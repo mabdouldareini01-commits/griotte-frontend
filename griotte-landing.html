@@ -2073,7 +2073,7 @@ footer {
         <div class="step-number">01</div>
         <div class="step-icon">📝</div>
         <h3>Créez votre compte</h3>
-        <p> <p onclick="window.location.href='/griotte-dashboard-lecteur.html'" style="cursor:pointer;">Inscription — via Google ou mail en 30 secondes</p>
+       <p onclick="ouvrirModal()" style="cursor:pointer;color:#D9902D;">Inscription — via mail en 30 secondes →</p>
       <div class="step reveal reveal-delay-2">
         <div class="step-number">02</div>
         <div class="step-icon">💰</div>
@@ -2735,6 +2735,80 @@ setTimeout(() => {
     if (rect.top < window.innerHeight) el.classList.add('visible');
   });
 }, 100);
+</script>
+<!-- MODAL INSCRIPTION -->
+<div id="modalInscription" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:#1a1612;border:1px solid rgba(217,144,45,0.3);border-radius:16px;padding:2rem;width:min(420px,calc(100vw - 2rem));position:relative;">
+    <button onclick="fermerModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">✕</button>
+    <h2 style="font-family:'Cormorant Garamond',serif;color:#D9902D;margin-bottom:0.5rem;">Créer un compte</h2>
+    <p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:#7a6f61;margin-bottom:1.5rem;">Rejoignez GRIOTTE en 30 secondes</p>
+    <input id="regNom" type="text" placeholder="Votre nom complet" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
+    <input id="regEmail" type="email" placeholder="Email" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
+    <input id="regPassword" type="password" placeholder="Mot de passe (min. 8 caractères)" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
+    <select id="regRole" style="width:100%;background:#1a1612;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:1rem;outline:none;">
+      <option value="READER">Je suis lecteur</option>
+      <option value="AUTHOR">Je suis auteur</option>
+    </select>
+    <div id="regMessage" style="font-family:'DM Mono',monospace;font-size:0.65rem;margin-bottom:0.75rem;"></div>
+    <button onclick="inscrire()" style="width:100%;padding:0.85rem;background:linear-gradient(135deg,#D9902D,#b8751f);border:none;border-radius:8px;color:#0c0a07;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;">Créer mon compte →</button>
+  </div>
+</div>
+
+<script>
+function ouvrirModal() {
+  const m = document.getElementById("modalInscription");
+  m.style.display = "flex";
+}
+
+function fermerModal() {
+  document.getElementById("modalInscription").style.display = "none";
+}
+
+async function inscrire() {
+  const nom = document.getElementById("regNom").value;
+  const email = document.getElementById("regEmail").value;
+  const password = document.getElementById("regPassword").value;
+  const role = document.getElementById("regRole").value;
+  const msg = document.getElementById("regMessage");
+
+  if (!nom || !email || !password) {
+    msg.style.color = "#f87171";
+    msg.textContent = "Veuillez remplir tous les champs";
+    return;
+  }
+
+  msg.style.color = "#D9902D";
+  msg.textContent = "Création du compte...";
+
+  try {
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: nom, email, password, role })
+    });
+    const data = await res.json();
+
+    if (data.accessToken) {
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      msg.style.color = "#4ade80";
+      msg.textContent = "Compte créé ! Redirection...";
+      setTimeout(() => {
+        if (role === "AUTHOR") {
+          window.location.href = "/griotte-dashboard-auteur.html";
+        } else {
+          window.location.href = "/griotte-dashboard-lecteur.html";
+        }
+      }, 1500);
+    } else {
+      msg.style.color = "#f87171";
+      msg.textContent = data.message || "Erreur lors de l'inscription";
+    }
+  } catch(e) {
+    msg.style.color = "#f87171";
+    msg.textContent = "Erreur de connexion au serveur";
+  }
+}
 </script>
 </body>
 </html>
