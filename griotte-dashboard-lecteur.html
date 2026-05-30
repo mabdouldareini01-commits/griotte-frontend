@@ -1400,5 +1400,28 @@ window.addEventListener('load', () => {
   });
 });
 </script>
-</body>
+<script>
+// Charger le solde depuis l'API
+async function chargerSolde() {
+  const token = localStorage.getItem("accessToken");
+  if (!token) return;
+  try {
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/wallets/balance", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (data.balance !== undefined) {
+      document.getElementById("soldeAmount").innerHTML = 
+        data.balance.toLocaleString("fr-FR") + ' <span style="font-size:0.85rem;font-family:DM Mono,monospace;color:var(--cendre)">FCFA</span>';
+      document.getElementById("soldePages").textContent = 
+        "= " + data.pages + " pages disponibles";
+    }
+  } catch(e) {
+    console.log("Non connecté");
+  }
+}
+
+// Lancer au chargement
+chargerSolde();
+</script>
 </html>
