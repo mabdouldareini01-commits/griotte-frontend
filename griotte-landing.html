@@ -2744,14 +2744,13 @@ setTimeout(() => {
     <p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:#7a6f61;margin-bottom:1.5rem;">Rejoignez GRIOTTE en 30 secondes</p>
     <input id="regNom" type="text" placeholder="Votre nom complet" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
     <input id="regEmail" type="email" placeholder="Email" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
-    <input id="regPassword" type="password" placeholder="Mot de passe (min. 8 caractères)" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
-    <input id="regPasswordConfirm" type="password" placeholder="Confirmer mot de passe" style="width:100%;padding:0.75rem;background:#2a1f1a;border:1px solid rgba(217,144,45,0.3);border-radius:8px;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;">
-    <select id="regRole" style="width:100%;background:#1a1612;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:1rem;outline:none;">
-      <option value="READER">Je suis lecteur</option>
-      <option value="AUTHOR">Je suis auteur</option>
-    </select>
-    <div id="regMessage" style="font-family:'DM Mono',monospace;font-size:0.65rem;margin-bottom:0.75rem;"></div>
-    <button onclick="inscrire()" style="width:100%;padding:0.85rem;background:linear-gradient(135deg,#D9902D,#b8751f);border:none;border-radius:8px;color:#0c0a07;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;">Créer mon compte →</button>
+<div style="position:relative;width:100%;margin-bottom:0.75rem;"><input id="regPassword" type="password" placeholder="Mot de passe (min. 8 caractères)" style="width:100%;padding:0.75rem;padding-right:2.5rem;background:#2a1f1a;border:1px solid rgba(217,144,45,0.3);border-radius:8px;color:#fff;font-family:'Syne',sans-serif;outline:none;box-sizing:border-box;"><button type="button" onclick="togglePassword('regPassword',this)" style="position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#D9902D;cursor:pointer;">👁</button></div>    <select id="regRole" style="width:100%;background:#1a1612;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:1rem;outline:none;">
+<div style="position:relative;width:100%;margin-bottom:0.75rem;"><input id="regPasswordConfirm" type="password" placeholder="Confirmer mot de passe" style="width:100%;padding:0.75rem;padding-right:2.5rem;background:#2a1f1a;border:1px solid rgba(217,144,45,0.3);border-radius:8px;color:#fff;font-family:'Syne',sans-serif;outline:none;box-sizing:border-box;"><button type="button" onclick="togglePassword('regPasswordConfirm',this)" style="position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#D9902D;cursor:pointer;">👁</button></div>
+<select id="regRole" style="width:100%;background:#1a1612;border:1px solid rgba(217,144,45,0.3);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;"></select>
+<option value="READER">Je suis lecteur</option>
+<option value="AUTHOR">Je suis auteur</option>
+</select>
+<button onclick="inscrire()" style="width:100%;padding:0.85rem;background:linear-gradient(135deg,#D9902D,#b8751f);border:none;border-radius:8px;color:#0c0a07;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;">Créer mon compte →</button>
   </div>
 </div>
 
