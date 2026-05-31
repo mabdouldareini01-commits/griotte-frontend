@@ -2737,10 +2737,10 @@ setTimeout(() => {
 }, 100);
 </script>
 <!-- MODAL INSCRIPTION -->
-<div id="modalInscription" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;">
-  <div style="background:#1a1612;border:1px solid rgba(217,144,45,0.3);border-radius:16px;padding:2rem;width:min(420px,calc(100vw - 2rem));position:relative;">
-    <button onclick="fermerModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">✕</button>
-    <h2 style="font-family:'Cormorant Garamond',serif;color:#D9902D;margin-bottom:0.5rem;">Créer un compte</h2>
+<div id="modalInscription" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:1rem;"></div>
+<div style="background:#1a1612;border:1px solid rgba(217,144,45,0.3);border-radius:16px;padding:2rem;width:100%;max-width:480px;position:relative;">    <button onclick="fermerModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">✕</button>
+ <button onclick="fermerModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;">×</button>
+  <h2 style="font-family:'Cormorant Garamond',serif;color:#D9902D;margin-bottom:0.5rem;">Créer un compte</h2>
     <p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:#7a6f61;margin-bottom:1.5rem;">Rejoignez GRIOTTE en 30 secondes</p>
     <input id="regNom" type="text" placeholder="Votre nom complet" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
     <input id="regEmail" type="email" placeholder="Email" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.75rem;color:#fff;font-family:'Syne',sans-serif;margin-bottom:0.75rem;outline:none;"/>
