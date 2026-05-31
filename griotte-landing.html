@@ -2763,7 +2763,11 @@ function ouvrirModal() {
 function fermerModal() {
   document.getElementById("modalInscription").style.display = "none";
 }
-
+function togglePassword(id, btn) {
+  const input = document.getElementById(id);
+  if (input.type === "password") { input.type = "text"; btn.textContent = "🙈"; }
+  else { input.type = "password"; btn.textContent = "👁"; }
+}
 async function inscrire() {
   const nom = document.getElementById("regNom").value;
   const email = document.getElementById("regEmail").value;
