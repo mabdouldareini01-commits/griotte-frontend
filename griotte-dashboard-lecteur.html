@@ -1406,16 +1406,17 @@ function payerAvecFedaPay(montant) {
       console.log('FedaPay response:', resp);
     if (resp.reason === FedaPay.TRANSACTION_APPROVED || resp.reason === 'TRANSACTION_APPROVED' || resp.reason === 'approved' || resp.reason === 'CHECKOUT COMPLETE') {
         try {
-          const result = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/verify-payment", {
+          const result = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/recharge", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({ transaction_id: resp.transaction.id, amount: montant })
+            body: JSON.stringify({ amount: montant })
           });
           const data = await result.json();
-          if (data.success) {            loadSolde();
+          if (data.success) {
+            loadSolde();
             closeModal();
             showToast("Solde rechargé avec succès !", "✅");
           } else {
