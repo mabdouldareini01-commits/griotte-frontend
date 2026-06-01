@@ -909,6 +909,9 @@ body {
     </a>
     <a class="nav-item" href="#">
       <span class="nav-icon">⚙</span> Paramètres
+      <a class="nav-item" onclick="deconnecter()" style="cursor:pointer;color:#f87171;">
+      <span class="nav-icon">🚪</span> Déconnexion
+    </a>
     </a>
   </nav>
 
@@ -1338,6 +1341,11 @@ window.addEventListener('load', () => {
     }, 600 + i * 100);
   });
 });
+function deconnecter() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  window.location.href = "/griotte-landing.html";
+}
 </script>
 </body>
 </html>
