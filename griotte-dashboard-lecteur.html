@@ -1367,17 +1367,21 @@ loadSolde();function deconnecter() {
   localStorage.removeItem("refreshToken");
   window.location.href = "/griotte-landing.html";
 }
-// Toast
 // Récupérer token depuis URL si Google OAuth
 const urlParams = new URLSearchParams(window.location.search);
 const tokenFromUrl = urlParams.get('token');
 if (tokenFromUrl) {
   localStorage.setItem('accessToken', tokenFromUrl);
   window.history.replaceState({}, '', window.location.pathname);
+}
+
 // Date actuelle
 const now = new Date();
 const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-document.getElementById('currentDate').textContent = now.toLocaleDateString('fr-FR', options);}function showToast(msg, icon = '✅') {
+document.getElementById('currentDate').textContent = now.toLocaleDateString('fr-FR', options);
+
+// Toast
+function showToast(msg, icon = '✅') {
   const t = document.getElementById('toast');
   document.getElementById('toastIcon').textContent = icon;
   document.getElementById('toastMsg').textContent = msg;
