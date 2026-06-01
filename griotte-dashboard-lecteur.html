@@ -982,7 +982,7 @@ body {
 
   <!-- TOPBAR -->
   <div class="topbar">
-    <div class="topbar-title">Bonjour, Kofi 👋</div>
+    <div class="topbar-title">Bonjour, <span id="userNameHeader">...</span> 👋</div>
     <div class="topbar-right">
       <div class="search-bar" onclick="showToast('Recherche ouverte', '🔍')">
         🔍 <span>Rechercher un roman…</span>
@@ -1000,7 +1000,7 @@ body {
     <div class="welcome-banner">
       <div class="wb-left">
         <div class="wb-greeting">Vendredi 30 mai 2026</div>
-        <div class="wb-title">Bonne lecture,<br/><em>Kofi.</em></div>
+        <div class="wb-title">Bonne lecture,<br/><em id="userNameSub">...</em></div>
         <div class="wb-sub">Vous avez lu 284 pages ce mois · 2 romans en cours</div>
       </div>
       <div class="wb-stats">
@@ -1355,8 +1355,10 @@ async function loadSolde() {
       document.getElementById("soldeAmount").innerHTML = data.balance.toLocaleString() + ' <span style="font-size:0.85rem;font-family:\'DM Mono\',monospace;color:var(--cendre)">FCFA</span>';
       document.getElementById("soldePages").textContent = "= " + Math.floor(data.balance / 10) + " pages disponibles";
     }
-    if (data.name && document.getElementById("userName")) {
-      document.getElementById("userName").textContent = data.name;
+    if (data.name) {
+      if (document.getElementById("userName")) document.getElementById("userName").textContent = data.name;
+      if (document.getElementById("userNameHeader")) document.getElementById("userNameHeader").textContent = data.name;
+      if (document.getElementById("userNameSub")) document.getElementById("userNameSub").textContent = data.name;
     }
   } catch(e) { console.log(e); }
 }
