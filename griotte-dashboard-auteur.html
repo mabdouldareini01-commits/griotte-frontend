@@ -918,7 +918,7 @@ body {
   <div class="sidebar-bottom">
     <div class="wallet-box">
       <div class="wallet-label">Solde disponible</div>
-      <div class="wallet-amount">47 320<span style="font-size:0.9rem;font-family:'DM Mono',monospace;color:var(--cendre);margin-left:4px">FCFA</span></div>
+      <div class="wallet-amount" id="auteurSolde">0<span style="font-size:0.9rem;font-family:'DM Mono',monospace;color:var(--cendre);margin-left:4px">FCFA</span></div>
       <button class="withdraw-btn" onclick="openModal()">Retirer mes gains →</button>
     </div>
   </div>
@@ -1341,7 +1341,20 @@ window.addEventListener('load', () => {
     }, 600 + i * 100);
   });
 });
-function deconnecter() {
+async function loadAuteurData() {
+  const token = localStorage.getItem("accessToken");
+  if (!token) return;
+  try {
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/me", {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (data.balance !== undefined) {
+      document.getElementById("auteurSolde").innerHTML = data.balance.toLocaleString() + '<span style="font-size:0.9rem;font-family:\'DM Mono\',monospace;color:var(--cendre);margin-left:4px">FCFA</span>';
+    }
+  } catch(e) { console.log(e); }
+}
+loadAuteurData();function deconnecter() {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
   window.location.href = "/griotte-landing.html";
