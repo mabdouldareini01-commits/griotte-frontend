@@ -1405,7 +1405,13 @@ function payerAvecFedaPay(montant) {
           });
           const data = await result.json();
           if (data.success) {
-            loadSolde();
+// Récupérer token depuis URL si Google OAuth
+const urlParams = new URLSearchParams(window.location.search);
+const tokenFromUrl = urlParams.get('token');
+if (tokenFromUrl) {
+  localStorage.setItem('accessToken', tokenFromUrl);
+  window.history.replaceState({}, '', window.location.pathname);
+}            loadSolde();
             closeModal();
             showToast("Solde rechargé avec succès !", "✅");
           } else {
