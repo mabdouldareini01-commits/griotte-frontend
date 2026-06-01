@@ -1392,7 +1392,8 @@ function payerAvecFedaPay(montant) {
       email: localStorage.getItem("userEmail") || 'lecteur@griotte.com'
     },
     onComplete: async function(resp) {
-      if (resp.reason === FedaPay.TRANSACTION_APPROVED || resp.reason === 'TRANSACTION_APPROVED') {
+      console.log('FedaPay response:', resp);
+    if (resp.reason === FedaPay.TRANSACTION_APPROVED || resp.reason === 'TRANSACTION_APPROVED' || resp.reason === 'approved') {
         try {
           const result = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/verify-payment", {
             method: "POST",
