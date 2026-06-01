@@ -1362,17 +1362,21 @@ async function loadSolde() {
     }
   } catch(e) { console.log(e); }
 }
-loadSolde();function deconnecter() {
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
-  window.location.href = "/griotte-landing.html";
-}
+
 // Récupérer token depuis URL si Google OAuth
 const urlParams = new URLSearchParams(window.location.search);
 const tokenFromUrl = urlParams.get('token');
 if (tokenFromUrl) {
   localStorage.setItem('accessToken', tokenFromUrl);
   window.history.replaceState({}, '', window.location.pathname);
+}
+
+loadSolde();
+
+function deconnecter() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  window.location.href = "/griotte-landing.html";
 }
 
 // Date actuelle
