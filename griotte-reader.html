@@ -1441,7 +1441,11 @@ function prevPage() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-async function nextPage() {
+const token = localStorage.getItem("accessToken");
+if (!token) {
+  window.location.href = "/griotte-landing.html";
+  return;
+}async function nextPage() {
   const token = localStorage.getItem("accessToken");
   if (token) {
     try {
