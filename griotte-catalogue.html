@@ -1162,7 +1162,7 @@ body {
 let books = [];
 async function loadBooks() {
   try {
-    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/books");
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/books-public");
     const data = await res.json();
     if (data && data.length > 0) {
       books = data.map(b => ({
