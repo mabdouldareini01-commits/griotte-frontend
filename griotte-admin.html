@@ -387,7 +387,7 @@ body{background:var(--noir);color:var(--blanc);font-family:"Syne",sans-serif;min
     <a class="nav-item" onclick="showPage('transactions',this)"><span class="nav-ico">🧾</span>Transactions</a>
 
     <div class="nav-section">Système</div>
-    <a class="nav-item" onclick="showPage('settings',this)"><span class="nav-ico">⚙️</span>Paramètres</a>
+    <a class="nav-item" onclick="showPage('settings',this)"><span class="nav-ico">⚙️</span>Paramètres</a><a class="nav-item" onclick="deconnecter()" style="cursor:pointer;color:#f87171;"><span class="nav-ico">🚪</span>Déconnexion</a>
     <a class="nav-item" onclick="showPage('logs',this)"><span class="nav-ico">📋</span>Logs système</a>
   </nav>
 
@@ -643,6 +643,10 @@ window.addEventListener("load",()=>{
     setTimeout(()=>{ f.style.transition="width 0.7s ease"; f.style.width=w; },400+i*100);
   });
 });
-</script>
+function deconnecter() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  window.location.href = "/griotte-landing.html";
+}</script>
 </body>
 </html>
