@@ -2796,12 +2796,17 @@ async function inscrire() {
     });
     const data = await res.json();
 
-    if (data.email) {
+    if (data.accessToken) {
+      localStorage.setItem("accessToken", data.accessToken);
       msg.style.color = "#4ade80";
-      msg.textContent = "Code OTP envoyé ! Vérifiez votre email.";
-      localStorage.setItem("pendingEmail", data.email);
-      localStorage.setItem("pendingRole", role);
-      setTimeout(() => { ouvrirModalOTP(); }, 1000);
+      msg.textContent = "Compte créé ! Redirection...";
+      setTimeout(() => {
+        if (role === "AUTHOR") {
+          window.location.href = "/griotte-dashboard-auteur.html";
+        } else {
+          window.location.href = "/griotte-dashboard-lecteur.html";
+        }
+      }, 1500);
     } else {
       msg.style.color = "#f87171";
       msg.textContent = data.message || "Erreur lors de l'inscription";
