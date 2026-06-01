@@ -1368,7 +1368,13 @@ loadSolde();function deconnecter() {
   window.location.href = "/griotte-landing.html";
 }
 // Toast
-function showToast(msg, icon = '✅') {
+// Récupérer token depuis URL si Google OAuth
+const urlParams = new URLSearchParams(window.location.search);
+const tokenFromUrl = urlParams.get('token');
+if (tokenFromUrl) {
+  localStorage.setItem('accessToken', tokenFromUrl);
+  window.history.replaceState({}, '', window.location.pathname);
+}function showToast(msg, icon = '✅') {
   const t = document.getElementById('toast');
   document.getElementById('toastIcon').textContent = icon;
   document.getElementById('toastMsg').textContent = msg;
@@ -1406,14 +1412,7 @@ function payerAvecFedaPay(montant) {
             body: JSON.stringify({ transaction_id: resp.transaction.id, amount: montant })
           });
           const data = await result.json();
-          if (data.success) {
-// Récupérer token depuis URL si Google OAuth
-const urlParams = new URLSearchParams(window.location.search);
-const tokenFromUrl = urlParams.get('token');
-if (tokenFromUrl) {
-  localStorage.setItem('accessToken', tokenFromUrl);
-  window.history.replaceState({}, '', window.location.pathname);
-}            loadSolde();
+          if (data.success) {            loadSolde();
             closeModal();
             showToast("Solde rechargé avec succès !", "✅");
           } else {
