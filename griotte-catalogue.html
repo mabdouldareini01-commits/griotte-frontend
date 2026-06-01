@@ -1159,7 +1159,32 @@ body {
 // ══════════════════════════
 // DATA
 // ══════════════════════════
-const books = [
+let books = [];
+async function loadBooks() {
+  try {
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/books");
+    const data = await res.json();
+    if (data && data.length > 0) {
+      books = data.map(b => ({
+        id: b.id,
+        title: b.title,
+        author: b.author?.name || "Auteur inconnu",
+        country: "🌍",
+        genre: b.genre,
+        pages: b.totalPages || 0,
+        rating: b.averageRating || 0,
+        readers: b.totalReads || 0,
+        cover: b.coverColor || "cv-1",
+        badges: [],
+        synopsis: b.synopsis,
+        tags: b.tags || []
+      }));
+    }
+  } catch(e) {
+    console.log("Utilisation données statiques");
+  }
+}
+const booksStatic = [
   { id:1, title:"Les Fils du Sahel", author:"Ama Kouyaté", country:"🇲🇱", genre:"Littérature", pages:312, rating:4.9, readers:"48k", cover:"cv-1", badges:["top"], synopsis:"Un fils revient au Sahel chercher ses racines.", tags:["Sahel","Mali","Identité"] },
   { id:2, title:"Mémoires de Carthage", author:"Sidi Ben Omar", country:"🇹🇳", genre:"Histoire", pages:254, rating:4.7, readers:"31k", cover:"cv-2", badges:[], synopsis:"Épopée historique entre Carthage et Rome.", tags:["Histoire","Tunisie"] },
   { id:3, title:"L'Ombre du Baobab", author:"Ama Kouyaté", country:"🇲🇱", genre:"Romance", pages:248, rating:4.8, readers:"29k", cover:"cv-3", badges:["new"], synopsis:"Un amour impossible sous les étoiles du Mali.", tags:["Romance","Mali"] },
@@ -1226,6 +1251,8 @@ function filterBooks(q) {
   searchQuery = q.toLowerCase();
   if (!q) {
     filteredBooks = [...books];
+books = booksStatic;
+loadBooks().then(() => renderBooks());
   } else {
     filteredBooks = books.filter(b =>
       b.title.toLowerCase().includes(searchQuery) ||
