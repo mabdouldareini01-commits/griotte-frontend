@@ -1441,7 +1441,24 @@ function prevPage() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function nextPage() {
+async function nextPage() {
+  const token = localStorage.getItem("accessToken");
+  if (token) {
+    try {
+      const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/recharge", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ amount: -10 })
+      });
+      const data = await res.json();
+      if (data.balance !== undefined) {
+        document.getElementById('creditsDisplay').textContent = data.balance.toLocaleString('fr-FR') + ' FCFA';
+      }
+    } catch(e) { console.log(e); }
+  }
   updateProgress(currentPage + 1);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
