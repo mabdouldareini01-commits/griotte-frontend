@@ -1464,7 +1464,7 @@ function showPage(pageNum) {
   document.getElementById('creditsDisplay').textContent = credits.toLocaleString('fr-FR') + ' FCFA';
 }
 
-function prevPage() {
+window.prevPage = function() {
   updateProgress(currentPage - 1);
   showToast('← Page précédente');
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1474,7 +1474,7 @@ const token = localStorage.getItem("accessToken");
 if (!token) {
   window.location.href = "/griotte-landing.html";
   return;
-}async function nextPage() {
+}window.nextPage = async function() {
   const token = localStorage.getItem("accessToken");
   if (token) {
     try {
@@ -1496,7 +1496,7 @@ if (!token) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function onSliderMove(val) {
+window.onSliderMove = function(val) {
   const page = Math.round((val / 100) * totalPages);
   updateProgress(page);
 }
