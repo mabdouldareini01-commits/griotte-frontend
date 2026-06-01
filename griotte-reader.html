@@ -1415,10 +1415,39 @@ function toggleToolbars() {
 // ═══════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════
-function updateProgress(page) {
+// Pages du livre
+const pages = [
+  `<div class="chapter-header"><span class="chapter-num">Chapitre I</span><h1 class="chapter-title">Les Racines du Sahel</h1></div>
+  <p>Le soleil se levait sur le village de Ségou quand Djibi ouvrit les yeux pour la première fois depuis trois jours. La fièvre l'avait quitté comme un voleur dans la nuit, sans prévenir, sans laisser de trace.</p>
+  <p class="indent">Sa mère était assise à son chevet, les yeux rouges de veille, les mains croisées sur ses genoux. Elle ne dit rien quand il bougea. Elle attendit simplement qu'il la regarde.</p>`,
+
+  `<p class="indent">— Tu as dormi longtemps, dit-elle enfin.</p>
+  <p class="indent">— Combien de temps ? demanda-t-il, la voix rauque.</p>
+  <p class="indent">— Trois jours. Trois nuits. Nous avons eu peur.</p>
+  <p>Djibi regarda le plafond de terre séchée. Des fissures y dessinaient des cartes de pays imaginaires. Il les connaissait par cœur — il les avait contemplées toute son enfance.</p>`,
+
+  `<div class="chapter-header"><span class="chapter-num">Chapitre II</span><h1 class="chapter-title">Le Départ</h1></div>
+  <p>Une semaine plus tard, Djibi annonça à sa famille qu'il partait pour Bamako. Sa mère ne pleura pas. Son père ne dit rien. C'était la tradition — quand un fils décidait de partir, on ne le retenait pas.</p>
+  <p class="indent">On lui préparait simplement un baluchon, on lui donnait la bénédiction des ancêtres, et on le regardait disparaître au bout du chemin de latérite rouge.</p>`,
+
+  `<div class="chapter-header"><span class="chapter-num">Chapitre III</span><h1 class="chapter-title">La Rivière Sacrée</h1></div>
+  <p>L'eau du fleuve Bani coulait lentement ce matin-là, comme si elle connaissait le poids de ce qui allait se passer. Djibi s'était levé avant l'aube, guidé par une voix que lui seul entendait.</p>
+  <p class="indent">Les femmes du village n'avaient pas encore allumé leurs feux. Les coqs dormaient encore. Seul le murmure de l'eau répondait aux pas de Djibi sur la berge argileuse.</p>`,
+
+  `<p class="indent">— Tu es revenu, dit une voix derrière lui.</p>
+  <p>Djibi ne se retourna pas. Il connaissait cette voix. Elle appartenait à Aminata, la vieille griotte du village, celle qu'on appelait <em>la Mémoire vivante</em>.</p>
+  <div class="blockquote"><p>« Le fleuve n'oublie jamais ce qu'il a porté. »</p><cite>— Aminata, la griotte</cite></div>`,
+];
+
+function showPage(pageNum) {
+  const index = (pageNum - 1) % pages.length;
+  document.getElementById('readingContent').innerHTML = pages[index];
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}function updateProgress(page) {
   currentPage = Math.max(1, Math.min(totalPages, page));
   currentProgress = Math.round((currentPage / totalPages) * 100);
   document.getElementById('pageIndicator').textContent = `p. ${currentPage} / ${totalPages}`;
+  showPage(currentPage);
   document.getElementById('progressFill').style.width = currentProgress + '%';
   document.getElementById('progressSlider').value = currentProgress;
   document.getElementById('progressPercent').textContent = currentProgress + '% lu';
