@@ -880,7 +880,7 @@ body {
   .packs-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
-</head>
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script></head>
 <body>
 
 <!-- MODAL RECHARGE -->
@@ -927,7 +927,7 @@ body {
       <button class="method-btn" onclick="selectMethod(this)">💳 Carte</button>
     </div>
 
-    <button class="modal-confirm" onclick="confirmRecharge()">Confirmer le paiement →</button>
+    <button class="modal-confirm" onclick="lancerPaiement()">Confirmer le paiement →</button>
   </div>
 </div>
 
@@ -1376,13 +1376,46 @@ function openModal() {
   document.getElementById('rechargeModal').classList.add('open');
 }
 
+function payerAvecFedaPay(montant) {
+  const token = localStorage.getItem("accessToken");
+  FedaPay.init({
+    public_key: 'pk_live_cELBuWDHuI2Z1oqFz2mlXSOJ',
+    transaction: {
+      amount: montant,
+      description: 'Recharge solde GRIOTTE'
+    },
+    customer: {
+      email: localStorage.getItem("userEmail") || 'lecteur@griotte.com'
+    },
+    onComplete: async function(resp) {
+      if (resp.reason === FedaPay.TRANSACTION_APPROVED) {
+        try {
+          await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/recharge", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ amount: montant })
+          });
+          loadSolde();
+          closeModal();
+          showToast("Solde rechargé avec succès !", "✅");
+        } catch(e) {
+          showToast("Erreur lors de la recharge", "❌");
+        }
+      }
+    }
+  }).open();
+}
+
 function closeModal() {
   document.getElementById('rechargeModal').classList.remove('open');
 }
 
-function confirmRecharge() {
-  closeModal();
-  showToast('Paiement confirmé ! Solde rechargé.', '💚');
+function lancerPaiement() {
+  const montant = parseInt(document.getElementById('rechargeAmount')?.value || document.querySelector('.pack-btn.selected')?.dataset?.amount || 500);
+  payerAvecFedaPay(montant);
 }
 
 document.getElementById('rechargeModal').addEventListener('click', (e) => {
