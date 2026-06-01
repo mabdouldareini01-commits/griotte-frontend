@@ -964,6 +964,7 @@ body {
     <a class="nav-link"><span class="nav-ico">🎁</span> Parrainage</a>
     <a class="nav-link"><span class="nav-ico">👤</span> Mon profil</a>
     <a class="nav-link"><span class="nav-ico">⚙</span> Paramètres</a>
+    <a class="nav-link" onclick="deconnecter()" style="cursor:pointer;color:#f87171;"><span class="nav-ico">🚪</span> Déconnexion</a>
   </nav>
 
   <div class="s-credits">
@@ -1342,6 +1343,11 @@ body {
 </div>
 
 <script>
+function deconnecter() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  window.location.href = "/griotte-landing.html";
+}
 // Toast
 function showToast(msg, icon = '✅') {
   const t = document.getElementById('toast');
