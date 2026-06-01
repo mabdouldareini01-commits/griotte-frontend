@@ -2803,8 +2803,17 @@ async function inscrire() {
       setTimeout(() => {
         if (role === "AUTHOR") {
           window.location.href = "/griotte-dashboard-auteur.html";
+        } else if (role === "ADMIN") {
+          window.location.href = "/griotte-admin.html";
+        } else {
+          const role = data.role || "READER";
+        if (role === "ADMIN") {
+          window.location.href = "/griotte-admin.html";
+        } else if (role === "AUTHOR") {
+          window.location.href = "/griotte-dashboard-auteur.html";
         } else {
           window.location.href = "/griotte-dashboard-lecteur.html";
+        }
         }
       }, 1500);
     } else {
