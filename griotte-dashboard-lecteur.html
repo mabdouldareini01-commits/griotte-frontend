@@ -1380,6 +1380,7 @@ function payerAvecFedaPay(montant) {
   const token = localStorage.getItem("accessToken");
   FedaPay.init({
     public_key: 'pk_live_cELBuWDHuI2Z1oqFz2mlXSOJ',
+    currency: { iso: 'XOF' },
     transaction: {
       amount: montant,
       description: 'Recharge solde GRIOTTE'
