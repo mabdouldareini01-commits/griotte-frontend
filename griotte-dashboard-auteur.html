@@ -895,6 +895,10 @@ body {
       <span class="nav-icon">📈</span> Statistiques
     </a>
 
+    <a class="nav-item" href="#" onclick="showPage('publier')" style="color:#D9902D;font-weight:700;">
+      <span class="nav-icon">✍️</span> Publier un livre
+    </a>
+
     <div class="nav-section-label">Finance</div>
     <a class="nav-item" href="#" onclick="openModal()">
       <span class="nav-icon">💸</span> Revenus & Retraits
@@ -939,7 +943,45 @@ body {
   </div>
 
   <!-- PAGE: DASHBOARD -->
-  <div class="page" id="page-dashboard">
+  <div class="page" <!-- PAGE: PUBLIER -->
+<div class="page" id="page-publier" style="display:none;">
+  <div style="max-width:600px;margin:0 auto;padding:2rem;">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#F8F6F2;margin-bottom:2rem;">Publier un livre</h2>
+    
+    <div style="display:flex;flex-direction:column;gap:1.2rem;">
+      <div>
+        <label style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#7a6f61;display:block;margin-bottom:0.5rem;">TITRE DU LIVRE *</label>
+        <input id="pubTitle" type="text" placeholder="Ex: Les Fils du Sahel" style="width:100%;padding:0.85rem;background:#1a1612;border:1px solid #2e2a24;border-radius:8px;color:#F8F6F2;font-family:'Syne',sans-serif;font-size:0.9rem;">
+      </div>
+      
+      <div>
+        <label style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#7a6f61;display:block;margin-bottom:0.5rem;">SYNOPSIS *</label>
+        <textarea id="pubSynopsis" placeholder="Résumé du livre..." rows="4" style="width:100%;padding:0.85rem;background:#1a1612;border:1px solid #2e2a24;border-radius:8px;color:#F8F6F2;font-family:'Syne',sans-serif;font-size:0.9rem;resize:vertical;"></textarea>
+      </div>
+      
+      <div>
+        <label style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#7a6f61;display:block;margin-bottom:0.5rem;">GENRE *</label>
+        <select id="pubGenre" style="width:100%;padding:0.85rem;background:#1a1612;border:1px solid #2e2a24;border-radius:8px;color:#F8F6F2;font-family:'Syne',sans-serif;font-size:0.9rem;">
+          <option value="Roman">Roman</option>
+          <option value="Littérature">Littérature</option>
+          <option value="Histoire">Histoire</option>
+          <option value="Fantastique">Fantastique</option>
+          <option value="Romance">Romance</option>
+          <option value="Policier">Policier</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Jeunesse">Jeunesse</option>
+          <option value="Poésie">Poésie</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#7a6f61;display:block;margin-bottom:0.5rem;">NOMBRE DE PAGES *</label>
+        <input id="pubPages" type="number" placeholder="Ex: 250" style="width:100%;padding:0.85rem;background:#1a1612;border:1px solid #2e2a24;border-radius:8px;color:#F8F6F2;font-family:'Syne',sans-serif;font-size:0.9rem;">
+      </div>
+
+      <div id="pubMessage" style="font-family:'DM Mono',monospace;font-size:0.8rem;"></div>
+
+      <button onclick="publierLivre()" style="padding:1rem;background:linear-gradient(135deg,#D9902D,#b8751f);id="page-dashboard">
 
     <!-- KPIs -->
     <div class="kpi-grid">
@@ -1353,6 +1395,47 @@ async function loadAuteurData() {
       document.getElementById("auteurSolde").innerHTML = data.balance.toLocaleString() + '<span style="font-size:0.9rem;font-family:\'DM Mono\',monospace;color:var(--cendre);margin-left:4px">FCFA</span>';
     }
   } catch(e) { console.log(e); }
+}
+async function publierLivre() {
+  const token = localStorage.getItem("accessToken");
+  const title = document.getElementById("pubTitle").value;
+  const synopsis = document.getElementById("pubSynopsis").value;
+  const genre = document.getElementById("pubGenre").value;
+  const totalPages = parseInt(document.getElementById("pubPages").value);
+  const msg = document.getElementById("pubMessage");
+
+  if (!title || !synopsis || !genre || !totalPages) {
+    msg.style.color = "#f87171";
+    msg.textContent = "Veuillez remplir tous les champs";
+    return;
+  }
+
+  try {
+    msg.style.color = "#D9902D";
+    msg.textContent = "Publication en cours...";
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/publish-book", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ title, synopsis, genre, totalPages })
+    });
+    const data = await res.json();
+    if (data.id) {
+      msg.style.color = "#4ade80";
+      msg.textContent = "✅ Livre publié avec succès !";
+      document.getElementById("pubTitle").value = "";
+      document.getElementById("pubSynopsis").value = "";
+      document.getElementById("pubPages").value = "";
+    } else {
+      msg.style.color = "#f87171";
+      msg.textContent = data.message || "Erreur lors de la publication";
+    }
+  } catch(e) {
+    msg.style.color = "#f87171";
+    msg.textContent = "Erreur de connexion";
+  }
 }
 loadAuteurData();function deconnecter() {
   localStorage.removeItem("accessToken");
