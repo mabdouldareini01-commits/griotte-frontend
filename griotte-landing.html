@@ -2801,19 +2801,13 @@ async function inscrire() {
       msg.style.color = "#4ade80";
       msg.textContent = "Compte créé ! Redirection...";
       setTimeout(() => {
-        if (role === "AUTHOR") {
+        const userRole = data.role || role;
+        if (userRole === "AUTHOR") {
           window.location.href = "/griotte-dashboard-auteur.html";
-        } else if (role === "ADMIN") {
+        } else if (userRole === "ADMIN") {
           window.location.href = "/griotte-admin.html";
-        } else {
-          const role = data.role || "READER";
-        if (role === "ADMIN") {
-          window.location.href = "/griotte-admin.html";
-        } else if (role === "AUTHOR") {
-          window.location.href = "/griotte-dashboard-auteur.html";
         } else {
           window.location.href = "/griotte-dashboard-lecteur.html";
-        }
         }
       }, 1500);
     } else {
