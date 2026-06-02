@@ -1364,8 +1364,9 @@ function confirmWithdraw() {
   showToast('Demande de retrait envoyée ! Traitement sous 24h.', '💸');
 }
 
-document.getElementById('withdrawModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('withdrawModal')) closeModal();
+const wModal = document.getElementById('withdrawModal');
+if (wModal) wModal.addEventListener('click', (e) => {
+  if (e.target === wModal) closeModal();
 });
 
 // Nav
