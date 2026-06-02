@@ -1336,6 +1336,169 @@ body {
 <!-- END MAIN -->
 
 <script>
+// Récupérer token depuis URL si Google OAuth
+const urlParams = new URLSearchParams(window.location.search);
+const tokenFromUrl = urlParams.get('token');
+if (tokenFromUrl) {
+  localStorage.setItem('accessToken', tokenFromUrl);
+  window.history.replaceState({}, '', window.location.pathname);
+}
+
+// Date actuelle
+const now = new Date();
+const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+if (document.getElementById('currentDate')) {
+  document.getElementById('currentDate').textContent = now.toLocaleDateString('fr-FR', options);
+}
+
+// Toast
+function showToast(msg, icon = '✅') {
+  const t = document.getElementById('toast');
+  document.querySelector('.toast-icon').textContent = icon;
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Modal
+function openModal() {
+  document.getElementById('withdrawModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('withdrawModal').classList.remove('open');
+}
+function confirmWithdraw() {
+  closeModal();
+  showToast('Demande de retrait envoyée ! Traitement sous 24h.', '💸');
+}
+const wModal = document.getElementById('withdrawModal');
+if (wModal) wModal.addEventListener('click', (e) => {
+  if (e.target === wModal) closeModal();
+});
+
+// Nav
+function showPage(page) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (event && event.target && event.target.closest('.nav-item')) {
+    event.target.closest('.nav-item').classList.add('active');
+  }
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  const target = document.getElementById('page-' + page);
+  if (target) target.style.display = 'block';
+  const titles = {
+    dashboard: 'Tableau de bord',
+    oeuvres: 'Mes œuvres',
+    stats: 'Statistiques',
+    transactions: 'Transactions',
+    publier: 'Publier un livre'
+  };
+  document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
+}
+
+// Tabs chart
+function switchTab(btn, period) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  showToast(`Affichage : ${period === '6m' ? '6 derniers mois' : '12 derniers mois'}`, '📊');
+}
+
+// Animate bars on load
+window.addEventListener('load', () => {
+  const bars = document.querySelectorAll('.chart-bar');
+  bars.forEach((bar, i) => {
+    const h = bar.style.height;
+    bar.style.height = '0';
+    setTimeout(() => {
+      bar.style.transition = 'height 0.6s ease';
+      bar.style.height = h;
+    }, 100 + i * 80);
+  });
+  const perfBars = document.querySelectorAll('.perf-bar-fill');
+  perfBars.forEach((bar, i) => {
+    const w = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => {
+      bar.style.transition = 'width 0.8s ease';
+      bar.style.width = w;
+    }, 400 + i * 120);
+  });
+  const countryBars = document.querySelectorAll('.country-bar-fill');
+  countryBars.forEach((bar, i) => {
+    const w = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => {
+      bar.style.transition = 'width 0.7s ease';
+      bar.style.width = w;
+    }, 600 + i * 100);
+  });
+});
+
+async function loadAuteurData() {
+  const token = localStorage.getItem("accessToken");
+  if (!token) return;
+  try {
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/me", {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (data.balance !== undefined) {
+      document.getElementById("auteurSolde").innerHTML = data.balance.toLocaleString() + '<span style="font-size:0.9rem;font-family:\'DM Mono\',monospace;color:var(--cendre);margin-left:4px">FCFA</span>';
+    }
+    if (data.name) {
+      document.querySelector('.author-name').textContent = data.name;
+    }
+  } catch(e) { console.log(e); }
+}
+
+async function publierLivre() {
+  const token = localStorage.getItem("accessToken");
+  const title = document.getElementById("pubTitle").value;
+  const synopsis = document.getElementById("pubSynopsis").value;
+  const genre = document.getElementById("pubGenre").value;
+  const totalPages = parseInt(document.getElementById("pubPages").value);
+  const msg = document.getElementById("pubMessage");
+
+  if (!title || !synopsis || !genre || !totalPages) {
+    msg.style.color = "#f87171";
+    msg.textContent = "Veuillez remplir tous les champs";
+    return;
+  }
+  try {
+    msg.style.color = "#D9902D";
+    msg.textContent = "Publication en cours...";
+    const res = await fetch("https://griotte-backend-2-production.up.railway.app/api/v1/auth/publish-book", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ title, synopsis, genre, totalPages })
+    });
+    const data = await res.json();
+    if (data.id) {
+      msg.style.color = "#4ade80";
+      msg.textContent = "✅ Livre publié avec succès !";
+      document.getElementById("pubTitle").value = "";
+      document.getElementById("pubSynopsis").value = "";
+      document.getElementById("pubPages").value = "";
+    } else {
+      msg.style.color = "#f87171";
+      msg.textContent = data.message || "Erreur lors de la publication";
+    }
+  } catch(e) {
+    msg.style.color = "#f87171";
+    msg.textContent = "Erreur de connexion";
+  }
+}
+
+function deconnecter() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  window.location.href = "/griotte-landing.html";
+}
+
+loadAuteurData();
+</script>
 // Date
 const now = new Date();
 document.getElementById('currentDate').textContent =
