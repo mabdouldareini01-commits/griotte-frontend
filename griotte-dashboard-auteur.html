@@ -1369,7 +1369,7 @@ document.getElementById('withdrawModal').addEventListener('click', (e) => {
 });
 
 // Nav
-function showPage(page) {
+window.showPage = function(page) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (event && event.target.closest('.nav-item')) {
     event.target.closest('.nav-item').classList.add('active');
