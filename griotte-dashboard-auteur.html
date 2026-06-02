@@ -1500,7 +1500,7 @@ if (document.getElementById('currentDate')) {
 
 loadAuteurData();
 
-function deconnecter() {
+window.deconnecter = function() {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
   window.location.href = "/griotte-landing.html";
