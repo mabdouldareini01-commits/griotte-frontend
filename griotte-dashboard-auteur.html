@@ -942,8 +942,7 @@ body {
     </div>
   </div>
 
-  <!-- PAGE: DASHBOARD -->
-  <div class="page" <!-- PAGE: PUBLIER -->
+  <!-- PAGE: PUBLIER -->
 <div class="page" id="page-publier" style="display:none;">
   <div style="max-width:600px;margin:0 auto;padding:2rem;">
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#F8F6F2;margin-bottom:2rem;">Publier un livre</h2>
@@ -1451,7 +1450,24 @@ async function publierLivre() {
     msg.textContent = "Erreur de connexion";
   }
 }
-loadAuteurData();function deconnecter() {
+// Récupérer token depuis URL
+const urlParams = new URLSearchParams(window.location.search);
+const tokenFromUrl = urlParams.get('token');
+if (tokenFromUrl) {
+  localStorage.setItem('accessToken', tokenFromUrl);
+  window.history.replaceState({}, '', window.location.pathname);
+}
+
+// Date actuelle
+const now = new Date();
+const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+if (document.getElementById('currentDate')) {
+  document.getElementById('currentDate').textContent = now.toLocaleDateString('fr-FR', options);
+}
+
+loadAuteurData();
+
+function deconnecter() {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
   window.location.href = "/griotte-landing.html";
