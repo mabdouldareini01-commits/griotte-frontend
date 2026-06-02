@@ -1369,7 +1369,7 @@ document.getElementById('withdrawModal').addEventListener('click', (e) => {
 });
 
 // Nav
-window.showPage = function(page) {
+function showPage(page) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (event && event.target.closest('.nav-item')) {
     event.target.closest('.nav-item').classList.add('active');
@@ -1500,7 +1500,7 @@ if (document.getElementById('currentDate')) {
 
 loadAuteurData();
 
-window.deconnecter = function() {
+function deconnecter() {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
   window.location.href = "/griotte-landing.html";
