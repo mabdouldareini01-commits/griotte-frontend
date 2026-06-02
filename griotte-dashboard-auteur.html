@@ -981,7 +981,15 @@ body {
 
       <div id="pubMessage" style="font-family:'DM Mono',monospace;font-size:0.8rem;"></div>
 
-      <button onclick="publierLivre()" style="padding:1rem;background:linear-gradient(135deg,#D9902D,#b8751f);id="page-dashboard">
+      <button onclick="publierLivre()" style="padding:1rem;background:linear-gradient(135deg,#D9902D,#b8751f);border:none;border-radius:8px;color:#0c0a07;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;">
+        Publier mon livre →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: DASHBOARD -->
+<div class="page" id="page-dashboard">
 
     <!-- KPIs -->
     <div class="kpi-grid">
@@ -1331,13 +1339,19 @@ document.getElementById('withdrawModal').addEventListener('click', (e) => {
 // Nav
 function showPage(page) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  event.target.closest('.nav-item').classList.add('active');
+  if (event && event.target.closest('.nav-item')) {
+    event.target.closest('.nav-item').classList.add('active');
+  }
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  const target = document.getElementById('page-' + page);
+  if (target) target.style.display = 'block';
 
   const titles = {
     dashboard: 'Tableau de bord',
     oeuvres: 'Mes œuvres',
     stats: 'Statistiques',
-    transactions: 'Transactions'
+    transactions: 'Transactions',
+    publier: 'Publier un livre'
   };
 
   document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
