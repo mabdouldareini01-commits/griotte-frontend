@@ -830,7 +830,7 @@ async function loadOeuvres(){
         +'<div class="oc-stat"><div class="oc-val">0 FCFA</div><div class="oc-label">Revenus</div></div>'
         +'</div>'
         +'<div class="oeuvre-card-actions">'
-        +'<button class="btn-action" onclick="showPage(\'create\',null)">✏️ Modifier</button>'
+        +'<button class="btn-action" onclick="loadBookForEdit(\''+b.id+'\')">✏️ Modifier</button>'
         +'<button class="btn-action primary" onclick="window.location.href=\'griotte-reader.html\'">▶ Voir</button>'
         +'</div>'
         +'</div>';
@@ -1210,6 +1210,56 @@ window.demandeRetrait=function(){
 };
 
 // Déconnexion
+window.loadBookForEdit=async function(bookId){
+  const token=localStorage.getItem('accessToken');
+  try{
+    showPage('create',null);
+    goToStep1();
+    showToast('Chargement de l\'œuvre...','⏳');
+    // Charger le livre
+    const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId);
+    const book=await res.json();
+    if(!book||book.error){showToast('Erreur de chargement','❌');return;}
+    // Remplir step 1
+    const t=document.getElementById('newTitle');if(t) t.value=book.title||'';
+    const s=document.getElementById('newSynopsis');if(s) s.value=book.synopsis||'';
+    const g=document.getElementById('newGenre');if(g) g.value=book.genre||'';
+    const p=document.getElementById('newPages');if(p) p.value=book.totalPages||'';
+    updatePreview();
+    // Remplir tags
+    selectedTags.length=0;
+    if(book.tags&&book.tags.length){
+      book.tags.forEach(function(t){selectedTags.push(t);});
+      renderTags();
+    }
+    // Remplir couverture
+    if(book.coverImage){
+      coverDataUrl=book.coverImage;
+      const cp=document.getElementById('coverPreview');
+      if(cp) cp.innerHTML='<img src="'+book.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
+    }
+    // Charger chapitres existants
+    const cRes=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId+'/chapters');
+    const existingChapters=await cRes.json();
+    if(existingChapters&&existingChapters.length>0){
+      chapters.length=0;
+      existingChapters.forEach(function(ch){
+        chapters.push({
+          id:ch.id,
+          num:ch.number,
+          title:ch.title,
+          type:ch.isFree?'free':'premium',
+          content:ch.content||'',
+          words:ch.wordCount||0,
+          status:'published'
+        });
+      });
+    }
+    window.currentBookId=bookId;
+    showToast('Œuvre chargée — '+chapters.length+' chapitre(s)','✅');
+  }catch(e){showToast('Erreur de connexion','❌');}
+};
+
 window.deconnecter=function(){
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');

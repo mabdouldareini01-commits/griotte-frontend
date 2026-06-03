@@ -468,7 +468,7 @@ function showState(type,title){
 window.nextPage=async function(){
   if(currentPage>=pages.length-1) return;
   // Lecture gratuite pour admin et auteur du livre
-  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||(bookData&&bookData.author&&bookData.authorId===userId);
+  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||bookData&&bookData.authorId===userId;
   if(!isFree&&balance<=0){
     document.getElementById('fundsOverlay').classList.add('open');
     return;
