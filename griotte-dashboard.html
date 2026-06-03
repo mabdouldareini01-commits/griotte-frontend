@@ -877,9 +877,7 @@ async function loadOeuvres(){
         +'<div class="brow-rev">0 FCFA</div>'
         +'</div>';
     }).join('')+'</div>';
-    return;
   }catch(e){}
-  // fallback
   const token=localStorage.getItem('accessToken');
   if(!token) return;
   try{
