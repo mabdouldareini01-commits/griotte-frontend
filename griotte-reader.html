@@ -6,669 +6,466 @@
 <title>GRIOTTE — Lecteur</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --noir:#080604;
-  --noir-soft:#0f0d0a;
-  --or:#D9902D;
-  --or-dark:#b8751f;
-  --blanc:#F8F6F2;
-  --cendre:#6b6157;
-  --border:rgba(248,246,242,0.07);
-  --text-day:#1a1510;
-  --bg-day:#f5f0e8;
-  --text-night:#e8e4de;
-  --bg-night:#0f0d0a;
-  --text-sepia:#3d2e1e;
-  --bg-sepia:#f4ead5;
-  --font-size:18px;
-  --line-height:1.9;
-  --width:680px;
-}
+:root{--noir:#080604;--noir-soft:#0f0d0a;--or:#D9902D;--or-dark:#b8751f;--blanc:#F8F6F2;--cendre:#6b6157;--border:rgba(248,246,242,0.07);--font-size:18px;--line-height:1.9;--width:680px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:var(--font-size)}
-body{background:var(--bg-night);color:var(--text-night);font-family:'Cormorant Garamond',serif;min-height:100vh;transition:background 0.4s,color 0.4s;overflow-x:hidden}
-body.day{background:var(--bg-day);color:var(--text-day)}
-body.sepia{background:var(--bg-sepia);color:var(--text-sepia)}
-::selection{background:rgba(217,144,45,0.25);color:inherit}
+body{background:var(--bg-color,#0f0d0a);color:var(--text-color,#e8e4de);font-family:'Cormorant Garamond',serif;min-height:100vh;transition:background 0.4s,color 0.4s;overflow-x:hidden}
+::selection{background:rgba(217,144,45,0.25)}
 ::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(217,144,45,0.3);border-radius:2px}
 
-/* ── TOOLBAR TOP ── */
-.toolbar-top{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:52px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 2rem;
-  background:rgba(15,13,10,0.92);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:transform 0.35s ease,opacity 0.35s ease,background 0.4s;
-}
-body.day .toolbar-top{background:rgba(245,240,232,0.92)}
-body.sepia .toolbar-top{background:rgba(244,234,213,0.92)}
+/* TOOLBAR TOP */
+.toolbar-top{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:var(--tb-bg,rgba(15,13,10,0.92));backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:transform 0.35s ease,opacity 0.35s ease}
 .toolbar-top.hidden{transform:translateY(-100%);opacity:0}
-
-.tb-left{display:flex;align-items:center;gap:1rem}
+.tb-left{display:flex;align-items:center;gap:0.9rem}
 .tb-back{background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.9rem;transition:all 0.2s;flex-shrink:0}
-.tb-back:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2)}
-body.day .tb-back,.body.sepia .tb-back{color:var(--cendre)}
+.tb-back:hover{color:var(--blanc)}
 .tb-book-info{}
-.tb-book-title{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:var(--blanc);line-height:1.1}
-body.day .tb-book-title,.body.sepia .tb-book-title{color:var(--text-day)}
-.tb-chapter{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);letter-spacing:0.08em}
-
-.tb-center{display:flex;align-items:center;gap:0.5rem}
-.tb-solde{
-  font-family:'DM Mono',monospace;font-size:0.62rem;
-  color:var(--or);
-  background:rgba(217,144,45,0.08);
-  border:1px solid rgba(217,144,45,0.2);
-  padding:0.3rem 0.8rem;
-  border-radius:100px;
-  display:flex;align-items:center;gap:0.4rem;
-}
-.tb-solde-dot{width:5px;height:5px;background:var(--or);border-radius:50%;animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
-
-.tb-right{display:flex;align-items:center;gap:0.4rem}
+.tb-title{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:var(--text-color,#e8e4de);line-height:1.1}
+.tb-chapter{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);letter-spacing:0.06em}
+.tb-solde{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--or);background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.2);padding:0.28rem 0.75rem;border-radius:100px;display:flex;align-items:center;gap:0.35rem}
+.tb-dot{width:5px;height:5px;background:var(--or);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.tb-right{display:flex;align-items:center;gap:0.35rem}
 .tb-btn{background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.82rem;transition:all 0.2s}
-.tb-btn:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2);background:rgba(248,246,242,0.05)}
+.tb-btn:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2)}
 .tb-btn.active{color:var(--or);border-color:rgba(217,144,45,0.3);background:rgba(217,144,45,0.08)}
 
-/* ── PROGRESS BAR TOP ── */
-.progress-bar-top{
-  position:fixed;top:52px;left:0;right:0;z-index:99;
-  height:2px;
-  background:rgba(248,246,242,0.06);
-}
-.progress-bar-fill{
-  height:100%;
-  background:linear-gradient(90deg,var(--or-dark),var(--or));
-  transition:width 0.4s ease;
-}
+/* PROGRESS */
+.progress-line{position:fixed;top:52px;left:0;right:0;z-index:99;height:2px;background:rgba(248,246,242,0.06)}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--or-dark),var(--or));transition:width 0.4s ease}
 
-/* ── READING AREA ── */
-.reading-area{
-  max-width:var(--width);
-  margin:0 auto;
-  padding:100px 2rem 160px;
-  cursor:default;
-}
+/* READING AREA */
+.reading-area{max-width:var(--width);margin:0 auto;padding:90px 2rem 160px}
 
-/* Chapitre header */
-.chapter-header{
-  text-align:center;
-  padding:4rem 0 3rem;
-  border-bottom:1px solid var(--border);
-  margin-bottom:3rem;
-}
-.chapter-number{
-  font-family:'DM Mono',monospace;
-  font-size:0.62rem;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--or);
-  margin-bottom:1.2rem;
-  display:block;
-}
-.chapter-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.6rem;
-  font-weight:500;
-  line-height:1.1;
-  margin-bottom:0.75rem;
-}
-.chapter-subtitle{
-  font-family:'Cormorant Garamond',serif;
-  font-style:italic;
-  font-size:1rem;
-  color:var(--cendre);
-  font-weight:300;
-}
+.chapter-header{text-align:center;padding:3.5rem 0 2.5rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+.chapter-number{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--or);margin-bottom:1rem;display:block}
+.chapter-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:500;line-height:1.1;margin-bottom:0.6rem}
+.chapter-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--cendre);font-weight:300}
 
-/* Texte */
-.reading-content p{
-  margin-bottom:1.4em;
-  line-height:var(--line-height);
-  font-size:1rem;
-  font-weight:400;
-  letter-spacing:0.01em;
-}
+.reading-content p{margin-bottom:1.4em;line-height:var(--line-height);font-size:1rem;font-weight:400;letter-spacing:0.01em}
 .reading-content p.indent{text-indent:2em}
-.reading-content .blockquote{
-  margin:2.5em 0;
-  padding:1.5em 2em;
-  border-left:2px solid var(--or);
-  background:rgba(217,144,45,0.04);
-  border-radius:0 8px 8px 0;
-}
-body.day .reading-content .blockquote{background:rgba(217,144,45,0.06)}
-.reading-content .blockquote p{margin-bottom:0.5em;font-style:italic;font-size:1.05rem}
-.reading-content .blockquote cite{
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  color:var(--or);
-  letter-spacing:0.08em;
-  font-style:normal;
-}
+.reading-content .bq{margin:2.5em 0;padding:1.4em 2em;border-left:2px solid var(--or);background:rgba(217,144,45,0.04);border-radius:0 8px 8px 0}
+.reading-content .bq p{margin-bottom:0.4em;font-style:italic;font-size:1.05rem}
+.reading-content .bq cite{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--or);font-style:normal;letter-spacing:0.06em}
 .reading-content em{font-style:italic}
 .reading-content strong{font-weight:600}
-
-/* Page separator */
-.page-sep{
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  margin:3rem 0;
-  opacity:0.3;
-}
+.page-sep{display:flex;align-items:center;gap:1rem;margin:3rem 0;opacity:0.25}
 .page-sep::before,.page-sep::after{content:'';flex:1;height:1px;background:currentColor}
-.page-sep-ico{font-size:0.7rem}
+.page-sep-ico{font-size:0.65rem}
 
-/* ── TOOLBAR BOTTOM ── */
-.toolbar-bottom{
-  position:fixed;bottom:0;left:0;right:0;z-index:100;
-  padding:1rem 2rem 1.5rem;
-  background:rgba(15,13,10,0.95);
-  backdrop-filter:blur(20px);
-  border-top:1px solid var(--border);
-  transition:transform 0.35s ease,opacity 0.35s ease,background 0.4s;
-}
-body.day .toolbar-bottom{background:rgba(245,240,232,0.95)}
-body.sepia .toolbar-bottom{background:rgba(244,234,213,0.95)}
+/* EMPTY / LOADING STATES */
+.reader-state{text-align:center;padding:6rem 2rem;max-width:500px;margin:0 auto}
+.rs-ico{font-size:4rem;margin-bottom:1.5rem;opacity:0.3;display:block}
+.rs-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;margin-bottom:0.75rem;color:var(--text-color,#e8e4de)}
+.rs-sub{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--cendre);line-height:1.8;margin-bottom:2rem;letter-spacing:0.04em}
+.rs-btn{background:linear-gradient(135deg,var(--or),var(--or-dark));color:#080604;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;padding:0.8rem 1.8rem;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s}
+.rs-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(217,144,45,0.3)}
+
+/* TOOLBAR BOTTOM */
+.toolbar-bottom{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:1rem 2rem 1.4rem;background:var(--tb-bg,rgba(15,13,10,0.95));backdrop-filter:blur(20px);border-top:1px solid var(--border);transition:transform 0.35s ease,opacity 0.35s ease}
 .toolbar-bottom.hidden{transform:translateY(100%);opacity:0}
-
-.tb-bottom-main{display:flex;align-items:center;gap:1.5rem;margin-bottom:0.8rem}
-.nav-btn{
-  width:44px;height:44px;
-  background:rgba(248,246,242,0.06);
-  border:1px solid var(--border);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-  font-size:1.2rem;
-  color:var(--blanc);
-  transition:all 0.2s;
-  flex-shrink:0;
-}
-body.day .nav-btn{color:var(--text-day)}
+.tb-bottom-main{display:flex;align-items:center;gap:1.2rem;margin-bottom:0.7rem}
+.nav-btn{width:44px;height:44px;background:rgba(248,246,242,0.06);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:var(--text-color,#e8e4de);transition:all 0.2s;flex-shrink:0}
 .nav-btn:hover{background:rgba(248,246,242,0.1);border-color:rgba(248,246,242,0.2)}
-.nav-btn:disabled{opacity:0.3;cursor:not-allowed}
-
+.nav-btn:disabled{opacity:0.25;cursor:not-allowed}
 .progress-section{flex:1}
-.progress-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
-.page-indicator{
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  color:var(--cendre);
-  letter-spacing:0.05em;
-}
-.progress-pct{
-  font-family:'DM Mono',monospace;
-  font-size:0.62rem;
-  color:var(--or);
-}
-.progress-slider-wrap{position:relative}
-.progress-slider{
-  width:100%;
-  height:4px;
-  -webkit-appearance:none;
-  appearance:none;
-  background:rgba(248,246,242,0.08);
-  border-radius:2px;
-  outline:none;
-  cursor:pointer;
-}
-body.day .progress-slider{background:rgba(26,21,16,0.1)}
-.progress-slider::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  width:14px;height:14px;
-  background:var(--or);
-  border-radius:50%;
-  box-shadow:0 0 8px rgba(217,144,45,0.4);
-  cursor:pointer;
-}
-.tb-bottom-meta{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.time-remaining{
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  color:var(--cendre);
-  letter-spacing:0.06em;
-}
-.debit-info{
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  color:rgba(217,144,45,0.6);
-  display:flex;align-items:center;gap:0.35rem;
-}
-.debit-dot{width:4px;height:4px;background:var(--or);border-radius:50%;opacity:0.6}
+.progress-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.45rem}
+.page-indicator{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);letter-spacing:0.04em}
+.progress-pct{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--or)}
+.progress-slider{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(248,246,242,0.08);border-radius:2px;outline:none;cursor:pointer}
+.progress-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--or);border-radius:50%;box-shadow:0 0 8px rgba(217,144,45,0.4);cursor:pointer}
+.tb-bottom-meta{display:flex;justify-content:space-between;align-items:center}
+.time-remaining{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--cendre);letter-spacing:0.05em}
+.debit-info{font-family:'DM Mono',monospace;font-size:0.56rem;color:rgba(217,144,45,0.55);display:flex;align-items:center;gap:0.3rem}
+.debit-dot{width:3px;height:3px;background:var(--or);border-radius:50%;opacity:0.55}
 
-/* ── SETTINGS PANEL ── */
-.settings-panel{
-  position:fixed;top:0;right:0;bottom:0;
-  width:320px;
-  background:var(--noir-soft);
-  border-left:1px solid var(--border);
-  z-index:200;
-  padding:5rem 2rem 2rem;
-  transform:translateX(100%);
-  transition:transform 0.35s ease;
-  overflow-y:auto;
-}
-body.day .settings-panel{background:rgba(245,240,232,0.98)}
-body.sepia .settings-panel{background:rgba(244,234,213,0.98)}
+/* SETTINGS PANEL */
+.settings-panel{position:fixed;top:0;right:0;bottom:0;width:300px;background:var(--tb-bg,#0f0d0a);border-left:1px solid var(--border);z-index:200;padding:5rem 1.8rem 2rem;transform:translateX(100%);transition:transform 0.3s ease;overflow-y:auto}
 .settings-panel.open{transform:translateX(0)}
-
-.settings-title{
-  font-family:'Syne',sans-serif;
-  font-size:0.88rem;
-  font-weight:700;
-  color:var(--blanc);
-  margin-bottom:0.3rem;
-}
-body.day .settings-title,.body.sepia .settings-title{color:var(--text-day)}
-.settings-sub{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:2rem;letter-spacing:0.06em}
-
-.settings-section{margin-bottom:2rem}
-.settings-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.75rem;display:block}
-
-/* Thème */
-.theme-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem}
-.theme-btn{border:1px solid var(--border);border-radius:8px;padding:0.65rem;cursor:pointer;text-align:center;transition:all 0.2s;background:none}
+.sp-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:var(--text-color,#e8e4de);margin-bottom:0.25rem}
+.sp-sub{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);margin-bottom:2rem;letter-spacing:0.05em}
+.sp-section{margin-bottom:1.8rem}
+.sp-label{font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.65rem;display:block}
+.theme-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:0.45rem}
+.theme-btn{border:1px solid var(--border);border-radius:8px;padding:0.6rem;cursor:pointer;text-align:center;transition:all 0.2s;background:none}
 .theme-btn.active{border-color:var(--or);background:rgba(217,144,45,0.08)}
-.theme-preview{width:100%;height:28px;border-radius:4px;margin-bottom:0.4rem}
-.theme-preview.night{background:linear-gradient(135deg,#0f0d0a,#1a1612)}
-.theme-preview.day{background:linear-gradient(135deg,#f5f0e8,#ece4d4)}
-.theme-preview.sepia{background:linear-gradient(135deg,#f4ead5,#e8d9b8)}
-.theme-name{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre)}
+.theme-prev{width:100%;height:26px;border-radius:4px;margin-bottom:0.35rem}
+.theme-prev.night{background:linear-gradient(135deg,#0f0d0a,#1a1612)}
+.theme-prev.day{background:linear-gradient(135deg,#f5f0e8,#ece4d4)}
+.theme-prev.sepia{background:linear-gradient(135deg,#f4ead5,#e8d9b8)}
+.theme-name{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--cendre)}
 .theme-btn.active .theme-name{color:var(--or)}
-
-/* Font size */
-.font-control{display:flex;align-items:center;gap:0.75rem}
-.font-btn{width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--cendre);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s;flex-shrink:0}
-.font-btn:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2)}
-.font-display{flex:1;text-align:center;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--cendre)}
-
-/* Width */
-.width-btns{display:flex;gap:0.5rem}
-.width-btn{flex:1;border:1px solid var(--border);border-radius:8px;padding:0.6rem;cursor:pointer;background:none;font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);transition:all 0.2s;text-align:center}
+.font-ctrl{display:flex;align-items:center;gap:0.65rem}
+.font-btn{width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--cendre);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.88rem;transition:all 0.2s;flex-shrink:0}
+.font-btn:hover{color:var(--blanc)}
+.font-disp{flex:1;text-align:center;font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--cendre)}
+.width-btns{display:flex;gap:0.45rem}
+.width-btn{flex:1;border:1px solid var(--border);border-radius:8px;padding:0.55rem;cursor:pointer;background:none;font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);transition:all 0.2s;text-align:center}
 .width-btn.active{border-color:var(--or);color:var(--or);background:rgba(217,144,45,0.08)}
+.solde-sp{background:rgba(217,144,45,0.06);border:1px solid rgba(217,144,45,0.15);border-radius:10px;padding:1rem;text-align:center}
+.solde-sp-amount{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.2rem}
+.solde-sp-label{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--cendre);margin-bottom:0.65rem}
+.solde-sp-btn{width:100%;padding:0.52rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:8px;color:#080604;font-family:'Syne',sans-serif;font-weight:700;font-size:0.68rem;cursor:pointer}
 
-/* Solde dans settings */
-.solde-settings{background:rgba(217,144,45,0.06);border:1px solid rgba(217,144,45,0.15);border-radius:10px;padding:1rem;text-align:center}
-.solde-settings-amount{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.2rem}
-.solde-settings-label{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);margin-bottom:0.75rem}
-.solde-settings-btn{width:100%;padding:0.55rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:8px;color:#080604;font-family:'Syne',sans-serif;font-weight:700;font-size:0.7rem;cursor:pointer;letter-spacing:0.06em}
+/* CHAPTERS PANEL */
+.chapters-panel{position:fixed;top:0;left:0;bottom:0;width:300px;background:var(--tb-bg,#0f0d0a);border-right:1px solid var(--border);z-index:200;padding:5rem 0 2rem;transform:translateX(-100%);transition:transform 0.3s ease;overflow-y:auto}
+.chapters-panel.open{transform:translateX(0)}
+.cp-title{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;color:var(--text-color,#e8e4de);padding:0 1.5rem;margin-bottom:1rem}
+.cp-book-title{font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:var(--cendre);padding:0 1.5rem;margin-bottom:1.5rem;font-style:italic}
+.chapter-item{display:flex;align-items:center;gap:0.75rem;padding:0.7rem 1.5rem;cursor:pointer;transition:background 0.15s;border-left:2px solid transparent}
+.chapter-item:hover{background:rgba(248,246,242,0.03)}
+.chapter-item.active{border-left-color:var(--or);background:rgba(217,144,45,0.06)}
+.ci-num{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);min-width:24px}
+.ci-title{font-size:0.78rem;color:var(--text-color,#e8e4de);font-weight:600;line-height:1.2;flex:1}
+.ci-free{font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--green,#4ade80);background:rgba(74,222,128,0.1);padding:0.08rem 0.35rem;border-radius:100px;flex-shrink:0}
+.ci-premium{font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--or);background:rgba(217,144,45,0.1);padding:0.08rem 0.35rem;border-radius:100px;flex-shrink:0}
 
-/* Panel overlay */
-.panel-overlay{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:opacity 0.35s;backdrop-filter:blur(2px)}
+/* PANEL OVERLAY */
+.panel-overlay{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.45);opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(2px)}
 .panel-overlay.open{opacity:1;pointer-events:all}
 
-/* ── TOAST ── */
-.toast{
-  position:fixed;bottom:6rem;left:50%;transform:translateX(-50%) translateY(20px);
-  background:rgba(15,13,10,0.95);
-  border:1px solid rgba(248,246,242,0.12);
-  border-radius:100px;
-  padding:0.6rem 1.2rem;
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  color:var(--blanc);
-  white-space:nowrap;
-  opacity:0;pointer-events:none;
-  transition:all 0.3s;
-  z-index:300;
-  display:flex;align-items:center;gap:0.5rem;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ── INSUFFICIENT FUNDS ── */
-.funds-overlay{
-  position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(12px);
-  display:none;align-items:center;justify-content:center;
-}
+/* FUNDS OVERLAY */
+.funds-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center}
 .funds-overlay.open{display:flex}
-.funds-box{
-  background:#0f0d0a;
-  border:1px solid rgba(248,246,242,0.1);
-  border-radius:20px;
-  padding:3rem;
-  text-align:center;
-  max-width:380px;
-  width:100%;
-  margin:1rem;
-  position:relative;
-}
+.funds-box{background:#0f0d0a;border:1px solid rgba(248,246,242,0.1);border-radius:20px;padding:3rem;text-align:center;max-width:360px;width:100%;margin:1rem;position:relative}
 .funds-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--or),transparent);border-radius:20px 20px 0 0}
-.funds-icon{font-size:3rem;margin-bottom:1rem}
+.funds-ico{font-size:3rem;margin-bottom:1rem}
 .funds-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--blanc);margin-bottom:0.5rem}
 .funds-sub{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);line-height:1.7;margin-bottom:2rem;letter-spacing:0.04em}
-.funds-recharge{width:100%;padding:0.9rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:12px;color:#080604;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;margin-bottom:0.75rem;transition:all 0.2s}
-.funds-recharge:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.funds-back{width:100%;padding:0.75rem;background:none;border:1px solid var(--border);border-radius:12px;color:var(--cendre);font-family:'Syne',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s}
+.funds-btn{width:100%;padding:0.9rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:12px;color:#080604;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;margin-bottom:0.7rem;transition:all 0.2s}
+.funds-btn:hover{filter:brightness(1.1)}
+.funds-back{width:100%;padding:0.75rem;background:none;border:1px solid var(--border);border-radius:12px;color:var(--cendre);font-family:'Syne',sans-serif;font-weight:600;font-size:0.8rem;cursor:pointer;transition:all 0.2s}
 .funds-back:hover{border-color:rgba(248,246,242,0.2);color:var(--blanc)}
+
+/* TOAST */
+.toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(15,13,10,0.95);border:1px solid rgba(248,246,242,0.1);border-radius:100px;padding:0.55rem 1.1rem;font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--blanc);white-space:nowrap;opacity:0;pointer-events:none;transition:all 0.28s;z-index:300;display:flex;align-items:center;gap:0.45rem}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* THEMES */
+body.day{--bg-color:#f5f0e8;--text-color:#1a1510;--tb-bg:rgba(245,240,232,0.92)}
+body.sepia{--bg-color:#f4ead5;--text-color:#3d2e1e;--tb-bg:rgba(244,234,213,0.92)}
 </style>
 </head>
 <body class="night">
 
-<!-- TOAST -->
 <div class="toast" id="toast"><span id="toastIco"></span><span id="toastMsg"></span></div>
 
 <!-- FONDS INSUFFISANTS -->
 <div class="funds-overlay" id="fundsOverlay">
   <div class="funds-box">
-    <div class="funds-icon">💳</div>
+    <div class="funds-ico">💳</div>
     <div class="funds-title">Solde insuffisant</div>
     <div class="funds-sub">Votre solde est épuisé.<br/>Rechargez pour continuer votre lecture.</div>
-    <button class="funds-recharge" onclick="window.location.href='griotte-dashboard.html'">Recharger mon solde →</button>
+    <button class="funds-btn" onclick="window.location.href='griotte-dashboard.html'">Recharger mon solde →</button>
     <button class="funds-back" onclick="window.location.href='griotte-dashboard.html'">← Retour au catalogue</button>
   </div>
 </div>
 
 <!-- PANEL OVERLAY -->
-<div class="panel-overlay" id="panelOverlay" onclick="closeSettings()"></div>
+<div class="panel-overlay" id="panelOverlay" onclick="closePanels()"></div>
 
-<!-- TOOLBAR TOP -->
-<nav class="toolbar-top" id="toolbarTop">
-  <div class="tb-left">
-    <button class="tb-back" onclick="window.location.href='griotte-dashboard.html'" title="Retour">←</button>
-    <div class="tb-book-info">
-      <div class="tb-book-title" id="bookTitle">Les Fils du Sahel</div>
-      <div class="tb-chapter" id="chapterLabel">Chapitre III · La Rivière Sacrée</div>
-    </div>
-  </div>
-  <div class="tb-center">
-    <div class="tb-solde">
-      <span class="tb-solde-dot"></span>
-      <span id="soldeDisplay">0 FCFA</span>
-    </div>
-  </div>
-  <div class="tb-right">
-    <button class="tb-btn" onclick="toggleBookmark()" id="bookmarkBtn" title="Signet">🔖</button>
-    <button class="tb-btn" onclick="toggleSettings()" title="Paramètres">⚙</button>
-  </div>
-</nav>
-
-<!-- PROGRESS BAR TOP -->
-<div class="progress-bar-top">
-  <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
-</div>
-
-<!-- READING AREA -->
-<main class="reading-area" id="readingArea">
-  <div class="reading-content" id="readingContent">
-    <!-- Rempli par JS -->
-  </div>
-</main>
-
-<!-- TOOLBAR BOTTOM -->
-<div class="toolbar-bottom" id="toolbarBottom">
-  <div class="tb-bottom-main">
-    <button class="nav-btn" id="prevBtn" onclick="prevPage()" title="Page précédente">‹</button>
-    <div class="progress-section">
-      <div class="progress-info-row">
-        <span class="page-indicator" id="pageIndicator">p. 1 / 312</span>
-        <span class="progress-pct" id="progressPct">0% lu</span>
-      </div>
-      <div class="progress-slider-wrap">
-        <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" value="0" oninput="onSliderMove(this.value)"/>
-      </div>
-    </div>
-    <button class="nav-btn" id="nextBtn" onclick="nextPage()" title="Page suivante">›</button>
-  </div>
-  <div class="tb-bottom-meta">
-    <span class="time-remaining" id="timeRemaining">≈ 5h restantes</span>
-    <span class="debit-info"><span class="debit-dot"></span>10 FCFA / page</span>
-  </div>
+<!-- CHAPTERS PANEL -->
+<div class="chapters-panel" id="chaptersPanel">
+  <div class="cp-title">Chapitres</div>
+  <div class="cp-book-title" id="cpBookTitle">—</div>
+  <div id="chaptersList"></div>
 </div>
 
 <!-- SETTINGS PANEL -->
 <div class="settings-panel" id="settingsPanel">
-  <div class="settings-title">Paramètres de lecture</div>
-  <div class="settings-sub">Personnalisez votre expérience</div>
-
-  <div class="settings-section">
-    <span class="settings-label">Thème</span>
+  <div class="sp-title">Paramètres de lecture</div>
+  <div class="sp-sub">Personnalisez votre expérience</div>
+  <div class="sp-section">
+    <span class="sp-label">Thème</span>
     <div class="theme-btns">
-      <button class="theme-btn" onclick="setTheme('day',this)">
-        <div class="theme-preview day"></div>
-        <div class="theme-name">Jour</div>
-      </button>
-      <button class="theme-btn active" onclick="setTheme('night',this)">
-        <div class="theme-preview night"></div>
-        <div class="theme-name">Nuit</div>
-      </button>
-      <button class="theme-btn" onclick="setTheme('sepia',this)">
-        <div class="theme-preview sepia"></div>
-        <div class="theme-name">Sépia</div>
-      </button>
+      <button class="theme-btn" onclick="setTheme('day',this)"><div class="theme-prev day"></div><div class="theme-name">Jour</div></button>
+      <button class="theme-btn active" onclick="setTheme('night',this)"><div class="theme-prev night"></div><div class="theme-name">Nuit</div></button>
+      <button class="theme-btn" onclick="setTheme('sepia',this)"><div class="theme-prev sepia"></div><div class="theme-name">Sépia</div></button>
     </div>
   </div>
-
-  <div class="settings-section">
-    <span class="settings-label">Taille du texte</span>
-    <div class="font-control">
+  <div class="sp-section">
+    <span class="sp-label">Taille du texte</span>
+    <div class="font-ctrl">
       <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
-      <span class="font-display" id="fontSizeDisplay">18px</span>
+      <span class="font-disp" id="fontSizeDisp">18px</span>
       <button class="font-btn" onclick="changeFontSize(1)">A+</button>
     </div>
   </div>
-
-  <div class="settings-section">
-    <span class="settings-label">Largeur de colonne</span>
+  <div class="sp-section">
+    <span class="sp-label">Largeur de colonne</span>
     <div class="width-btns">
       <button class="width-btn" onclick="setWidth(560,this)">Étroit</button>
       <button class="width-btn active" onclick="setWidth(680,this)">Moyen</button>
       <button class="width-btn" onclick="setWidth(820,this)">Large</button>
     </div>
   </div>
-
-  <div class="settings-section">
-    <span class="settings-label">Mon solde</span>
-    <div class="solde-settings">
-      <div class="solde-settings-amount" id="soldeSettings">0 FCFA</div>
-      <div class="solde-settings-label">= <span id="pagesRestantes">0</span> pages disponibles</div>
-      <button class="solde-settings-btn" onclick="window.location.href='griotte-dashboard.html'">+ Recharger mon solde</button>
+  <div class="sp-section">
+    <span class="sp-label">Mon solde</span>
+    <div class="solde-sp">
+      <div class="solde-sp-amount" id="soldeSp">0 FCFA</div>
+      <div class="solde-sp-label">= <span id="pagesRestSp">0</span> pages dispo</div>
+      <button class="solde-sp-btn" onclick="window.location.href='griotte-dashboard.html'">+ Recharger</button>
     </div>
+  </div>
+</div>
+
+<!-- TOOLBAR TOP -->
+<nav class="toolbar-top" id="toolbarTop">
+  <div class="tb-left">
+    <button class="tb-back" onclick="window.location.href='griotte-dashboard.html'">←</button>
+    <div class="tb-book-info">
+      <div class="tb-title" id="bookTitle">Chargement...</div>
+      <div class="tb-chapter" id="chapterLabel">—</div>
+    </div>
+  </div>
+  <div class="tb-solde"><span class="tb-dot"></span><span id="soldeDisplay">0 FCFA</span></div>
+  <div class="tb-right">
+    <button class="tb-btn" onclick="toggleChaptersPanel()" title="Chapitres">☰</button>
+    <button class="tb-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Signet">🔖</button>
+    <button class="tb-btn" onclick="toggleSettingsPanel()" title="Paramètres">⚙</button>
+  </div>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div class="progress-line"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+<!-- READING AREA -->
+<main class="reading-area" id="readingArea">
+  <div class="reading-content" id="readingContent">
+    <div class="reader-state">
+      <span class="rs-ico">📖</span>
+      <div class="rs-title">Chargement...</div>
+      <div class="rs-sub">Récupération du contenu en cours.</div>
+    </div>
+  </div>
+</main>
+
+<!-- TOOLBAR BOTTOM -->
+<div class="toolbar-bottom" id="toolbarBottom">
+  <div class="tb-bottom-main">
+    <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹</button>
+    <div class="progress-section">
+      <div class="progress-info-row">
+        <span class="page-indicator" id="pageIndicator">p. 1 / —</span>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+      <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" value="0" oninput="onSliderMove(this.value)"/>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="nextPage()">›</button>
+  </div>
+  <div class="tb-bottom-meta">
+    <span class="time-remaining" id="timeRemaining">—</span>
+    <span class="debit-info"><span class="debit-dot"></span>10 FCFA / page</span>
   </div>
 </div>
 
 <script>
 (function(){
 const API='https://griotte-backend-2-production.up.railway.app/api/v1/auth';
-let currentPage=1;
-const totalPages=312;
-let fontSize=18;
+let pages=[];
+let currentPage=0;
+let totalPages=0;
 let balance=0;
 let bookmarked=false;
 let toolbarsVisible=true;
 let hideTimeout;
+let bookId=null;
+let fontSize=18;
+let bookData=null;
 
-/* ── PAGES CONTENT ── */
-const pages=[
-  {chapter:'Chapitre I',title:'Les Racines du Sahel',subtitle:'Où tout commence, au bord du fleuve',content:`
-<p>Le soleil se levait sur le village de Ségou quand Djibi ouvrit les yeux pour la première fois depuis trois jours. La fièvre l'avait quitté comme un voleur dans la nuit, sans prévenir, sans laisser de trace si ce n'était cette lassitude profonde qui pesait sur ses membres comme de l'argile mouillée.</p>
-<p class="indent">Sa mère était assise à son chevet, les yeux rouges de veille, les mains croisées sur ses genoux. Elle ne dit rien quand il bougea. Elle attendit simplement qu'il la regarde.</p>
-<p class="indent">— Tu as dormi longtemps, dit-elle enfin.</p>
-<p class="indent">— Combien de temps ? demanda-t-il, la voix rauque comme du sable.</p>
-<p class="indent">— Trois jours. Trois nuits. Nous avons eu peur.</p>
-<p>Djibi regarda le plafond de terre séchée. Des fissures y dessinaient des cartes de pays imaginaires. Il les connaissait par cœur — il les avait contemplées toute son enfance, cherchant des formes dans le labyrinthe des craquelures. Là, un dragon. Là, la silhouette d'un vieux griot. Là, le dessin obscur d'une rivière qui ne portait pas de nom.</p>
-<div class="blockquote"><p>« Quand un homme tombe malade au Sahel, ce n'est pas son corps qui souffre. C'est son âme qui cherche une direction. »</p><cite>— Vieux Amadou Coulibaly, griot de Ségou</cite></div>
-<p>Il inspira lentement. L'air sentait le feu de bois, le mil qui chauffe, et quelque chose d'autre — quelque chose d'ancien, de végétal, qu'il n'arrivait pas tout à fait à identifier. Sa mère avait dû préparer la décoction des jours difficiles. Celle que lui avait enseignée sa propre mère, et sa mère avant elle.</p>
-`},
-  {chapter:'Chapitre I',title:'Les Racines du Sahel',subtitle:'Où tout commence, au bord du fleuve',content:`
-<p>Une semaine plus tard, Djibi était debout. Ses jambes tremblaient encore un peu quand il marchait trop vite, mais son esprit était clair — plus clair, même, qu'il ne l'avait été depuis des années. Comme si la fièvre avait brûlé quelque chose d'inutile en lui, laissant derrière elle un espace propre et vide, prêt à être rempli.</p>
-<p class="indent">Il passa ses matinées assis sous le grand néré qui ombrageait le puits du village. Les femmes venaient y chercher de l'eau, les enfants jouaient dans la poussière rouge, les vieux parlaient de la pluie et du sorgho. La vie ordinaire, dans toute sa beauté inattentive.</p>
-<p class="indent">— Tu pars bientôt, lui dit un matin son père.</p>
-<p>Ce n'était pas une question. Toussaint Koné avait l'habitude des non-dits, des vérités qu'on énonce comme des constats météorologiques, sans émotion apparente. C'était sa façon d'aimer — en nommant les choses telles qu'elles étaient.</p>
-<p class="indent">— Je ne sais pas encore, répondit Djibi.</p>
-<p class="indent">— Si. Tu le sais. Tu regardes le nord depuis trois jours.</p>
-<p>C'était vrai. Djibi ne s'en était pas rendu compte lui-même, mais c'était vrai. Son regard revenait toujours vers le nord, vers la route poussiéreuse qui menait à Bamako, à Mopti, au monde.</p>
-<div class="page-sep"><span class="page-sep-ico">✦</span></div>
-<p>Il annonça son départ le lendemain soir, au repas. Sa mère ne pleura pas. Son père ne dit rien. C'était la tradition — quand un fils décidait de partir, on ne le retenait pas. On lui préparait simplement un baluchon, on lui donnait la bénédiction des ancêtres, et on le regardait disparaître au bout du chemin de latérite rouge.</p>
-`},
-  {chapter:'Chapitre II',title:'Le Départ',subtitle:'La route qui ne revient jamais',content:`
-<p>Bamako l'avala d'un coup, sans préambule. Il n'y avait pas de transition entre le village et la ville — juste une frontière invisible que l'on franchissait un matin, et de l'autre côté de laquelle tout était différent : les bruits, les odeurs, la vitesse des choses.</p>
-<p class="indent">Djibi avait une adresse griffonnée sur un bout de papier : son cousin Bakary, qui travaillait dans un garage du quartier de Médina-Coura. Il mit deux heures à trouver la rue, perdu dans ce labyrinthe de ruelles et de marchés où tout le monde semblait savoir exactement où il allait sauf lui.</p>
-<p>Le garage de Bakary était une cour poussiéreuse bordée de carcasses de voitures dont certaines semblaient attendre la résurrection depuis des décennies. Des mécaniciens en bleus de travail s'affairaient dans un bruit de ferraille et de moteurs qu'on relançait à la force du poignet.</p>
-<p class="indent">— Ah, le voilà ! cria Bakary en apercevant son cousin. Le fils de mon oncle qui vient manger à ma table sans me prévenir !</p>
-<p class="indent">Mais il riait en disant ça, et il serra Djibi dans ses bras avec une force qui faillit le renverser.</p>
-<div class="blockquote"><p>« Bamako ne te demande pas d'où tu viens. Elle te demande seulement ce que tu veux. Et si tu ne sais pas répondre, elle t'avale. »</p><cite>— Bakary Koné</cite></div>
-<p>Cette nuit-là, allongé sur un matelas fin posé à même le sol de ciment, Djibi écouta la ville dormir. Ce n'était pas le silence du Sahel — un silence profond, presque tangible, habité par le vent et le chant des grillons. C'était un silence bruyant, paradoxal, fait de milliers de petits sons qui ensemble formaient quelque chose d'immense et de vivant.</p>
-`},
-  {chapter:'Chapitre III',title:'La Rivière Sacrée',subtitle:'Où Djibi découvre le secret de ses ancêtres',content:`
-<p>L'eau du fleuve Bani coulait lentement ce matin-là, comme si elle connaissait le poids de ce qui allait se passer. Djibi s'était levé avant l'aube, guidé par une voix que lui seul entendait — celle de son grand-père Sékou, mort depuis dix ans mais toujours présent dans le bruissement du vent sur les herbes sèches du Sahel.</p>
-<p class="indent">Les femmes du village n'avaient pas encore allumé leurs feux. Les coqs dormaient encore. Seul le murmure de l'eau répondait aux pas de Djibi sur la berge argileuse. Il portait la calebasse de sa mère — celle aux motifs d'indigo qui racontaient l'histoire de leur famille sur sept générations.</p>
-<p class="indent">— Tu es revenu, dit une voix derrière lui.</p>
-<p>Djibi ne se retourna pas. Il connaissait cette voix. Elle appartenait à Aminata, la vieille griotte du village, celle qu'on appelait <em>la Mémoire vivante</em>. Elle avait cent ans selon certains, deux cents selon d'autres. Personne ne savait vraiment. Elle était simplement là, comme le baobab au centre du village — éternelle, inébranlable, chargée de toutes les histoires que le monde avait jamais connues.</p>
-<div class="blockquote"><p>« Le fleuve n'oublie jamais ce qu'il a porté. Chaque larme versée sur ses rives, chaque prière murmurée à son oreille — tout cela vit encore dans ses eaux. Et un jour, il te rendra ce que tes ancêtres lui ont confié. »</p><cite>— Aminata, la griotte</cite></div>
-<p class="indent">Djibi se retourna enfin. La vieille femme était assise sur un rocher plat, les pieds dans l'eau froide du matin, son grand boubou violet flottant autour d'elle comme un nuage. Elle souriait.</p>
-<p class="indent">— Qu'est-ce que mes ancêtres lui ont confié ? demanda-t-il.</p>
-<p class="indent">— Une histoire. La tienne. Celle que tu dois maintenant écrire.</p>
-`},
-  {chapter:'Chapitre III',title:'La Rivière Sacrée',subtitle:'Où Djibi découvre le secret de ses ancêtres',content:`
-<p>Aminata lui parla pendant des heures, là, au bord du fleuve, tandis que le soleil montait dans le ciel de coton blanc et que la chaleur commençait à peser sur toutes choses. Elle lui parla de ses ancêtres, des griots de sa lignée, des histoires qu'ils avaient gardées et transmises de génération en génération comme on transmet un feu sacré.</p>
-<p class="indent">Elle lui parla aussi de la malédiction — car il y en avait une, bien sûr. Il y en a toujours une, dans les grandes histoires. Une promesse brisée, un serment oublié, une dette qui courait depuis sept générations et qui attendait, patiente comme le désert, que quelqu'un vienne enfin la régler.</p>
-<p>Djibi écoutait sans l'interrompre. De temps en temps, il posait une question — courte, précise, comme son père lui avait appris à le faire. Les grandes questions se posent en peu de mots. Les petits esprits ont besoin de beaucoup de mots pour ne rien dire. Les grands esprits n'en ont besoin que d'un.</p>
-<div class="page-sep"><span class="page-sep-ico">✦</span></div>
-<p>Quand elle eut fini, le soleil était haut et la berge commençait à se remplir de femmes venues laver le linge. Aminata se leva — avec une agilité surprenante pour une femme de son âge prétendu — et redressa son grand boubou violet.</p>
-<p class="indent">— Que dois-je faire maintenant ? demanda Djibi.</p>
-<p class="indent">— Ce que font tous les héros de toutes les histoires depuis le commencement du monde, dit-elle. Tu dois partir. Tu dois chercher. Et quand tu auras trouvé, tu devras choisir.</p>
-<p class="indent">Elle ramassa la calebasse de sa mère et la lui tendit.</p>
-<p class="indent">— Commence par ça, dit-elle. Va porter l'eau du matin à ta mère. Certaines choses simples sont les plus difficiles à retrouver. Et les plus précieuses de toutes.</p>
-`},
-];
+// Token & bookId depuis URL
+const up=new URLSearchParams(window.location.search);
+bookId=up.get('bookId');
 
-/* ── INIT ── */
-function init(){
+// Init
+async function init(){
   const token=localStorage.getItem('accessToken');
-  if(token) loadSolde(token);
-  // Charger les chapitres réels si bookId dans URL
-  const up=new URLSearchParams(window.location.search);
-  const bookId=up.get('bookId');
-  if(bookId) loadRealChapters(bookId,token);
-  else{showPage(currentPage);updateProgress();}
-  startHideTimer();
-  document.addEventListener('click',handleAreaClick);
+  if(token) await loadSolde(token);
+  if(!bookId){
+    showState('no-book');
+    return;
+  }
+  await loadBook(bookId);
 }
 
-async function loadRealChapters(bookId,token){
+// Load solde
+async function loadSolde(token){
   try{
-    const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId+'/chapters');
-    const chapters=await res.json();
-    if(chapters&&chapters.length>0){
-      // Remplacer le contenu statique par les vrais chapitres
-      pages.length=0;
-      chapters.forEach(function(ch){
-        // Découper le contenu en pages de ~300 mots
-        const words=(ch.content||'').split(/\s+/).filter(Boolean);
-        const wordsPerPage=300;
-        const totalChPages=Math.max(1,Math.ceil(words.length/wordsPerPage));
-        for(let p=0;p<totalChPages;p++){
-          const start=p*wordsPerPage;
-          const chunk=words.slice(start,start+wordsPerPage).join(' ');
-          pages.push({
-            chapter:ch.title,
-            title:ch.title,
-            subtitle:'Page '+(p+1)+' / '+totalChPages,
-            content:'<p class="indent">'+chunk+'</p>'
-          });
-        }
-      });
-      if(pages.length===0) pages.push({chapter:'Début',title:'Lecture',subtitle:'',content:'<p>Contenu à venir.</p>'});
-      // Update book title
-      const res2=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books-public');
-      const books=await res2.json();
-      const book=books.find(function(b){return b.id===bookId;});
-      if(book){
-        const bt=document.getElementById('bookTitle');
-        if(bt) bt.textContent=book.title;
-      }
+    const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
+    const d=await res.json();
+    if(d.balance!==undefined){
+      balance=d.balance;
+      updateSoldeDisplay();
     }
-  }catch(e){console.log('Chapitres non chargés:',e);}
-  showPage(currentPage);
-  updateProgress();
-}
-
-function loadSolde(token){
-  fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}})
-    .then(function(r){return r.json();})
-    .then(function(d){
-      if(d.balance!==undefined){
-        balance=d.balance;
-        updateSoldeDisplay();
-      }
-    }).catch(function(){});
+  }catch(e){}
 }
 
 function updateSoldeDisplay(){
-  const s=document.getElementById('soldeDisplay');
-  if(s) s.textContent=balance.toLocaleString()+' FCFA';
-  const ss=document.getElementById('soldeSettings');
+  const sd=document.getElementById('soldeDisplay');
+  if(sd) sd.textContent=balance.toLocaleString()+' FCFA';
+  const ss=document.getElementById('soldeSp');
   if(ss) ss.textContent=balance.toLocaleString()+' FCFA';
-  const sp=document.getElementById('pagesRestantes');
+  const sp=document.getElementById('pagesRestSp');
   if(sp) sp.textContent=Math.floor(balance/10);
 }
 
-/* ── PAGE ── */
-function showPage(page){
-  const idx=Math.min(Math.max(page-1,0),pages.length-1);
+// Load book + chapters
+async function loadBook(id){
+  try{
+    // Charger le livre
+    const bRes=await fetch(API+'/books-public');
+    const books=await bRes.json();
+    bookData=books.find(function(b){return b.id===id;});
+
+    if(!bookData){
+      showState('not-found');
+      return;
+    }
+
+    // Titre du livre
+    const bt=document.getElementById('bookTitle');
+    if(bt) bt.textContent=bookData.title;
+    const cbt=document.getElementById('cpBookTitle');
+    if(cbt) cbt.textContent=bookData.title;
+
+    // Charger les chapitres
+    const cRes=await fetch(API+'/books/'+id+'/chapters');
+    const chapters=await cRes.json();
+
+    if(!chapters||chapters.length===0){
+      showState('no-chapters',bookData.title);
+      return;
+    }
+
+    // Construire les pages depuis les chapitres réels
+    pages=[];
+    chapters.forEach(function(ch,ci){
+      const content=ch.content||'';
+      const words=content.split(/\s+/).filter(Boolean);
+      const wordsPerPage=280;
+      const numPages=Math.max(1,Math.ceil(words.length/wordsPerPage));
+
+      for(let p=0;p<numPages;p++){
+        const start=p*wordsPerPage;
+        const chunk=words.slice(start,start+wordsPerPage).join(' ');
+        const isFirst=p===0;
+        pages.push({
+          chapterNum:ch.number,
+          chapterTitle:ch.title,
+          isFirstOfChapter:isFirst,
+          isFree:ch.isFree,
+          content:chunk,
+          chapterIndex:ci,
+          pageInChapter:p+1,
+          totalPagesInChapter:numPages
+        });
+      }
+    });
+
+    totalPages=pages.length;
+
+    // Construire la liste des chapitres dans le panel
+    renderChaptersList(chapters);
+
+    // Afficher la première page
+    showPage(0);
+    updateProgress();
+    startHideTimer();
+    document.addEventListener('click',handleAreaClick);
+    document.addEventListener('mousemove',onMouseMove);
+
+  }catch(e){
+    console.error(e);
+    showState('error');
+  }
+}
+
+// Render chapters list
+function renderChaptersList(chapters){
+  const cl=document.getElementById('chaptersList');
+  if(!cl) return;
+  cl.innerHTML=chapters.map(function(ch,i){
+    return '<div class="chapter-item" id="ci-'+i+'" onclick="jumpToChapter('+i+')">'
+      +'<div class="ci-num">'+ch.number+'</div>'
+      +'<div class="ci-title">'+ch.title+'</div>'
+      +(ch.isFree?'<span class="ci-free">Gratuit</span>':'<span class="ci-premium">Premium</span>')
+      +'</div>';
+  }).join('');
+}
+
+// Jump to chapter
+window.jumpToChapter=function(chapterIndex){
+  const firstPage=pages.findIndex(function(p){return p.chapterIndex===chapterIndex;});
+  if(firstPage>=0){
+    currentPage=firstPage;
+    showPage(currentPage);
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+    closePanels();
+  }
+};
+
+// Show page
+function showPage(idx){
+  if(pages.length===0) return;
+  idx=Math.max(0,Math.min(idx,pages.length-1));
   const p=pages[idx];
   const content=document.getElementById('readingContent');
   content.style.opacity='0';
   setTimeout(function(){
     let html='';
-    // Header seulement si premier paragraphe du chapitre ou nouveau chapitre
-    if(idx===0||pages[idx].chapter!==pages[idx-1].chapter){
+    if(p.isFirstOfChapter){
       html+='<div class="chapter-header">'
-        +'<span class="chapter-number">'+p.chapter+'</span>'
-        +'<h1 class="chapter-title">'+p.title+'</h1>'
-        +'<div class="chapter-subtitle">'+p.subtitle+'</div>'
+        +'<span class="chapter-number">Chapitre '+p.chapterNum+'</span>'
+        +'<h1 class="chapter-title">'+p.chapterTitle+'</h1>'
         +'</div>';
     }
-    html+='<div>'+p.content+'</div>';
+    // Formater le texte en paragraphes
+    const sentences=p.content.split(/(?<=[.!?»])\s+/);
+    const paragraphs=[];
+    let current=[];
+    sentences.forEach(function(s,i){
+      current.push(s);
+      if(current.length>=3||i===sentences.length-1){
+        paragraphs.push(current.join(' '));
+        current=[];
+      }
+    });
+    html+='<div>'+paragraphs.map(function(par,i){
+      return '<p class="'+(i>0?'indent':'')+'">'+(par.trim()||'...')+'</p>';
+    }).join('')+'</div>';
     content.innerHTML=html;
     content.style.opacity='1';
-    content.style.transition='opacity 0.3s ease';
+    content.style.transition='opacity 0.25s ease';
     // Update chapter label
     const cl=document.getElementById('chapterLabel');
-    if(cl) cl.textContent=p.chapter+' · '+p.title;
+    if(cl) cl.textContent='Ch. '+p.chapterNum+' · '+p.chapterTitle;
+    // Update active chapter in panel
+    document.querySelectorAll('.chapter-item').forEach(function(el){el.classList.remove('active');});
+    const activeItem=document.getElementById('ci-'+p.chapterIndex);
+    if(activeItem) activeItem.classList.add('active');
   },150);
 }
 
-function updateProgress(){
-  const pct=Math.round(((currentPage-1)/totalPages)*100);
-  const fill=document.getElementById('progressFill');
-  if(fill) fill.style.width=pct+'%';
-  const slider=document.getElementById('progressSlider');
-  if(slider) slider.value=pct;
-  const pi=document.getElementById('pageIndicator');
-  if(pi) pi.textContent='p. '+currentPage+' / '+totalPages;
-  const pp=document.getElementById('progressPct');
-  if(pp) pp.textContent=pct+'% lu';
-  const tr=document.getElementById('timeRemaining');
-  if(tr){
-    const pagesLeft=totalPages-currentPage;
-    const hours=Math.floor(pagesLeft/40);
-    const mins=Math.round((pagesLeft%40)*1.5);
-    tr.textContent=hours>0?'≈ '+hours+'h '+mins+'min restantes':'≈ '+mins+' min restantes';
-  }
-  const prevBtn=document.getElementById('prevBtn');
-  const nextBtn=document.getElementById('nextBtn');
-  if(prevBtn) prevBtn.disabled=currentPage===1;
-  if(nextBtn) nextBtn.disabled=currentPage===totalPages;
+// Show empty/error states
+function showState(type,title){
+  const content=document.getElementById('readingContent');
+  const bt=document.getElementById('bookTitle');
+  if(bt) bt.textContent=title||'GRIOTTE';
+  const states={
+    'no-book':'<div class="reader-state"><span class="rs-ico">📚</span><div class="rs-title">Aucun livre sélectionné</div><div class="rs-sub">Choisissez une œuvre depuis le catalogue pour commencer à lire.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
+    'not-found':'<div class="reader-state"><span class="rs-ico">🔍</span><div class="rs-title">Livre introuvable</div><div class="rs-sub">Ce livre n\'existe pas ou a été supprimé.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
+    'no-chapters':'<div class="reader-state"><span class="rs-ico">📝</span><div class="rs-title">'+(title||'Œuvre sans chapitre')+'</div><div class="rs-sub">Cette œuvre ne contient pas encore de chapitre.<br/>Revenez bientôt — l\'auteur est en train d\'écrire !</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Retour au catalogue →</button></div>',
+    'error':'<div class="reader-state"><span class="rs-ico">⚠️</span><div class="rs-title">Erreur de chargement</div><div class="rs-sub">Impossible de charger ce livre.<br/>Vérifiez votre connexion et réessayez.</div><button class="rs-btn" onclick="window.location.reload()">Réessayer →</button></div>'
+  };
+  content.innerHTML=states[type]||states['error'];
+  hideToolbars();
 }
 
-/* ── NAVIGATION ── */
+// Navigation
 window.nextPage=async function(){
-  if(currentPage>=totalPages) return;
+  if(currentPage>=pages.length-1) return;
   if(balance<=0){
     document.getElementById('fundsOverlay').classList.add('open');
     return;
@@ -682,10 +479,7 @@ window.nextPage=async function(){
         body:JSON.stringify({amount:-10})
       });
       const d=await res.json();
-      if(d.error){
-        document.getElementById('fundsOverlay').classList.add('open');
-        return;
-      }
+      if(d.error){document.getElementById('fundsOverlay').classList.add('open');return;}
       if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
     }catch(e){}
   }
@@ -693,11 +487,11 @@ window.nextPage=async function(){
   showPage(currentPage);
   updateProgress();
   window.scrollTo({top:0,behavior:'smooth'});
-  showToast('p. '+currentPage,'📄');
+  showToast('p. '+(currentPage+1),'📄');
 };
 
 window.prevPage=function(){
-  if(currentPage<=1) return;
+  if(currentPage<=0) return;
   currentPage--;
   showPage(currentPage);
   updateProgress();
@@ -705,97 +499,112 @@ window.prevPage=function(){
 };
 
 window.onSliderMove=function(val){
-  const page=Math.max(1,Math.round((parseInt(val)/100)*totalPages));
+  const page=Math.max(0,Math.round((parseInt(val)/100)*(pages.length-1)));
   currentPage=page;
   showPage(currentPage);
   updateProgress();
 };
 
-/* ── TOOLBARS ── */
+// Progress
+function updateProgress(){
+  const pct=totalPages>1?Math.round((currentPage/(totalPages-1))*100):0;
+  const pf=document.getElementById('progressFill');if(pf) pf.style.width=pct+'%';
+  const ps=document.getElementById('progressSlider');if(ps) ps.value=pct;
+  const pi=document.getElementById('pageIndicator');if(pi) pi.textContent='p. '+(currentPage+1)+' / '+totalPages;
+  const pp=document.getElementById('progressPct');if(pp) pp.textContent=pct+'% lu';
+  const tr=document.getElementById('timeRemaining');
+  if(tr){
+    const left=totalPages-currentPage-1;
+    const h=Math.floor(left/40);
+    const m=Math.round((left%40)*1.5);
+    tr.textContent=h>0?'≈ '+h+'h '+m+'min restantes':'≈ '+m+' min restantes';
+  }
+  const prevBtn=document.getElementById('prevBtn');if(prevBtn) prevBtn.disabled=currentPage===0;
+  const nextBtn=document.getElementById('nextBtn');if(nextBtn) nextBtn.disabled=currentPage>=pages.length-1;
+}
+
+// Toolbars
 function startHideTimer(){
   clearTimeout(hideTimeout);
   hideTimeout=setTimeout(function(){
-    if(toolbarsVisible){
-      document.getElementById('toolbarTop').classList.add('hidden');
-      document.getElementById('toolbarBottom').classList.add('hidden');
-      toolbarsVisible=false;
-    }
+    document.getElementById('toolbarTop').classList.add('hidden');
+    document.getElementById('toolbarBottom').classList.add('hidden');
+    toolbarsVisible=false;
   },4000);
 }
-
 function showToolbars(){
   document.getElementById('toolbarTop').classList.remove('hidden');
   document.getElementById('toolbarBottom').classList.remove('hidden');
   toolbarsVisible=true;
   startHideTimer();
 }
-
+function hideToolbars(){
+  document.getElementById('toolbarTop').classList.add('hidden');
+  document.getElementById('toolbarBottom').classList.add('hidden');
+  toolbarsVisible=false;
+}
 function handleAreaClick(e){
-  if(e.target.closest('.toolbar-top')||e.target.closest('.toolbar-bottom')||
-     e.target.closest('.settings-panel')||e.target.closest('.funds-overlay')) return;
+  if(e.target.closest('.toolbar-top')||e.target.closest('.toolbar-bottom')||e.target.closest('.settings-panel')||e.target.closest('.chapters-panel')||e.target.closest('.funds-overlay')||e.target.closest('.reader-state')) return;
   showToolbars();
 }
+function onMouseMove(){if(!toolbarsVisible) showToolbars();else startHideTimer();}
 
-document.addEventListener('mousemove',function(){
-  if(!toolbarsVisible) showToolbars();
-  else startHideTimer();
-});
-
-/* ── SETTINGS ── */
-window.toggleSettings=function(){
+// Panels
+window.toggleSettingsPanel=function(){
   document.getElementById('settingsPanel').classList.toggle('open');
   document.getElementById('panelOverlay').classList.toggle('open');
+  document.getElementById('chaptersPanel').classList.remove('open');
 };
-window.closeSettings=function(){
+window.toggleChaptersPanel=function(){
+  document.getElementById('chaptersPanel').classList.toggle('open');
+  document.getElementById('panelOverlay').classList.toggle('open');
   document.getElementById('settingsPanel').classList.remove('open');
+};
+window.closePanels=function(){
+  document.getElementById('settingsPanel').classList.remove('open');
+  document.getElementById('chaptersPanel').classList.remove('open');
   document.getElementById('panelOverlay').classList.remove('open');
 };
 
+// Settings
 window.setTheme=function(theme,btn){
   document.body.className=theme;
   document.querySelectorAll('.theme-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
 };
-
 window.changeFontSize=function(delta){
   fontSize=Math.max(14,Math.min(24,fontSize+delta));
   document.documentElement.style.setProperty('--font-size',fontSize+'px');
-  const fd=document.getElementById('fontSizeDisplay');
-  if(fd) fd.textContent=fontSize+'px';
+  const fd=document.getElementById('fontSizeDisp');if(fd) fd.textContent=fontSize+'px';
 };
-
 window.setWidth=function(w,btn){
   document.documentElement.style.setProperty('--width',w+'px');
   document.querySelectorAll('.width-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
 };
 
-/* ── BOOKMARK ── */
+// Bookmark
 window.toggleBookmark=function(){
   bookmarked=!bookmarked;
   const btn=document.getElementById('bookmarkBtn');
-  if(btn){
-    btn.classList.toggle('active',bookmarked);
-    btn.textContent=bookmarked?'🔖':'🔖';
-  }
-  showToast(bookmarked?'Signet ajouté — p. '+currentPage:'Signet retiré','🔖');
+  if(btn) btn.classList.toggle('active',bookmarked);
+  showToast(bookmarked?'Signet ajouté — p.'+(currentPage+1):'Signet retiré','🔖');
 };
 
-/* ── TOAST ── */
+// Toast
 window.showToast=function(msg,ico){
-  ico=ico||'✅';
   const t=document.getElementById('toast');
-  document.getElementById('toastIco').textContent=ico;
+  document.getElementById('toastIco').textContent=ico||'✅';
   document.getElementById('toastMsg').textContent=msg;
   t.classList.add('show');
   setTimeout(function(){t.classList.remove('show');},1800);
 };
 
-/* ── KEYBOARD ── */
+// Keyboard
 document.addEventListener('keydown',function(e){
   if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextPage();}
   else if(e.key==='ArrowLeft'){e.preventDefault();prevPage();}
-  else if(e.key==='Escape'){closeSettings();}
+  else if(e.key==='Escape') closePanels();
 });
 
 init();
