@@ -2803,11 +2803,11 @@ async function inscrire() {
       setTimeout(() => {
         const userRole = data.role || role;
         if (userRole === "AUTHOR") {
-          window.location.href = "/griotte-dashboard-auteur.html";
+          window.location.href = "/griotte-dashboard.html";
         } else if (userRole === "ADMIN") {
-          window.location.href = "/griotte-admin.html";
+          window.location.href = "/griotte-dashboard.html";
         } else {
-          window.location.href = "/griotte-dashboard-lecteur.html";
+          window.location.href = "/griotte-dashboard.html";
         }
       }, 1500);
     } else {
@@ -2875,9 +2875,9 @@ async function verifierOTP() {
       msg.textContent = "Compte vérifié ! Redirection...";
       setTimeout(() => {
         if (role === "AUTHOR") {
-          window.location.href = "/griotte-dashboard-auteur.html";
+          window.location.href = "/griotte-dashboard.html";
         } else {
-          window.location.href = "/griotte-dashboard-lecteur.html";
+          window.location.href = "/griotte-dashboard.html";
         }
       }, 1500);
     } else {
@@ -2924,11 +2924,11 @@ async function seConnecter() {
       setTimeout(() => {
         const userRole = data.role || "READER";
         if (userRole === "ADMIN") {
-          window.location.href = "/griotte-admin.html";
+          window.location.href = "/griotte-dashboard.html";
         } else if (userRole === "AUTHOR") {
-          window.location.href = "/griotte-dashboard-auteur.html";
+          window.location.href = "/griotte-dashboard.html";
         } else {
-          window.location.href = "/griotte-dashboard-lecteur.html";
+          window.location.href = "/griotte-dashboard.html";
         }
       }, 1500);
     } else {
