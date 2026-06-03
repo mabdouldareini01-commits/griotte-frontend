@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GRIOTTE — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--noir:#0c0a07;--noir-soft:#141210;--noir-card:#1a1612;--or:#D9902D;--or-dark:#b8751f;--blanc:#F8F6F2;--cendre:#6b6157;--border:rgba(248,246,242,0.07);--green:#4ade80;--red:#f87171;--sidebar-w:240px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min-height:100vh;display:flex}
+.sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--noir-soft);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;overflow-y:auto}
+.sidebar-logo{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.7rem}
+.logo-mark{width:34px;height:34px;background:linear-gradient(135deg,var(--or),var(--or-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem;color:var(--noir);flex-shrink:0}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--blanc);letter-spacing:0.06em;text-transform:uppercase}
+.logo-text span{color:var(--or)}
+.sidebar-user{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border)}
+.user-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#3d1a0a,#8B4513);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#f5c07a;margin-bottom:0.7rem;border:2px solid rgba(217,144,45,0.25)}
+.user-name{font-size:0.9rem;font-weight:700;color:var(--blanc);margin-bottom:0.3rem}
+.user-role{display:inline-flex;align-items:center;gap:0.3rem;font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;background:rgba(74,222,128,0.1);padding:0.2rem 0.5rem;border-radius:100px}
+.user-role.admin{color:#60a5fa;background:rgba(96,165,250,0.1)}
+.user-role.reader{color:var(--or);background:rgba(217,144,45,0.1)}
+.sidebar-nav{flex:1;padding:1rem 0}
+.nav-label{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);letter-spacing:0.18em;text-transform:uppercase;padding:0.5rem 1.5rem 0.3rem}
+.nav-item{display:flex;align-items:center;gap:0.7rem;padding:0.65rem 1.5rem;cursor:pointer;transition:all 0.15s;border-left:2px solid transparent;color:var(--cendre);font-size:0.82rem;font-weight:600;text-decoration:none;user-select:none}
+.nav-item:hover{color:var(--blanc);background:rgba(248,246,242,0.04)}
+.nav-item.active{color:var(--or);border-left-color:var(--or);background:rgba(217,144,45,0.08)}
+.nav-item.publish{color:var(--or);font-weight:700}
+.nav-item.danger{color:var(--red)}
+.nav-ico{font-size:0.9rem;width:18px;text-align:center}
+.sidebar-bottom{padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.wallet-box{background:var(--noir-card);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.wallet-label{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4rem}
+.wallet-amount{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.6rem}
+.wallet-btn{width:100%;padding:0.55rem;background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer}
+.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.topbar{height:60px;background:var(--noir-soft);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:1rem;font-weight:700;color:var(--blanc)}
+.topbar-date{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre)}
+.page{padding:2rem;flex:1;display:none}
+.page.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
+.kpi-card{background:var(--noir-card);border:1px solid var(--border);border-radius:12px;padding:1.4rem}
+.kpi-icon{font-size:1.3rem;margin-bottom:0.8rem;display:block}
+.kpi-label{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4rem}
+.kpi-value{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.5rem}
+.kpi-trend{display:inline-flex;align-items:center;gap:0.25rem;font-family:'DM Mono',monospace;font-size:0.6rem;padding:0.18rem 0.5rem;border-radius:100px;background:rgba(74,222,128,0.1);color:var(--green)}
+.card{background:var(--noir-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.card-title{font-size:0.88rem;font-weight:700;color:var(--blanc);margin-bottom:1rem}
+.form-group{margin-bottom:1.2rem}
+.form-label{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:0.5rem}
+.form-input,.form-select,.form-textarea{width:100%;background:rgba(248,246,242,0.04);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;font-family:'Syne',sans-serif;font-size:0.88rem;color:var(--blanc);outline:none;transition:border-color 0.2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--or)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--cendre)}
+.form-textarea{resize:vertical;font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.8}
+.form-select option{background:var(--noir-card)}
+.btn-primary{width:100%;padding:1rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:8px;color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer}
+.pub-msg{font-family:'DM Mono',monospace;font-size:0.8rem;margin-bottom:1rem;min-height:1.2rem}
+/* Bibliothèque */
+.book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1.2rem}
+.book-card{background:var(--noir-card);border:1px solid var(--border);border-radius:10px;padding:1rem;cursor:pointer;transition:border-color 0.2s}
+.book-card:hover{border-color:rgba(217,144,45,0.4)}
+.book-cover{width:100%;aspect-ratio:2/3;border-radius:6px;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.cv-1{background:linear-gradient(160deg,#2d1b0e,#8B4513)}
+.cv-2{background:linear-gradient(160deg,#0a1628,#2e5f8f)}
+.cv-3{background:linear-gradient(160deg,#1a2a0a,#5f8f2e)}
+.cv-4{background:linear-gradient(160deg,#280a0a,#8f2e2e)}
+.cv-5{background:linear-gradient(160deg,#1a0a28,#6f2e8f)}
+.book-title{font-size:0.78rem;font-weight:700;color:var(--blanc);margin-bottom:0.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.book-author{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre)}
+/* Solde lecteur */
+.credits-widget{background:linear-gradient(135deg,rgba(217,144,45,0.12),rgba(184,117,31,0.06));border:1px solid rgba(217,144,45,0.25);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.cw-label{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
+.cw-amount{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--or);margin-bottom:0.3rem}
+.cw-pages{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);margin-bottom:1rem}
+.cw-recharge{padding:0.75rem 1.5rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:8px;color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer}
+/* Toast */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--noir-card);border:1px solid rgba(248,246,242,0.14);border-radius:10px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.7rem;font-size:0.82rem;color:var(--blanc);box-shadow:0 8px 32px rgba(0,0,0,0.4);transform:translateY(20px);opacity:0;pointer-events:none;transition:all 0.3s;z-index:600}
+.toast.show{opacity:1;transform:translateY(0)}
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--noir-card);border:1px solid rgba(248,246,242,0.14);border-radius:16px;padding:2rem;width:min(480px,calc(100vw - 2rem));position:relative;max-height:90vh;overflow-y:auto}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--blanc);margin-bottom:0.3rem}
+.modal-sub{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);letter-spacing:0.08em;margin-bottom:1.5rem}
+.modal-close{position:absolute;top:1rem;right:1rem;width:30px;height:30px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--cendre);cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center}
+.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:1.5rem}
+.pack-btn{background:rgba(248,246,242,0.04);border:1px solid var(--border);border-radius:8px;padding:1rem;cursor:pointer;text-align:center;transition:all 0.2s;color:var(--blanc)}
+.pack-btn:hover,.pack-btn.selected{border-color:var(--or);background:rgba(217,144,45,0.1)}
+.pack-amount{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--or)}
+.pack-pages{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-top:0.2rem}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastIcon"></span><span id="toastMsg"></span></div>
+
+<!-- MODAL RECHARGE -->
+<div class="modal-overlay" id="rechargeModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeRechargeModal()">✕</button>
+    <div class="modal-title">Recharger mon solde</div>
+    <div class="modal-sub">10 FCFA = 1 page lue</div>
+    <div class="pack-grid">
+      <div class="pack-btn selected" onclick="selectPack(this,500)" data-amount="500"><div class="pack-amount">500</div><div class="pack-pages">FCFA · 50 pages</div></div>
+      <div class="pack-btn" onclick="selectPack(this,1000)" data-amount="1000"><div class="pack-amount">1 000</div><div class="pack-pages">FCFA · 100 pages</div></div>
+      <div class="pack-btn" onclick="selectPack(this,2000)" data-amount="2000"><div class="pack-amount">2 000</div><div class="pack-pages">FCFA · 200 pages</div></div>
+      <div class="pack-btn" onclick="selectPack(this,5000)" data-amount="5000"><div class="pack-amount">5 000</div><div class="pack-pages">FCFA · 500 pages</div></div>
+      <div class="pack-btn" onclick="selectPack(this,10000)" data-amount="10000"><div class="pack-amount">10 000</div><div class="pack-pages">FCFA · 1 000 pages</div></div>
+      <div class="pack-btn" onclick="selectPack(this,20000)" data-amount="20000"><div class="pack-amount">20 000</div><div class="pack-pages">FCFA · 2 000 pages</div></div>
+    </div>
+    <button class="btn-primary" onclick="lancerPaiement()">Confirmer le paiement →</button>
+  </div>
+</div>
+
+<!-- MODAL RETRAIT -->
+<div class="modal-overlay" id="withdrawModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeWithdrawModal()">✕</button>
+    <div class="modal-title">Demande de retrait</div>
+    <div class="modal-sub">Vos gains seront transférés sous 24–48h</div>
+    <div class="form-group">
+      <label class="form-label">Montant à retirer (FCFA)</label>
+      <input type="number" class="form-input" id="withdrawAmount" placeholder="Ex: 20 000" min="500"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Méthode de paiement</label>
+      <select class="form-select" id="withdrawMethod">
+        <option>📱 Mobile Money — Flooz</option>
+        <option>📱 MTN MoMo</option>
+        <option>🏦 Virement bancaire</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Numéro / IBAN</label>
+      <input type="text" class="form-input" id="withdrawNumber" placeholder="Votre numéro Mobile Money ou IBAN"/>
+    </div>
+    <div style="display:flex;gap:0.75rem;margin-top:1rem">
+      <button onclick="closeWithdrawModal()" style="flex:1;padding:0.8rem;background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;">Annuler</button>
+      <button onclick="confirmWithdraw()" style="flex:2;padding:0.8rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:8px;color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;">Confirmer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">G</div>
+    <span class="logo-text">Griot<span>te</span></span>
+  </div>
+  <div class="sidebar-user">
+    <div class="user-avatar" id="userAvatarLetter">?</div>
+    <div class="user-name" id="userName">Chargement...</div>
+    <div class="user-role" id="userRoleBadge">...</div>
+  </div>
+  <nav class="sidebar-nav" id="sidebarNav"></nav>
+  <div class="sidebar-bottom" id="sidebarBottom"></div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="pageTitle">Dashboard</div>
+    <div class="topbar-date" id="currentDate"></div>
+  </div>
+
+  <!-- ═══ PAGES COMMUNES ═══ -->
+
+  <!-- Accueil -->
+  <div class="page" id="page-accueil">
+    <div class="kpi-grid" id="kpiGrid"></div>
+    <div class="card">
+      <div class="card-title">Bienvenue sur GRIOTTE 🍒</div>
+      <p style="color:var(--cendre);font-size:0.88rem;line-height:1.6">La première plateforme africaine de littérature numérique. Lisez, écrivez, publiez.</p>
+    </div>
+  </div>
+
+  <!-- Bibliothèque / Catalogue -->
+  <div class="page" id="page-bibliotheque">
+    <div class="card">
+      <div class="card-title">📚 Ma bibliothèque</div>
+      <div id="bibliothequeContent"><p style="color:var(--cendre)">Chargement...</p></div>
+    </div>
+  </div>
+
+  <!-- Mes lectures -->
+  <div class="page" id="page-lectures">
+    <div class="card">
+      <div class="card-title">📖 Mes lectures</div>
+      <p style="color:var(--cendre);font-size:0.88rem">Votre historique de lecture apparaîtra ici.</p>
+    </div>
+  </div>
+
+  <!-- Crédits -->
+  <div class="page" id="page-credits">
+    <div class="credits-widget">
+      <div class="cw-label">Mon solde</div>
+      <div class="cw-amount" id="soldeAmount">0 <span style="font-size:1rem;font-family:'DM Mono',monospace;color:var(--cendre)">FCFA</span></div>
+      <div class="cw-pages" id="soldePages">= 0 pages disponibles</div>
+      <button class="cw-recharge" onclick="openRechargeModal()">+ Recharger</button>
+    </div>
+    <div class="card">
+      <div class="card-title">Historique des recharges</div>
+      <p style="color:var(--cendre);font-size:0.88rem">Vos transactions apparaîtront ici.</p>
+    </div>
+  </div>
+
+  <!-- ═══ PAGES AUTEUR ═══ -->
+
+  <!-- Publier -->
+  <div class="page" id="page-publier">
+    <div style="max-width:640px;margin:0 auto">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--blanc);margin-bottom:0.5rem">Publier un livre</h2>
+      <p style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--cendre);margin-bottom:2rem;letter-spacing:0.08em">Publiez votre œuvre sur GRIOTTE</p>
+      <div class="card">
+        <div class="form-group">
+          <label class="form-label">Titre du livre *</label>
+          <input id="pubTitle" type="text" class="form-input" placeholder="Ex: Les Fils du Sahel"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Synopsis *</label>
+          <textarea id="pubSynopsis" class="form-input form-textarea" rows="4" placeholder="Résumé de votre livre..."></textarea>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">Genre *</label>
+            <select id="pubGenre" class="form-select">
+              <option value="Roman">Roman</option>
+              <option value="Littérature">Littérature</option>
+              <option value="Histoire">Histoire</option>
+              <option value="Fantastique">Fantastique</option>
+              <option value="Romance">Romance</option>
+              <option value="Policier">Policier</option>
+              <option value="Thriller">Thriller</option>
+              <option value="Jeunesse">Jeunesse</option>
+              <option value="Poésie">Poésie</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nombre de pages *</label>
+            <input id="pubPages" type="number" class="form-input" placeholder="Ex: 250"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contenu du livre</label>
+          <textarea id="pubContent" class="form-input form-textarea" rows="10" placeholder="Écrivez votre livre ici ou faites un copier-coller..."></textarea>
+        </div>
+        <div class="pub-msg" id="pubMessage"></div>
+        <button class="btn-primary" onclick="publierLivre()">Publier mon livre →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mes œuvres -->
+  <div class="page" id="page-oeuvres">
+    <div class="card">
+      <div class="card-title">📚 Mes œuvres</div>
+      <div id="oeuvresContent"><p style="color:var(--cendre)">Chargement...</p></div>
+    </div>
+  </div>
+
+  <!-- Revenus -->
+  <div class="page" id="page-revenus">
+    <div class="kpi-grid">
+      <div class="kpi-card"><span class="kpi-icon">💰</span><div class="kpi-label">Revenus du mois</div><div class="kpi-value">0</div><span class="kpi-trend">FCFA</span></div>
+      <div class="kpi-card"><span class="kpi-icon">📖</span><div class="kpi-label">Pages lues</div><div class="kpi-value">0</div><span class="kpi-trend">ce mois</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">💸 Retirer mes gains</div>
+      <button class="btn-primary" onclick="openWithdrawModal()" style="max-width:300px">Faire une demande de retrait →</button>
+    </div>
+  </div>
+
+  <!-- ═══ PAGES ADMIN ═══ -->
+
+  <!-- Tableau de bord global -->
+  <div class="page" id="page-admin-dashboard">
+    <div class="kpi-grid">
+      <div class="kpi-card"><span class="kpi-icon">👥</span><div class="kpi-label">Utilisateurs</div><div class="kpi-value" id="adminUsers">—</div><span class="kpi-trend">total</span></div>
+      <div class="kpi-card"><span class="kpi-icon">📚</span><div class="kpi-label">Livres publiés</div><div class="kpi-value" id="adminBooks">—</div><span class="kpi-trend">total</span></div>
+      <div class="kpi-card"><span class="kpi-icon">💰</span><div class="kpi-label">Revenus plateforme</div><div class="kpi-value">0</div><span class="kpi-trend">FCFA</span></div>
+      <div class="kpi-card"><span class="kpi-icon">✍️</span><div class="kpi-label">Auteurs actifs</div><div class="kpi-value">—</div><span class="kpi-trend">total</span></div>
+    </div>
+  </div>
+
+  <!-- Gestion utilisateurs -->
+  <div class="page" id="page-admin-users">
+    <div class="card">
+      <div class="card-title">👥 Gestion des utilisateurs</div>
+      <div id="adminUsersContent"><p style="color:var(--cendre)">Chargement...</p></div>
+    </div>
+  </div>
+
+  <!-- Validation livres -->
+  <div class="page" id="page-admin-livres">
+    <div class="card">
+      <div class="card-title">📚 Validation des livres</div>
+      <div id="adminLivresContent"><p style="color:var(--cendre)">Chargement...</p></div>
+    </div>
+  </div>
+
+  <!-- Paiements -->
+  <div class="page" id="page-admin-paiements">
+    <div class="card">
+      <div class="card-title">💳 Gestion des paiements</div>
+      <p style="color:var(--cendre);font-size:0.88rem">Transactions et paiements apparaîtront ici.</p>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE PROFIL ═══ -->
+  <div class="page" id="page-profil">
+    <div class="card">
+      <div class="card-title">👤 Mon profil</div>
+      <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem">
+        <div class="user-avatar" style="width:64px;height:64px;font-size:1.8rem" id="profilAvatar">?</div>
+        <div>
+          <div style="font-size:1.1rem;font-weight:700;color:var(--blanc)" id="profilName">—</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--cendre)" id="profilEmail">—</div>
+        </div>
+      </div>
+      <p style="color:var(--cendre);font-size:0.88rem">Modification du profil à venir.</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+<script>
+(function() {
+  const API = 'https://griotte-backend-2-production.up.railway.app/api/v1/auth';
+  let userRole = 'READER';
+  let userName = '';
+  let userBalance = 0;
+  let selectedPack = 500;
+
+  // Token depuis URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const tokenFromUrl = urlParams.get('token');
+  if (tokenFromUrl) {
+    localStorage.setItem('accessToken', tokenFromUrl);
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
+  // Date
+  const now = new Date();
+  const dateEl = document.getElementById('currentDate');
+  if (dateEl) dateEl.textContent = now.toLocaleDateString('fr-FR', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  // Toast
+  window.showToast = function(msg, icon) {
+    icon = icon || '✅';
+    const t = document.getElementById('toast');
+    document.getElementById('toastIcon').textContent = icon;
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){t.classList.remove('show');}, 2800);
+  };
+
+  // Navigation
+  window.showPage = function(page, el) {
+    document.querySelectorAll('.page').forEach(function(p){p.style.display='none';p.classList.remove('active');});
+    const target = document.getElementById('page-'+page);
+    if (target) {target.style.display='block';target.classList.add('active');}
+    document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+    if (el) el.classList.add('active');
+    const titles = {
+      'accueil':'Accueil','bibliotheque':'Ma bibliothèque','lectures':'Mes lectures',
+      'credits':'Mes crédits','publier':'Publier un livre','oeuvres':'Mes œuvres',
+      'revenus':'Revenus & Retraits','profil':'Mon profil',
+      'admin-dashboard':'Tableau de bord global','admin-users':'Utilisateurs',
+      'admin-livres':'Validation des livres','admin-paiements':'Paiements'
+    };
+    const titleEl = document.getElementById('pageTitle');
+    if (titleEl) titleEl.textContent = titles[page] || page;
+    if (page === 'credits') loadSolde();
+    if (page === 'bibliotheque') loadBibliotheque();
+    if (page === 'oeuvres') loadOeuvres();
+    if (page === 'admin-users') loadAdminUsers();
+    if (page === 'admin-livres') loadAdminLivres();
+    if (page === 'admin-dashboard') loadAdminDashboard();
+    if (page === 'profil') loadProfil();
+  };
+
+  // Construire menu selon le rôle
+  function buildMenu(role) {
+    const nav = document.getElementById('sidebarNav');
+    const bottom = document.getElementById('sidebarBottom');
+    let html = '';
+
+    // Menu commun
+    html += '<div class="nav-label">Navigation</div>';
+    html += '<a class="nav-item active" onclick="showPage(\'accueil\',this)"><span class="nav-ico">🏠</span> Accueil</a>';
+    html += '<a class="nav-item" onclick="showPage(\'bibliotheque\',this)"><span class="nav-ico">📚</span> Bibliothèque</a>';
+    html += '<a class="nav-item" onclick="showPage(\'lectures\',this)"><span class="nav-ico">📖</span> Mes lectures</a>';
+    html += '<a class="nav-item" onclick="showPage(\'credits\',this)"><span class="nav-ico">💳</span> Mes crédits</a>';
+
+    // Menu auteur
+    if (role === 'AUTHOR' || role === 'ADMIN') {
+      html += '<div class="nav-label">Auteur</div>';
+      html += '<a class="nav-item publish" onclick="showPage(\'publier\',this)"><span class="nav-ico">✍️</span> Publier un livre</a>';
+      html += '<a class="nav-item" onclick="showPage(\'oeuvres\',this)"><span class="nav-ico">📗</span> Mes œuvres</a>';
+      html += '<a class="nav-item" onclick="showPage(\'revenus\',this)"><span class="nav-ico">💸</span> Revenus & Retraits</a>';
+    }
+
+    // Menu admin
+    if (role === 'ADMIN') {
+      html += '<div class="nav-label">Administration</div>';
+      html += '<a class="nav-item" onclick="showPage(\'admin-dashboard\',this)"><span class="nav-ico">📊</span> Tableau de bord global</a>';
+      html += '<a class="nav-item" onclick="showPage(\'admin-users\',this)"><span class="nav-ico">👥</span> Utilisateurs</a>';
+      html += '<a class="nav-item" onclick="showPage(\'admin-livres\',this)"><span class="nav-ico">📋</span> Validation des livres</a>';
+      html += '<a class="nav-item" onclick="showPage(\'admin-paiements\',this)"><span class="nav-ico">💳</span> Paiements</a>';
+    }
+
+    // Compte
+    html += '<div class="nav-label">Compte</div>';
+    html += '<a class="nav-item" onclick="showPage(\'profil\',this)"><span class="nav-ico">👤</span> Mon profil</a>';
+    html += '<a class="nav-item danger" onclick="deconnecter()"><span class="nav-ico">🚪</span> Déconnexion</a>';
+
+    nav.innerHTML = html;
+
+    // Sidebar bottom
+    if (role === 'READER' || role === 'AUTHOR') {
+      bottom.innerHTML = '<div class="wallet-box"><div class="wallet-label">Mon solde</div><div class="wallet-amount" id="sidebarSolde">0 <span style="font-size:0.9rem;font-family:\'DM Mono\',monospace;color:var(--cendre)">FCFA</span></div><button class="wallet-btn" onclick="openRechargeModal()">+ Recharger</button></div>';
+    } else if (role === 'ADMIN') {
+      bottom.innerHTML = '<div class="wallet-box"><div class="wallet-label">Mode</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:#60a5fa;font-weight:700">● ADMINISTRATEUR</div></div>';
+    }
+
+    // KPIs accueil selon rôle
+    const kpiGrid = document.getElementById('kpiGrid');
+    if (role === 'READER') {
+      kpiGrid.innerHTML = '<div class="kpi-card"><span class="kpi-icon">💳</span><div class="kpi-label">Mon solde</div><div class="kpi-value" id="kpiSolde">0</div><span class="kpi-trend">FCFA</span></div><div class="kpi-card"><span class="kpi-icon">📖</span><div class="kpi-label">Pages lues</div><div class="kpi-value">0</div><span class="kpi-trend">ce mois</span></div>';
+    } else if (role === 'AUTHOR') {
+      kpiGrid.innerHTML = '<div class="kpi-card"><span class="kpi-icon">💰</span><div class="kpi-label">Revenus</div><div class="kpi-value">0</div><span class="kpi-trend">ce mois</span></div><div class="kpi-card"><span class="kpi-icon">📚</span><div class="kpi-label">Mes livres</div><div class="kpi-value">0</div><span class="kpi-trend">publiés</span></div><div class="kpi-card"><span class="kpi-icon">👥</span><div class="kpi-label">Lecteurs</div><div class="kpi-value">0</div><span class="kpi-trend">actifs</span></div>';
+    } else if (role === 'ADMIN') {
+      kpiGrid.innerHTML = '<div class="kpi-card"><span class="kpi-icon">👥</span><div class="kpi-label">Utilisateurs</div><div class="kpi-value" id="kpiUsers">—</div><span class="kpi-trend">total</span></div><div class="kpi-card"><span class="kpi-icon">📚</span><div class="kpi-label">Livres</div><div class="kpi-value" id="kpiBooks">—</div><span class="kpi-trend">publiés</span></div><div class="kpi-card"><span class="kpi-icon">💰</span><div class="kpi-label">Revenus</div><div class="kpi-value">0</div><span class="kpi-trend">plateforme</span></div>';
+    }
+  }
+
+  // Badge rôle
+  function buildRoleBadge(role) {
+    const badge = document.getElementById('userRoleBadge');
+    if (!badge) return;
+    if (role === 'ADMIN') { badge.textContent = '● Administrateur'; badge.className = 'user-role admin'; }
+    else if (role === 'AUTHOR') { badge.textContent = '● Auteur vérifié'; badge.className = 'user-role'; }
+    else { badge.textContent = '● Lecteur actif'; badge.className = 'user-role reader'; }
+  }
+
+  // Charger données utilisateur
+  async function loadUserData() {
+    const token = localStorage.getItem('accessToken');
+    if (!token) { window.location.href = '/griotte-landing.html'; return; }
+    try {
+      const res = await fetch(API + '/me', { headers: { 'Authorization': 'Bearer ' + token } });
+      const data = await res.json();
+      if (!data.name) { window.location.href = '/griotte-landing.html'; return; }
+      userRole = data.role || 'READER';
+      userName = data.name;
+      userBalance = data.balance || 0;
+      const nameEl = document.getElementById('userName');
+      if (nameEl) nameEl.textContent = userName;
+      const avatarEl = document.getElementById('userAvatarLetter');
+      if (avatarEl) avatarEl.textContent = userName.charAt(0).toUpperCase();
+      buildRoleBadge(userRole);
+      buildMenu(userRole);
+      updateSoldeDisplay(userBalance);
+    } catch(e) {
+      window.location.href = '/griotte-landing.html';
+    }
+  }
+
+  function updateSoldeDisplay(balance) {
+    const sidebarSolde = document.getElementById('sidebarSolde');
+    if (sidebarSolde) sidebarSolde.innerHTML = balance.toLocaleString() + ' <span style="font-size:0.9rem;font-family:\'DM Mono\',monospace;color:var(--cendre)">FCFA</span>';
+    const soldeAmount = document.getElementById('soldeAmount');
+    if (soldeAmount) soldeAmount.innerHTML = balance.toLocaleString() + ' <span style="font-size:1rem;font-family:\'DM Mono\',monospace;color:var(--cendre)">FCFA</span>';
+    const soldePages = document.getElementById('soldePages');
+    if (soldePages) soldePages.textContent = '= ' + Math.floor(balance/10) + ' pages disponibles';
+    const kpiSolde = document.getElementById('kpiSolde');
+    if (kpiSolde) kpiSolde.textContent = balance.toLocaleString();
+  }
+
+  // Charger solde
+  window.loadSolde = async function() {
+    const token = localStorage.getItem('accessToken');
+    if (!token) return;
+    try {
+      const res = await fetch(API + '/me', { headers: { 'Authorization': 'Bearer ' + token } });
+      const data = await res.json();
+      if (data.balance !== undefined) { userBalance = data.balance; updateSoldeDisplay(data.balance); }
+    } catch(e) {}
+  };
+
+  // Bibliothèque
+  async function loadBibliotheque() {
+    try {
+      const res = await fetch(API + '/books-public');
+      const books = await res.json();
+      const el = document.getElementById('bibliothequeContent');
+      if (!books || books.length === 0) { el.innerHTML = '<p style="color:var(--cendre)">Aucun livre disponible.</p>'; return; }
+      const covers = ['cv-1','cv-2','cv-3','cv-4','cv-5'];
+      el.innerHTML = '<div class="book-grid">' + books.map(function(b,i) {
+        return '<div class="book-card"><div class="book-cover '+covers[i%5]+'"></div><div class="book-title">'+b.title+'</div><div class="book-author">'+(b.author?b.author.name:'')+'</div></div>';
+      }).join('') + '</div>';
+    } catch(e) { document.getElementById('bibliothequeContent').innerHTML = '<p style="color:var(--cendre)">Erreur de chargement.</p>'; }
+  }
+
+  // Mes œuvres
+  async function loadOeuvres() {
+    const token = localStorage.getItem('accessToken');
+    if (!token) return;
+    try {
+      const res = await fetch(API + '/books-public');
+      const books = await res.json();
+      const el = document.getElementById('oeuvresContent');
+      if (!books || books.length === 0) { el.innerHTML = '<p style="color:var(--cendre)">Vous n\'avez pas encore publié de livre.</p>'; return; }
+      el.innerHTML = '<div class="book-grid">' + books.map(function(b) {
+        return '<div class="book-card"><div class="book-cover cv-1"></div><div class="book-title">'+b.title+'</div><div class="book-author">'+b.genre+' · '+b.totalPages+' pages</div></div>';
+      }).join('') + '</div>';
+    } catch(e) {}
+  }
+
+  // Admin
+  async function loadAdminDashboard() {}
+  async function loadAdminUsers() {
+    document.getElementById('adminUsersContent').innerHTML = '<p style="color:var(--cendre)">Fonctionnalité en développement.</p>';
+  }
+  async function loadAdminLivres() {
+    try {
+      const res = await fetch(API + '/books-public');
+      const books = await res.json();
+      const el = document.getElementById('adminLivresContent');
+      if (!books || books.length === 0) { el.innerHTML = '<p style="color:var(--cendre)">Aucun livre.</p>'; return; }
+      el.innerHTML = '<table style="width:100%;border-collapse:collapse">' +
+        '<tr style="font-family:\'DM Mono\',monospace;font-size:0.62rem;color:var(--cendre);border-bottom:1px solid var(--border)"><th style="text-align:left;padding:0.5rem">TITRE</th><th style="text-align:left;padding:0.5rem">AUTEUR</th><th style="text-align:left;padding:0.5rem">STATUT</th></tr>' +
+        books.map(function(b) {
+          return '<tr style="border-bottom:1px solid var(--border);font-size:0.82rem"><td style="padding:0.75rem 0.5rem;color:var(--blanc)">'+b.title+'</td><td style="padding:0.75rem 0.5rem;color:var(--cendre)">'+(b.author?b.author.name:'—')+'</td><td style="padding:0.75rem 0.5rem"><span style="background:rgba(74,222,128,0.1);color:var(--green);font-family:\'DM Mono\',monospace;font-size:0.6rem;padding:0.2rem 0.5rem;border-radius:100px">'+b.status+'</span></td></tr>';
+        }).join('') + '</table>';
+    } catch(e) {}
+  }
+
+  // Profil
+  function loadProfil() {
+    const nameEl = document.getElementById('profilName');
+    if (nameEl) nameEl.textContent = userName;
+    const avatarEl = document.getElementById('profilAvatar');
+    if (avatarEl) avatarEl.textContent = userName.charAt(0).toUpperCase();
+    const token = localStorage.getItem('accessToken');
+  }
+
+  // Modals
+  window.openRechargeModal = function() { document.getElementById('rechargeModal').classList.add('open'); };
+  window.closeRechargeModal = function() { document.getElementById('rechargeModal').classList.remove('open'); };
+  window.openWithdrawModal = function() { document.getElementById('withdrawModal').classList.add('open'); };
+  window.closeWithdrawModal = function() { document.getElementById('withdrawModal').classList.remove('open'); };
+  window.confirmWithdraw = function() { closeWithdrawModal(); showToast('Demande de retrait envoyée !', '💸'); };
+
+  // Pack selection
+  window.selectPack = function(el, amount) {
+    selectedPack = amount;
+    document.querySelectorAll('.pack-btn').forEach(function(b){b.classList.remove('selected');});
+    el.classList.add('selected');
+  };
+
+  // Paiement FedaPay
+  window.lancerPaiement = function() {
+    const token = localStorage.getItem('accessToken');
+    FedaPay.init({
+      public_key: 'pk_live_cELBuWDHuI2Z1oqFz2mlXSOJ',
+      currency: { iso: 'XOF' },
+      transaction: { amount: selectedPack, description: 'Recharge solde GRIOTTE' },
+      customer: { email: localStorage.getItem('userEmail') || 'lecteur@griotte.com' },
+      onComplete: async function(resp) {
+        console.log('FedaPay:', resp);
+        if (resp.reason === 'CHECKOUT COMPLETE' || resp.reason === FedaPay.TRANSACTION_APPROVED) {
+          try {
+            await fetch(API + '/recharge', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+              body: JSON.stringify({ amount: selectedPack })
+            });
+            await loadSolde();
+            closeRechargeModal();
+            showToast('Solde rechargé !', '✅');
+          } catch(e) { showToast('Erreur lors de la recharge', '❌'); }
+        }
+      }
+    }).open();
+  };
+
+  // Publier livre
+  window.publierLivre = async function() {
+    const token = localStorage.getItem('accessToken');
+    const title = document.getElementById('pubTitle').value.trim();
+    const synopsis = document.getElementById('pubSynopsis').value.trim();
+    const genre = document.getElementById('pubGenre').value;
+    const totalPages = parseInt(document.getElementById('pubPages').value) || 0;
+    const msg = document.getElementById('pubMessage');
+    if (!title || !synopsis || !totalPages) { msg.style.color='#f87171'; msg.textContent='Remplissez tous les champs *'; return; }
+    msg.style.color = '#D9902D'; msg.textContent = 'Publication en cours...';
+    try {
+      const res = await fetch(API + '/publish-book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ title, synopsis, genre, totalPages })
+      });
+      const data = await res.json();
+      if (data.id) {
+        msg.style.color = '#4ade80'; msg.textContent = '✅ Livre publié avec succès !';
+        document.getElementById('pubTitle').value = '';
+        document.getElementById('pubSynopsis').value = '';
+        document.getElementById('pubPages').value = '';
+        showToast('Livre publié !', '📚');
+      } else { msg.style.color = '#f87171'; msg.textContent = data.message || 'Erreur'; }
+    } catch(e) { msg.style.color = '#f87171'; msg.textContent = 'Erreur de connexion'; }
+  };
+
+  // Déconnexion
+  window.deconnecter = function() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    window.location.href = '/griotte-landing.html';
+  };
+
+  // Init
+  loadUserData();
+})();
+</script>
+</body>
+</html>
