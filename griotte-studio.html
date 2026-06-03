@@ -816,7 +816,7 @@ async function loadOeuvres(){
       return '<div class="oeuvre-card">'
         +'<div class="oeuvre-card-top">'
         +'<div class="oeuvre-cover" style="background:'+gradients[i%6]+'">'
-        +'<div class="oeuvre-cover-placeholder">📖</div>'
+        +(b.coverImage?'<img src="'+b.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>':'<div class="oeuvre-cover-placeholder">📖</div>')
         +'</div>'
         +'<div class="oeuvre-meta">'
         +'<div class="oeuvre-title">'+b.title+'</div>'
@@ -1148,7 +1148,7 @@ window.publierOeuvre=async function(){
     const res=await fetch(API+'/publish-book',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-      body:JSON.stringify({title,synopsis,genre,totalPages:pages,tags:selectedTags})
+      body:JSON.stringify({title,synopsis,genre,totalPages:pages,tags:selectedTags,coverImage:coverDataUrl})
     });
     const d=await res.json();
     if(d.id){
