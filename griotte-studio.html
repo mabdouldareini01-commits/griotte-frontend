@@ -1005,6 +1005,28 @@ window.onDrop=function(e){
 };
 function processCoverFile(file){
   if(file.size>5*1024*1024){showToast('Image trop lourde (max 5 Mo)','⚠️');return;}
+  // Compression automatique
+  const img=new Image();
+  const objectUrl=URL.createObjectURL(file);
+  img.onload=function(){
+    URL.revokeObjectURL(objectUrl);
+    const canvas=document.createElement('canvas');
+    const MAX=800;
+    let w=img.width,h=img.height;
+    if(w>MAX||h>MAX){const ratio=Math.min(MAX/w,MAX*1.5/h);w=Math.round(w*ratio);h=Math.round(h*ratio);}
+    canvas.width=w;canvas.height=h;
+    const ctx=canvas.getContext('2d');
+    ctx.drawImage(img,0,0,w,h);
+    coverDataUrl=canvas.toDataURL('image/jpeg',0.75);
+    const cp=document.getElementById('coverPreview');
+    if(cp) cp.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
+    const cpb=document.getElementById('previewCoverBig');
+    if(cpb) cpb.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover"/>';
+    const sizekb=Math.round(coverDataUrl.length*0.75/1024);
+    showToast('Couverture ajoutée · '+sizekb+' Ko','🎨');
+  };
+  img.src=objectUrl;
+  return;
   const reader=new FileReader();
   reader.onload=function(e){
     coverDataUrl=e.target.result;
