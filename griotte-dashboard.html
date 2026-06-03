@@ -326,6 +326,15 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
           <div class="form-group"><label class="form-label">Pages *</label><input id="pubPages" type="number" class="form-input" placeholder="Ex: 250"/></div>
         </div>
         <div class="form-group"><label class="form-label">Contenu</label><textarea id="pubContent" class="form-textarea" placeholder="Écrivez ou collez votre livre ici..."></textarea></div>
+        <div class="form-group">
+          <label class="form-label">Tags (max 15)</label>
+          <div id="tagsContainer" style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.5rem;min-height:32px"></div>
+          <div style="display:flex;gap:0.5rem">
+            <input id="tagInput" type="text" class="form-input" placeholder="Ajouter un tag..." style="flex:1" onkeydown="handleTagInput(event)"/>
+            <button onclick="addTag()" type="button" style="padding:0.75rem 1rem;background:rgba(217,144,45,0.1);border:1px solid rgba(217,144,45,0.3);border-radius:8px;color:var(--or);font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;cursor:pointer">+ Ajouter</button>
+          </div>
+          <div style="margin-top:0.6rem;display:flex;flex-wrap:wrap;gap:0.35rem" id="tagSuggestions"></div>
+        </div>
         <div class="pub-msg" id="pubMessage"></div>
         <button class="btn-publish" onclick="publierLivre()">Publier mon livre →</button>
       </div>
@@ -694,6 +703,63 @@ window.lancerPaiement=function(){
   }).open();
 };
 
+// Tags système
+const selectedTags=[];
+const suggestedTags=['Romance','Amour','Famille','Immigration','Diaspora','Sorcellerie','Mythologie africaine','Politique','Tradition','Mali','Sénégal','Nigeria','Ghana','Côte d\'Ivoire','Cameroun','Kenya','Fantastique','Thriller','Policier','Jeunesse','Poésie','Histoire','Développement personnel','Religion','Héritage'];
+
+function renderTags(){
+  const c=document.getElementById('tagsContainer');
+  if(!c) return;
+  c.innerHTML=selectedTags.map(function(t){
+    return '<span style="display:inline-flex;align-items:center;gap:0.3rem;background:rgba(217,144,45,0.1);border:1px solid rgba(217,144,45,0.25);border-radius:100px;padding:0.2rem 0.6rem;font-family:\'DM Mono\',monospace;font-size:0.6rem;color:var(--or)">'
+      +t+'<span onclick="removeTag(\''+t+'\')" style="cursor:pointer;opacity:0.6;margin-left:0.2rem">✕</span></span>';
+  }).join('');
+}
+
+function renderSuggestions(){
+  const s=document.getElementById('tagSuggestions');
+  if(!s) return;
+  const input=document.getElementById('tagInput');
+  const val=input?input.value.toLowerCase():'';
+  const filtered=suggestedTags.filter(function(t){return !selectedTags.includes(t)&&(val===''||t.toLowerCase().includes(val));}).slice(0,8);
+  s.innerHTML=filtered.map(function(t){
+    return '<span onclick="addTagDirect(\''+t+'\')" style="display:inline-block;background:rgba(248,246,242,0.04);border:1px solid rgba(248,246,242,0.08);border-radius:100px;padding:0.18rem 0.55rem;font-family:\'DM Mono\',monospace;font-size:0.58rem;color:var(--cendre);cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor=\'rgba(217,144,45,0.3)\';this.style.color=\'var(--or)\'" onmouseout="this.style.borderColor=\'rgba(248,246,242,0.08)\';this.style.color=\'var(--cendre)\'">+'+t+'</span>';
+  }).join('');
+}
+
+window.handleTagInput=function(e){
+  if(e.key==='Enter'){e.preventDefault();addTag();}
+  else renderSuggestions();
+};
+
+window.addTag=function(){
+  const input=document.getElementById('tagInput');
+  if(!input) return;
+  const val=input.value.trim();
+  if(val&&!selectedTags.includes(val)&&selectedTags.length<15){
+    selectedTags.push(val);
+    input.value='';
+    renderTags();
+    renderSuggestions();
+  }
+};
+
+window.addTagDirect=function(tag){
+  if(!selectedTags.includes(tag)&&selectedTags.length<15){
+    selectedTags.push(tag);
+    renderTags();
+    renderSuggestions();
+  }
+};
+
+window.removeTag=function(tag){
+  const idx=selectedTags.indexOf(tag);
+  if(idx>-1){selectedTags.splice(idx,1);renderTags();renderSuggestions();}
+};
+
+// Init suggestions
+setTimeout(function(){renderSuggestions();},500);
+
 window.publierLivre=async function(){
   const token=localStorage.getItem('accessToken');
   const title=document.getElementById('pubTitle').value.trim();
@@ -704,7 +770,7 @@ window.publierLivre=async function(){
   if(!title||!synopsis||!totalPages){msg.style.color='#f87171';msg.textContent='Remplissez tous les champs *';return;}
   msg.style.color='#D9902D';msg.textContent='Publication en cours...';
   try{
-    const res=await fetch(API+'/publish-book',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({title,synopsis,genre,totalPages})});
+    const res=await fetch(API+'/publish-book',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({title,synopsis,genre,totalPages,tags:selectedTags})});
     const d=await res.json();
     if(d.id){msg.style.color='#4ade80';msg.textContent='✅ Publié !';document.getElementById('pubTitle').value='';document.getElementById('pubSynopsis').value='';document.getElementById('pubPages').value='';showToast('Livre publié !','📚');}
     else{msg.style.color='#f87171';msg.textContent=d.message||'Erreur';}
