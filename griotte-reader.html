@@ -550,10 +550,51 @@ const pages=[
 function init(){
   const token=localStorage.getItem('accessToken');
   if(token) loadSolde(token);
-  showPage(currentPage);
-  updateProgress();
+  // Charger les chapitres réels si bookId dans URL
+  const up=new URLSearchParams(window.location.search);
+  const bookId=up.get('bookId');
+  if(bookId) loadRealChapters(bookId,token);
+  else{showPage(currentPage);updateProgress();}
   startHideTimer();
   document.addEventListener('click',handleAreaClick);
+}
+
+async function loadRealChapters(bookId,token){
+  try{
+    const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId+'/chapters');
+    const chapters=await res.json();
+    if(chapters&&chapters.length>0){
+      // Remplacer le contenu statique par les vrais chapitres
+      pages.length=0;
+      chapters.forEach(function(ch){
+        // Découper le contenu en pages de ~300 mots
+        const words=(ch.content||'').split(/\s+/).filter(Boolean);
+        const wordsPerPage=300;
+        const totalChPages=Math.max(1,Math.ceil(words.length/wordsPerPage));
+        for(let p=0;p<totalChPages;p++){
+          const start=p*wordsPerPage;
+          const chunk=words.slice(start,start+wordsPerPage).join(' ');
+          pages.push({
+            chapter:ch.title,
+            title:ch.title,
+            subtitle:'Page '+(p+1)+' / '+totalChPages,
+            content:'<p class="indent">'+chunk+'</p>'
+          });
+        }
+      });
+      if(pages.length===0) pages.push({chapter:'Début',title:'Lecture',subtitle:'',content:'<p>Contenu à venir.</p>'});
+      // Update book title
+      const res2=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books-public');
+      const books=await res2.json();
+      const book=books.find(function(b){return b.id===bookId;});
+      if(book){
+        const bt=document.getElementById('bookTitle');
+        if(bt) bt.textContent=book.title;
+      }
+    }
+  }catch(e){console.log('Chapitres non chargés:',e);}
+  showPage(currentPage);
+  updateProgress();
 }
 
 function loadSolde(token){

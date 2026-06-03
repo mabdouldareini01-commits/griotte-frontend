@@ -1105,23 +1105,36 @@ window.selectChType=function(type,btn){
   if(sg) sg.style.display=type==='scheduled'?'block':'none';
 };
 
-window.saveChapter=function(){
+window.saveChapter=async function(){
   const title=document.getElementById('chTitle').value.trim();
   if(!title){showToast('Ajoutez un titre au chapitre','⚠️');return;}
   const content=document.getElementById('chContent').value;
-  chapters.push({
+  const ch={
     num:chapters.length+1,
     title:title,
     type:chapterType,
     content:content,
     words:content.split(/\s+/).filter(Boolean).length,
     status:chapterType==='scheduled'?'scheduled':'draft'
-  });
+  };
+  chapters.push(ch);
   document.getElementById('chTitle').value='';
   document.getElementById('chContent').value='';
   closeChapterModal();
   renderChapters();
   showToast('Chapitre ajouté !','📝');
+  // Si livre déjà publié, sauvegarder le chapitre en base
+  if(window.currentBookId){
+    const token=localStorage.getItem('accessToken');
+    try{
+      await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+window.currentBookId+'/chapters',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+        body:JSON.stringify({title:ch.title,content:ch.content,number:ch.num,isFree:ch.type==='free'})
+      });
+      showToast('Chapitre sauvegardé en base !','💾');
+    }catch(e){}
+  }
 };
 
 function renderChapters(){
@@ -1174,9 +1187,14 @@ window.publierOeuvre=async function(){
     });
     const d=await res.json();
     if(d.id){
-      msg.style.color='#4ade80';msg.textContent='✅ Œuvre publiée avec succès !';
+      window.currentBookId=d.id;
+      msg.style.color='#4ade80';msg.textContent='✅ Œuvre publiée ! Ajoutez vos chapitres ci-dessous.';
       showToast('Œuvre publiée !','🚀');
-      setTimeout(function(){showPage('oeuvres',null);},2000);
+      const token2=localStorage.getItem('accessToken');
+      for(let i=0;i<chapters.length;i++){
+        try{await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+d.id+'/chapters',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token2},body:JSON.stringify({title:chapters[i].title,content:chapters[i].content,number:chapters[i].num,isFree:chapters[i].type==='free'})});}catch(e2){}
+      }
+      setTimeout(function(){showPage('oeuvres',null);},3000);
     } else {
       msg.style.color='#f87171';msg.textContent=d.message||'Erreur lors de la publication';
     }
