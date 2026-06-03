@@ -10,471 +10,363 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min-height:100vh;display:flex}
-::selection{background:rgba(217,144,45,0.25);color:var(--blanc)}
+::selection{background:rgba(217,144,45,0.25)}
 ::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(217,144,45,0.3);border-radius:2px}
 
-/* ── SIDEBAR FILTERS ── */
+/* SIDEBAR */
 .sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--noir-soft);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;z-index:100;overflow-y:auto;display:flex;flex-direction:column}
-.sidebar-top{padding:1.5rem;border-bottom:1px solid var(--border)}
-.back-link{display:flex;align-items:center;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cendre);text-decoration:none;transition:color 0.2s;margin-bottom:1.5rem}
+.sidebar-top{padding:1.4rem 1.5rem;border-bottom:1px solid var(--border)}
+.back-link{display:flex;align-items:center;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cendre);text-decoration:none;margin-bottom:1.4rem;transition:color 0.2s}
 .back-link:hover{color:var(--blanc)}
 .cat-logo{display:flex;align-items:center;gap:0.6rem}
-.logo-mark{width:30px;height:30px;background:linear-gradient(135deg,var(--or),var(--or-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:0.9rem;color:var(--noir);flex-shrink:0}
-.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--blanc);letter-spacing:0.06em;text-transform:uppercase}
+.logo-mark{width:28px;height:28px;background:linear-gradient(135deg,var(--or),var(--or-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:0.85rem;color:var(--noir)}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--blanc);letter-spacing:0.06em;text-transform:uppercase}
 .logo-text span{color:var(--or)}
 
-.filter-section{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border)}
-.filter-title{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.85rem;display:flex;align-items:center;justify-content:space-between}
-.filter-clear{color:var(--or);cursor:pointer;font-size:0.55rem;transition:opacity 0.2s}
+.filter-block{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border)}
+.filter-title{font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.75rem;display:flex;justify-content:space-between;align-items:center}
+.filter-clear{color:var(--or);cursor:pointer;font-size:0.52rem;transition:opacity 0.2s}
 .filter-clear:hover{opacity:0.7}
 
-/* Genre chips */
-.genre-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
-.chip{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.06em;padding:0.3rem 0.65rem;border:1px solid var(--border);border-radius:100px;cursor:pointer;transition:all 0.2s;color:var(--cendre);background:none;user-select:none}
+.genre-chips{display:flex;flex-wrap:wrap;gap:0.35rem}
+.chip{font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.05em;padding:0.28rem 0.62rem;border:1px solid var(--border);border-radius:100px;cursor:pointer;transition:all 0.2s;color:var(--cendre);background:none;user-select:none}
 .chip:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2)}
 .chip.active{color:var(--or);border-color:var(--border-or);background:var(--or-glow)}
 
-/* Countries */
-.country-list{display:flex;flex-direction:column;gap:0.35rem}
-.country-item{display:flex;align-items:center;gap:0.6rem;padding:0.4rem 0.5rem;border-radius:6px;cursor:pointer;transition:all 0.2s;font-size:0.75rem;color:var(--cendre)}
+.country-list{display:flex;flex-direction:column;gap:0.25rem}
+.country-item{display:flex;align-items:center;gap:0.55rem;padding:0.38rem 0.5rem;border-radius:6px;cursor:pointer;transition:all 0.2s;font-size:0.72rem;color:var(--cendre)}
 .country-item:hover{background:rgba(248,246,242,0.04);color:var(--blanc)}
 .country-item.active{color:var(--or);background:var(--or-glow)}
-.country-flag{font-size:0.9rem}
-.country-count{margin-left:auto;font-family:'DM Mono',monospace;font-size:0.55rem;color:rgba(107,97,87,0.5)}
+.country-count{margin-left:auto;font-family:'DM Mono',monospace;font-size:0.52rem;color:rgba(107,97,87,0.45)}
 
-/* Sort */
-.sort-select{width:100%;background:rgba(248,246,242,0.04);border:1px solid var(--border);border-radius:8px;padding:0.65rem 1rem;font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);outline:none;cursor:pointer;transition:border-color 0.2s}
-.sort-select:focus{border-color:var(--border-or)}
+.sort-select{width:100%;background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:8px;padding:0.62rem 0.9rem;font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);outline:none;cursor:pointer}
 .sort-select option{background:var(--noir-card)}
 
-/* Price range */
-.price-range{display:flex;flex-direction:column;gap:0.5rem}
-.price-slider{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:rgba(248,246,242,0.08);border-radius:2px;outline:none;cursor:pointer}
-.price-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--or);border-radius:50%;box-shadow:0 0 6px rgba(217,144,45,0.4)}
-.price-labels{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre)}
-
-/* Rating */
-.rating-options{display:flex;flex-direction:column;gap:0.3rem}
-.rating-opt{display:flex;align-items:center;gap:0.5rem;cursor:pointer;padding:0.35rem 0.5rem;border-radius:6px;transition:background 0.2s}
+.rating-opt{display:flex;align-items:center;gap:0.5rem;cursor:pointer;padding:0.32rem 0.5rem;border-radius:6px;transition:background 0.2s}
 .rating-opt:hover{background:rgba(248,246,242,0.04)}
 .rating-opt.active{background:var(--or-glow)}
-.rating-stars{color:var(--or);font-size:0.75rem;letter-spacing:0.05em}
-.rating-label{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre)}
+.rating-stars{color:var(--or);font-size:0.72rem}
+.rating-label{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--cendre)}
 .rating-opt.active .rating-label{color:var(--or)}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
-
-/* Topbar */
-.topbar{height:60px;background:rgba(8,6,4,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;position:sticky;top:0;z-index:50}
-.topbar-left{display:flex;align-items:center;gap:1.5rem}
-.catalogue-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--blanc)}
-.results-count{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);letter-spacing:0.06em}
-
-.search-wrap{position:relative;flex:1;max-width:420px}
-.search-input{width:100%;background:rgba(248,246,242,0.04);border:1px solid var(--border);border-radius:100px;padding:0.55rem 1rem 0.55rem 2.2rem;font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--blanc);outline:none;transition:all 0.2s}
-.search-input:focus{border-color:var(--border-or);background:rgba(248,246,242,0.06)}
+.topbar{height:58px;background:rgba(8,6,4,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:50}
+.topbar-left{display:flex;align-items:center;gap:1.2rem}
+.cat-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--blanc)}
+.results-count{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre)}
+.search-wrap{position:relative;flex:1;max-width:380px}
+.search-input{width:100%;background:rgba(248,246,242,0.04);border:1px solid var(--border);border-radius:100px;padding:0.52rem 1rem 0.52rem 2rem;font-family:'DM Mono',monospace;font-size:0.66rem;color:var(--blanc);outline:none;transition:all 0.2s}
+.search-input:focus{border-color:var(--border-or)}
 .search-input::placeholder{color:var(--cendre)}
-.search-ico{position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:var(--cendre);font-size:0.8rem;pointer-events:none}
-
-.view-toggle{display:flex;gap:0.3rem}
-.view-btn{width:32px;height:32px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--cendre);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.8rem;transition:all 0.2s}
+.search-ico{position:absolute;left:0.72rem;top:50%;transform:translateY(-50%);color:var(--cendre);font-size:0.78rem;pointer-events:none}
+.view-toggle{display:flex;gap:0.25rem}
+.view-btn{width:30px;height:30px;border:1px solid var(--border);border-radius:7px;background:none;color:var(--cendre);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.78rem;transition:all 0.2s}
 .view-btn:hover{color:var(--blanc)}
 .view-btn.active{color:var(--or);border-color:var(--border-or);background:var(--or-glow)}
 
-/* ── CONTENT ── */
-.content{padding:2.5rem;flex:1}
+/* CONTENT */
+.content{padding:2rem;flex:1}
 
-/* Featured banner */
-.featured-banner{border-radius:16px;background:linear-gradient(135deg,rgba(45,27,14,0.8),rgba(139,69,19,0.4),rgba(8,6,4,0.8));border:1px solid rgba(217,144,45,0.15);padding:2.5rem;margin-bottom:2.5rem;position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:2rem}
-.featured-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 80% 50%,rgba(217,144,45,0.08),transparent)}
-.featured-info{}
-.featured-tag{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem}
-.featured-tag::before{content:'';width:20px;height:1px;background:var(--or)}
-.featured-title{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;line-height:1.1;color:var(--blanc);margin-bottom:0.5rem}
-.featured-author{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--blanc-dim);margin-bottom:1.2rem}
-.featured-actions{display:flex;gap:0.75rem}
-.btn-featured-primary{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;padding:0.65rem 1.4rem;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s}
-.btn-featured-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(217,144,45,0.3)}
-.btn-featured-secondary{background:rgba(248,246,242,0.08);color:var(--blanc-dim);font-family:'DM Mono',monospace;font-size:0.65rem;padding:0.65rem 1.2rem;border:1px solid var(--border);border-radius:100px;cursor:pointer;letter-spacing:0.08em;transition:all 0.2s}
-.btn-featured-secondary:hover{color:var(--blanc);background:rgba(248,246,242,0.12)}
-.featured-book-visual{flex-shrink:0}
-.featured-cover{width:120px;height:175px;border-radius:4px 12px 12px 4px;background:linear-gradient(160deg,#2d1b0e,#8B4513);box-shadow:-6px 0 0 rgba(0,0,0,0.4),0 16px 48px rgba(0,0,0,0.5);position:relative}
+/* LOADING */
+.loading-state{text-align:center;padding:5rem 2rem}
+.loading-ico{font-size:3rem;margin-bottom:1rem;opacity:0.3;animation:spin 2s linear infinite;display:block}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.loading-text{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--cendre)}
 
-/* Books grid */
-.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.5rem}
-.books-grid.list-view{grid-template-columns:1fr;gap:0.75rem}
+/* EMPTY */
+.empty-state{text-align:center;padding:5rem 2rem}
+.empty-ico{font-size:3.5rem;margin-bottom:1rem;opacity:0.3;display:block}
+.empty-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--blanc-dim);margin-bottom:0.5rem}
+.empty-sub{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);line-height:1.7}
 
-/* Grid card */
+/* GRID */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1.4rem;margin-bottom:2rem}
+.books-grid.list-view{grid-template-columns:1fr;gap:0.7rem}
+
+/* GRID CARD */
 .book-card{cursor:pointer;transition:transform 0.25s;position:relative}
 .book-card:hover{transform:translateY(-5px)}
-.book-cover{aspect-ratio:2/3;border-radius:4px 12px 12px 4px;margin-bottom:0.85rem;position:relative;overflow:hidden;box-shadow:-5px 0 0 rgba(0,0,0,0.3),0 14px 40px rgba(0,0,0,0.4);transition:box-shadow 0.25s}
+.book-cover{aspect-ratio:2/3;border-radius:4px 12px 12px 4px;margin-bottom:0.8rem;position:relative;overflow:hidden;box-shadow:-5px 0 0 rgba(0,0,0,0.3),0 14px 40px rgba(0,0,0,0.4);transition:box-shadow 0.25s}
 .book-card:hover .book-cover{box-shadow:-5px 0 0 rgba(0,0,0,0.3),0 20px 60px rgba(0,0,0,0.55)}
-.cover-inner-cat{width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0.75rem;position:relative}
-.cover-inner-cat::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.75))}
-.book-badge{position:absolute;top:0.6rem;left:0.6rem;z-index:1;font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.18rem 0.45rem;border-radius:100px}
+.book-cover img{width:100%;height:100%;object-fit:cover}
+.book-cover-placeholder{width:100%;height:100%;display:flex;align-items:flex-end;padding:0.65rem;position:relative}
+.book-cover-placeholder::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.72))}
+.book-badge{position:absolute;top:0.55rem;left:0.55rem;z-index:1;font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.12rem 0.38rem;border-radius:100px}
 .badge-new{background:rgba(74,222,128,0.2);color:#4ade80}
 .badge-trending{background:rgba(217,144,45,0.2);color:var(--or)}
 .badge-top{background:rgba(248,113,113,0.2);color:#f87171}
-.book-pages-cover{position:absolute;bottom:0.6rem;right:0.6rem;z-index:1;font-family:'DM Mono',monospace;font-size:0.52rem;color:rgba(255,255,255,0.5)}
-.book-title-cat{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:600;color:var(--blanc);line-height:1.2;margin-bottom:0.25rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.book-author-cat{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:0.3rem}
-.book-meta-row{display:flex;align-items:center;justify-content:space-between}
-.book-rating-cat{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--or);display:flex;align-items:center;gap:0.2rem}
-.book-price{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre)}
-
-/* Quick read hover overlay */
-.book-overlay{position:absolute;inset:0;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(8,6,4,0.75);opacity:0;transition:opacity 0.25s;border-radius:4px 12px 12px 4px;pointer-events:none;margin-bottom:0.85px}
+.book-pages-cover{position:absolute;bottom:0.55rem;right:0.55rem;z-index:1;font-family:'DM Mono',monospace;font-size:0.5rem;color:rgba(255,255,255,0.5)}
+.book-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,6,4,0.72);opacity:0;transition:opacity 0.25s;border-radius:4px 12px 12px 4px}
 .book-card:hover .book-overlay{opacity:1}
-.book-overlay-btn{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;padding:0.55rem 1.2rem;border:none;border-radius:100px;cursor:pointer;pointer-events:all;transform:translateY(4px);transition:transform 0.25s}
+.book-overlay-btn{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.7rem;padding:0.52rem 1.1rem;border:none;border-radius:100px;cursor:pointer;transform:translateY(4px);transition:transform 0.25s}
 .book-card:hover .book-overlay-btn{transform:translateY(0)}
+.book-title-cat{font-family:'Cormorant Garamond',serif;font-size:0.92rem;font-weight:600;color:var(--blanc);line-height:1.2;margin-bottom:0.22rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.book-author-cat{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);margin-bottom:0.28rem}
+.book-meta-row{display:flex;align-items:center;justify-content:space-between}
+.book-rating-cat{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--or)}
+.book-price{font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre)}
 
-/* List card */
-.book-card-list{display:flex;gap:1.2rem;background:var(--noir-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;cursor:pointer;transition:border-color 0.2s}
+/* LIST CARD */
+.book-card-list{display:flex;gap:1.1rem;background:var(--noir-card);border:1px solid var(--border);border-radius:11px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s}
 .book-card-list:hover{border-color:var(--border-or)}
-.list-cover{width:70px;height:100px;border-radius:3px 10px 10px 3px;flex-shrink:0;box-shadow:-4px 0 0 rgba(0,0,0,0.3)}
+.list-cover{width:65px;height:95px;border-radius:3px 9px 9px 3px;flex-shrink:0;box-shadow:-4px 0 0 rgba(0,0,0,0.3);overflow:hidden;position:relative}
+.list-cover img{width:100%;height:100%;object-fit:cover}
+.list-cover-ph{width:100%;height:100%}
 .list-info{flex:1;min-width:0}
-.list-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--blanc);margin-bottom:0.25rem;line-height:1.2}
-.list-author{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);margin-bottom:0.5rem}
-.list-synopsis{font-family:'Cormorant Garamond',serif;font-size:0.88rem;color:var(--blanc-dim);line-height:1.5;margin-bottom:0.75rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
-.list-tags{display:flex;gap:0.4rem;flex-wrap:wrap}
-.list-tag{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.06em;padding:0.18rem 0.5rem;border-radius:100px;border:1px solid var(--border);color:var(--cendre)}
-.list-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;flex-shrink:0;min-width:80px}
-.list-rating{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--or);margin-bottom:0.3rem}
-.list-pages{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:auto}
-.list-read-btn{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.68rem;padding:0.5rem 1rem;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.list-title{font-family:'Cormorant Garamond',serif;font-size:1.02rem;font-weight:600;color:var(--blanc);margin-bottom:0.22rem;line-height:1.2}
+.list-author{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:0.45rem}
+.list-synopsis{font-family:'Cormorant Garamond',serif;font-size:0.85rem;color:var(--blanc-dim);line-height:1.5;margin-bottom:0.65rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;font-style:italic}
+.list-tags{display:flex;gap:0.35rem;flex-wrap:wrap}
+.list-tag{font-family:'DM Mono',monospace;font-size:0.52rem;letter-spacing:0.05em;padding:0.15rem 0.45rem;border-radius:100px;border:1px solid var(--border);color:var(--cendre)}
+.list-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;flex-shrink:0;min-width:75px}
+.list-rating{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--or);margin-bottom:0.25rem}
+.list-pages{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--cendre);margin-bottom:auto}
+.list-read-btn{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.65rem;padding:0.48rem 0.9rem;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
 .list-read-btn:hover{filter:brightness(1.1)}
 
-/* Empty state */
-.empty-state{text-align:center;padding:6rem 2rem;color:var(--cendre)}
-.empty-ico{font-size:4rem;margin-bottom:1rem;opacity:0.3}
-.empty-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--blanc-dim);margin-bottom:0.5rem}
-.empty-sub{font-family:'DM Mono',monospace;font-size:0.65rem;line-height:1.7}
-
-/* Load more */
-.load-more-section{text-align:center;padding:3rem 0}
-.load-more-btn{background:none;border:1px solid var(--border);color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 2.5rem;border-radius:100px;cursor:pointer;transition:all 0.2s}
+/* LOAD MORE */
+.load-more-btn{width:100%;padding:0.92rem;background:none;border:1px solid var(--border);border-radius:10px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
 .load-more-btn:hover{border-color:var(--border-or);color:var(--or);background:var(--or-glow)}
 
-/* Covers */
-.cv-1{background:linear-gradient(160deg,#2d1b0e,#8B4513)}
-.cv-2{background:linear-gradient(160deg,#0a1628,#2e5f8f)}
-.cv-3{background:linear-gradient(160deg,#1a2a0a,#5f8f2e)}
-.cv-4{background:linear-gradient(160deg,#280a0a,#8f2e2e)}
-.cv-5{background:linear-gradient(160deg,#0a1a28,#0e5a8f)}
-.cv-6{background:linear-gradient(160deg,#1a0a28,#5a1e8f)}
-.cv-7{background:linear-gradient(160deg,#281a0a,#8f5a1e)}
-.cv-8{background:linear-gradient(160deg,#0a2828,#1e7a7a)}
-.cv-9{background:linear-gradient(160deg,#1e1a0a,#7a6e1e)}
-.cv-10{background:linear-gradient(160deg,#28100a,#8f401e)}
-.cv-11{background:linear-gradient(160deg,#0a2818,#1e7a4a)}
-.cv-12{background:linear-gradient(160deg,#200a28,#6a1e8f)}
-.cv-13{background:linear-gradient(160deg,#1a1a0a,#6e6e1e)}
-.cv-14{background:linear-gradient(160deg,#0a2020,#1e7a5a)}
-.cv-15{background:linear-gradient(160deg,#280a1a,#8f1e5a)}
+/* COVER COLORS */
+.cv-1{background:linear-gradient(160deg,#2d1b0e,#8B4513)}.cv-2{background:linear-gradient(160deg,#0a1628,#2e5f8f)}.cv-3{background:linear-gradient(160deg,#1a2a0a,#5f8f2e)}.cv-4{background:linear-gradient(160deg,#280a0a,#8f2e2e)}.cv-5{background:linear-gradient(160deg,#0a1a28,#0e5a8f)}.cv-6{background:linear-gradient(160deg,#1a0a28,#5a1e8f)}.cv-7{background:linear-gradient(160deg,#281a0a,#8f5a1e)}.cv-8{background:linear-gradient(160deg,#0a2828,#1e7a7a)}.cv-9{background:linear-gradient(160deg,#1e1a0a,#7a6e1e)}.cv-10{background:linear-gradient(160deg,#28100a,#8f401e)}.cv-11{background:linear-gradient(160deg,#0a2818,#1e7a4a)}.cv-12{background:linear-gradient(160deg,#200a28,#6a1e8f)}
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR FILTERS -->
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-top">
-    <a href="griotte-dashboard.html" class="back-link">← Retour au dashboard</a>
+    <a href="griotte-dashboard.html" class="back-link">← Retour</a>
     <div class="cat-logo">
       <div class="logo-mark">G</div>
       <span class="logo-text">Griot<span>te</span></span>
     </div>
   </div>
 
-  <div class="filter-section">
-    <div class="filter-title">Genres <span class="filter-clear" onclick="clearFilter('genre')">Effacer</span></div>
-    <div class="genre-chips">
-      <span class="chip active" onclick="filterGenre('all',this)">Tout</span>
-      <span class="chip" onclick="filterGenre('roman',this)">Roman</span>
-      <span class="chip" onclick="filterGenre('fantastique',this)">Fantastique</span>
-      <span class="chip" onclick="filterGenre('histoire',this)">Histoire</span>
-      <span class="chip" onclick="filterGenre('policier',this)">Policier</span>
-      <span class="chip" onclick="filterGenre('romance',this)">Romance</span>
-      <span class="chip" onclick="filterGenre('thriller',this)">Thriller</span>
-      <span class="chip" onclick="filterGenre('jeunesse',this)">Jeunesse</span>
-      <span class="chip" onclick="filterGenre('poesie',this)">Poésie</span>
+  <div class="filter-block">
+    <div class="filter-title">Genre <span class="filter-clear" onclick="clearGenre()">Effacer</span></div>
+    <div class="genre-chips" id="genreChips">
+      <span class="chip active" onclick="setGenre('',this)">Tout</span>
+      <span class="chip" onclick="setGenre('roman',this)">Roman</span>
+      <span class="chip" onclick="setGenre('romance',this)">Romance</span>
+      <span class="chip" onclick="setGenre('fantastique',this)">Fantastique</span>
+      <span class="chip" onclick="setGenre('histoire',this)">Histoire</span>
+      <span class="chip" onclick="setGenre('policier',this)">Policier</span>
+      <span class="chip" onclick="setGenre('thriller',this)">Thriller</span>
+      <span class="chip" onclick="setGenre('jeunesse',this)">Jeunesse</span>
+      <span class="chip" onclick="setGenre('poésie',this)">Poésie</span>
     </div>
   </div>
 
-  <div class="filter-section">
-    <div class="filter-title">Pays <span class="filter-clear" onclick="clearFilter('country')">Effacer</span></div>
-    <div class="country-list">
-      <div class="country-item active" onclick="filterCountry('all',this)"><span class="country-flag">🌍</span> Tous les pays<span class="country-count">1 200+</span></div>
-      <div class="country-item" onclick="filterCountry('ml',this)"><span class="country-flag">🇲🇱</span> Mali<span class="country-count">142</span></div>
-      <div class="country-item" onclick="filterCountry('sn',this)"><span class="country-flag">🇸🇳</span> Sénégal<span class="country-count">118</span></div>
-      <div class="country-item" onclick="filterCountry('ng',this)"><span class="country-flag">🇳🇬</span> Nigeria<span class="country-count">215</span></div>
-      <div class="country-item" onclick="filterCountry('gh',this)"><span class="country-flag">🇬🇭</span> Ghana<span class="country-count">89</span></div>
-      <div class="country-item" onclick="filterCountry('ci',this)"><span class="country-flag">🇨🇮</span> Côte d'Ivoire<span class="country-count">76</span></div>
-      <div class="country-item" onclick="filterCountry('ke',this)"><span class="country-flag">🇰🇪</span> Kenya<span class="country-count">94</span></div>
-      <div class="country-item" onclick="filterCountry('tn',this)"><span class="country-flag">🇹🇳</span> Tunisie<span class="country-count">67</span></div>
-      <div class="country-item" onclick="filterCountry('cm',this)"><span class="country-flag">🇨🇲</span> Cameroun<span class="country-count">58</span></div>
-    </div>
-  </div>
-
-  <div class="filter-section">
+  <div class="filter-block">
     <div class="filter-title">Trier par</div>
-    <select class="sort-select" id="sortSelect" onchange="applySort()">
-      <option value="popular">Plus populaires</option>
+    <select class="sort-select" id="sortSelect" onchange="applyFilters()">
       <option value="recent">Plus récents</option>
-      <option value="rating">Mieux notés</option>
+      <option value="alpha">Alphabétique</option>
       <option value="pages_asc">Moins de pages</option>
       <option value="pages_desc">Plus de pages</option>
     </select>
   </div>
 
-  <div class="filter-section">
-    <div class="filter-title">Note minimale</div>
-    <div class="rating-options">
-      <div class="rating-opt active" onclick="filterRating(0,this)"><span class="rating-stars">★★★★★</span><span class="rating-label">Toutes les notes</span></div>
-      <div class="rating-opt" onclick="filterRating(4.5,this)"><span class="rating-stars">★★★★½</span><span class="rating-label">4.5 et plus</span></div>
-      <div class="rating-opt" onclick="filterRating(4,this)"><span class="rating-stars">★★★★</span><span class="rating-label">4.0 et plus</span></div>
-      <div class="rating-opt" onclick="filterRating(3.5,this)"><span class="rating-stars">★★★½</span><span class="rating-label">3.5 et plus</span></div>
+  <div class="filter-block">
+    <div class="filter-title">Pays</div>
+    <div class="country-list" id="countryList">
+      <div class="country-item active" onclick="setCountry('',this)">🌍 Tous les pays</div>
     </div>
   </div>
 </aside>
 
 <!-- MAIN -->
 <div class="main">
-  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-left">
-      <h1 class="catalogue-title">Catalogue</h1>
-      <span class="results-count" id="resultsCount">1 200+ œuvres</span>
+      <h1 class="cat-title">Catalogue</h1>
+      <span class="results-count" id="resultsCount">Chargement...</span>
     </div>
     <div class="search-wrap">
       <span class="search-ico">🔍</span>
-      <input type="text" class="search-input" id="searchInput" placeholder="Rechercher un livre, un auteur..." oninput="applySearch()"/>
+      <input type="text" class="search-input" id="searchInput" placeholder="Titre, auteur, tag..." oninput="applyFilters()"/>
     </div>
     <div class="view-toggle">
-      <button class="view-btn active" id="gridViewBtn" onclick="setView('grid',this)" title="Grille">⊞</button>
-      <button class="view-btn" id="listViewBtn" onclick="setView('list',this)" title="Liste">☰</button>
+      <button class="view-btn active" id="btnGrid" onclick="setView('grid',this)" title="Grille">⊞</button>
+      <button class="view-btn" id="btnList" onclick="setView('list',this)" title="Liste">☰</button>
     </div>
   </div>
 
-  <!-- Content -->
   <div class="content">
-    <!-- Featured -->
-    <div class="featured-banner">
-      <div class="featured-info">
-        <div class="featured-tag">Coup de cœur de la semaine</div>
-        <div class="featured-title">Les Fils du Sahel</div>
-        <div class="featured-author">Ama Kouyaté · 🇲🇱 Mali · Roman · 312 pages · ★ 4.9 · 48k lecteurs</div>
-        <div class="featured-actions">
-          <button class="btn-featured-primary" onclick="window.location.href='griotte-reader.html?bookId='+( typeof b !=='undefined'?b.id:'')">▶ Lire maintenant</button>
-          <button class="btn-featured-secondary">+ Ma liste</button>
-        </div>
-      </div>
-      <div class="featured-book-visual">
-        <div class="featured-cover"></div>
+    <div id="booksGrid" class="books-grid">
+      <div class="loading-state" style="grid-column:1/-1">
+        <span class="loading-ico">⏳</span>
+        <div class="loading-text">Chargement des œuvres...</div>
       </div>
     </div>
-
-    <!-- Books -->
-    <div class="books-grid" id="booksGrid"></div>
-
-    <!-- Load more -->
-    <div class="load-more-section" id="loadMoreSection">
-      <button class="load-more-btn" onclick="loadMore()">Charger plus d'œuvres →</button>
-    </div>
+    <button class="load-more-btn" id="loadMoreBtn" style="display:none" onclick="loadMore()">Charger plus →</button>
   </div>
 </div>
 
 <script>
-const allBooks=[
-  {id:1,title:'Les Fils du Sahel',author:'Ama Kouyaté',country:'ml',flag:'🇲🇱',genre:'roman',pages:312,rating:4.9,readers:'48k',cover:'cv-1',badge:'top',synopsis:'Dans le Mali profond des années 60, un jeune griot découvre que son destin est lié à un secret vieux de sept générations. Une épopée sur l\'identité, la transmission et la mémoire africaine.'},
-  {id:2,title:'Mémoires de Carthage',author:'Sidi Ben Omar',country:'tn',flag:'🇹🇳',genre:'histoire',pages:254,rating:4.7,readers:'31k',cover:'cv-2',badge:null,synopsis:'Un voyage époustouflant au cœur de l\'Afrique du Nord antique, entre Carthage et les royaumes berbères. Un roman historique qui redonne vie aux oubliés de l\'histoire.'},
-  {id:3,title:"L'Ombre du Baobab",author:'Ama Kouyaté',country:'ml',flag:'🇲🇱',genre:'roman',pages:248,rating:4.8,readers:'29k',cover:'cv-3',badge:'new',synopsis:'Sous le baobab millénaire du village de Kayes, trois générations de femmes partagent leurs secrets. Un roman intime et puissant sur la sororité et la résilience.'},
-  {id:4,title:'La Maison Brûlée',author:'Fatou Diallo',country:'sn',flag:'🇸🇳',genre:'roman',pages:180,rating:4.6,readers:'22k',cover:'cv-4',badge:null,synopsis:'Retour au pays après vingt ans d\'exil. La narratrice retrouve sa maison d\'enfance en ruines et avec elle, tous les fantômes de son passé.'},
-  {id:5,title:"L'Oracle du Kilimandjaro",author:'Nadia Osei',country:'gh',flag:'🇬🇭',genre:'fantastique',pages:428,rating:4.9,readers:'19k',cover:'cv-5',badge:'trending',synopsis:'Un oracle ancestral, une malédiction qui court depuis le XIVe siècle, et une jeune femme qui doit choisir entre son héritage et son avenir. Fantastique africain au sommet.'},
-  {id:6,title:'Royaumes Oubliés',author:'Ibrahim Touré',country:'ml',flag:'🇲🇱',genre:'histoire',pages:370,rating:4.9,readers:'17k',cover:'cv-6',badge:'new',synopsis:"L'histoire méconnue des grands empires africains — Mali, Songhaï, Kanem-Bornou — racontée avec la rigueur d'un historien et la plume d'un romancier."},
-  {id:7,title:"L'Inspecteur de Lagos",author:'Chidi Okonkwo',country:'ng',flag:'🇳🇬',genre:'policier',pages:294,rating:4.5,readers:'34k',cover:'cv-7',badge:'trending',synopsis:"Dans le Lagos bouillonnant d'aujourd'hui, l'inspecteur Emeka résout les crimes que la police officielle préfère ignorer. Polar noir au rythme haletant."},
-  {id:8,title:'Entre Deux Rives',author:'Léa Makosso',country:'sn',flag:'🇨🇬',genre:'roman',pages:276,rating:4.7,readers:'15k',cover:'cv-8',badge:null,synopsis:'Entre Brazzaville et Paris, une histoire d\'amour impossible et une réflexion sur l\'identité franco-africaine. Lyrique, intense, bouleversant.'},
-  {id:9,title:'La Sorcière du Nil',author:'Sara El-Rashid',country:'tn',flag:'🇪🇬',genre:'fantastique',pages:360,rating:4.8,readers:'12k',cover:'cv-9',badge:'new',synopsis:"Dans l'Egypte ancienne revisitée par une plume contemporaine, une guérisseuse défie les dieux pour sauver son peuple. Fantastique africain somptueux."},
-  {id:10,title:'Petit Griot',author:'Moïse Dembélé',country:'sn',flag:'🇧🇫',genre:'jeunesse',pages:120,rating:5.0,readers:'8k',cover:'cv-10',badge:'top',synopsis:"Un enfant de 10 ans hérite du rôle de griot dans son village. Une fable enchanteresse sur la parole, la mémoire et la responsabilité. Pour tous les âges."},
-  {id:11,title:'Nairobi Noir',author:'Wanjiru Kamau',country:'ke',flag:'🇰🇪',genre:'policier',pages:310,rating:4.6,readers:'21k',cover:'cv-11',badge:'trending',synopsis:"Une détective aux méthodes peu orthodoxes plonge dans les bas-fonds de Nairobi. Un polar haletant qui radiographie la société kenyane contemporaine."},
-  {id:12,title:"L'Empire de Songhaï",author:'Oumar Diarra',country:'ml',flag:'🇲🇱',genre:'histoire',pages:450,rating:4.8,readers:'9k',cover:'cv-12',badge:'top',synopsis:"La montée et la chute de l'Empire Songhaï, racontées de l'intérieur. Un monument de la littérature historique africaine. Prix littéraire UEMOA 2025."},
-  {id:13,title:'La Danse des Masques',author:'Koffi Assouma',country:'ci',flag:'🇨🇮',genre:'fantastique',pages:198,rating:4.4,readers:'7k',cover:'cv-13',badge:null,synopsis:"Quand les masques sacrés des Gouro s'animent la nuit, un jeune sculpteur découvre que l'art peut traverser la frontière entre les mondes."},
-  {id:14,title:'Les Nuits de Casablanca',author:'Yasmine Aziz',country:'tn',flag:'🇲🇦',genre:'romance',pages:232,rating:4.5,readers:'11k',cover:'cv-14',badge:'new',synopsis:"Un architecte et une musicienne se croisent dans les ruelles de la médina. Une histoire d'amour entre tradition et modernité, portée par une Casablanca en pleine mutation."},
-  {id:15,title:'Chasseurs de Savane',author:'Ibo Ndiaye',country:'sn',flag:'🇸🇳',genre:'thriller',pages:288,rating:4.3,readers:'6k',cover:'cv-15',badge:null,synopsis:"Une équipe d'enquêteurs traque les trafiquants d'ivoire à travers toute l'Afrique subsaharienne. Thriller écologique à grande vitesse."},
-  {id:16,title:"Chants d'Aksum",author:'Selam Haile',country:'sn',flag:'🇪🇹',genre:'poesie',pages:96,rating:4.9,readers:'4k',cover:'cv-1',badge:'top',synopsis:"Un recueil de poèmes en français et en amharique, entre le plateau éthiopien et l'exil parisien. Une voix nouvelle, singulière, déchirante."},
-  {id:17,title:'Le Médecin des Pauvres',author:'Dr Amara Cissé',country:'ml',flag:'🇬🇳',genre:'roman',pages:342,rating:4.6,readers:'14k',cover:'cv-2',badge:null,synopsis:"Un médecin de campagne guinéen lutte contre la corruption et l'absence d'infrastructures pour soigner les siens. Un roman humaniste et engagé."},
-  {id:18,title:'Safari Intérieur',author:'Wanjiku Mwangi',country:'ke',flag:'🇰🇪',genre:'roman',pages:265,rating:4.7,readers:'10k',cover:'cv-3',badge:'new',synopsis:"Un road trip au cœur du Kenya, de Nairobi jusqu'au lac Turkana. Une femme seule, une voiture, 2 000 kilomètres de questions sans réponses."},
-];
-
-let filteredBooks=[...allBooks];
+(function(){
+const API='https://griotte-backend-2-production.up.railway.app/api/v1/auth';
+const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6','cv-7','cv-8','cv-9','cv-10','cv-11','cv-12'];
+let allBooks=[];
+let filtered=[];
+let displayCount=18;
 let currentView='grid';
-let activeGenre='all';
-let activeCountry='all';
-let activeRating=0;
-let displayCount=12;
+let activeGenre='';
+let activeCountry='';
 
-function renderBooks(){
-  const grid=document.getElementById('booksGrid');
-  const count=document.getElementById('resultsCount');
-  const shown=filteredBooks.slice(0,displayCount);
-  count.textContent=filteredBooks.length+' œuvre'+(filteredBooks.length>1?'s':'');
-
-  if(filteredBooks.length===0){
-    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-ico">🔍</div><div class="empty-title">Aucun résultat</div><div class="empty-sub">Essayez d\'autres filtres ou une autre recherche.</div></div>';
-    document.getElementById('loadMoreSection').style.display='none';
-    return;
+// Load books from backend
+async function loadBooks(){
+  try{
+    const res=await fetch(API+'/books-public');
+    const data=await res.json();
+    if(!data||!Array.isArray(data)||data.length===0){
+      showEmpty();
+      return;
+    }
+    allBooks=data;
+    buildCountryList();
+    applyFilters();
+  }catch(e){
+    document.getElementById('booksGrid').innerHTML='<div class="empty-state" style="grid-column:1/-1"><span class="empty-ico">⚠️</span><div class="empty-title">Erreur de connexion</div><div class="empty-sub">Impossible de charger les œuvres.<br/>Vérifiez votre connexion.</div></div>';
   }
+}
 
-  const lm=document.getElementById('loadMoreSection');
-  lm.style.display=displayCount>=filteredBooks.length?'none':'block';
-
-  const badges={'new':'badge-new','trending':'badge-trending','top':'badge-top'};
-  const badgeLabels={'new':'Nouveau','trending':'Tendance','top':'Top'};
-
-  if(currentView==='grid'){
-    grid.className='books-grid';
-    grid.innerHTML=shown.map(function(b){
-      return '<div class="book-card" onclick="window.location.href=\'griotte-reader.html\'">'
-        +'<div class="book-cover '+b.cover+'">'
-        +'<div class="cover-inner-cat">'
-        +(b.badge?'<div class="book-badge '+badges[b.badge]+'">'+badgeLabels[b.badge]+'</div>':'')
-        +'<div class="book-pages-cover">'+b.pages+' p.</div>'
-        +'</div>'
-        +'<div class="book-overlay"><button class="book-overlay-btn">▶ Lire</button></div>'
-        +'</div>'
-        +'<div class="book-title-cat">'+b.title+'</div>'
-        +'<div class="book-author-cat">'+b.flag+' '+b.author+'</div>'
-        +'<div class="book-meta-row"><span class="book-rating-cat">★ '+b.rating+'</span><span class="book-price">'+b.pages+'p · '+b.pages*10+' FCFA max</span></div>'
-        +'</div>';
-    }).join('');
-  } else {
-    grid.className='books-grid list-view';
-    grid.innerHTML=shown.map(function(b){
-      return '<div class="book-card-list" onclick="window.location.href=\'griotte-reader.html\'">'
-        +'<div class="list-cover '+b.cover+'"></div>'
-        +'<div class="list-info">'
-        +'<div class="list-title">'+b.title+'</div>'
-        +'<div class="list-author">'+b.flag+' '+b.author+' · '+b.genre+'</div>'
-        +'<div class="list-synopsis">'+b.synopsis+'</div>'
-        +'<div class="list-tags"><span class="list-tag">'+b.genre+'</span><span class="list-tag">'+b.pages+' pages</span>'+(b.badge?'<span class="list-tag" style="color:var(--or);border-color:var(--border-or)">'+badgeLabels[b.badge]+'</span>':'')+'</div>'
-        +'</div>'
-        +'<div class="list-right">'
-        +'<div class="list-rating">★ '+b.rating+'</div>'
-        +'<div class="list-pages">'+b.readers+' lecteurs</div>'
-        +'<button class="list-read-btn" onclick="event.stopPropagation();window.location.href=\'griotte-reader.html\'">▶ Lire</button>'
-        +'</div>'
-        +'</div>';
-    }).join('');
-  }
+function buildCountryList(){
+  const countries={};
+  allBooks.forEach(function(b){
+    if(b.author&&b.author.country) countries[b.author.country]=(countries[b.author.country]||0)+1;
+  });
+  const cl=document.getElementById('countryList');
+  let html='<div class="country-item active" onclick="setCountry(\'\',this)">🌍 Tous les pays <span class="country-count">'+allBooks.length+'</span></div>';
+  Object.entries(countries).forEach(function(e){
+    html+='<div class="country-item" onclick="setCountry(\''+e[0]+'\',this)">'+e[0]+' <span class="country-count">'+e[1]+'</span></div>';
+  });
+  cl.innerHTML=html;
 }
 
 function applyFilters(){
-  const search=document.getElementById('searchInput').value.toLowerCase();
+  const search=(document.getElementById('searchInput').value||'').toLowerCase();
   const sort=document.getElementById('sortSelect').value;
-  filteredBooks=allBooks.filter(function(b){
-    const matchGenre=activeGenre==='all'||b.genre===activeGenre;
-    const matchCountry=activeCountry==='all'||b.country===activeCountry;
-    const matchRating=b.rating>=activeRating;
-    const matchSearch=!search||b.title.toLowerCase().includes(search)||b.author.toLowerCase().includes(search)||b.synopsis.toLowerCase().includes(search)||b.genre.toLowerCase().includes(search);
-    return matchGenre&&matchCountry&&matchRating&&matchSearch;
+  filtered=allBooks.filter(function(b){
+    const matchGenre=!activeGenre||b.genre.toLowerCase().includes(activeGenre);
+    const matchCountry=!activeCountry||JSON.stringify(b).toLowerCase().includes(activeCountry.toLowerCase());
+    const matchSearch=!search||
+      b.title.toLowerCase().includes(search)||
+      (b.author&&b.author.name&&b.author.name.toLowerCase().includes(search))||
+      (b.synopsis&&b.synopsis.toLowerCase().includes(search))||
+      (b.tags&&b.tags.join(' ').toLowerCase().includes(search));
+    return matchGenre&&matchCountry&&matchSearch;
   });
-  // Sort
-  if(sort==='recent') filteredBooks.sort(function(a,b){return b.id-a.id;});
-  else if(sort==='rating') filteredBooks.sort(function(a,b){return b.rating-a.rating;});
-  else if(sort==='pages_asc') filteredBooks.sort(function(a,b){return a.pages-b.pages;});
-  else if(sort==='pages_desc') filteredBooks.sort(function(a,b){return b.pages-a.pages;});
-  else filteredBooks.sort(function(a,b){return parseInt(b.readers)-parseInt(a.readers);});
-  displayCount=12;
-  renderBooks();
+  if(sort==='alpha') filtered.sort(function(a,b){return a.title.localeCompare(b.title);});
+  else if(sort==='pages_asc') filtered.sort(function(a,b){return a.totalPages-b.totalPages;});
+  else if(sort==='pages_desc') filtered.sort(function(a,b){return b.totalPages-a.totalPages;});
+  else filtered.sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt);});
+  displayCount=18;
+  render();
 }
 
-window.filterGenre=function(genre,el){
+function render(){
+  const grid=document.getElementById('booksGrid');
+  const rc=document.getElementById('resultsCount');
+  const lmb=document.getElementById('loadMoreBtn');
+  const shown=filtered.slice(0,displayCount);
+  rc.textContent=filtered.length+' œuvre'+(filtered.length>1?'s':'');
+  if(filtered.length===0){showEmpty();lmb.style.display='none';return;}
+  lmb.style.display=displayCount<filtered.length?'block':'none';
+  if(currentView==='grid'){
+    grid.className='books-grid';
+    grid.innerHTML=shown.map(function(b,i){return gridCard(b,i);}).join('');
+  } else {
+    grid.className='books-grid list-view';
+    grid.innerHTML=shown.map(function(b,i){return listCard(b,i);}).join('');
+  }
+}
+
+function gridCard(b,i){
+  const url='griotte-reader.html?bookId='+encodeURIComponent(b.id);
+  const tags=(b.tags||[]).slice(0,2);
+  let coverHtml='';
+  if(b.coverImage){
+    coverHtml='<img src="'+b.coverImage+'" alt="'+b.title+'" style="width:100%;height:100%;object-fit:cover"/>';
+  } else {
+    coverHtml='<div class="book-cover-placeholder '+covers[i%12]+'"></div>';
+  }
+  return '<div class="book-card" onclick="window.location.href=\''+url+'\'">'
+    +'<div class="book-cover">'
+    +coverHtml
+    +'<div class="book-pages-cover">'+b.totalPages+' p.</div>'
+    +'<div class="book-overlay"><button class="book-overlay-btn">▶ Lire</button></div>'
+    +'</div>'
+    +'<div class="book-title-cat">'+b.title+'</div>'
+    +'<div class="book-author-cat">'+(b.author?b.author.name:'—')+'</div>'
+    +'<div class="book-meta-row"><span class="book-rating-cat">★ 4.8</span><span class="book-price">'+b.genre+'</span></div>'
+    +'</div>';
+}
+
+function listCard(b,i){
+  const url='griotte-reader.html?bookId='+encodeURIComponent(b.id);
+  const tags=(b.tags||[]).slice(0,3);
+  let coverHtml='';
+  if(b.coverImage){
+    coverHtml='<img src="'+b.coverImage+'" alt="'+b.title+'" style="width:100%;height:100%;object-fit:cover"/>';
+  } else {
+    coverHtml='<div class="list-cover-ph '+covers[i%12]+'"></div>';
+  }
+  return '<div class="book-card-list" onclick="window.location.href=\''+url+'\'">'
+    +'<div class="list-cover">'+coverHtml+'</div>'
+    +'<div class="list-info">'
+    +'<div class="list-title">'+b.title+'</div>'
+    +'<div class="list-author">'+(b.author?b.author.name:'—')+' · '+b.genre+'</div>'
+    +'<div class="list-synopsis">'+(b.synopsis||'Aucun synopsis disponible.')+'</div>'
+    +'<div class="list-tags">'+tags.map(function(t){return '<span class="list-tag">'+t+'</span>';}).join('')+'</div>'
+    +'</div>'
+    +'<div class="list-right">'
+    +'<div class="list-rating">★ 4.8</div>'
+    +'<div class="list-pages">'+b.totalPages+' pages</div>'
+    +'<button class="list-read-btn" onclick="event.stopPropagation();window.location.href=\''+url+'\'">▶ Lire</button>'
+    +'</div>'
+    +'</div>';
+}
+
+function showEmpty(){
+  const grid=document.getElementById('booksGrid');
+  const cls=currentView==='grid'?'books-grid':'books-grid list-view';
+  grid.className=cls;
+  grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><span class="empty-ico">🔍</span><div class="empty-title">Aucun résultat</div><div class="empty-sub">Aucune œuvre ne correspond à vos filtres.</div></div>';
+}
+
+window.setGenre=function(genre,el){
   activeGenre=genre;
   document.querySelectorAll('.genre-chips .chip').forEach(function(c){c.classList.remove('active');});
   el.classList.add('active');
   applyFilters();
 };
-
-window.filterCountry=function(country,el){
+window.clearGenre=function(){
+  activeGenre='';
+  document.querySelectorAll('.genre-chips .chip').forEach(function(c){c.classList.remove('active');});
+  document.querySelector('.genre-chips .chip').classList.add('active');
+  applyFilters();
+};
+window.setCountry=function(country,el){
   activeCountry=country;
   document.querySelectorAll('.country-item').forEach(function(c){c.classList.remove('active');});
   el.classList.add('active');
   applyFilters();
 };
-
-window.filterRating=function(rating,el){
-  activeRating=rating;
-  document.querySelectorAll('.rating-opt').forEach(function(r){r.classList.remove('active');});
-  el.classList.add('active');
-  applyFilters();
-};
-
-window.applySort=function(){applyFilters();};
-window.applySearch=function(){applyFilters();};
-
-window.clearFilter=function(type){
-  if(type==='genre'){
-    activeGenre='all';
-    document.querySelectorAll('.genre-chips .chip').forEach(function(c){c.classList.remove('active');});
-    document.querySelector('.genre-chips .chip').classList.add('active');
-  }
-  if(type==='country'){
-    activeCountry='all';
-    document.querySelectorAll('.country-item').forEach(function(c){c.classList.remove('active');});
-    document.querySelector('.country-item').classList.add('active');
-  }
-  applyFilters();
-};
-
 window.setView=function(view,btn){
   currentView=view;
   document.querySelectorAll('.view-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
-  renderBooks();
+  render();
 };
+window.loadMore=function(){displayCount+=18;render();};
 
-window.loadMore=function(){
-  displayCount+=12;
-  renderBooks();
-};
-
-// Also try to load real books from backend
-async function loadRealBooks(){
-  try{
-    const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books-public');
-    const books=await res.json();
-    if(books&&books.length>0){
-      const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6','cv-7','cv-8'];
-      const realBooks=books.map(function(b,i){
-        return {
-          id:1000+i,
-          title:b.title,
-          author:b.author?b.author.name:'Auteur inconnu',
-          country:'sn',flag:'🌍',
-          genre:(b.genre||'roman').toLowerCase(),
-          pages:b.totalPages||100,
-          rating:4.8,readers:'Nouveau',
-          cover:covers[i%covers.length],
-          badge:'new',
-          synopsis:b.synopsis||'Découvrez cette œuvre africaine sur GRIOTTE.'
-        };
-      });
-      // Add real books at top
-      realBooks.forEach(function(rb){
-        if(!allBooks.find(function(b){return b.title===rb.title;})){
-          allBooks.unshift(rb);
-        }
-      });
-      filteredBooks=[...allBooks];
-      renderBooks();
-    }
-  }catch(e){}
-}
-
-renderBooks();
-loadRealBooks();
+loadBooks();
+})();
 </script>
 </body>
 </html>
