@@ -861,6 +861,234 @@ async function loadBibliotheque(){
 
 // Mes œuvres
 async function loadOeuvres(){
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
+  const token=localStorage.getItem('accessToken');
+  if(!token) return;
+  try{
+    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+    const books=await res.json();
+    const el=document.getElementById('oeuvresContent');
+    if(!books||books.length===0){el.innerHTML='<div class="empty-state"><div class="empty-state-ico">📗</div>Vous n\'avez pas encore publié de livre.<br/><br/><button onclick="showPage(\'publier\',null)" style="background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:\'Syne\',sans-serif;font-weight:700;font-size:0.75rem;padding:0.6rem 1.4rem;border:none;border-radius:100px;cursor:pointer;margin-top:1rem">Publier mon premier livre →</button></div>';return;}
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
+      return '<div class="book-row">'
+        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages</div></div>'
+        +'<span class="brow-status status-pub">Publié</span>'
+        +'<div class="brow-rev">0 FCFA</div>'
+        +'</div>';
+    }).join('')+'</div>';
+    return;
+  }catch(e){}
+  // fallback
   try{
     const res=await fetch(API+'/books-public');
     const books=await res.json();
