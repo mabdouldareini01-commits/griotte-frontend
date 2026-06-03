@@ -646,16 +646,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 
   <!-- PROFIL -->
   <div class="page" id="page-profil">
-    <div class="profil-header">
-      <div class="profil-ava-lg" id="profilAva">?</div>
-      <div>
-        <div class="profil-name" id="profilName">—</div>
-        <div class="profil-email" id="profilEmail">—</div>
-      </div>
-    </div>
-    <div class="page-padded" style="padding-top:1.5rem">
-      <div class="card"><div class="card-title" style="margin-bottom:1rem">Mon profil</div><div class="empty-state" style="padding:2rem"><span class="empty-ico">⚙️</span>Modification du profil à venir.</div></div>
-    </div>
+    <div id="profilContent"></div>
   </div>
 
 </div>
@@ -1068,9 +1059,262 @@ async function loadAdminLivres(){
 }
 
 function renderProfil(){
-  const pn=document.getElementById('profilName');if(pn) pn.textContent=userName;
-  const pa=document.getElementById('profilAva');if(pa) pa.textContent=userName.charAt(0).toUpperCase();
+  const el=document.getElementById('profilContent');
+  if(!el) return;
+  const role=activeView;
+  const initial=userName.charAt(0).toUpperCase();
+
+  if(role==='reader'||role==='READER'){
+    el.innerHTML=`
+    <div class="profil-header">
+      <div class="profil-ava-lg" id="profilAva" style="cursor:pointer;position:relative" onclick="document.getElementById('avatarInput').click()">
+        ${initial}
+        <div style="position:absolute;bottom:0;right:0;width:22px;height:22px;background:var(--or);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--noir)">✏️</div>
+      </div>
+      <input type="file" id="avatarInput" accept="image/*" style="display:none"/>
+      <div>
+        <div class="profil-name" id="profilName">${userName}</div>
+        <div class="profil-email">Lecteur actif · <span style="color:var(--or)">● Vérifié</span></div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);margin-top:0.3rem">Solde : <span style="color:var(--or)">${userBalance.toLocaleString()} FCFA</span></div>
+      </div>
+    </div>
+    <div class="page-padded" style="padding-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div>
+        <div class="card" style="margin-bottom:1.2rem">
+          <div class="card-title" style="margin-bottom:1.2rem">✏️ Modifier mes informations</div>
+          <div class="form-group"><label class="form-label">Nom complet</label><input type="text" class="form-input" id="pfNom" value="${userName}" placeholder="Votre nom"/></div>
+          <div class="form-group"><label class="form-label">Pseudonyme</label><input type="text" class="form-input" id="pfPseudo" placeholder="Ex: griot_lecteur"/></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="pfEmail" placeholder="votre@email.com"/></div>
+          <div class="form-group"><label class="form-label">Téléphone</label><input type="tel" class="form-input" id="pfTel" placeholder="+223 XX XX XX XX"/></div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Pays</label>
+              <select class="form-select" id="pfPays">
+                <option>🇲🇱 Mali</option><option>🇸🇳 Sénégal</option><option>🇳🇬 Nigeria</option><option>🇬🇭 Ghana</option><option>🇨🇮 Côte d'Ivoire</option><option>🇨🇲 Cameroun</option><option>🇰🇪 Kenya</option><option>🇫🇷 France (diaspora)</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Ville</label><input type="text" class="form-input" id="pfVille" placeholder="Votre ville"/></div>
+          </div>
+          <div class="form-group"><label class="form-label">Langue préférée</label>
+            <select class="form-select">
+              <option>🇫🇷 Français</option><option>🇬🇧 Anglais</option><option>🇵🇹 Portugais</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Genres favoris</label>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+              ${['Romance','Fantastique','Thriller','Roman africain','Histoire','Policier'].map(g=>`<span onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'rgba(217,144,45,0.15)':'';this.style.borderColor=this.classList.contains('active')?'var(--border-or)':'var(--border)';this.style.color=this.classList.contains('active')?'var(--or)':'var(--cendre)'" style="font-family:'DM Mono',monospace;font-size:0.58rem;padding:0.28rem 0.65rem;border:1px solid var(--border);border-radius:100px;cursor:pointer;color:var(--cendre);transition:all 0.2s">${g}</span>`).join('')}
+            </div>
+          </div>
+          <div class="form-group"><label class="form-label">Notifications</label>
+            <div style="display:flex;flex-direction:column;gap:0.5rem">
+              ${[['Nouveaux chapitres','notif1'],['Recommandations','notif2'],['Promotions','notif3']].map(([l,id])=>`<label style="display:flex;align-items:center;gap:0.6rem;cursor:pointer"><input type="checkbox" id="${id}" checked style="accent-color:var(--or)"/><span style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre)">${l}</span></label>`).join('')}
+            </div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.68rem;min-height:1rem;margin-bottom:0.75rem" id="pfMsg"></div>
+          <button class="btn-publish" onclick="saveProfile()">Enregistrer les modifications →</button>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1.2rem">
+          <div class="card-title" style="margin-bottom:1rem">📊 Mon activité</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem">
+            <div style="background:rgba(217,144,45,0.06);border:1px solid rgba(217,144,45,0.12);border-radius:10px;padding:0.9rem;text-align:center">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--or)">${userBalance.toLocaleString()}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre);margin-top:0.2rem">FCFA solde</div>
+            </div>
+            <div style="background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:10px;padding:0.9rem;text-align:center">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--blanc)">${Math.floor(userBalance/10)}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre);margin-top:0.2rem">pages dispo</div>
+            </div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:0.5rem;letter-spacing:0.1em;text-transform:uppercase">Lectures en cours</div>
+          <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html'" style="margin-bottom:0.5rem">
+            <div class="rp-cover cv-1"></div>
+            <div class="rp-info">
+              <div class="rp-title">Les Fils du Sahel</div>
+              <div class="rp-bar-track"><div class="rp-bar-fill" style="width:67%"></div></div>
+              <div class="rp-progress"><span>p. 209/312</span><span>67%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:1rem">📅 Informations du compte</div>
+          <div style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.62rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+              <span style="color:var(--cendre)">Membre depuis</span>
+              <span style="color:var(--blanc)">Juin 2025</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.62rem;padding:0.5rem 0;border-bottom:1px solid var(--border)">
+              <span style="color:var(--cendre)">Statut</span>
+              <span style="color:var(--green)">● Actif</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.62rem;padding:0.5rem 0">
+              <span style="color:var(--cendre)">Rôle</span>
+              <span style="color:var(--or)">Lecteur</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  else if(role==='author'){
+    el.innerHTML=`
+    <div class="profil-header">
+      <div class="profil-ava-lg" style="cursor:pointer;position:relative" onclick="document.getElementById('avatarInputA').click()">
+        ${initial}
+        <div style="position:absolute;bottom:0;right:0;width:22px;height:22px;background:var(--or);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--noir)">✏️</div>
+      </div>
+      <input type="file" id="avatarInputA" accept="image/*" style="display:none"/>
+      <div>
+        <div class="profil-name">${userName}</div>
+        <div style="display:flex;align-items:center;gap:0.6rem;margin-top:0.3rem">
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--green);background:rgba(74,222,128,0.1);padding:0.2rem 0.6rem;border-radius:100px">● Auteur vérifié</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);margin-top:0.3rem">Solde disponible : <span style="color:var(--or)">${userBalance.toLocaleString()} FCFA</span></div>
+      </div>
+    </div>
+    <div class="page-padded" style="padding-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div>
+        <div class="card" style="margin-bottom:1.2rem">
+          <div class="card-title" style="margin-bottom:1.2rem">✏️ Profil éditorial</div>
+          <div class="form-group"><label class="form-label">Nom d'auteur</label><input type="text" class="form-input" value="${userName}" placeholder="Votre nom d'auteur"/></div>
+          <div class="form-group"><label class="form-label">Biographie</label><textarea class="form-textarea" rows="4" placeholder="Parlez de vous, de votre style d'écriture, de vos inspirations..."></textarea></div>
+          <div class="form-2col">
+            <div class="form-group"><label class="form-label">Pays</label>
+              <select class="form-select">
+                <option>🇲🇱 Mali</option><option>🇸🇳 Sénégal</option><option>🇳🇬 Nigeria</option><option>🇬🇭 Ghana</option><option>🇨🇮 Côte d'Ivoire</option><option>🇨🇲 Cameroun</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Ville</label><input type="text" class="form-input" placeholder="Votre ville"/></div>
+          </div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="votre@email.com"/></div>
+          <div class="form-group"><label class="form-label">Téléphone</label><input type="tel" class="form-input" placeholder="+223 XX XX XX XX"/></div>
+          <div class="form-group"><label class="form-label">Genres d'écriture</label>
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+              ${['Romance','Fantastique','Thriller','Roman','Histoire','Policier'].map(g=>`<span onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'rgba(217,144,45,0.15)':'';this.style.borderColor=this.classList.contains('active')?'var(--border-or)':'var(--border)';this.style.color=this.classList.contains('active')?'var(--or)':'var(--cendre)'" style="font-family:'DM Mono',monospace;font-size:0.58rem;padding:0.28rem 0.65rem;border:1px solid var(--border);border-radius:100px;cursor:pointer;color:var(--cendre);transition:all 0.2s">${g}</span>`).join('')}
+            </div>
+          </div>
+          <div class="form-group"><label class="form-label">Réseaux sociaux</label>
+            <input type="text" class="form-input" placeholder="Instagram · @votre_pseudo" style="margin-bottom:0.5rem"/>
+            <input type="text" class="form-input" placeholder="Twitter/X · @votre_pseudo"/>
+          </div>
+          <div class="form-group"><label class="form-label">Méthode de retrait préférée</label>
+            <select class="form-select">
+              <option>📱 Mobile Money — Flooz</option><option>📱 MTN MoMo</option><option>🟠 Orange Money</option><option>🏦 Virement bancaire</option>
+            </select>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.68rem;min-height:1rem;margin-bottom:0.75rem" id="pfMsgA"></div>
+          <button class="btn-publish" onclick="saveProfile()">Enregistrer le profil →</button>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1.2rem">
+          <div class="card-title" style="margin-bottom:1rem">📊 Mes statistiques</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem" id="authorStatsGrid">
+            <div style="background:rgba(217,144,45,0.06);border:1px solid rgba(217,144,45,0.12);border-radius:10px;padding:0.9rem;text-align:center">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--or)" id="pfBookCount">—</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre);margin-top:0.2rem">livres publiés</div>
+            </div>
+            <div style="background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:10px;padding:0.9rem;text-align:center">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--blanc)">0</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre);margin-top:0.2rem">lecteurs actifs</div>
+            </div>
+            <div style="background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.1);border-radius:10px;padding:0.9rem;text-align:center">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--green)">${userBalance.toLocaleString()}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre);margin-top:0.2rem">FCFA solde</div>
+            </div>
+            <div style="background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:10px;padding:0.9rem;text-align:center">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--blanc)">0</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre);margin-top:0.2rem">FCFA revenus</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:1rem">🔒 Sécurité du compte</div>
+          <div class="form-group"><label class="form-label">Nouveau mot de passe</label><input type="password" class="form-input" placeholder="Nouveau mot de passe"/></div>
+          <div class="form-group"><label class="form-label">Confirmer</label><input type="password" class="form-input" placeholder="Confirmer le mot de passe"/></div>
+          <button class="btn-publish" style="background:rgba(248,246,242,0.06);color:var(--blanc);border:1px solid var(--border)">Changer le mot de passe</button>
+        </div>
+      </div>
+    </div>`;
+    // Load author stats
+    const token=localStorage.getItem('accessToken');
+    if(token){
+      fetch(API+'/my-stats',{headers:{'Authorization':'Bearer '+token}})
+        .then(function(r){return r.json();})
+        .then(function(d){
+          const bc=document.getElementById('pfBookCount');
+          if(bc&&d.totalBooks!==undefined) bc.textContent=d.totalBooks;
+        }).catch(function(){});
+    }
+  }
+
+  else if(role==='admin'){
+    el.innerHTML=`
+    <div class="profil-header">
+      <div class="profil-ava-lg" style="background:linear-gradient(135deg,#0a1628,#1e4a8f);color:#7eb8f5;cursor:pointer;position:relative" onclick="document.getElementById('avatarInputAd').click()">
+        ${initial}
+        <div style="position:absolute;bottom:0;right:0;width:22px;height:22px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:#fff">✏️</div>
+      </div>
+      <input type="file" id="avatarInputAd" accept="image/*" style="display:none"/>
+      <div>
+        <div class="profil-name">${userName}</div>
+        <div style="display:flex;align-items:center;gap:0.6rem;margin-top:0.3rem">
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--blue);background:rgba(96,165,250,0.1);padding:0.2rem 0.6rem;border-radius:100px">● Super Administrateur</span>
+        </div>
+      </div>
+    </div>
+    <div class="page-padded" style="padding-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div>
+        <div class="card" style="margin-bottom:1.2rem">
+          <div class="card-title" style="margin-bottom:1.2rem">✏️ Informations administrateur</div>
+          <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" value="${userName}"/></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="admin@griotte.com"/></div>
+          <div class="form-group"><label class="form-label">Téléphone</label><input type="tel" class="form-input" placeholder="+XX XX XX XX XX"/></div>
+          <div class="form-group"><label class="form-label">Pays</label>
+            <select class="form-select">
+              <option>🇲🇱 Mali</option><option>🇸🇳 Sénégal</option><option>🇫🇷 France</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Rôle exact</label>
+            <select class="form-select">
+              <option>🔑 Super Administrateur</option>
+              <option>🛡️ Administrateur</option>
+              <option>👁 Modérateur</option>
+            </select>
+          </div>
+          <button class="btn-publish" onclick="saveProfile()">Enregistrer →</button>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1.2rem">
+          <div class="card-title" style="margin-bottom:1rem">🔒 Sécurité</div>
+          <div class="form-group"><label class="form-label">Mot de passe actuel</label><input type="password" class="form-input" placeholder="Mot de passe actuel"/></div>
+          <div class="form-group"><label class="form-label">Nouveau mot de passe</label><input type="password" class="form-input" placeholder="Nouveau mot de passe"/></div>
+          <div class="form-group"><label class="form-label">Confirmer</label><input type="password" class="form-input" placeholder="Confirmer"/></div>
+          <button class="btn-publish" style="margin-bottom:1rem">Changer le mot de passe →</button>
+          <div style="border-top:1px solid var(--border);padding-top:1rem">
+            <div style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.75rem">Historique des connexions</div>
+            ${[['Aujourd\'hui 14:32','Chrome · Bamako, Mali','✅'],['Hier 09:15','Firefox · Dakar, Sénégal','✅'],['Il y a 3 jours','Chrome · Paris, France','✅']].map(([d,loc,s])=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:0.45rem 0;border-bottom:1px solid rgba(248,246,242,0.03)"><div><div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--blanc)">${d}</div><div style="font-family:'DM Mono',monospace;font-size:0.54rem;color:var(--cendre)">${loc}</div></div><span>${s}</span></div>`).join('')}
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:1rem">📊 Accès rapide</div>
+          <button onclick="window.location.href='griotte-admin.html'" class="btn-publish" style="margin-bottom:0.75rem">Ouvrir le back-office complet →</button>
+          <button onclick="setView('reader',document.getElementById('vbReader'))" class="btn-publish" style="background:rgba(248,246,242,0.06);color:var(--blanc);border:1px solid var(--border);margin-bottom:0.5rem">Basculer en vue Lecteur</button>
+          <button onclick="setView('author',document.getElementById('vbAuthor'))" class="btn-publish" style="background:rgba(248,246,242,0.06);color:var(--blanc);border:1px solid var(--border)">Basculer en vue Auteur</button>
+        </div>
+      </div>
+    </div>`;
+  }
 }
+
+window.saveProfile=function(){
+  const msgEl=document.getElementById('pfMsg')||document.getElementById('pfMsgA');
+  if(msgEl){msgEl.style.color='#4ade80';msgEl.textContent='✅ Profil enregistré !';}
+  showToast('Profil mis à jour !','✅');
+  setTimeout(function(){if(msgEl) msgEl.textContent='';},2500);
+};
 
 // Tags
 const suggestedTags=['Romance','Amour','Famille','Immigration','Diaspora','Sorcellerie','Mythologie africaine','Politique','Tradition','Mali','Sénégal','Nigeria','Ghana','Côte d\'Ivoire','Cameroun','Kenya','Fantastique','Thriller','Policier','Jeunesse','Histoire','Développement','Religion','Héritage','Campus','Étudiant'];
