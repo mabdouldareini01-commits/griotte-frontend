@@ -267,6 +267,8 @@ let pages=[];
 let currentPage=0;
 let totalPages=0;
 let balance=0;
+let userRole='READER';
+let userId='';
 let bookmarked=false;
 let toolbarsVisible=true;
 let hideTimeout;
@@ -294,10 +296,9 @@ async function loadSolde(token){
   try{
     const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
     const d=await res.json();
-    if(d.balance!==undefined){
-      balance=d.balance;
-      updateSoldeDisplay();
-    }
+    if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
+    if(d.role) userRole=d.role;
+    if(d.id) userId=d.id;
   }catch(e){}
 }
 
@@ -466,12 +467,14 @@ function showState(type,title){
 // Navigation
 window.nextPage=async function(){
   if(currentPage>=pages.length-1) return;
-  if(balance<=0){
+  // Lecture gratuite pour admin et auteur du livre
+  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||(bookData&&bookData.author&&bookData.authorId===userId);
+  if(!isFree&&balance<=0){
     document.getElementById('fundsOverlay').classList.add('open');
     return;
   }
   const token=localStorage.getItem('accessToken');
-  if(token){
+  if(token&&!isFree){
     try{
       const res=await fetch(API+'/recharge',{
         method:'POST',

@@ -368,7 +368,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
         <div class="hero-title">Les Fils du Sahel</div>
         <div class="hero-author">Ama Kouyaté · 🇲🇱 Mali · 312 pages · ★ 4.9 · 48k lecteurs</div>
         <div class="hero-actions">
-          <button class="btn-read" onclick="window.location.href='griotte-reader.html'">▶ Lire maintenant</button>
+          <button class="btn-read" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">▶ Lire maintenant</button>
           <button class="btn-fav" id="heroFavBtn" onclick="toggleHeroFav()">♡ Ma liste</button>
         </div>
       </div>
@@ -378,7 +378,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
     <div class="content-section">
       <div class="strip-header"><div class="strip-title">Continuer la lecture</div><button class="strip-more" onclick="showPage('lectures',null)">Tout voir →</button></div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem">
-        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html'">
+        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">
           <div class="rp-cover cv-1"></div>
           <div class="rp-info">
             <div class="rp-title">Les Fils du Sahel</div>
@@ -388,7 +388,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
           </div>
           <button class="rp-continue">▶</button>
         </div>
-        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html'">
+        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">
           <div class="rp-cover cv-5"></div>
           <div class="rp-info">
             <div class="rp-title">L'Oracle du Kilimandjaro</div>
@@ -468,7 +468,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
     <div class="page-padded">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--blanc);margin-bottom:1.5rem">Mes lectures</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem">
-        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html'">
+        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">
           <div class="rp-cover cv-1"></div>
           <div class="rp-info">
             <div class="rp-title">Les Fils du Sahel</div>
@@ -478,7 +478,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
           </div>
           <button class="rp-continue">▶</button>
         </div>
-        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html'">
+        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">
           <div class="rp-cover cv-5"></div>
           <div class="rp-info">
             <div class="rp-title">L'Oracle du Kilimandjaro</div>
@@ -711,7 +711,7 @@ function renderFavoris(){
   }
   fc.innerHTML='<div class="books-strip" style="flex-wrap:wrap;overflow:visible">'+favorites.map(function(t,i){
     const covers=['cv-1','cv-2','cv-3','cv-4','cv-5'];
-    return '<div class="book-card-md" onclick="window.location.href=\'griotte-reader.html\'">'
+    return '<div class="book-card-md" onclick="window.location.href=\'griotte-reader.html?bookId=\'+(b.id||\'\')">'
       +'<div class="book-cover-md '+covers[i%5]+'"><div class="cover-inner"><div class="cov-pages">—</div></div></div>'
       +'<div class="book-title-sm">'+t+'</div>'
       +'</div>';
@@ -893,7 +893,7 @@ function bookCardHTML(b){
   const bc={'new':'cn','trending':'ct','top':'ch'};
   const bl={'new':'Nouveau','trending':'Tendance','top':'Top'};
   const isFav=favorites.includes(b.t);
-  return '<div class="book-card-md" onclick="window.location.href=\'griotte-reader.html\'">'
+  return '<div class="book-card-md" onclick="window.location.href=\'griotte-reader.html?bookId=\'+(b.id||\'\')">'
     +'<div class="book-cover-md '+b.c+'"><div class="cover-inner">'
     +(b.b?'<div class="cov-badge '+bc[b.b]+'">'+bl[b.b]+'</div>':'')
     +'<div class="cov-pages">'+b.p+' p.</div>'
@@ -915,7 +915,49 @@ window.toggleFav=function(title,btn){
   renderFavoris();
 };
 
-function renderStrips(){
+async function renderStrips(){
+  // Charger vrais livres depuis backend
+  try{
+    const res=await fetch(API+'/books-public');
+    const realBooks=await res.json();
+    if(realBooks&&realBooks.length>0){
+      const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6','cv-7','cv-8','cv-9','cv-10','cv-11','cv-12'];
+      function realBookCard(b,i){
+        const url='griotte-reader.html?bookId='+encodeURIComponent(b.id);
+        const isFav=favorites.includes(b.title);
+        let coverHtml='';
+        if(b.coverImage){
+          coverHtml='<img src="'+b.coverImage+'" alt="'+b.title+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
+        }
+        return '<div class="book-card-md" onclick="window.location.href=\''+url+'\'">'
+          +'<div class="book-cover-md '+(b.coverImage?'':covers[i%12])+'" style="'+(b.coverImage?'background:none':'')+'">'
+          +(b.coverImage?coverHtml:'<div class="cover-inner"><div class="cov-pages">'+b.totalPages+' p.</div></div>')
+          +'<button class="fav-btn'+(isFav?' on':'')+'" onclick="event.stopPropagation();toggleFav(\''+b.title+'\',this)">'+(isFav?'♥':'♡')+'</button>'
+          +'</div>'
+          +'<div class="book-title-sm">'+b.title+'</div>'
+          +'<div class="book-author-sm">'+(b.author?b.author.name:'—')+'</div>'
+          +'<div class="book-rating-sm">★ 4.8</div>'
+          +'</div>';
+      }
+      const sr=document.getElementById('stripRecommended');
+      if(sr) sr.innerHTML=realBooks.map(function(b,i){return realBookCard(b,i);}).join('');
+      const st=document.getElementById('stripTrending');
+      if(st) st.innerHTML=realBooks.slice(0,4).map(function(b,i){return realBookCard(b,i);}).join('');
+      const sn=document.getElementById('stripNew');
+      if(sn) sn.innerHTML=realBooks.slice(0,4).map(function(b,i){return realBookCard(b,i);}).join('');
+      // Hero avec premier livre réel
+      if(realBooks[0]){
+        const heroTitle=document.querySelector('.hero-title');
+        if(heroTitle) heroTitle.textContent=realBooks[0].title;
+        const heroAuthor=document.querySelector('.hero-author');
+        if(heroAuthor) heroAuthor.textContent=(realBooks[0].author?realBooks[0].author.name:'—')+' · '+realBooks[0].genre+' · '+realBooks[0].totalPages+' pages';
+        const heroReadBtn=document.querySelector('.btn-read');
+        if(heroReadBtn) heroReadBtn.onclick=function(){window.location.href='griotte-reader.html?bookId='+encodeURIComponent(realBooks[0].id);};
+      }
+      return;
+    }
+  }catch(e){}
+  // Fallback mock
   const sr=document.getElementById('stripRecommended');
   if(sr) sr.innerHTML=booksData.map(bookCardHTML).join('');
   const st=document.getElementById('stripTrending');
@@ -934,7 +976,7 @@ async function loadBibliotheque(){
     const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
     el.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1.2rem">'
       +books.map(function(b,i){
-        return '<div class="book-card-md" onclick="window.location.href=\'griotte-reader.html\'">'
+        return '<div class="book-card-md" onclick="window.location.href=\'griotte-reader.html?bookId=\'+(b.id||\'\')">'
           +'<div class="book-cover-md '+covers[i%6]+'"><div class="cover-inner"><div class="cov-pages">'+b.totalPages+' p.</div></div></div>'
           +'<div class="book-title-sm">'+b.title+'</div>'
           +'<div class="book-author-sm">'+(b.author?b.author.name:'')+'</div>'
@@ -962,7 +1004,10 @@ async function loadOeuvres(){
         +'<div class="brow-cover '+covers[i%6]+'"></div>'
         +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages'+(b.tags&&b.tags.length?' · '+b.tags.slice(0,2).join(', '):'')+'</div></div>'
         +'<span class="brow-status status-pub">Publié</span>'
-        +'<div class="brow-rev">0 FCFA</div>'
+        +'<div style="display:flex;gap:0.35rem;flex-shrink:0">'
+        +'<button onclick="event.stopPropagation();window.location.href=\'griotte-studio.html\'" style="font-family:\'DM Mono\',monospace;font-size:0.54rem;padding:0.25rem 0.55rem;border:1px solid var(--border-or);border-radius:6px;background:none;color:var(--or);cursor:pointer">Modifier</button>'
+        +'<button onclick="event.stopPropagation();deleteOeuvre(\''+b.id+'\')" style="font-family:\'DM Mono\',monospace;font-size:0.54rem;padding:0.25rem 0.55rem;border:1px solid rgba(248,113,113,0.2);border-radius:6px;background:none;color:var(--red);cursor:pointer">Supprimer</button>'
+        +'</div>'
         +'</div>';
     }).join('')+'</div>';
   }catch(e){el.innerHTML='<div class="empty-state"><span class="empty-ico">⚠️</span>Erreur de chargement.</div>';}
@@ -1126,7 +1171,7 @@ function renderProfil(){
             </div>
           </div>
           <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:0.5rem;letter-spacing:0.1em;text-transform:uppercase">Lectures en cours</div>
-          <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html'" style="margin-bottom:0.5rem">
+          <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''" style="margin-bottom:0.5rem">
             <div class="rp-cover cv-1"></div>
             <div class="rp-info">
               <div class="rp-title">Les Fils du Sahel</div>
@@ -1375,6 +1420,20 @@ window.publierLivre=async function(){
     if(d.id){msg.style.color='#4ade80';msg.textContent='✅ Publié !';document.getElementById('pubTitle').value='';document.getElementById('pubSynopsis').value='';document.getElementById('pubPages').value='';showToast('Œuvre publiée !','📚');}
     else{msg.style.color='#f87171';msg.textContent=d.message||'Erreur';}
   }catch(e){msg.style.color='#f87171';msg.textContent='Erreur de connexion';}
+};
+
+window.deleteOeuvre=async function(id){
+  if(!confirm('Supprimer cette œuvre ? Cette action est irréversible.')) return;
+  const token=localStorage.getItem('accessToken');
+  try{
+    const res=await fetch(API+'/books/'+id+'/delete',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token}
+    });
+    const d=await res.json();
+    if(d.success){showToast('Œuvre supprimée','🗑');loadOeuvres();}
+    else showToast('Erreur : '+d.error,'❌');
+  }catch(e){showToast('Erreur de connexion','❌');}
 };
 
 window.deconnecter=function(){
