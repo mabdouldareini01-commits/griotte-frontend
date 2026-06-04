@@ -300,6 +300,8 @@ async function loadSolde(token){
     if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
     if(d.role) userRole=d.role;
     if(d.id) userId=d.id;
+    else if(d.sub) userId=d.sub;
+    console.log('Loaded user - id:',d.id,'role:',d.role,'userId set to:',userId);
   }catch(e){}
 }
 
