@@ -156,9 +156,10 @@ body.sepia{--bg-color:#f4ead5;--text-color:#3d2e1e;--tb-bg:rgba(244,234,213,0.92
   <div class="funds-box">
     <div class="funds-ico">💳</div>
     <div class="funds-title">Solde insuffisant</div>
-    <div class="funds-sub">Votre solde est épuisé.<br/>Rechargez pour continuer votre lecture.</div>
-    <button class="funds-btn" onclick="window.location.href='griotte-dashboard.html'">Recharger mon solde →</button>
-    <button class="funds-back" onclick="window.location.href='griotte-dashboard.html'">← Retour au catalogue</button>
+    <div class="funds-sub" id="fundsMessage">Votre solde est épuisé.<br/>Rechargez pour continuer votre lecture.</div>
+    <button class="funds-btn" onclick="window.location.href='griotte-dashboard.html?page=credits'">+ Recharger mes crédits →</button>
+    <button class="funds-back" onclick="closeFundsOverlay()">← Continuer depuis le début</button>
+    <button class="funds-back" style="margin-top:0.5rem" onclick="window.location.href='griotte-catalogue.html'">📚 Retour au catalogue</button>
   </div>
 </div>
 
@@ -314,10 +315,10 @@ function updateSoldeDisplay(){
 // Load book + chapters
 async function loadBook(id){
   try{
-    // Charger le livre
-    const bRes=await fetch(API+'/books-public');
-    const books=await bRes.json();
-    bookData=books.find(function(b){return b.id===id;});
+    // Charger le livre avec authorId
+    const bRes=await fetch(API+'/books/'+id);
+    bookData=await bRes.json();
+    if(bookData.error) bookData=null;
 
     if(!bookData){
       showState('not-found');
@@ -468,7 +469,14 @@ function showState(type,title){
 window.nextPage=async function(){
   if(currentPage>=pages.length-1) return;
   // Lecture gratuite pour admin et auteur du livre
-  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||bookData&&bookData.authorId===userId;
+  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||(bookData&&bookData.authorId===userId);
+  const currentPageData=pages[currentPage];
+  const nextPageData=pages[currentPage+1];
+  // Vérifier si la prochaine page est premium et non accessible
+  if(!isFree&&nextPageData&&!nextPageData.isFree&&balance<=0){
+    document.getElementById('fundsOverlay').classList.add('open');
+    return;
+  }
   if(!isFree&&balance<=0){
     document.getElementById('fundsOverlay').classList.add('open');
     return;
@@ -502,11 +510,26 @@ window.prevPage=function(){
 };
 
 window.onSliderMove=function(val){
-  const page=Math.max(0,Math.round((parseInt(val)/100)*(pages.length-1)));
-  currentPage=page;
+  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||bookData&&bookData.authorId===userId;
+  const targetPage=Math.max(0,Math.round((parseInt(val)/100)*(pages.length-1)));
+  // Calculer combien de pages gratuites sont accessibles
+  const freePagesCount=pages.filter(function(p){return p.isFree;}).length;
+  const paidPagesCount=Math.floor(balance/10);
+  const maxAccessible=isFree?pages.length-1:Math.min(pages.length-1,freePagesCount+paidPagesCount+currentPage);
+  if(!isFree&&targetPage>maxAccessible){
+    // Bloquer et montrer écran premium
+    document.getElementById('progressSlider').value=Math.round((currentPage/(pages.length-1))*100);
+    showPremiumBlock();
+    return;
+  }
+  currentPage=targetPage;
   showPage(currentPage);
   updateProgress();
 };
+
+function showPremiumBlock(){
+  document.getElementById('fundsOverlay').classList.add('open');
+}
 
 // Progress
 function updateProgress(){
@@ -595,6 +618,13 @@ window.toggleBookmark=function(){
 };
 
 // Toast
+window.closeFundsOverlay=function(){
+  document.getElementById('fundsOverlay').classList.remove('open');
+  // Remettre le slider à la position actuelle
+  const slider=document.getElementById('progressSlider');
+  if(slider&&pages.length>1) slider.value=Math.round((currentPage/(pages.length-1))*100);
+};
+
 window.showToast=function(msg,ico){
   const t=document.getElementById('toast');
   document.getElementById('toastIco').textContent=ico||'✅';
