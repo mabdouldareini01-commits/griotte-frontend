@@ -6,6 +6,22 @@
 <title>GRIOTTE Admin — Back-office</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* == THEME CLAIR GRIOTTE == */
+html,body{background:var(--bg)!important;color:var(--text-main)!important}
+/* Sidebar light */
+.sidebar,.aside,[class*="sidebar"]{background:var(--bg-sidebar)!important;border-color:var(--border)!important}
+/* Cards */
+.card,[class*="-card"]{background:var(--bg-card)!important;border-color:var(--border)!important}
+/* Topbar */
+.topbar,[class*="topbar"]{background:rgba(248,245,241,0.96)!important;border-color:var(--border)!important;color:var(--text-main)!important}
+/* Orange buttons */
+[class*="btn"][class*="primary"],
+[class*="btn"][class*="hero"],
+[class*="hero-btn"]{background:var(--or)!important;color:#fff!important}
+/* Orange accents */
+[class*="or-"],[style*="#FF6B00"],[style*="#FF6B00"]{color:var(--or)!important}
+/* == FIN THEME == */
+
 /* ── LOGO GRIOTTE UNIQUE ─────────────────────────────────── */
 .g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0;overflow:visible}
 .g-icon img{display:block;object-fit:contain;border-radius:16px;overflow:visible}
@@ -20,7 +36,33 @@
 }
 /* ──────────────────────────────────────────────────────── */
 
-:root{--noir:#080604;--noir-soft:#0c0a08;--noir-card:#111009;--or:#D9902D;--or-dark:#b8751f;--or-glow:rgba(217,144,45,0.08);--blanc:#F8F6F2;--blanc-dim:#9a9288;--cendre:#5a5248;--border:rgba(248,246,242,0.05);--border-strong:rgba(248,246,242,0.1);--border-or:rgba(217,144,45,0.2);--green:#4ade80;--red:#f87171;--blue:#60a5fa;--yellow:#fbbf24;--purple:#a78bfa;--sidebar-w:240px}
+:root{
+  /* Couleurs logo */
+  --or:#FF6B00;
+  --or-dark:#CC5200;
+  --or-light:#FF8C33;
+  --or-glow:rgba(255,107,0,0.12);
+  --or-border:rgba(255,107,0,0.25);
+  /* Fond & surfaces */
+  --bg:#F8F5F1;
+  --bg-card:#FFFFFF;
+  --bg-card2:#FFF8F4;
+  --bg-sidebar:#FFFFFF;
+  /* Texte */
+  --text-main:#1A1410;
+  --text-soft:#6B5F52;
+  --text-muted:#A89880;
+  /* Bordures */
+  --border:rgba(26,20,16,0.09);
+  --border-strong:rgba(26,20,16,0.16);
+  /* Compatibilité ancien code */
+  --noir:#1A1410;
+  --noir-soft:#F8F5F1;
+  --noir-card:#FFFFFF;
+  --blanc:#F8F5F1;
+  --blanc-dim:#A89880;
+  --cendre:#6B5F52;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
 body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min-height:100vh;display:flex}
@@ -286,7 +328,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo"><div class="g-icon g-icon--36"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div>
+  <div class="sidebar-logo"><div class="g-icon g-icon--36"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div></div>
     </span>
     <span class="admin-badge">Admin</span>
   </div>

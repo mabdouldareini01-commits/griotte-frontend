@@ -6,6 +6,22 @@
 <title>GRIOTTE Studio — Espace Auteur</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* == THEME CLAIR GRIOTTE == */
+html,body{background:var(--bg)!important;color:var(--text-main)!important}
+/* Sidebar light */
+.sidebar,.aside,[class*="sidebar"]{background:var(--bg-sidebar)!important;border-color:var(--border)!important}
+/* Cards */
+.card,[class*="-card"]{background:var(--bg-card)!important;border-color:var(--border)!important}
+/* Topbar */
+.topbar,[class*="topbar"]{background:rgba(248,245,241,0.96)!important;border-color:var(--border)!important;color:var(--text-main)!important}
+/* Orange buttons */
+[class*="btn"][class*="primary"],
+[class*="btn"][class*="hero"],
+[class*="hero-btn"]{background:var(--or)!important;color:#fff!important}
+/* Orange accents */
+[class*="or-"],[style*="#FF6B00"],[style*="#FF6B00"]{color:var(--or)!important}
+/* == FIN THEME == */
+
 /* ── LOGO GRIOTTE UNIQUE ─────────────────────────────────── */
 .g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0;overflow:visible}
 .g-icon img{display:block;object-fit:contain;border-radius:16px;overflow:visible}
@@ -20,7 +36,33 @@
 }
 /* ──────────────────────────────────────────────────────── */
 
-:root{--noir:#080604;--noir-soft:#0f0d0a;--noir-card:#141210;--or:#D9902D;--or-dark:#b8751f;--or-glow:rgba(217,144,45,0.1);--blanc:#F8F6F2;--blanc-dim:#a09890;--cendre:#6b6157;--border:rgba(248,246,242,0.06);--border-or:rgba(217,144,45,0.2);--green:#4ade80;--red:#f87171;--blue:#60a5fa;--sidebar-w:260px}
+:root{
+  /* Couleurs logo */
+  --or:#FF6B00;
+  --or-dark:#CC5200;
+  --or-light:#FF8C33;
+  --or-glow:rgba(255,107,0,0.12);
+  --or-border:rgba(255,107,0,0.25);
+  /* Fond & surfaces */
+  --bg:#F8F5F1;
+  --bg-card:#FFFFFF;
+  --bg-card2:#FFF8F4;
+  --bg-sidebar:#FFFFFF;
+  /* Texte */
+  --text-main:#1A1410;
+  --text-soft:#6B5F52;
+  --text-muted:#A89880;
+  /* Bordures */
+  --border:rgba(26,20,16,0.09);
+  --border-strong:rgba(26,20,16,0.16);
+  /* Compatibilité ancien code */
+  --noir:#1A1410;
+  --noir-soft:#F8F5F1;
+  --noir-card:#FFFFFF;
+  --blanc:#F8F5F1;
+  --blanc-dim:#A89880;
+  --cendre:#6B5F52;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min-height:100vh;display:flex}
@@ -111,7 +153,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .steps-bar{display:flex;align-items:center;gap:0;margin-bottom:3rem}
 .step-item{display:flex;align-items:center;gap:0.75rem;flex:1}
 .step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.68rem;font-weight:700;flex-shrink:0;transition:all 0.3s}
-.step-num.done{background:var(--green);color:#080604}
+.step-num.done{background:var(--green);color:#FFFFFF}
 .step-num.active{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir)}
 .step-num.pending{background:rgba(248,246,242,0.06);color:var(--cendre);border:1px solid var(--border)}
 .step-label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.08em}
@@ -352,7 +394,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo"><div class="g-icon g-icon--40"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div>
+  <div class="sidebar-logo"><div class="g-icon g-icon--40"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div></div>
     </span>
     <span class="studio-badge">Studio</span>
   </div>
@@ -1247,7 +1289,7 @@ window.publierOeuvre=async function(){
   const pages=parseInt(document.getElementById('newPages').value)||100;
   const msg=document.getElementById('pubMsg');
   if(!title||!synopsis||!genre){msg.style.color='#f87171';msg.textContent='Remplissez les informations obligatoires';return;}
-  msg.style.color='#D9902D';msg.textContent='Publication en cours...';
+  msg.style.color='#FF6B00';msg.textContent='Publication en cours...';
   try{
     const res=await fetch(API+'/publish-book',{
       method:'POST',

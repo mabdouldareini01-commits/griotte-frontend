@@ -8,6 +8,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/* == LOGO COMPOSANT == */
+.g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;overflow:visible}
+.g-icon img{display:block;object-fit:contain;border-radius:14px;overflow:visible}
+.g-icon--48 img{height:48px;width:48px}
+.g-icon--40 img{height:40px;width:40px}
+.g-icon--36 img{height:36px;width:36px}
+.g-icon--32 img{height:32px;width:32px}
+[class*="logo"]{overflow:visible!important}
+@media(max-width:768px){.g-icon--48 img,.g-icon--40 img{height:36px;width:36px}}
+/* == FIN LOGO == */
+
+/* == THEME CLAIR GRIOTTE == */
+html,body{background:var(--bg)!important;color:var(--text-main)!important}
+/* Sidebar light */
+.sidebar,.aside,[class*="sidebar"]{background:var(--bg-sidebar)!important;border-color:var(--border)!important}
+/* Cards */
+.card,[class*="-card"]{background:var(--bg-card)!important;border-color:var(--border)!important}
+/* Topbar */
+.topbar,[class*="topbar"]{background:rgba(248,245,241,0.96)!important;border-color:var(--border)!important;color:var(--text-main)!important}
+/* Orange buttons */
+[class*="btn"][class*="primary"],
+[class*="btn"][class*="hero"],
+[class*="hero-btn"]{background:var(--or)!important;color:#fff!important}
+/* Orange accents */
+[class*="or-"],[style*="#FF6B00"],[style*="#FF6B00"]{color:var(--or)!important}
+/* == FIN THEME == */
+
 /* == TYPOGRAPHIE GRIOTTE == */
 body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
 h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1;letter-spacing:-0.01em}
@@ -27,25 +54,37 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.1;letter-spacing:
 /* ═══════════════════════════════
    VARIABLES & RESET
 ═══════════════════════════════ */
-:root {
-  --noir: #08060400;
-  --noir-deep: #050403;
-  --noir-card: #0f0d0a;
-  --noir-soft: #141210;
-  --or: #D9902D;
-  --or-light: #e8a84a;
-  --or-dark: #b8751f;
-  --or-glow: rgba(217,144,45,0.15);
-  --blanc: #F8F6F2;
-  --blanc-dim: #c8c4bc;
-  --cendre: #6b6157;
-  --border: rgba(248,246,242,0.06);
-  --border-or: rgba(217,144,45,0.2);
+:root{
+  /* Couleurs logo */
+  --or:#FF6B00;
+  --or-dark:#CC5200;
+  --or-light:#FF8C33;
+  --or-glow:rgba(255,107,0,0.12);
+  --or-border:rgba(255,107,0,0.25);
+  /* Fond & surfaces */
+  --bg:#F8F5F1;
+  --bg-card:#FFFFFF;
+  --bg-card2:#FFF8F4;
+  --bg-sidebar:#FFFFFF;
+  /* Texte */
+  --text-main:#1A1410;
+  --text-soft:#6B5F52;
+  --text-muted:#A89880;
+  /* Bordures */
+  --border:rgba(26,20,16,0.09);
+  --border-strong:rgba(26,20,16,0.16);
+  /* Compatibilité ancien code */
+  --noir:#1A1410;
+  --noir-soft:#F8F5F1;
+  --noir-card:#FFFFFF;
+  --blanc:#F8F5F1;
+  --blanc-dim:#A89880;
+  --cendre:#6B5F52;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
-  background: #080604;
+  background: #FFFFFF;
   color: var(--blanc);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
@@ -53,7 +92,7 @@ body {
 }
 ::selection { background: rgba(217,144,45,0.3); color: var(--blanc); }
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #080604; }
+::-webkit-scrollbar-track { background: #FFFFFF; }
 ::-webkit-scrollbar-thumb { background: var(--or-dark); border-radius: 2px; }
 
 /* ═══════════════════════════════
@@ -368,7 +407,7 @@ nav.scrolled {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 200px;
-  background: linear-gradient(to bottom, transparent, #080604);
+  background: linear-gradient(to bottom, transparent, #FFFFFF);
   pointer-events: none;
   z-index: 3;
 }
@@ -1234,15 +1273,13 @@ footer {
 }
 .role-btn.active { border-color: var(--or); color: var(--or); background: var(--or-glow); }
 </style>
+<link rel="icon" type="image/png" href="./logo-icon.png"/>
 </head>
 <body>
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">G</div>
-    <span class="nav-logo-text">Griot<span>te</span></span>
-  </a>
+  <a href="#" style="text-decoration:none"><div class="g-icon g-icon--48"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></a>
   <ul class="nav-links">
     <li><a href="#catalogue">Catalogue</a></li>
     <li><a href="#concept">Tarifs</a></li>
@@ -1577,9 +1614,8 @@ footer {
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="footer-brand">
-    <div class="footer-logo">
-      <div class="nav-logo-mark" style="width:28px;height:28px;font-size:0.85rem">G</div>
-      <span class="nav-logo-text" style="font-size:1rem">Griot<span>te</span></span>
+    <div class="footer-logo"><div class="g-icon g-icon--48"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div>
+      </span>
     </div>
     <p class="footer-tagline">La première plateforme africaine de littérature numérique. 10 FCFA par page. 60% pour les auteurs.</p>
     <p class="footer-copy">© 2026 GRIOTTE. Tous droits réservés.</p>
@@ -1725,7 +1761,7 @@ async function inscrire() {
   if (!nom || !email || !password) {
     msg.style.color = '#f87171'; msg.textContent = 'Veuillez remplir tous les champs'; return;
   }
-  msg.style.color = '#D9902D'; msg.textContent = 'Création du compte...';
+  msg.style.color = '#FF6B00'; msg.textContent = 'Création du compte...';
   try {
     const res = await fetch(API + '/register', {
       method: 'POST',
@@ -1751,7 +1787,7 @@ async function seConnecter() {
   if (!email || !password) {
     msg.style.color = '#f87171'; msg.textContent = 'Veuillez remplir tous les champs'; return;
   }
-  msg.style.color = '#D9902D'; msg.textContent = 'Connexion en cours...';
+  msg.style.color = '#FF6B00'; msg.textContent = 'Connexion en cours...';
   try {
     const res = await fetch(API + '/login', {
       method: 'POST',
@@ -1867,7 +1903,7 @@ window.doLogin=async function(){
   const pass=document.getElementById('loginPass').value;
   const msg=document.getElementById('loginMsg');
   if(!email||!pass){msg.style.color='#f87171';msg.textContent='Remplissez tous les champs';return;}
-  msg.style.color='#D9902D';msg.textContent='Connexion en cours...';
+  msg.style.color='#FF6B00';msg.textContent='Connexion en cours...';
   try{
     const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/login',{
       method:'POST',
@@ -1894,7 +1930,7 @@ window.doRegister=async function(){
   const msg=document.getElementById('regMsg');
   if(!name||!email||!pass){msg.style.color='#f87171';msg.textContent='Remplissez tous les champs';return;}
   if(pass.length<6){msg.style.color='#f87171';msg.textContent='Mot de passe trop court (min 6 caractères)';return;}
-  msg.style.color='#D9902D';msg.textContent='Création du compte...';
+  msg.style.color='#FF6B00';msg.textContent='Création du compte...';
   try{
     const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/register',{
       method:'POST',
@@ -1926,14 +1962,14 @@ document.addEventListener('keydown',function(e){
 <div id="authModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:3000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(12px);padding:1rem">
 <style>
 #authModal.open{display:flex}
-.auth-box{background:#0f0d0a;border:1px solid rgba(248,246,242,0.1);border-radius:20px;padding:2.5rem;width:100%;max-width:400px;position:relative;animation:authIn .3s ease}
+.auth-box{background:#FFFFFF;border:1px solid rgba(248,246,242,0.1);border-radius:20px;padding:2.5rem;width:100%;max-width:400px;position:relative;animation:authIn .3s ease}
 @keyframes authIn{from{opacity:0;transform:scale(.96) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.auth-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#D9902D,transparent);border-radius:20px 20px 0 0}
+.auth-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#FF6B00,transparent);border-radius:20px 20px 0 0}
 .auth-close{position:absolute;top:1rem;right:1rem;width:28px;height:28px;border:1px solid rgba(248,246,242,0.08);border-radius:7px;background:none;color:#6b6157;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center}
 .auth-logo{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.8rem}
-.auth-logo-mark{width:30px;height:30px;background:linear-gradient(135deg,#D9902D,#b8751f);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:0.9rem;color:#080604}
+.auth-logo-mark{width:30px;height:30px;background:linear-gradient(135deg,#FF6B00,#CC5200);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:0.9rem;color:#FFFFFF}
 .auth-logo-text{font-family:'Inter',sans-serif;font-weight:800;font-size:1rem;color:#F8F6F2;letter-spacing:0.06em;text-transform:uppercase}
-.auth-logo-text span{color:#D9902D}
+.auth-logo-text span{color:#FF6B00}
 .auth-title{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:600;color:#F8F6F2;margin-bottom:0.25rem}
 .auth-sub{font-family:'DM Mono',monospace;font-size:0.6rem;color:#6b6157;letter-spacing:0.08em;margin-bottom:1.6rem}
 .auth-field{margin-bottom:0.85rem}
@@ -1941,14 +1977,14 @@ document.addEventListener('keydown',function(e){
 .auth-input{width:100%;background:rgba(248,246,242,0.04);border:1px solid rgba(248,246,242,0.08);border-radius:9px;padding:0.75rem 0.95rem;font-family:'Inter',sans-serif;font-size:0.85rem;color:#F8F6F2;outline:none;transition:border-color 0.2s}
 .auth-input:focus{border-color:rgba(217,144,45,0.4)}
 .auth-input::placeholder{color:rgba(107,97,87,0.5)}
-.auth-btn{width:100%;padding:0.88rem;background:linear-gradient(135deg,#D9902D,#b8751f);border:none;border-radius:10px;color:#080604;font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;transition:all 0.2s;margin-top:0.4rem}
+.auth-btn{width:100%;padding:0.88rem;background:linear-gradient(135deg,#FF6B00,#CC5200);border:none;border-radius:10px;color:#FFFFFF;font-family:'Inter',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;transition:all 0.2s;margin-top:0.4rem}
 .auth-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .auth-google{width:100%;padding:0.78rem;background:rgba(248,246,242,0.04);border:1px solid rgba(248,246,242,0.1);border-radius:10px;color:#F8F6F2;font-family:'Inter',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s;margin-top:0.65rem;display:flex;align-items:center;justify-content:center;gap:0.55rem}
 .auth-google:hover{background:rgba(248,246,242,0.08);border-color:rgba(248,246,242,0.18)}
 .auth-divider{display:flex;align-items:center;gap:0.75rem;margin:1.1rem 0}
 .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(248,246,242,0.06)}
 .auth-divider span{font-family:'DM Mono',monospace;font-size:0.56rem;color:#6b6157;letter-spacing:0.08em}
-.auth-link{font-family:'DM Mono',monospace;font-size:0.6rem;color:#D9902D;background:none;border:none;cursor:pointer;padding:0;transition:opacity 0.2s;text-decoration:underline;text-underline-offset:3px}
+.auth-link{font-family:'DM Mono',monospace;font-size:0.6rem;color:#FF6B00;background:none;border:none;cursor:pointer;padding:0;transition:opacity 0.2s;text-decoration:underline;text-underline-offset:3px}
 .auth-link:hover{opacity:0.7}
 .auth-msg{font-family:'DM Mono',monospace;font-size:0.65rem;min-height:1rem;margin-bottom:0.5rem;text-align:center}
 .auth-footer{text-align:center;margin-top:1.3rem;font-family:'DM Mono',monospace;font-size:0.6rem;color:#6b6157}
