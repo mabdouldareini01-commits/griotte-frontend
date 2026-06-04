@@ -301,7 +301,7 @@ async function loadSolde(token){
     if(d.role) userRole=d.role;
     if(d.id) userId=d.id;
     else if(d.sub) userId=d.sub;
-    console.log('Loaded user - id:',d.id,'role:',d.role,'userId set to:',userId);
+    
   }catch(e){}
 }
 
@@ -472,7 +472,6 @@ window.nextPage=async function(){
   if(currentPage>=pages.length-1) return;
   // Lecture gratuite pour admin et auteur du livre
   const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||userRole==='AUTHOR'&&bookData&&bookData.authorId===userId;
-  console.log('isFree:',isFree,'role:',userRole,'userId:',userId,'authorId:',bookData&&bookData.authorId);
   const currentPageData=pages[currentPage];
   const nextPageData=pages[currentPage+1];
   // Vérifier si la prochaine page est premium et non accessible
