@@ -170,6 +170,7 @@ body.sepia{--bg-color:#f4ead5;--text-color:#3d2e1e;--tb-bg:rgba(244,234,213,0.92
 <!-- CHAPTERS PANEL -->
 <div class="chapters-panel" id="chaptersPanel">
   <div class="cp-title">Chapitres</div>
+  <div id="cpCover" style="width:80px;height:115px;border-radius:3px 10px 10px 3px;margin:0 1.5rem 1rem;overflow:hidden;box-shadow:-4px 0 0 rgba(0,0,0,0.3)"></div>
   <div class="cp-book-title" id="cpBookTitle">—</div>
   <div id="chaptersList"></div>
 </div>
@@ -330,6 +331,15 @@ async function loadBook(id){
     if(bt) bt.textContent=bookData.title;
     const cbt=document.getElementById('cpBookTitle');
     if(cbt) cbt.textContent=bookData.title;
+    // Couverture dans panel chapitres
+    const cpCover=document.getElementById('cpCover');
+    if(cpCover){
+      if(bookData.coverImage){
+        cpCover.innerHTML='<img src="'+bookData.coverImage+'" alt="'+bookData.title+'" style="width:100%;height:100%;object-fit:cover"/>';
+      } else {
+        cpCover.style.background='linear-gradient(160deg,#2d1b0e,#8B4513)';
+      }
+    }
 
     // Charger les chapitres
     const cRes=await fetch(API+'/books/'+id+'/chapters');
