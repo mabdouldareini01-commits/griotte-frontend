@@ -983,8 +983,12 @@ async function loadBibliotheque(){
     const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
     el.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1.2rem">'
       +books.map(function(b,i){
-        return '<div class="book-card-md" onclick="window.location.href=\'griotte-reader.html?bookId=\'+(b.id||\'\')">'
-          +'<div class="book-cover-md '+covers[i%6]+'"><div class="cover-inner"><div class="cov-pages">'+b.totalPages+' p.</div></div></div>'
+        const url='griotte-reader.html?bookId='+encodeURIComponent(b.id);
+        const coverHtml=b.coverImage
+          ?'<img src="'+b.coverImage+'" alt="'+b.title+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>'
+          :'<div class="cover-inner"><div class="cov-pages">'+b.totalPages+' p.</div></div>';
+        return '<div class="book-card-md" onclick="window.location.href=\''+url+'\'">'
+          +'<div class="book-cover-md '+(b.coverImage?'':covers[i%6])+'" style="'+(b.coverImage?'background:none;':'')+'overflow:hidden">'+coverHtml+'</div>'
           +'<div class="book-title-sm">'+b.title+'</div>'
           +'<div class="book-author-sm">'+(b.author?b.author.name:'')+'</div>'
           +'</div>';
@@ -1008,7 +1012,7 @@ async function loadOeuvres(){
     const kl=document.getElementById('kpiLivres');if(kl) kl.textContent=books.length;
     el.innerHTML='<div class="book-rows">'+books.map(function(b,i){
       return '<div class="book-row">'
-        +'<div class="brow-cover '+covers[i%6]+'"></div>'
+        +'<div class="brow-cover '+(b.coverImage?'':covers[i%6])+'" style="overflow:hidden">'+(b.coverImage?'<img src="'+b.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:2px 6px 6px 2px"/>':'')+'</div>'
         +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages'+(b.tags&&b.tags.length?' · '+b.tags.slice(0,2).join(', '):'')+'</div></div>'
         +'<span class="brow-status status-pub">Publié</span>'
         +'<div style="display:flex;gap:0.35rem;flex-shrink:0">'
