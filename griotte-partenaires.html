@@ -8,15 +8,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ── COMPOSANT LOGO GRIOTTE ─────────────────────────────────── */
-.g-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;flex-shrink:0;min-width:0;overflow:visible}
-.g-logo img{display:block;height:32px;width:auto;max-width:none;object-fit:contain;flex-shrink:0;overflow:visible}
-.g-logo--sm img{height:26px}
-.g-logo--lg img{height:40px}
-.g-logo--icon img{height:32px;width:32px;border-radius:8px;object-fit:cover}
-.sidebar-logo,.cat-logo,.nav-logo,.footer-logo,.s-logo,.logo{overflow:visible!important}
-.logo-mark,.nav-logo-mark,.auth-logo-mark{overflow:visible!important}
-/* ─────────────────────────────────────────────────────────────── */
+/* ── COMPOSANT LOGO GRIOTTE ─────────────────────────────── */
+.g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0}
+.g-icon img{display:block;width:auto;object-fit:contain;border-radius:12px}
+.g-icon--48 img{height:48px;width:48px}
+.g-icon--40 img{height:40px;width:40px}
+.g-icon--36 img{height:36px;width:36px}
+.g-icon--32 img{height:32px;width:32px}
+.g-logo-full{display:flex;align-items:center;flex-shrink:0;line-height:0}
+.g-logo-full img{height:36px;width:auto;object-fit:contain}
+/* Force overflow visible partout autour du logo */
+.sidebar-logo,.cat-logo,.nav-logo,.footer-logo,.s-logo,.logo,
+.logo-mark,.nav-logo-mark,.auth-logo-mark,
+[class*="logo"]{overflow:visible!important}
+@media(max-width:768px){
+  .g-icon--48 img{height:40px;width:40px}
+  .g-icon--40 img{height:36px;width:36px}
+  .g-icon--36 img{height:32px;width:32px}
+}
+/* ──────────────────────────────────────────────────────── */
 
 :root {
   --noir: #0c0a07;
@@ -797,7 +807,7 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="g-logo"><img src="./logo.png" alt="GRIOTTE" style="height:32px;width:auto;object-fit:contain" onerror="this.src='';this.style.display='none'"></a>
+  <a href="#" class="g-logo-full" style="text-decoration:none"><img src="./logo.png" alt="GRIOTTE" onerror="this.style.display='none'"></a>
   <div class="nav-right">
     <div class="nav-tag">Partenaires & Investisseurs</div>
     <a href="#cta" class="nav-contact">Nous contacter</a>
@@ -1352,7 +1362,7 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="foot-left">
-    <a href="#" class="g-logo"><img src="./logo.png" alt="GRIOTTE" style="height:32px;width:auto;object-fit:contain" onerror="this.src='';this.style.display='none'"></a>
+    <a href="#" class="g-logo-full" style="text-decoration:none"><img src="./logo.png" alt="GRIOTTE" onerror="this.style.display='none'"></a>
     <span class="foot-sep">|</span>
     <span class="foot-copy">Dossier partenaires & investisseurs · Confidentiel · 2025</span>
   </div>

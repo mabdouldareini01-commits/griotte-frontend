@@ -6,15 +6,25 @@
 <title>GRIOTTE — Catalogue</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ── COMPOSANT LOGO GRIOTTE ─────────────────────────────────── */
-.g-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;flex-shrink:0;min-width:0;overflow:visible}
-.g-logo img{display:block;height:32px;width:auto;max-width:none;object-fit:contain;flex-shrink:0;overflow:visible}
-.g-logo--sm img{height:26px}
-.g-logo--lg img{height:40px}
-.g-logo--icon img{height:32px;width:32px;border-radius:8px;object-fit:cover}
-.sidebar-logo,.cat-logo,.nav-logo,.footer-logo,.s-logo,.logo{overflow:visible!important}
-.logo-mark,.nav-logo-mark,.auth-logo-mark{overflow:visible!important}
-/* ─────────────────────────────────────────────────────────────── */
+/* ── COMPOSANT LOGO GRIOTTE ─────────────────────────────── */
+.g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0}
+.g-icon img{display:block;width:auto;object-fit:contain;border-radius:12px}
+.g-icon--48 img{height:48px;width:48px}
+.g-icon--40 img{height:40px;width:40px}
+.g-icon--36 img{height:36px;width:36px}
+.g-icon--32 img{height:32px;width:32px}
+.g-logo-full{display:flex;align-items:center;flex-shrink:0;line-height:0}
+.g-logo-full img{height:36px;width:auto;object-fit:contain}
+/* Force overflow visible partout autour du logo */
+.sidebar-logo,.cat-logo,.nav-logo,.footer-logo,.s-logo,.logo,
+.logo-mark,.nav-logo-mark,.auth-logo-mark,
+[class*="logo"]{overflow:visible!important}
+@media(max-width:768px){
+  .g-icon--48 img{height:40px;width:40px}
+  .g-icon--40 img{height:36px;width:36px}
+  .g-icon--36 img{height:32px;width:32px}
+}
+/* ──────────────────────────────────────────────────────── */
 
 :root{--noir:#080604;--noir-soft:#0f0d0a;--noir-card:#141210;--or:#D9902D;--or-dark:#b8751f;--or-glow:rgba(217,144,45,0.1);--blanc:#F8F6F2;--blanc-dim:#a09890;--cendre:#6b6157;--border:rgba(248,246,242,0.06);--border-or:rgba(217,144,45,0.2);--green:#4ade80;--sidebar-w:280px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -151,7 +161,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 <aside class="sidebar">
   <div class="sidebar-top">
     <a href="griotte-dashboard.html" class="back-link">← Retour</a>
-    <div class="cat-logo"><div class="g-logo"><img src="./logo.png" alt="GRIOTTE" style="height:32px;width:auto;object-fit:contain" onerror="this.src='';this.style.display='none'"></div></div>
+    <div class="cat-logo"><div class="g-icon g-icon--40"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div>
       </span>
     </div>
   </div>
