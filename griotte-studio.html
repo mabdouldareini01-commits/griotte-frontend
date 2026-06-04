@@ -1166,7 +1166,15 @@ function renderChapters(){
   }).join('');
 }
 
-window.deleteChapter=function(i){chapters.splice(i,1);chapters.forEach(function(c,j){c.num=j+1;});renderChapters();showToast('Chapitre supprimé','🗑');};
+window.deleteChapter=function(i){
+  const ch=chapters[i];
+  if(!ch) return;
+  if(!confirm('Supprimer le chapitre "'+ch.title+'" ? Cette action est irréversible.')) return;
+  chapters.splice(i,1);
+  chapters.forEach(function(c,j){c.num=j+1;});
+  renderChapters();
+  showToast('Chapitre supprimé','🗑');
+};
 window.editChapter=function(i){
   const ch=chapters[i];
   if(!ch) return;
