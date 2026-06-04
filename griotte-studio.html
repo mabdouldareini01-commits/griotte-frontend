@@ -1167,7 +1167,54 @@ function renderChapters(){
 }
 
 window.deleteChapter=function(i){chapters.splice(i,1);chapters.forEach(function(c,j){c.num=j+1;});renderChapters();showToast('Chapitre supprimé','🗑');};
-window.editChapter=function(i){showToast('Éditeur de chapitre à venir','✏️');};
+window.editChapter=function(i){
+  const ch=chapters[i];
+  if(!ch) return;
+  // Ouvrir modal avec contenu existant
+  document.getElementById('chTitle').value=ch.title||'';
+  document.getElementById('chContent').value=ch.content||'';
+  chapterType=ch.type||'free';
+  // Mettre à jour les boutons de type
+  document.querySelectorAll('.ctype-btn').forEach(function(b){b.classList.remove('active');});
+  const typeMap={'free':0,'premium':1,'scheduled':2};
+  const btns=document.querySelectorAll('.ctype-btn');
+  if(btns[typeMap[chapterType]]) btns[typeMap[chapterType]].classList.add('active');
+  // Changer le bouton save pour modifier au lieu de créer
+  const saveBtn=document.querySelector('[onclick="saveChapter()"]');
+  if(saveBtn){
+    saveBtn.textContent='Enregistrer les modifications →';
+    saveBtn.onclick=function(){updateChapter(i);};
+  }
+  openChapterModal();
+};
+
+window.updateChapter=async function(i){
+  const title=document.getElementById('chTitle').value.trim();
+  if(!title){showToast('Ajoutez un titre','⚠️');return;}
+  const content=document.getElementById('chContent').value;
+  chapters[i].title=title;
+  chapters[i].content=content;
+  chapters[i].type=chapterType;
+  chapters[i].words=content.split(/\s+/).filter(Boolean).length;
+  closeChapterModal();
+  renderChapters();
+  showToast('Chapitre modifié !','✅');
+  // Sauvegarder en base si chapitre existant
+  if(chapters[i].id&&window.currentBookId){
+    const token=localStorage.getItem('accessToken');
+    try{
+      await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+window.currentBookId+'/chapters/'+chapters[i].id+'/update',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+        body:JSON.stringify({title:title,content:content,isFree:chapterType==='free'})
+      });
+      showToast('Chapitre sauvegardé en base !','💾');
+    }catch(e){}
+  }
+  // Réinitialiser le bouton save
+  const saveBtn=document.querySelector('[onclick*="updateChapter"]');
+  if(saveBtn){saveBtn.textContent='Créer le chapitre →';saveBtn.onclick=function(){saveChapter();};}
+};
 
 // Publish
 window.publierOeuvre=async function(){
