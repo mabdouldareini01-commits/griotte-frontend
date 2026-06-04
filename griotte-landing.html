@@ -1245,7 +1245,7 @@ footer {
     <li><a href="#catalogue">Catalogue</a></li>
     <li><a href="#concept">Tarifs</a></li>
     <li><a href="#authors">Auteurs</a></li>
-    <li><a href="#" onclick="openAuth('login')" class="nav-cta">Commencer →</a></li>
+    <li><a href="#" onclick="ouvrirModalConnexion()" class="nav-cta">Commencer →</a></li>
   </ul>
 </nav>
 
@@ -1264,7 +1264,7 @@ footer {
       10 FCFA par page. Commencez à lire maintenant.
     </p>
     <div class="hero-actions">
-      <button class="btn-hero-primary" onclick="openAuth('login')">Rejoindre GRIOTTE →</button>
+      <button class="btn-hero-primary" onclick="ouvrirModalConnexion()">Rejoindre GRIOTTE →</button>
       <button class="btn-hero-secondary" onclick="document.getElementById('catalogue').scrollIntoView({behavior:'smooth'})">
         <span class="play-icon">▶</span>
         Explorer le catalogue
@@ -1377,7 +1377,7 @@ footer {
           <div class="step-content">
             <div class="step-title">Créez votre compte</div>
             <div class="step-desc">Inscription gratuite en 30 secondes. Lecteur ou auteur, rejoignez la communauté GRIOTTE.</div>
-            <button class="step-cta-inline" onclick="openAuth('login')">S'inscrire maintenant →</button>
+            <button class="step-cta-inline" onclick="ouvrirModalConnexion()">S'inscrire maintenant →</button>
           </div>
         </div>
         <div class="step-item">
@@ -1567,7 +1567,7 @@ footer {
     la littérature africaine sur GRIOTTE.
   </p>
   <div class="cta-actions">
-    <button class="btn-cta-primary" onclick="openAuth('login')">Créer mon compte gratuitement →</button>
+    <button class="btn-cta-primary" onclick="ouvrirModalConnexion()">Créer mon compte gratuitement →</button>
     <button class="btn-cta-secondary" onclick="ouvrirModalConnexion()">J'ai déjà un compte</button>
   </div>
 </section>
@@ -1586,7 +1586,7 @@ footer {
     <div class="footer-col-title">Plateforme</div>
     <ul class="footer-links">
       <li><a href="#catalogue">Catalogue</a></li>
-      <li><a href="#" onclick="openAuth('login')">S'inscrire</a></li>
+      <li><a href="#" onclick="ouvrirModalConnexion()">S'inscrire</a></li>
       <li><a href="#" onclick="ouvrirModalConnexion()">Se connecter</a></li>
       <li><a href="griotte-reader.html">Lire un extrait</a></li>
     </ul>
@@ -1787,7 +1787,7 @@ function renderBooks(books) {
   const badgeClass = { 'new':'badge-new', 'trending':'badge-trending', 'top':'badge-top' };
   const badgeLabel = { 'new':'Nouveau', 'trending':'Tendance', 'top':'Top' };
   grid.innerHTML = books.map(function(b) {
-    return '<div class="book-card-premium" onclick="window.openAuth(\'login\')">' +
+    return '<div class="book-card-premium" onclick="ouvrirModalConnexion()">' +
       '<div class="book-cover-premium '+b.cover+'">' +
       (b.badge ? '<div class="book-cover-badge '+badgeClass[b.badge]+'">'+badgeLabel[b.badge]+'</div>' : '') +
       '<div class="book-cover-pages">'+b.pages+' p.</div>' +
