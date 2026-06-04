@@ -6,13 +6,17 @@
 <title>GRIOTTE — Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --noir:#080604;--noir-soft:#fff8f4;--noir-card:#ffffff;
-  --or:#FF6B00;--or-dark:#CC5500;--or-light:#FF8C33;--or-glow:rgba(255,107,0,0.08);
-  --blanc:#F8F6F2;--blanc-dim:#8a7e72;--cendre:#7a6e62;
-  --border:rgba(8,6,4,0.08);--border-strong:rgba(8,6,4,0.14);--border-or:rgba(255,107,0,0.22);
-  --green:#16a34a;--red:#dc2626;--blue:#2563eb;
-  --sidebar-w:260px;--text-main:#1a1410;--text-soft:#6b5f53}
+/* ── COMPOSANT LOGO GRIOTTE ─────────────────────────────────── */
+.g-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;flex-shrink:0;min-width:0;overflow:visible}
+.g-logo img{display:block;height:32px;width:auto;max-width:none;object-fit:contain;flex-shrink:0;overflow:visible}
+.g-logo--sm img{height:26px}
+.g-logo--lg img{height:40px}
+.g-logo--icon img{height:32px;width:32px;border-radius:8px;object-fit:cover}
+.sidebar-logo,.cat-logo,.nav-logo,.footer-logo,.s-logo,.logo{overflow:visible!important}
+.logo-mark,.nav-logo-mark,.auth-logo-mark{overflow:visible!important}
+/* ─────────────────────────────────────────────────────────────── */
+
+:root{--noir:#080604;--noir-soft:#0f0d0a;--noir-card:#141210;--or:#D9902D;--or-dark:#b8751f;--or-glow:rgba(217,144,45,0.1);--blanc:#F8F6F2;--blanc-dim:#a09890;--cendre:#6b6157;--border:rgba(248,246,242,0.06);--border-strong:rgba(248,246,242,0.12);--border-or:rgba(217,144,45,0.2);--green:#4ade80;--red:#f87171;--blue:#60a5fa;--sidebar-w:260px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
 body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min-height:100vh;display:flex}
@@ -329,10 +333,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-mark"><img src="./logo-icon.png" alt="G" style="width:28px;height:28px;border-radius:8px;object-fit:cover" onerror="this.style.display='none'"/></div>
-    <span class="logo-text">Griot<span>te</span></span>
-  </div>
+  <div class="sidebar-logo"><div class="g-logo"><img src="./logo.png" alt="GRIOTTE" style="height:32px;width:auto;object-fit:contain" onerror="this.src='';this.style.display='none'"></div></div>
   <div class="sidebar-user">
     <div class="user-top">
       <div class="user-ava" id="userAva">?</div>
@@ -1432,7 +1433,7 @@ window.publierLivre=async function(){
   const totalPages=parseInt(document.getElementById('pubPages').value)||0;
   const msg=document.getElementById('pubMessage');
   if(!title||!synopsis||!totalPages){msg.style.color='#f87171';msg.textContent='Remplissez tous les champs *';return;}
-  msg.style.color='#FF6B00';msg.textContent='Publication en cours...';
+  msg.style.color='#D9902D';msg.textContent='Publication en cours...';
   try{
     const res=await fetch(API+'/publish-book',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({title,synopsis,genre,totalPages,tags:selectedTags})});
     const d=await res.json();
