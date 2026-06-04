@@ -1787,7 +1787,7 @@ function renderBooks(books) {
   const badgeClass = { 'new':'badge-new', 'trending':'badge-trending', 'top':'badge-top' };
   const badgeLabel = { 'new':'Nouveau', 'trending':'Tendance', 'top':'Top' };
   grid.innerHTML = books.map(function(b) {
-    return '<div class="book-card-premium" onclick="openAuth('login')">' +
+    return '<div class="book-card-premium" onclick="window.openAuth(\'login\')">' +
       '<div class="book-cover-premium '+b.cover+'">' +
       (b.badge ? '<div class="book-cover-badge '+badgeClass[b.badge]+'">'+badgeLabel[b.badge]+'</div>' : '') +
       '<div class="book-cover-pages">'+b.pages+' p.</div>' +
