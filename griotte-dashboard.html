@@ -629,6 +629,9 @@ const selectedTags=[];
 const up=new URLSearchParams(window.location.search);
 const tf=up.get('token');
 if(tf){localStorage.setItem('accessToken',tf);window.history.replaceState({},'',window.location.pathname);}
+// Restaurer vue active
+const savedView=localStorage.getItem('griotActiveView');
+if(savedView) activeView=savedView;
 
 // Date
 const de=document.getElementById('currentDate');
@@ -686,10 +689,12 @@ function renderFavoris(){
 // View switcher (admin only)
 window.setView=function(view,btn){
   activeView=view;
+  localStorage.setItem('griotActiveView',view);
   document.querySelectorAll('.view-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
   buildMenu(userRole,view);
-  showPage('accueil',document.querySelector('.nav-link.active'));
+  const defaultPages={reader:'accueil',author:'oeuvres',admin:'admin-dashboard'};
+  showPage(defaultPages[view]||'accueil',document.querySelector('.nav-link.active'));
   showToast('Vue '+view+' activée','👁');
 };
 
