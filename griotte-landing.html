@@ -1875,7 +1875,7 @@ window.doLogin=async function(){
     if(d.accessToken){
       localStorage.setItem('accessToken',d.accessToken);
       msg.style.color='#4ade80';msg.textContent='✅ Connecté !';
-      setTimeout(function(){window.location.href='#' onclick="openAuth('login')";},800);
+ setTimeout(function(){window.location.href='griotte-dashboard.html';},800);
     } else {
       msg.style.color='#f87171';msg.textContent=d.message||'Email ou mot de passe incorrect';
     }
@@ -1902,7 +1902,7 @@ window.doRegister=async function(){
     if(d.accessToken){
       localStorage.setItem('accessToken',d.accessToken);
       msg.style.color='#4ade80';msg.textContent='✅ Compte créé !';
-      setTimeout(function(){window.location.href='#' onclick="openAuth('login')";},800);
+ setTimeout(function(){window.location.href='griotte-dashboard.html';},800);
     } else {
       msg.style.color='#f87171';msg.textContent=d.message||'Erreur lors de la création';
     }
