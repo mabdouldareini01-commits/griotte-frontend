@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>GRIOTTE — La littérature africaine, réinventée</title>
+<link rel="icon" type="image/png" href="./logo-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -11,25 +12,17 @@
 /* ═══════════════════════════════
    VARIABLES & RESET
 ═══════════════════════════════ */
-:root {
-  --noir: #08060400;
-  --noir-deep: #050403;
-  --noir-card: #0f0d0a;
-  --noir-soft: #141210;
-  --or: #D9902D;
-  --or-light: #e8a84a;
-  --or-dark: #b8751f;
-  --or-glow: rgba(217,144,45,0.15);
-  --blanc: #F8F6F2;
-  --blanc-dim: #c8c4bc;
-  --cendre: #6b6157;
-  --border: rgba(248,246,242,0.06);
-  --border-or: rgba(217,144,45,0.2);
-}
+:root{
+  --noir:#080604;--noir-soft:#fff8f4;--noir-card:#ffffff;
+  --or:#FF6B00;--or-dark:#CC5500;--or-light:#FF8C33;--or-glow:rgba(255,107,0,0.08);
+  --blanc:#F8F6F2;--blanc-dim:#8a7e72;--cendre:#7a6e62;
+  --border:rgba(8,6,4,0.08);--border-strong:rgba(8,6,4,0.14);--border-or:rgba(255,107,0,0.22);
+  --green:#16a34a;--red:#dc2626;--blue:#2563eb;
+  --sidebar-w:260px;--text-main:#1a1410;--text-soft:#6b5f53}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
-  background: #080604;
+  background: #F8F6F2;
   color: var(--blanc);
   font-family: 'Syne', sans-serif;
   overflow-x: hidden;
@@ -37,7 +30,7 @@ body {
 }
 ::selection { background: rgba(217,144,45,0.3); color: var(--blanc); }
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #080604; }
+::-webkit-scrollbar-track { background: #F8F6F2; }
 ::-webkit-scrollbar-thumb { background: var(--or-dark); border-radius: 2px; }
 
 /* ═══════════════════════════════
@@ -1238,7 +1231,7 @@ footer {
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">G</div>
+    <div class="logo-mark"><img src="./logo-icon.png" alt="G" style="width:28px;height:28px;border-radius:8px;object-fit:cover" onerror="this.style.display='none'"/></div>
     <span class="nav-logo-text">Griot<span>te</span></span>
   </a>
   <ul class="nav-links">
@@ -1576,7 +1569,7 @@ footer {
 <footer>
   <div class="footer-brand">
     <div class="footer-logo">
-      <div class="nav-logo-mark" style="width:28px;height:28px;font-size:0.85rem">G</div>
+      <div class="logo-mark"><img src="./logo-icon.png" alt="G" style="width:28px;height:28px;border-radius:8px;object-fit:cover" onerror="this.style.display='none'"/></div>
       <span class="nav-logo-text" style="font-size:1rem">Griot<span>te</span></span>
     </div>
     <p class="footer-tagline">La première plateforme africaine de littérature numérique. 10 FCFA par page. 60% pour les auteurs.</p>
@@ -1723,7 +1716,7 @@ async function inscrire() {
   if (!nom || !email || !password) {
     msg.style.color = '#f87171'; msg.textContent = 'Veuillez remplir tous les champs'; return;
   }
-  msg.style.color = '#D9902D'; msg.textContent = 'Création du compte...';
+  msg.style.color = '#FF6B00'; msg.textContent = 'Création du compte...';
   try {
     const res = await fetch(API + '/register', {
       method: 'POST',
@@ -1749,7 +1742,7 @@ async function seConnecter() {
   if (!email || !password) {
     msg.style.color = '#f87171'; msg.textContent = 'Veuillez remplir tous les champs'; return;
   }
-  msg.style.color = '#D9902D'; msg.textContent = 'Connexion en cours...';
+  msg.style.color = '#FF6B00'; msg.textContent = 'Connexion en cours...';
   try {
     const res = await fetch(API + '/login', {
       method: 'POST',
@@ -1865,7 +1858,7 @@ window.doLogin=async function(){
   const pass=document.getElementById('loginPass').value;
   const msg=document.getElementById('loginMsg');
   if(!email||!pass){msg.style.color='#f87171';msg.textContent='Remplissez tous les champs';return;}
-  msg.style.color='#D9902D';msg.textContent='Connexion en cours...';
+  msg.style.color='#FF6B00';msg.textContent='Connexion en cours...';
   try{
     const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/login',{
       method:'POST',
@@ -1892,7 +1885,7 @@ window.doRegister=async function(){
   const msg=document.getElementById('regMsg');
   if(!name||!email||!pass){msg.style.color='#f87171';msg.textContent='Remplissez tous les champs';return;}
   if(pass.length<6){msg.style.color='#f87171';msg.textContent='Mot de passe trop court (min 6 caractères)';return;}
-  msg.style.color='#D9902D';msg.textContent='Création du compte...';
+  msg.style.color='#FF6B00';msg.textContent='Création du compte...';
   try{
     const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/register',{
       method:'POST',
@@ -1926,12 +1919,12 @@ document.addEventListener('keydown',function(e){
 #authModal.open{display:flex}
 .auth-box{background:#0f0d0a;border:1px solid rgba(248,246,242,0.1);border-radius:20px;padding:2.5rem;width:100%;max-width:400px;position:relative;animation:authIn .3s ease}
 @keyframes authIn{from{opacity:0;transform:scale(.96) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.auth-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#D9902D,transparent);border-radius:20px 20px 0 0}
+.auth-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#FF6B00,transparent);border-radius:20px 20px 0 0}
 .auth-close{position:absolute;top:1rem;right:1rem;width:28px;height:28px;border:1px solid rgba(248,246,242,0.08);border-radius:7px;background:none;color:#6b6157;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center}
 .auth-logo{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.8rem}
-.auth-logo-mark{width:30px;height:30px;background:linear-gradient(135deg,#D9902D,#b8751f);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:0.9rem;color:#080604}
+.auth-logo-mark{width:30px;height:30px;background:linear-gradient(135deg,#FF6B00,#b8751f);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:0.9rem;color:#080604}
 .auth-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#F8F6F2;letter-spacing:0.06em;text-transform:uppercase}
-.auth-logo-text span{color:#D9902D}
+.auth-logo-text span{color:#FF6B00}
 .auth-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:#F8F6F2;margin-bottom:0.25rem}
 .auth-sub{font-family:'DM Mono',monospace;font-size:0.6rem;color:#6b6157;letter-spacing:0.08em;margin-bottom:1.6rem}
 .auth-field{margin-bottom:0.85rem}
@@ -1939,14 +1932,14 @@ document.addEventListener('keydown',function(e){
 .auth-input{width:100%;background:rgba(248,246,242,0.04);border:1px solid rgba(248,246,242,0.08);border-radius:9px;padding:0.75rem 0.95rem;font-family:'Syne',sans-serif;font-size:0.85rem;color:#F8F6F2;outline:none;transition:border-color 0.2s}
 .auth-input:focus{border-color:rgba(217,144,45,0.4)}
 .auth-input::placeholder{color:rgba(107,97,87,0.5)}
-.auth-btn{width:100%;padding:0.88rem;background:linear-gradient(135deg,#D9902D,#b8751f);border:none;border-radius:10px;color:#080604;font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;transition:all 0.2s;margin-top:0.4rem}
+.auth-btn{width:100%;padding:0.88rem;background:linear-gradient(135deg,#FF6B00,#b8751f);border:none;border-radius:10px;color:#080604;font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;cursor:pointer;transition:all 0.2s;margin-top:0.4rem}
 .auth-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .auth-google{width:100%;padding:0.78rem;background:rgba(248,246,242,0.04);border:1px solid rgba(248,246,242,0.1);border-radius:10px;color:#F8F6F2;font-family:'Syne',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s;margin-top:0.65rem;display:flex;align-items:center;justify-content:center;gap:0.55rem}
 .auth-google:hover{background:rgba(248,246,242,0.08);border-color:rgba(248,246,242,0.18)}
 .auth-divider{display:flex;align-items:center;gap:0.75rem;margin:1.1rem 0}
 .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(248,246,242,0.06)}
 .auth-divider span{font-family:'DM Mono',monospace;font-size:0.56rem;color:#6b6157;letter-spacing:0.08em}
-.auth-link{font-family:'DM Mono',monospace;font-size:0.6rem;color:#D9902D;background:none;border:none;cursor:pointer;padding:0;transition:opacity 0.2s;text-decoration:underline;text-underline-offset:3px}
+.auth-link{font-family:'DM Mono',monospace;font-size:0.6rem;color:#FF6B00;background:none;border:none;cursor:pointer;padding:0;transition:opacity 0.2s;text-decoration:underline;text-underline-offset:3px}
 .auth-link:hover{opacity:0.7}
 .auth-msg{font-family:'DM Mono',monospace;font-size:0.65rem;min-height:1rem;margin-bottom:0.5rem;text-align:center}
 .auth-footer{text-align:center;margin-top:1.3rem;font-family:'DM Mono',monospace;font-size:0.6rem;color:#6b6157}
