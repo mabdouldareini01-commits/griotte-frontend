@@ -1441,24 +1441,24 @@ footer {
     <div>
       <div class="section-label">Pour les auteurs</div>
       <h2 class="section-title">Votre plume,<br/><em>vos revenus.</em></h2>
-      <p class="section-sub" style="margin-bottom:2.5rem">GRIOTTE est conçu pour que les créateurs africains vivent de leur art. Publiez, mesurez, encaissez.</p>
+      <p class="section-sub" style="margin-bottom:2.5rem">GRIOTTE est né pour donner une scène aux voix africaines. Écrivez votre histoire, trouvez vos lecteurs, construisez votre œuvre chapitre après chapitre.</p>
       <div class="author-features">
         <div class="author-feature">
-          <div class="feature-ico">✍️</div>
+          <div class="feature-ico" style="font-size:1.1rem;opacity:0.7">—</div>
           <div>
             <div class="feature-title">Publication en quelques minutes</div>
             <div class="feature-desc">Uploadez votre manuscrit, définissez votre prix, publiez. Votre livre est live immédiatement.</div>
           </div>
         </div>
         <div class="author-feature">
-          <div class="feature-ico">📊</div>
+          <div class="feature-ico" style="font-size:1.1rem;opacity:0.7">—</div>
           <div>
             <div class="feature-title">Analytics en temps réel</div>
             <div class="feature-desc">Suivez vos lectures page par page, vos revenus, vos lecteurs par pays.</div>
           </div>
         </div>
         <div class="author-feature">
-          <div class="feature-ico">💸</div>
+          <div class="feature-ico" style="font-size:1.1rem;opacity:0.6;font-family:'DM Mono',monospace">💸</div>
           <div>
             <div class="feature-title">60% pour vous, toujours</div>
             <div class="feature-desc">La règle ne change pas. Chaque centime de vos lecteurs vous revient à 60%.</div>
@@ -1629,7 +1629,7 @@ footer {
       <label class="modal-label">Mot de passe</label>
       <div class="password-wrap">
         <input type="password" class="modal-input" id="regPassword" placeholder="Minimum 8 caractères"/>
-        <button class="eye-btn" onclick="togglePassword('regPassword',this)">👁</button>
+        <button class="eye-btn" onclick="togglePassword('regPassword',this)">○</button>
       </div>
     </div>
     <div class="modal-field">
@@ -1654,7 +1654,7 @@ footer {
 <div class="modal-overlay" id="modalConnexion">
   <div class="modal-box">
     <button class="modal-close-btn" onclick="fermerModalConnexion()">✕</button>
-    <div class="modal-headline">Bon retour 🍒</div>
+    <div class="modal-headline">Connexion</div>
     <div class="modal-sub">Connectez-vous à votre espace GRIOTTE</div>
     <div class="modal-field">
       <label class="modal-label">Email</label>
@@ -1664,9 +1664,10 @@ footer {
       <label class="modal-label">Mot de passe</label>
       <div class="password-wrap">
         <input type="password" class="modal-input" id="loginPassword" placeholder="Votre mot de passe"/>
-        <button class="eye-btn" onclick="togglePassword('loginPassword',this)">👁</button>
+        <button class="eye-btn" onclick="togglePassword('loginPassword',this)">○</button>
       </div>
     </div>
+    <div style="text-align:right;margin-bottom:0.75rem"><button onclick="alert('Fonctionnalité à venir — contactez support@griotte.com')" style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--or);background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px">Mot de passe oublié ?</button></div>
     <div class="modal-msg" id="loginMessage"></div>
     <button class="modal-btn-primary" onclick="seConnecter()">Se connecter →</button>
     <div class="modal-divider">ou</div>
