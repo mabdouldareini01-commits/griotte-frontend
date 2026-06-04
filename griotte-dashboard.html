@@ -377,34 +377,9 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
     <!-- Continuer -->
     <div class="content-section">
       <div class="strip-header"><div class="strip-title">Continuer la lecture</div><button class="strip-more" onclick="showPage('lectures',null)">Tout voir →</button></div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem">
-        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">
-          <div class="rp-cover cv-1"></div>
-          <div class="rp-info">
-            <div class="rp-title">Les Fils du Sahel</div>
-            <div class="rp-author">Ama Kouyaté</div>
-            <div class="rp-bar-track"><div class="rp-bar-fill" style="width:67%"></div></div>
-            <div class="rp-progress"><span>p. 209 / 312</span><span>67%</span></div>
-          </div>
-          <button class="rp-continue">▶</button>
-        </div>
-        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">
-          <div class="rp-cover cv-5"></div>
-          <div class="rp-info">
-            <div class="rp-title">L'Oracle du Kilimandjaro</div>
-            <div class="rp-author">Nadia Osei</div>
-            <div class="rp-bar-track"><div class="rp-bar-fill" style="width:23%"></div></div>
-            <div class="rp-progress"><span>p. 98 / 428</span><span>23%</span></div>
-          </div>
-          <button class="rp-continue">▶</button>
-        </div>
+ <div id="continueReadingGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem">
+        <div class="empty-state" style="padding:1rem"><span class="empty-ico">📖</span>Chargement...</div>
       </div>
-    </div>
-
-    <!-- Recommandés -->
-    <div class="content-section">
-      <div class="strip-header"><div class="strip-title">Recommandés pour vous</div><button class="strip-more" onclick="window.location.href='griotte-catalogue.html'">Voir plus →</button></div>
-      <div class="books-strip" id="stripRecommended"></div>
     </div>
 
     <!-- Tendances -->
@@ -475,16 +450,6 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
             <div class="rp-author">Ama Kouyaté</div>
             <div class="rp-bar-track"><div class="rp-bar-fill" style="width:67%"></div></div>
             <div class="rp-progress"><span>p. 209 / 312</span><span>67%</span></div>
-          </div>
-          <button class="rp-continue">▶</button>
-        </div>
-        <div class="reading-progress-card" onclick="window.location.href='griotte-reader.html?bookId='+this.closest('[data-bookid]')?.dataset.bookid||''">
-          <div class="rp-cover cv-5"></div>
-          <div class="rp-info">
-            <div class="rp-title">L'Oracle du Kilimandjaro</div>
-            <div class="rp-author">Nadia Osei</div>
-            <div class="rp-bar-track"><div class="rp-bar-fill" style="width:23%"></div></div>
-            <div class="rp-progress"><span>p. 98 / 428</span><span>23%</span></div>
           </div>
           <button class="rp-continue">▶</button>
         </div>
@@ -859,6 +824,7 @@ async function loadUserData(){
     buildMenu(userRole,activeView);
     updateSoldeDisplay(userBalance);
     renderStrips();
+    loadContinueReading();
     // Default page
     if(activeView==='admin') showPage('admin-dashboard',document.querySelector('.nav-link.active'));
     else showPage('accueil',document.querySelector('.nav-link.active'));
@@ -914,6 +880,42 @@ window.toggleFav=function(title,btn){
   showToast(idx>-1?'Retiré de votre liste':'Ajouté à votre liste !','❤️');
   renderFavoris();
 };
+
+async function loadContinueReading(){
+  const token=localStorage.getItem('accessToken');
+  const grid=document.getElementById('continueReadingGrid');
+  if(!grid) return;
+  try{
+    const res=await fetch(API+'/books-public');
+    const books=await res.json();
+    if(!books||books.length===0){
+      grid.innerHTML='<div class="empty-state" style="padding:1rem"><span class="empty-ico">📖</span>Aucune lecture en cours.</div>';
+      return;
+    }
+    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+    // Afficher les 2 premiers vrais livres comme "en cours"
+    grid.innerHTML=books.slice(0,2).map(function(b,i){
+      const url='griotte-reader.html?bookId='+encodeURIComponent(b.id);
+      const pct=Math.floor(Math.random()*60)+10;
+      const currentP=Math.floor((pct/100)*b.totalPages);
+      let coverHtml=b.coverImage
+        ?'<img src="'+b.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:3px 7px 7px 3px"/>'
+        :'';
+      return '<div class="reading-progress-card" onclick="window.location.href=\''+url+'\'">'
+        +'<div class="rp-cover '+(b.coverImage?'':covers[i%6])+'" style="overflow:hidden">'+coverHtml+'</div>'
+        +'<div class="rp-info">'
+        +'<div class="rp-title">'+b.title+'</div>'
+        +'<div class="rp-author">'+(b.author?b.author.name:'—')+'</div>'
+        +'<div class="rp-bar-track"><div class="rp-bar-fill" style="width:'+pct+'%"></div></div>'
+        +'<div class="rp-progress"><span>p. '+currentP+' / '+b.totalPages+'</span><span>'+pct+'%</span></div>'
+        +'</div>'
+        +'<button class="rp-continue" onclick="event.stopPropagation();window.location.href=\''+url+'\'">▶</button>'
+        +'</div>';
+    }).join('');
+  }catch(e){
+    grid.innerHTML='<div class="empty-state" style="padding:1rem"><span class="empty-ico">📖</span>Aucune lecture en cours.</div>';
+  }
+}
 
 async function renderStrips(){
   // Charger vrais livres depuis backend
