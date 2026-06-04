@@ -6,23 +6,17 @@
 <title>GRIOTTE — Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ── COMPOSANT LOGO GRIOTTE ─────────────────────────────── */
-.g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0}
-.g-icon img{display:block;width:auto;object-fit:contain;border-radius:12px}
+/* ── LOGO GRIOTTE UNIQUE ─────────────────────────────────── */
+.g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0;overflow:visible}
+.g-icon img{display:block;object-fit:contain;border-radius:16px;overflow:visible}
 .g-icon--48 img{height:48px;width:48px}
 .g-icon--40 img{height:40px;width:40px}
 .g-icon--36 img{height:36px;width:36px}
 .g-icon--32 img{height:32px;width:32px}
-.g-logo-full{display:flex;align-items:center;flex-shrink:0;line-height:0}
-.g-logo-full img{height:36px;width:auto;object-fit:contain}
-/* Force overflow visible partout autour du logo */
-.sidebar-logo,.cat-logo,.nav-logo,.footer-logo,.s-logo,.logo,
-.logo-mark,.nav-logo-mark,.auth-logo-mark,
-[class*="logo"]{overflow:visible!important}
+[class*="logo"],[class*="sidebar-logo"],[class*="cat-logo"],[class*="s-logo"],[class*="footer-logo"]{overflow:visible!important}
 @media(max-width:768px){
-  .g-icon--48 img{height:40px;width:40px}
-  .g-icon--40 img{height:36px;width:36px}
-  .g-icon--36 img{height:32px;width:32px}
+  .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
+  .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
 }
 /* ──────────────────────────────────────────────────────── */
 
