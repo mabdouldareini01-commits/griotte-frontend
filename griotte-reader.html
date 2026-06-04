@@ -66,15 +66,16 @@ body{background:var(--bg-color,#0f0d0a);color:var(--text-color,#e8e4de);font-fam
 .toolbar-bottom{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:1rem 2rem 1.4rem;background:var(--tb-bg,rgba(15,13,10,0.95));backdrop-filter:blur(20px);border-top:1px solid var(--border);transition:transform 0.35s ease,opacity 0.35s ease}
 .toolbar-bottom.hidden{transform:translateY(100%);opacity:0}
 .tb-bottom-main{display:flex;align-items:center;gap:1.2rem;margin-bottom:0.7rem}
-.nav-btn{width:44px;height:44px;background:rgba(248,246,242,0.06);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:var(--text-color,#e8e4de);transition:all 0.2s;flex-shrink:0}
+.nav-btn{height:44px;padding:0 1.2rem;background:rgba(248,246,242,0.06);border:1px solid var(--border);border-radius:100px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.78rem;font-family:'Syne',sans-serif;font-weight:700;color:var(--text-color,#e8e4de);transition:all 0.2s;flex-shrink:0;letter-spacing:0.04em}
 .nav-btn:hover{background:rgba(248,246,242,0.1);border-color:rgba(248,246,242,0.2)}
 .nav-btn:disabled{opacity:0.25;cursor:not-allowed}
+.nav-btn-next{background:rgba(217,144,45,0.1);border-color:rgba(217,144,45,0.25);color:var(--or)}
+.nav-btn-next:hover{background:rgba(217,144,45,0.18)}
 .progress-section{flex:1}
 .progress-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.45rem}
 .page-indicator{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);letter-spacing:0.04em}
 .progress-pct{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--or)}
-.progress-slider{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(248,246,242,0.08);border-radius:2px;outline:none;cursor:pointer}
-.progress-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--or);border-radius:50%;box-shadow:0 0 8px rgba(217,144,45,0.4);cursor:pointer}
+.page-counter{display:flex;flex-direction:column;align-items:center;gap:0.2rem;flex:1}
 .tb-bottom-meta{display:flex;justify-content:space-between;align-items:center}
 .time-remaining{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--cendre);letter-spacing:0.05em}
 .debit-info{font-family:'DM Mono',monospace;font-size:0.56rem;color:rgba(217,144,45,0.55);display:flex;align-items:center;gap:0.3rem}
@@ -245,15 +246,12 @@ body.sepia{--bg-color:#f4ead5;--text-color:#3d2e1e;--tb-bg:rgba(244,234,213,0.92
 <!-- TOOLBAR BOTTOM -->
 <div class="toolbar-bottom" id="toolbarBottom">
   <div class="tb-bottom-main">
-    <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹</button>
-    <div class="progress-section">
-      <div class="progress-info-row">
-        <span class="page-indicator" id="pageIndicator">p. 1 / —</span>
-        <span class="progress-pct" id="progressPct">0%</span>
-      </div>
-      <input type="range" class="progress-slider" id="progressSlider" min="0" max="100" value="0" oninput="onSliderMove(this.value)"/>
+    <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹ Précédent</button>
+    <div class="page-counter">
+      <span class="page-indicator" id="pageIndicator">Page 1 / —</span>
+      <span class="progress-pct" id="progressPct">0%</span>
     </div>
-    <button class="nav-btn" id="nextBtn" onclick="nextPage()">›</button>
+    <button class="nav-btn nav-btn-next" id="nextBtn" onclick="nextPage()">Suivant ›</button>
   </div>
   <div class="tb-bottom-meta">
     <span class="time-remaining" id="timeRemaining">—</span>
@@ -511,34 +509,13 @@ window.prevPage=function(){
   window.scrollTo({top:0,behavior:'smooth'});
 };
 
-window.onSliderMove=function(val){
-  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||bookData&&bookData.authorId===userId;
-  const targetPage=Math.max(0,Math.round((parseInt(val)/100)*(pages.length-1)));
-  // Calculer combien de pages gratuites sont accessibles
-  const freePagesCount=pages.filter(function(p){return p.isFree;}).length;
-  const paidPagesCount=Math.floor(balance/10);
-  const maxAccessible=isFree?pages.length-1:Math.min(pages.length-1,freePagesCount+paidPagesCount+currentPage);
-  if(!isFree&&targetPage>maxAccessible){
-    // Bloquer et montrer écran premium
-    document.getElementById('progressSlider').value=Math.round((currentPage/(pages.length-1))*100);
-    showPremiumBlock();
-    return;
-  }
-  currentPage=targetPage;
-  showPage(currentPage);
-  updateProgress();
-};
 
-function showPremiumBlock(){
-  document.getElementById('fundsOverlay').classList.add('open');
-}
 
 // Progress
 function updateProgress(){
   const pct=totalPages>1?Math.round((currentPage/(totalPages-1))*100):0;
   const pf=document.getElementById('progressFill');if(pf) pf.style.width=pct+'%';
-  const ps=document.getElementById('progressSlider');if(ps) ps.value=pct;
-  const pi=document.getElementById('pageIndicator');if(pi) pi.textContent='p. '+(currentPage+1)+' / '+totalPages;
+  const pi=document.getElementById('pageIndicator');if(pi) pi.textContent='Page '+(currentPage+1)+' / '+totalPages;
   const pp=document.getElementById('progressPct');if(pp) pp.textContent=pct+'% lu';
   const tr=document.getElementById('timeRemaining');
   if(tr){
