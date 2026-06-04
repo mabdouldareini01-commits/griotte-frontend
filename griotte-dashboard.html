@@ -1007,8 +1007,9 @@ async function loadOeuvres(){
         +'<div class="brow-meta"><div class="brow-title">'+b.title+'</div><div class="brow-stats">'+b.genre+' · '+b.totalPages+' pages'+(b.tags&&b.tags.length?' · '+b.tags.slice(0,2).join(', '):'')+'</div></div>'
         +'<span class="brow-status status-pub">Publié</span>'
         +'<div style="display:flex;gap:0.35rem;flex-shrink:0">'
-        +'<button onclick="event.stopPropagation();window.location.href=\'griotte-studio.html\'" style="font-family:\'DM Mono\',monospace;font-size:0.54rem;padding:0.25rem 0.55rem;border:1px solid var(--border-or);border-radius:6px;background:none;color:var(--or);cursor:pointer">Modifier</button>'
-        +'<button onclick="event.stopPropagation();deleteOeuvre(\''+b.id+'\')" style="font-family:\'DM Mono\',monospace;font-size:0.54rem;padding:0.25rem 0.55rem;border:1px solid rgba(248,113,113,0.2);border-radius:6px;background:none;color:var(--red);cursor:pointer">Supprimer</button>'
+        +'<button onclick="event.stopPropagation();window.location.href=\'griotte-reader.html?bookId='+b.id+'\'" style="font-family:\'DM Mono\',monospace;font-size:0.54rem;padding:0.25rem 0.55rem;border:1px solid rgba(74,222,128,0.2);border-radius:6px;background:none;color:var(--green);cursor:pointer">▶ Lire</button>'
+        +'<button onclick="event.stopPropagation();loadBookForEdit(\''+b.id+'\')" style="font-family:\'DM Mono\',monospace;font-size:0.54rem;padding:0.25rem 0.55rem;border:1px solid var(--border-or);border-radius:6px;background:none;color:var(--or);cursor:pointer">✏️ Modifier</button>'
+        +'<button onclick="event.stopPropagation();deleteOeuvre(\''+b.id+'\')" style="font-family:\'DM Mono\',monospace;font-size:0.54rem;padding:0.25rem 0.55rem;border:1px solid rgba(248,113,113,0.2);border-radius:6px;background:none;color:var(--red);cursor:pointer">🗑 Suppr.</button>'
         +'</div>'
         +'</div>';
     }).join('')+'</div>';
