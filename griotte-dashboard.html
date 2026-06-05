@@ -356,8 +356,8 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
   </nav>
 
   <div class="sidebar-footer">
-    <a href="griotte-admin.html">🔒 Espace administrateur</a>
-    <a href="index.html" onclick="return confirm('Se déconnecter ?')">🚪 Déconnexion</a>
+    <a href="./griotte-admin.html">🔒 Espace administrateur</a>
+    <a href="./griotte-landing.html" onclick="return confirm('Se déconnecter ?')">🚪 Déconnexion</a>
   </div>
 </aside>
 
@@ -616,7 +616,7 @@ async function initUser() {
 
     // Admin → lien visible
     if (user.role === 'ADMIN') {
-      var adminLink = document.querySelector('.sidebar-footer a[href="griotte-admin.html"]');
+      var adminLink = document.querySelector('.sidebar-footer a[href="./griotte-admin.html"]');
       if (adminLink) adminLink.style.fontWeight = '700';
     }
 
@@ -801,10 +801,10 @@ function showToast(msg) {
 }
 
 // ── DÉCONNEXION sidebar ──
-document.querySelector('.sidebar-footer a[href="index.html"]') &&
-  document.querySelector('.sidebar-footer a[href="index.html"]').addEventListener('click', function(e) {
+document.querySelector('.sidebar-footer a[href="./griotte-landing.html"]') &&
+  document.querySelector('.sidebar-footer a[href="./griotte-landing.html"]').addEventListener('click', function(e) {
     e.preventDefault();
-    if (confirm('Se déconnecter ?')) logout();
+    if (confirm('Se déconnecter ?')) { localStorage.clear(); window.location.href = './griotte-landing.html'; }
   });
 
 // ── LANCEMENT ──
