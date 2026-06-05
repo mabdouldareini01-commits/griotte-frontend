@@ -145,17 +145,17 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
 
     <div class="auth-error" id="loginError"></div>
 
-    <form id="loginForm" onsubmit="doLogin(event)" novalidate>
+    <form id="loginForm" onsubmit="doLogin(event)" novalidate autocomplete="off">
       <div class="field">
         <label for="loginEmail">Adresse email</label>
         <input id="loginEmail" type="email" name="email"
-          placeholder="votre@email.com" autocomplete="email" required/>
+          placeholder="votre@email.com" autocomplete="off" required/>
       </div>
       <div class="field">
         <label for="loginPassword">Mot de passe</label>
         <div class="field-pw">
           <input id="loginPassword" type="password" name="password"
-            placeholder="••••••••" autocomplete="current-password" required/>
+            placeholder="••••••••" autocomplete="new-password" required/>
           <button type="button" class="pw-toggle" onclick="togglePw('loginPassword',this)">👁</button>
         </div>
       </div>
@@ -163,7 +163,7 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
         <label for="loginConfirm">Confirmer le mot de passe</label>
         <div class="field-pw">
           <input id="loginConfirm" type="password" name="confirm"
-            placeholder="Répétez votre mot de passe" autocomplete="current-password" required/>
+            placeholder="Répétez votre mot de passe" autocomplete="new-password" required/>
           <button type="button" class="pw-toggle" onclick="togglePw('loginConfirm',this)">👁</button>
         </div>
       </div>
@@ -183,12 +183,18 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
   </div>
 </div>
 <script>
+// Vider les champs au chargement pour éviter le remplissage automatique
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var fields = document.querySelectorAll('#loginForm input');
+    fields.forEach(function(f) { f.value = ''; });
+  }, 100);
+});
+
 const API = 'https://griotte-backend-2-production.up.railway.app/api/v1';
 
-// Déjà connecté ?
-if (localStorage.getItem('griotte_token')) {
-  redirectByRole(localStorage.getItem('griotte_role') || 'READER');
-}
+// Ne pas rediriger automatiquement — laisser l'utilisateur voir le formulaire
+// (désactivé volontairement)
 
 function redirectByRole(role) {
   if (role === 'ADMIN')  window.location.href = './griotte-admin.html';
