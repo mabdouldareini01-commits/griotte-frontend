@@ -3,142 +3,197 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>GRIOTTE — Littérature africaine numérique</title>
+<title>GRIOTTE — Rejoindre la communauté</title>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-font-smoothing:antialiased}
-body{font-family:'Inter',sans-serif;min-height:100vh;color:#1A1410;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:100vh;display:flex;align-items:stretch}
 :root{
   --or:#FF6B00;--or-dark:#CC5200;--or-glow:rgba(255,107,0,0.12);
   --bg:#F8F5F1;--card:#FFFFFF;
   --text:#1A1410;--soft:#4A3F35;--muted:#7A6A5E;
-  --border:rgba(26,20,16,0.1);--shadow:0 4px 40px rgba(26,20,16,0.10)
+  --border:rgba(26,20,16,0.1)
 }
-/* Logo */
-.logo{display:flex;flex-direction:column;align-items:center;gap:0.55rem}
-.logo img{width:60px;height:60px;border-radius:16px;object-fit:contain}
-.logo-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:var(--text);letter-spacing:-0.02em}
-.logo-name span{color:var(--or)}
-/* Card */
-.card{background:var(--card);border-radius:24px;padding:2.75rem 2.5rem;box-shadow:var(--shadow);border:1px solid var(--border);width:100%;max-width:440px}
-/* Fields */
-.field{margin-bottom:1rem}
-.field label{display:block;font-size:0.78rem;font-weight:600;color:var(--soft);margin-bottom:0.4rem;letter-spacing:0.01em}
-.field input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:0.8rem 1rem;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--text);outline:none;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none}
-.field input:focus{border-color:var(--or);box-shadow:0 0 0 3px var(--or-glow)}
-.field-pw{position:relative}
-.field-pw input{padding-right:3rem}
-.pw-eye{position:absolute;right:0.9rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:1rem;padding:0.2rem;line-height:1;transition:color 0.2s}
-.pw-eye:hover{color:var(--or)}
-/* Buttons */
-.btn{width:100%;padding:0.88rem 1rem;border-radius:12px;font-family:'Inter',sans-serif;font-weight:600;font-size:0.95rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.6rem;border:none;text-decoration:none}
-.btn-primary{background:var(--or);color:#fff;box-shadow:0 3px 16px rgba(255,107,0,0.28)}
-.btn-primary:hover{background:var(--or-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,107,0,0.32)}
-.btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+
+/* ── LAYOUT 2 COLONNES ── */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;width:100%}
+
+/* ── COLONNE GAUCHE ── */
+.left{
+  background:linear-gradient(160deg,#1A1410 0%,#2d1f14 60%,#3a2510 100%);
+  padding:3.5rem;display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden
+}
+.left::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 30% 50%,rgba(255,107,0,0.12) 0%,transparent 70%);
+  pointer-events:none
+}
+.left-logo{display:flex;align-items:center;gap:0.65rem;margin-bottom:3rem;position:relative}
+.left-logo img{width:44px;height:44px;border-radius:12px;object-fit:contain}
+.left-logo-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:#fff;letter-spacing:-0.01em}
+.left-logo-name span{color:var(--or)}
+.left-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:800;line-height:1.12;
+  letter-spacing:-0.025em;color:#fff;
+  margin-bottom:2rem;position:relative
+}
+.left-title em{font-style:italic;color:var(--or)}
+.perks{list-style:none;display:flex;flex-direction:column;gap:1rem;position:relative}
+.perk{display:flex;align-items:flex-start;gap:0.85rem}
+.perk-ico{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(255,107,0,0.15);border:1px solid rgba(255,107,0,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;flex-shrink:0;margin-top:1px
+}
+.perk-text{font-size:0.95rem;color:rgba(255,255,255,0.8);line-height:1.5}
+.perk-text strong{color:#fff;font-weight:600}
+.left-bottom{
+  margin-top:3rem;padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,0.08);
+  position:relative
+}
+.stats-row{display:flex;gap:2.5rem}
+.stat-item{}
+.stat-val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#fff;line-height:1}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:0.62rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem}
+
+/* ── COLONNE DROITE ── */
+.right{
+  display:flex;align-items:center;justify-content:center;
+  padding:3rem 2.5rem;background:var(--bg)
+}
+.auth-card{
+  width:100%;max-width:380px;
+  background:var(--card);border-radius:20px;
+  padding:2.5rem;
+  box-shadow:0 4px 40px rgba(26,20,16,0.10);
+  border:1px solid var(--border)
+}
+.card-title{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:800;color:var(--text);margin-bottom:0.35rem;letter-spacing:-0.02em}
+.card-sub{font-size:0.82rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.5}
+.btn{
+  width:100%;padding:0.85rem 1rem;border-radius:11px;
+  font-family:'Inter',sans-serif;font-weight:600;font-size:0.9rem;
+  cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;
+  gap:0.6rem;border:none;text-decoration:none;margin-bottom:0.75rem
+}
 .btn-google{background:#fff;color:var(--text);border:1.5px solid var(--border)}
 .btn-google:hover{border-color:rgba(26,20,16,0.22);background:#fafafa}
+.btn-primary{background:var(--or);color:#fff;box-shadow:0 3px 16px rgba(255,107,0,0.25)}
+.btn-primary:hover{background:var(--or-dark);transform:translateY(-1px)}
 .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}
 .btn-outline:hover{border-color:var(--or);color:var(--or)}
-/* Divider */
-.divider{display:flex;align-items:center;gap:0.75rem;margin:1.1rem 0;color:var(--muted);font-size:0.75rem}
+.divider{
+  display:flex;align-items:center;gap:0.6rem;
+  margin:0.5rem 0 1rem;color:var(--muted);font-size:0.72rem
+}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-/* Error / success */
-.msg-error{background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.18);border-radius:9px;padding:0.65rem 0.9rem;font-size:0.82rem;color:#dc2626;margin-bottom:1rem;display:none;line-height:1.5}
-.msg-error.on{display:block}
-.msg-ok{background:rgba(22,163,74,0.07);border:1px solid rgba(22,163,74,0.18);border-radius:9px;padding:0.65rem 0.9rem;font-size:0.82rem;color:#15803d;margin-bottom:1rem;display:none;line-height:1.5}
-.msg-ok.on{display:block}
-/* Switch link */
-.switch{text-align:center;font-size:0.84rem;color:var(--muted);margin-top:1.4rem}
-.switch a{color:var(--or);font-weight:600;text-decoration:none}
-.switch a:hover{text-decoration:underline}
-/* Checkbox */
-.check-row{display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.85rem}
-.check-row input[type=checkbox]{width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:var(--or);cursor:pointer}
-.check-row label{font-size:0.8rem;color:var(--soft);line-height:1.5;cursor:pointer}
-.check-row a{color:var(--or);text-decoration:underline}
+.legal{
+  font-size:0.72rem;color:var(--muted);text-align:center;
+  line-height:1.6;margin-top:1.25rem
+}
+.legal a{color:var(--or);text-decoration:none}
+.legal a:hover{text-decoration:underline}
 
-body{
-  background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  padding:2rem 1rem;
-}
-.welcome-wrap{width:100%;max-width:480px;text-align:center}
-.welcome-logo{margin-bottom:2.5rem}
-.welcome-logo img{width:72px;height:72px;border-radius:20px;object-fit:contain;margin-bottom:0.75rem}
-.welcome-logo .logo-name{font-size:1.8rem}
-.welcome-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.9rem,5vw,2.6rem);
-  font-weight:800;line-height:1.12;
-  letter-spacing:-0.025em;
-  color:var(--text);margin-bottom:1.1rem
-}
-.welcome-title em{font-style:italic;color:var(--or)}
-.welcome-sub{
-  font-size:1rem;color:var(--soft);line-height:1.75;
-  margin-bottom:2.75rem;max-width:400px;margin-left:auto;margin-right:auto
-}
-.welcome-btns{display:flex;flex-direction:column;gap:0.85rem;margin-bottom:2rem}
-.welcome-footer{
-  font-size:0.75rem;color:var(--muted);line-height:1.6
-}
-.welcome-footer a{color:var(--or);text-decoration:none}
-.welcome-footer a:hover{text-decoration:underline}
-.badge{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  font-family:'DM Mono',monospace;font-size:0.65rem;
-  letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--or);background:rgba(255,107,0,0.08);
-  border:1px solid rgba(255,107,0,0.18);
-  border-radius:50px;padding:0.3rem 0.9rem;
-  margin-bottom:1.5rem;display:inline-block
-}
-@media(max-width:480px){
-  body{padding:1.5rem 1rem;align-items:flex-start;padding-top:3rem}
-  .welcome-title{font-size:1.8rem}
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .split{grid-template-columns:1fr}
+  .left{display:none}
+  .right{min-height:100vh;padding:2rem 1.25rem}
 }
 </style>
 </head>
 <body>
-<div class="welcome-wrap">
-  <div class="welcome-logo">
-    <img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"/>
-    <div class="logo-name">Grio<span>tte</span></div>
+<div class="split">
+
+  <!-- COLONNE GAUCHE -->
+  <div class="left">
+    <div class="left-logo">
+      <img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"/>
+      <div class="left-logo-name">Grio<span>tte</span></div>
+    </div>
+
+    <h1 class="left-title">
+      Rejoignez la<br/>communauté<br/><em>GRIOTTE</em>
+    </h1>
+
+    <ul class="perks">
+      <li class="perk">
+        <div class="perk-ico">📚</div>
+        <div class="perk-text"><strong>Des milliers d'œuvres africaines</strong><br/>Romans, nouvelles, poésies, essais du continent</div>
+      </li>
+      <li class="perk">
+        <div class="perk-ico">💳</div>
+        <div class="perk-text"><strong>Lecture simple et accessible</strong><br/>10 FCFA par page — payez uniquement ce que vous lisez</div>
+      </li>
+      <li class="perk">
+        <div class="perk-ico">✍️</div>
+        <div class="perk-text"><strong>Publication en quelques minutes</strong><br/>Uploadez votre manuscrit et touchez vos lecteurs</div>
+      </li>
+      <li class="perk">
+        <div class="perk-ico">💰</div>
+        <div class="perk-text"><strong>Revenus transparents pour les auteurs</strong><br/>60% de chaque page lue vous revient directement</div>
+      </li>
+      <li class="perk">
+        <div class="perk-ico">🌍</div>
+        <div class="perk-text"><strong>Une seule plateforme pour lire et publier</strong><br/>Un compte, tous les accès, aucune limite</div>
+      </li>
+    </ul>
+
+    <div class="left-bottom">
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-val">48k+</div>
+          <div class="stat-lbl">Lecteurs</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">1 200+</div>
+          <div class="stat-lbl">Œuvres</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">340+</div>
+          <div class="stat-lbl">Auteurs</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="badge">Plateforme africaine · Littérature numérique</div>
+  <!-- COLONNE DROITE -->
+  <div class="right">
+    <div class="auth-card">
+      <div class="card-title">Commencer sur GRIOTTE</div>
+      <p class="card-sub">Un compte pour lire, publier et recevoir des revenus.</p>
 
-  <h1 class="welcome-title">
-    L'Afrique raconte<br/><em>ses histoires</em><br/>au monde entier.
-  </h1>
+      <button class="btn btn-google" onclick="window.location.href='https://griotte-backend-2-production.up.railway.app/api/v1/auth/google'">
+        <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Continuer avec Google
+      </button>
 
-  <p class="welcome-sub">
-    Découvrez des milliers d'œuvres africaines, soutenez les auteurs du continent et publiez vos propres histoires sur une plateforme pensée pour la littérature numérique.
-  </p>
+      <div class="divider">ou</div>
 
-  <div class="welcome-btns">
-    <button class="btn btn-google" onclick="window.location.href='https://griotte-backend-2-production.up.railway.app/api/v1/auth/google'">
-      <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      Continuer avec Google
-    </button>
-    <a class="btn btn-primary" href="./griotte-register.html">
-      S'inscrire avec Email
-    </a>
-    <a class="btn btn-outline" href="./griotte-login.html">
-      Se connecter
-    </a>
+      <a class="btn btn-primary" href="./griotte-register.html">
+        ✉️ S'inscrire avec Email
+      </a>
+      <a class="btn btn-outline" href="./griotte-login.html">
+        Se connecter
+      </a>
+
+      <p class="legal">
+        En continuant, vous acceptez les
+        <a href="#">Conditions d'utilisation</a> et la
+        <a href="#">Politique de confidentialité</a> de GRIOTTE.
+      </p>
+    </div>
   </div>
 
-  <p class="welcome-footer">
-    En continuant, vous acceptez nos
-    <a href="#">Conditions d'utilisation</a> et notre
-    <a href="#">Politique de confidentialité</a>.
-  </p>
 </div>
 </body>
 </html>

@@ -111,13 +111,9 @@ body{background:var(--bg);display:flex;align-items:center;justify-content:center
       </div>
     </div>
 
-    <div class="check-row">
-      <input type="checkbox" id="chkCgu" required/>
-      <label for="chkCgu">J'ai lu et accepté les <a href="#">Conditions d'utilisation</a> de GRIOTTE.</label>
-    </div>
     <div class="check-row" style="margin-bottom:1.5rem">
-      <input type="checkbox" id="chkPdc" required/>
-      <label for="chkPdc">J'ai lu et accepté la <a href="#">Politique de confidentialité</a> de GRIOTTE.</label>
+      <input type="checkbox" id="chkAll" required/>
+      <label for="chkAll">J'ai lu et accepté les <a href="#">Conditions d'utilisation</a> ainsi que la <a href="#">Politique de confidentialité</a> de GRIOTTE.</label>
     </div>
 
     <button class="btn btn-primary" type="submit" id="regBtn">Créer mon compte →</button>
@@ -164,8 +160,7 @@ async function doRegister(e) {
   var email    = document.getElementById('regEmail').value.trim();
   var pw       = document.getElementById('regPw').value;
   var confirm  = document.getElementById('regConfirm').value;
-  var cgu      = document.getElementById('chkCgu').checked;
-  var pdc      = document.getElementById('chkPdc').checked;
+  var chkAll   = document.getElementById('chkAll').checked;
 
   if (!name || !username || !dob || !email || !pw || !confirm) {
     showErr('Veuillez remplir tous les champs.'); return;
@@ -176,7 +171,7 @@ async function doRegister(e) {
   if (pw !== confirm) {
     showErr('Les mots de passe ne correspondent pas.'); return;
   }
-  if (!cgu || !pdc) {
+  if (!chkAll) {
     showErr('Vous devez accepter les conditions d'utilisation et la politique de confidentialité.'); return;
   }
 
