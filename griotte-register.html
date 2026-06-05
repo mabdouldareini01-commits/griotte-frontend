@@ -25,33 +25,9 @@ h1{font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:600;color:#1A1410
 .field input:focus{border-color:var(--or);box-shadow:0 0 0 3px var(--or-glow)}
 
 .pw-wrap{position:relative;display:block}
-.pw-wrap input{
-  width:100%;background:#F8F5F1;
-  border:1.5px solid rgba(26,20,16,0.1);
-  border-radius:10px;
-  padding:0.82rem 3rem 0.82rem 1rem;
-  font-family:'Inter',sans-serif;font-size:0.9rem;
-  color:#1A1410;outline:none;
-  transition:border-color 0.2s,box-shadow 0.2s;
-  -webkit-appearance:none;appearance:none;
-  /* Force no browser autofill overlay */
-  background-clip:padding-box
-}
+.pw-wrap input{width:100%;background:#F8F5F1;border:1.5px solid rgba(26,20,16,0.1);border-radius:10px;padding:0.82rem 3.2rem 0.82rem 1rem;font-family:'Inter',sans-serif;font-size:0.9rem;color:#1A1410;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
 .pw-wrap input:focus{border-color:#FF6B00;box-shadow:0 0 0 3px rgba(255,107,0,0.1)}
-.pw-eye{
-  position:absolute;
-  right:0;top:0;bottom:0;
-  width:3rem;
-  display:flex;align-items:center;justify-content:center;
-  background:none;border:none;
-  cursor:pointer;
-  color:#9A8878;
-  font-size:0.9rem;
-  /* Critical: ensure button is on top */
-  z-index:10;
-  -webkit-tap-highlight-color:transparent;
-  user-select:none
-}
+.pw-eye{position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;font-size:1rem;color:#9A8878;padding:0;line-height:1;z-index:5;-webkit-tap-highlight-color:transparent}
 .pw-eye:hover{color:#FF6B00}
 .pw-eye svg{pointer-events:none;display:block}
 
@@ -100,14 +76,14 @@ h1{font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:600;color:#1A1410
       <label for="pw">Mot de passe</label>
       <div class="pw-wrap">
         <input id="pw" type="password" placeholder="Minimum 8 caractères" autocomplete="off" required minlength="8"/>
-        <button type="button" class="pw-eye" onclick="togglePw('pw',this)" aria-label="Afficher"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button type="button" class="pw-eye" id="eye_pw" onclick="togglePw('pw')">👁</button>
       </div>
     </div>
     <div class="field">
       <label for="pw2">Confirmer le mot de passe</label>
       <div class="pw-wrap">
         <input id="pw2" type="password" placeholder="Répétez votre mot de passe" autocomplete="off" required/>
-        <button type="button" class="pw-eye" onclick="togglePw('pw2',this)" aria-label="Afficher"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button type="button" class="pw-eye" id="eye_pw2" onclick="togglePw('pw2')">👁</button>
       </div>
     </div>
     <div class="check">
@@ -121,15 +97,17 @@ h1{font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:600;color:#1A1410
 <script>
 const API='https://griotte-backend-2-production.up.railway.app/api/v1';
 
-function togglePw(inputId, btn) {
+function togglePw(inputId) {
   var inp = document.getElementById(inputId);
-  if (!inp) return;
-  var isHidden = inp.type === 'password';
-  inp.type = isHidden ? 'text' : 'password';
-  btn.innerHTML = isHidden
-    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
-    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
-  btn.setAttribute('aria-label', isHidden ? 'Masquer' : 'Afficher');
+  var btn = document.getElementById('eye_' + inputId);
+  if (!inp || !btn) return;
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    inp.type = 'password';
+    btn.textContent = '👁';
+  }
 }
 
 window.addEventListener('load',function(){
