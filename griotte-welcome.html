@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Mot de passe oublié — GRIOTTE</title>
+<title>GRIOTTE — Littérature africaine numérique</title>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -62,52 +62,83 @@ body{font-family:'Inter',sans-serif;min-height:100vh;color:#1A1410;overflow-x:hi
 .check-row label{font-size:0.8rem;color:var(--soft);line-height:1.5;cursor:pointer}
 .check-row a{color:var(--or);text-decoration:underline}
 
-body{background:var(--bg);display:flex;align-items:center;justify-content:center;padding:2rem 1rem;min-height:100vh}
+body{
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem 1rem;
+}
+.welcome-wrap{width:100%;max-width:480px;text-align:center}
+.welcome-logo{margin-bottom:2.5rem}
+.welcome-logo img{width:72px;height:72px;border-radius:20px;object-fit:contain;margin-bottom:0.75rem}
+.welcome-logo .logo-name{font-size:1.8rem}
+.welcome-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,5vw,2.6rem);
+  font-weight:800;line-height:1.12;
+  letter-spacing:-0.025em;
+  color:var(--text);margin-bottom:1.1rem
+}
+.welcome-title em{font-style:italic;color:var(--or)}
+.welcome-sub{
+  font-size:1rem;color:var(--soft);line-height:1.75;
+  margin-bottom:2.75rem;max-width:400px;margin-left:auto;margin-right:auto
+}
+.welcome-btns{display:flex;flex-direction:column;gap:0.85rem;margin-bottom:2rem}
+.welcome-footer{
+  font-size:0.75rem;color:var(--muted);line-height:1.6
+}
+.welcome-footer a{color:var(--or);text-decoration:none}
+.welcome-footer a:hover{text-decoration:underline}
+.badge{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-family:'DM Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--or);background:rgba(255,107,0,0.08);
+  border:1px solid rgba(255,107,0,0.18);
+  border-radius:50px;padding:0.3rem 0.9rem;
+  margin-bottom:1.5rem;display:inline-block
+}
+@media(max-width:480px){
+  body{padding:1.5rem 1rem;align-items:flex-start;padding-top:3rem}
+  .welcome-title{font-size:1.8rem}
+}
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="logo" style="margin-bottom:1.75rem">
+<div class="welcome-wrap">
+  <div class="welcome-logo">
     <img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"/>
     <div class="logo-name">Grio<span>tte</span></div>
   </div>
 
-  <h1 style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:var(--text);margin-bottom:0.4rem;letter-spacing:-0.02em">Mot de passe oublié</h1>
-  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.6">Entrez votre adresse email. Si un compte existe, vous recevrez un lien de réinitialisation.</p>
+  <div class="badge">Plateforme africaine · Littérature numérique</div>
 
-  <div class="msg-error" id="fErr"></div>
-  <div class="msg-ok"    id="fOk">✅ Si un compte existe avec cet email, un lien de réinitialisation vous sera envoyé. Vérifiez votre boîte mail.</div>
+  <h1 class="welcome-title">
+    L'Afrique raconte<br/><em>ses histoires</em><br/>au monde entier.
+  </h1>
 
-  <form id="fForm" onsubmit="doForgot(event)" novalidate>
-    <div class="field">
-      <label for="fEmail">Adresse email</label>
-      <input id="fEmail" type="email" placeholder="votre@email.com" autocomplete="off" required/>
-    </div>
-    <button class="btn btn-primary" type="submit" id="fBtn">Envoyer le lien de réinitialisation →</button>
-  </form>
+  <p class="welcome-sub">
+    Découvrez des milliers d'œuvres africaines, soutenez les auteurs du continent et publiez vos propres histoires sur une plateforme pensée pour la littérature numérique.
+  </p>
 
-  <p class="switch" style="margin-top:1.25rem">
-    <a href="./griotte-login.html">← Retour à la connexion</a>
+  <div class="welcome-btns">
+    <button class="btn btn-google" onclick="window.location.href='https://griotte-backend-2-production.up.railway.app/api/v1/auth/google'">
+      <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continuer avec Google
+    </button>
+    <a class="btn btn-primary" href="./griotte-register.html">
+      S'inscrire avec Email
+    </a>
+    <a class="btn btn-outline" href="./griotte-login.html">
+      Se connecter
+    </a>
+  </div>
+
+  <p class="welcome-footer">
+    En continuant, vous acceptez nos
+    <a href="#">Conditions d'utilisation</a> et notre
+    <a href="#">Politique de confidentialité</a>.
   </p>
 </div>
-<script>
-const API = 'https://griotte-backend-2-production.up.railway.app/api/v1';
-async function doForgot(e) {
-  e.preventDefault();
-  document.getElementById('fErr').classList.remove('on');
-  var email = document.getElementById('fEmail').value.trim();
-  if (!email) { var el=document.getElementById('fErr'); el.textContent='Veuillez entrer votre email.'; el.classList.add('on'); return; }
-  var btn = document.getElementById('fBtn');
-  btn.textContent = 'Envoi…'; btn.disabled = true;
-  try {
-    await fetch(API + '/auth/forgot-password', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email})
-    });
-  } catch(e) {}
-  document.getElementById('fForm').style.display = 'none';
-  document.getElementById('fOk').classList.add('on');
-}
-</script>
 </body>
 </html>
