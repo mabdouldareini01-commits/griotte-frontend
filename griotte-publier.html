@@ -52,8 +52,8 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
   --bg-sidebar:#FFFFFF;
   /* Texte */
   --text-main:#1A1410;
-  --text-soft:#6B5F52;
-  --text-muted:#A89880;
+  --text-soft:#4A3F35;
+  --text-muted:#6B5A4E;
   /* Bordures */
   --border:rgba(26,20,16,0.09);
   --border-strong:rgba(26,20,16,0.16);
@@ -62,7 +62,7 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
   --noir-soft:#F8F5F1;
   --noir-card:#FFFFFF;
   --blanc:#F8F5F1;
-  --blanc-dim:#A89880;
+  --blanc-dim:#6B5A4E;
   --cendre:#6B5F52;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -82,10 +82,10 @@ body{background:var(--noir);color:var(--blanc);font-family:"Syne",sans-serif;min
 .s-author{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.75rem;}
 .a-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2d1b0e,#8B4513);display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:700;color:#f5c07a;border:1.5px solid var(--or-border);flex-shrink:0;}
 .a-name{font-size:0.84rem;font-weight:700;color:var(--blanc);margin-bottom:0.12rem;}
-.a-badge{display:inline-flex;align-items:center;gap:0.3rem;font-family:"DM Mono",monospace;font-size:0.55rem;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;background:var(--green-bg);padding:0.15rem 0.45rem;border-radius:100px;}
+.a-badge{display:inline-flex;align-items:center;gap:0.3rem;font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;background:var(--green-bg);padding:0.15rem 0.45rem;border-radius:100px;}
 
 .s-nav{flex:1;padding:0.75rem 0;}
-.nav-sec{font-family:"DM Mono",monospace;font-size:0.56rem;color:var(--cendre);letter-spacing:0.18em;text-transform:uppercase;padding:0.5rem 1.5rem 0.25rem;}
+.nav-sec{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.18em;text-transform:uppercase;padding:0.5rem 1.5rem 0.25rem;}
 .nav-item{display:flex;align-items:center;gap:0.7rem;padding:0.6rem 1.5rem;color:var(--cendre);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.15s;border-left:2px solid transparent;text-decoration:none;}
 .nav-item:hover{color:var(--blanc);background:rgba(248,246,242,0.03);}
 .nav-item.active{color:var(--or);border-left-color:var(--or);background:var(--or-glow);}
@@ -93,9 +93,9 @@ body{background:var(--noir);color:var(--blanc);font-family:"Syne",sans-serif;min
 
 /* Steps indicator in sidebar */
 .steps-nav{padding:1rem 1.5rem;border-top:1px solid var(--border);}
-.steps-title{font-family:"DM Mono",monospace;font-size:0.58rem;color:var(--cendre);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.85rem;}
+.steps-title{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.85rem;}
 .step-item{display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;cursor:pointer;transition:all 0.15s;}
-.step-circle{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border-md);display:flex;align-items:center;justify-content:center;font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--cendre);flex-shrink:0;transition:all 0.2s;}
+.step-circle{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border-md);display:flex;align-items:center;justify-content:center;font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);flex-shrink:0;transition:all 0.2s;}
 .step-item.done .step-circle{background:var(--green);border-color:var(--green);color:var(--noir);}
 .step-item.active .step-circle{background:var(--or);border-color:var(--or);color:var(--noir);font-weight:700;}
 .step-label{font-size:0.76rem;color:var(--cendre);transition:color 0.2s;}
@@ -116,7 +116,7 @@ body{background:var(--noir);color:var(--blanc);font-family:"Syne",sans-serif;min
 .tb-right{display:flex;align-items:center;gap:0.75rem;}
 .save-draft{padding:0.45rem 1rem;background:none;border:1px solid var(--border);border-radius:7px;font-family:"Syne",sans-serif;font-size:0.75rem;font-weight:600;color:var(--cendre);cursor:pointer;transition:all 0.2s;}
 .save-draft:hover{border-color:var(--or-border);color:var(--or);}
-.auto-save{font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--green);letter-spacing:0.06em;display:flex;align-items:center;gap:0.35rem;}
+.auto-save{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--green);letter-spacing:0.06em;display:flex;align-items:center;gap:0.35rem;}
 .as-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
@@ -129,29 +129,29 @@ body{background:var(--noir);color:var(--blanc);font-family:"Syne",sans-serif;min
 
 /* ═══ STEP HEADER ═══ */
 .step-header{margin-bottom:2.5rem;}
-.step-label-top{font-family:"DM Mono",monospace;font-size:0.62rem;color:var(--or);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:0.5rem;}
+.step-label-top{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--or);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:0.5rem;}
 .step-title{font-family:"Cormorant Garamond",serif;font-size:2rem;font-weight:600;color:var(--blanc);line-height:1.15;margin-bottom:0.4rem;}
 .step-desc{font-size:0.82rem;color:var(--cendre);font-weight:300;line-height:1.6;}
 
 /* ═══ FORM ELEMENTS ═══ */
 .form-section{margin-bottom:2.5rem;}
-.fs-title{font-family:"DM Mono",monospace;font-size:0.62rem;color:var(--cendre);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;}
+.fs-title{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;}
 .fs-title::before{content:"";width:18px;height:1px;background:var(--or);}
 
 .field{margin-bottom:1.2rem;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
 .field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
-label{font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--cendre);letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:0.45rem;}
+label{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:0.45rem;}
 label .required{color:var(--or);margin-left:0.2rem;}
-label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity:0.7;}
+label .optional{color:var(--cendre);font-size:0.75rem;margin-left:0.3rem;opacity:0.7;}
 
 .input,.textarea,.select{width:100%;background:rgba(248,246,242,0.04);border:1.5px solid var(--border);border-radius:10px;padding:0.8rem 1rem;font-family:"Syne",sans-serif;font-size:0.88rem;color:var(--blanc);outline:none;transition:border-color 0.2s,box-shadow 0.2s;appearance:none;}
 .input:focus,.textarea:focus,.select:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(217,144,45,0.08);}
 .input::placeholder,.textarea::placeholder{color:var(--cendre);}
 .textarea{resize:vertical;min-height:100px;line-height:1.6;}
 .select option{background:var(--noir-card);}
-.field-hint{font-family:"DM Mono",monospace;font-size:0.58rem;color:var(--cendre);margin-top:0.4rem;letter-spacing:0.04em;}
-.char-count{font-family:"DM Mono",monospace;font-size:0.58rem;color:var(--cendre);text-align:right;margin-top:0.3rem;}
+.field-hint{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);margin-top:0.4rem;letter-spacing:0.04em;}
+.char-count{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);text-align:right;margin-top:0.3rem;}
 .char-count.warn{color:var(--or);}
 .char-count.danger{color:var(--red);}
 
@@ -161,7 +161,7 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
 .cover-preview:hover{border-color:var(--or-border);background:var(--or-glow);}
 .cover-preview.has-color{border-style:solid;}
 .cp-icon{font-size:2rem;color:var(--cendre);}
-.cp-text{font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--cendre);letter-spacing:0.1em;text-align:center;text-transform:uppercase;}
+.cp-text{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.1em;text-align:center;text-transform:uppercase;}
 .cover-controls{display:flex;flex-direction:column;gap:1rem;}
 .color-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;}
 .color-swatch{aspect-ratio:1;border-radius:8px;cursor:pointer;transition:all 0.2s;border:2px solid transparent;}
@@ -185,10 +185,10 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
 .chapter-item.dragging{border-color:var(--or-border);box-shadow:0 8px 30px rgba(0,0,0,0.4);opacity:0.9;}
 .ch-header{display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1rem;cursor:pointer;}
 .ch-drag{color:var(--cendre);font-size:0.85rem;cursor:grab;}
-.ch-num{font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--or);letter-spacing:0.08em;width:28px;flex-shrink:0;}
+.ch-num{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--or);letter-spacing:0.08em;width:28px;flex-shrink:0;}
 .ch-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--blanc);}
-.ch-pages{font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--cendre);margin-left:auto;}
-.ch-status{font-family:"DM Mono",monospace;font-size:0.55rem;padding:0.15rem 0.45rem;border-radius:100px;margin-left:0.5rem;}
+.ch-pages{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);margin-left:auto;}
+.ch-status{font-family:"DM Mono",monospace;font-size:0.75rem;padding:0.15rem 0.45rem;border-radius:100px;margin-left:0.5rem;}
 .ch-done{background:var(--green-bg);color:var(--green);}
 .ch-empty{background:rgba(248,246,242,0.05);color:var(--cendre);}
 .ch-actions{display:flex;gap:0.3rem;}
@@ -200,7 +200,7 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
 .ch-upload{border:1.5px dashed var(--border-md);border-radius:8px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:0.75rem;}
 .ch-upload:hover{border-color:var(--or-border);background:var(--or-glow);}
 .ch-upload-icon{font-size:1.5rem;margin-bottom:0.4rem;}
-.ch-upload-text{font-family:"DM Mono",monospace;font-size:0.62rem;color:var(--cendre);letter-spacing:0.08em;text-transform:uppercase;}
+.ch-upload-text{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.08em;text-transform:uppercase;}
 .ch-upload-hint{font-size:0.7rem;color:var(--cendre);margin-top:0.25rem;}
 
 .add-chapter-btn{width:100%;padding:0.75rem;background:none;border:1.5px dashed var(--border-md);border-radius:10px;font-family:"Syne",sans-serif;font-size:0.78rem;font-weight:600;color:var(--cendre);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
@@ -210,14 +210,14 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
 .tags-wrap{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0.6rem 0.75rem;background:rgba(248,246,242,0.04);border:1.5px solid var(--border);border-radius:10px;cursor:text;min-height:48px;align-items:center;transition:border-color 0.2s;}
 .tags-wrap:focus-within{border-color:var(--or);box-shadow:0 0 0 3px rgba(217,144,45,0.08);}
 .tag-chip{display:flex;align-items:center;gap:0.3rem;background:var(--or-glow);border:1px solid var(--or-border);border-radius:100px;padding:0.2rem 0.6rem;font-size:0.72rem;color:var(--or);}
-.tag-chip button{background:none;border:none;color:var(--or);cursor:pointer;font-size:0.65rem;padding:0;line-height:1;opacity:0.7;}
+.tag-chip button{background:none;border:none;color:var(--or);cursor:pointer;font-size:0.75rem;padding:0;line-height:1;opacity:0.7;}
 .tag-chip button:hover{opacity:1;}
 .tag-input{background:none;border:none;outline:none;font-family:"Syne",sans-serif;font-size:0.82rem;color:var(--blanc);min-width:80px;flex:1;}
 .tag-input::placeholder{color:var(--cendre);}
 
 /* ═══ PRICING PREVIEW ═══ */
 .pricing-preview{background:var(--noir-card);border:1px solid var(--or-border);border-radius:12px;padding:1.5rem;}
-.pp-title{font-family:"DM Mono",monospace;font-size:0.6rem;color:var(--cendre);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;}
+.pp-title{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;}
 .pp-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid var(--border);}
 .pp-row:last-child{border-bottom:none;}
 .pp-label{font-size:0.78rem;color:var(--blanc-dim);}
@@ -231,10 +231,10 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
 .rp-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;}
 .rp-cover{width:80px;aspect-ratio:3/4;border-radius:8px;flex-shrink:0;}
 .rp-title{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:600;color:var(--blanc);margin-bottom:0.2rem;}
-.rp-author{font-family:"DM Mono",monospace;font-size:0.62rem;color:var(--or);letter-spacing:0.1em;text-transform:uppercase;}
+.rp-author{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--or);letter-spacing:0.1em;text-transform:uppercase;}
 .rp-checklist{display:flex;flex-direction:column;gap:0.5rem;}
 .check-row{display:flex;align-items:center;gap:0.75rem;font-size:0.78rem;color:var(--blanc-dim);}
-.check-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;flex-shrink:0;}
+.check-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;}
 .ci-ok{background:var(--green-bg);color:var(--green);}
 .ci-warn{background:var(--or-glow);color:var(--or);}
 .ci-err{background:var(--red-bg);color:var(--red);}
@@ -247,7 +247,7 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
 .btn-next:hover{filter:brightness(1.1);}
 .btn-publish{background:linear-gradient(135deg,#166534,#22c55e);box-shadow:0 4px 20px rgba(74,222,128,0.2);}
 
-.step-progress-text{font-family:"DM Mono",monospace;font-size:0.65rem;color:var(--cendre);letter-spacing:0.08em;}
+.step-progress-text{font-family:"DM Mono",monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.08em;}
 
 /* ═══ SUCCESS ═══ */
 .success-screen{display:none;text-align:center;padding:4rem 2rem;}
@@ -270,6 +270,130 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
 
 @media(max-width:900px){.content{padding:1.5rem;} .field-row,.field-row-3{grid-template-columns:1fr;} .cover-upload-area{grid-template-columns:1fr;}}
 @media(max-width:768px){:root{--sidebar-w:0px;}.sidebar{display:none;}.main{margin-left:0;}}
+
+/* ════════════════════════════════════════════════
+   GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
+   Applied across all pages for WCAG AA compliance
+   ════════════════════════════════════════════════ */
+
+/* 1. Strengthen base variables */
+:root {
+  --text-main:   #1A1410 !important;   /* near-black, high contrast */
+  --text-soft:   #4A3F35 !important;   /* dark brown-grey, readable */
+  --text-muted:  #6B5A4E !important;   /* medium brown, still readable */
+  --blanc-dim:   #6B5A4E !important;
+  --cendre:      #4A3F35 !important;
+}
+
+/* 2. Body & base text */
+body { color: #1A1410 !important; background: #F8F5F1 !important; }
+
+/* 3. All paragraphs, labels, small text */
+p, span, label, li, td, th, caption, figcaption,
+.section-sub, .hero-sub, .step-desc, .feature-desc,
+.footer-tagline, .testi-quote, .book-author, .dash-book-reads,
+.auth-sub { color: #4A3F35; }
+
+/* 4. Headings always dark */
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title, .auth-title,
+.dash-title, .feature-title, .step-title { color: #1A1410 !important; }
+
+/* 5. Nav links */
+.nav-links a, .sidebar-link, .sidebar-nav a,
+[class*="nav-link"], [class*="menu-link"] { color: #3A2F25 !important; }
+
+/* 6. Sidebar — enforce dark text on white bg */
+.sidebar, .aside, [class*="sidebar"] {
+  background: #FFFFFF !important;
+  color: #1A1410 !important;
+}
+.sidebar *, .aside * { color: #1A1410; }
+.nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
+
+/* 7. Cards — always readable */
+.card, [class*="-card"], .book-card, .testi-card,
+.stat-card, .dash-stat, .concept-visual, .author-dashboard {
+  background: #FFFFFF !important;
+  color: #1A1410 !important;
+  border-color: rgba(26,20,16,0.1) !important;
+}
+.card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
+
+/* 8. Topbar */
+.topbar, [class*="topbar"], #navbar {
+  background: rgba(248,245,241,0.95) !important;
+  color: #1A1410 !important;
+}
+.topbar *, #navbar * { color: #1A1410; }
+
+/* 9. Buttons — always visible */
+[class*="btn"][class*="primary"],
+[class*="btn"][class*="hero"],
+[class*="btn-nav-cta"], .btn-hero-primary,
+.btn-cta-primary, .auth-btn {
+  background: #FF6B00 !important;
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+[class*="btn"][class*="ghost"],
+[class*="btn"][class*="secondary"],
+.btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
+  color: #1A1410 !important;
+  border-color: rgba(26,20,16,0.25) !important;
+  opacity: 1 !important;
+}
+
+/* 10. Footer — dark bg with proper white text */
+footer {
+  background: #1A1410 !important;
+  color: rgba(255,255,255,0.75) !important;
+}
+footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
+footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
+.footer-links a { color: rgba(255,255,255,0.65) !important; }
+.footer-links a:hover { color: #FF6B00 !important; }
+.footer-copy, .footer-legal a { color: rgba(255,255,255,0.35) !important; }
+.footer-col-title { color: rgba(255,255,255,0.4) !important; }
+
+/* 11. Orange accent — always full opacity */
+.or, [style*="color:var(--or)"], [style*="color: var(--or)"] { color: #FF6B00 !important; opacity: 1 !important; }
+em { color: #FF6B00 !important; opacity: 1 !important; }
+
+/* 12. Stat values — bold and dark */
+.hero-stat-value, .stat-value, .dash-stat-val,
+.pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
+.hero-stat-label, .stat-label, .dash-stat-lbl {
+  color: #6B5A4E !important; opacity: 1 !important;
+}
+
+/* 13. Auth modal */
+.auth-box { background: #FFFFFF !important; }
+.auth-input { background: #F8F5F1 !important; color: #1A1410 !important; border-color: rgba(26,20,16,0.15) !important; }
+.auth-label { color: #4A3F35 !important; }
+
+/* 14. Section badges & DM Mono labels */
+.section-badge, .hero-badge, .dash-badge,
+[class*="badge"], [class*="-label"], .nav-section {
+  opacity: 1 !important;
+}
+
+/* 15. Minimum font sizes */
+.nav-section, .footer-col-title, .hero-badge,
+.section-badge, .ticker-item, .book-price,
+.testi-role, .auth-sub, [class*="-label"],
+[class*="-lbl"], [class*="badge"] {
+  font-size: max(0.72rem, 11px) !important;
+}
+
+/* 16. Reader — dark text on white */
+.reader-content, .reader-text, [class*="reader-body"] {
+  color: #1A1410 !important;
+  background: #FFFFFF !important;
+}
+
+/* ═══════════════════════════════════════════════ */
+
 </style>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 </head>
@@ -446,7 +570,7 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
           <div class="cover-preview cs1 has-color" id="coverPreview" onclick="toast('Importez votre image ou choisissez une couleur →','🎨')">
             <div style="position:absolute;inset:0;padding:1rem;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%);">
               <div style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-weight:600;color:#fff;line-height:1.2;" id="coverTitle">Les Fils du Sahel</div>
-              <div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:rgba(255,255,255,0.6);margin-top:0.2rem;">Ama Kouyaté</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:0.2rem;">Ama Kouyaté</div>
             </div>
           </div>
           <div class="cover-controls">
@@ -550,7 +674,7 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
       <div class="form-section">
         <div class="fs-title" style="justify-content:space-between;">
           <span style="display:flex;align-items:center;gap:0.5rem;"><span style="display:block;width:18px;height:1px;background:var(--or);"></span>Chapitres (10 ajoutés)</span>
-          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--or);">312 pages au total</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);">312 pages au total</span>
         </div>
         <div class="chapters-list">
 
@@ -760,7 +884,7 @@ label .optional{color:var(--cendre);font-size:0.52rem;margin-left:0.3rem;opacity
       <div class="review-panel">
         <div class="rp-header">
           <div class="rp-cover cs1" style="display:flex;align-items:flex-end;padding:0.6rem;background:linear-gradient(160deg,#2d1b0e,#c47d2e);">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:0.65rem;font-weight:600;color:rgba(255,255,255,0.9);line-height:1.2;" id="previewTitle2">Les Fils du Sahel</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.9);line-height:1.2;" id="previewTitle2">Les Fils du Sahel</div>
           </div>
           <div>
             <div class="rp-title" id="previewTitle3">Les Fils du Sahel</div>

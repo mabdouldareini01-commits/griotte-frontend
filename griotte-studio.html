@@ -50,8 +50,8 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
   --bg-sidebar:#FFFFFF;
   /* Texte */
   --text-main:#1A1410;
-  --text-soft:#6B5F52;
-  --text-muted:#A89880;
+  --text-soft:#4A3F35;
+  --text-muted:#6B5A4E;
   /* Bordures */
   --border:rgba(26,20,16,0.09);
   --border-strong:rgba(26,20,16,0.16);
@@ -60,7 +60,7 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
   --noir-soft:#F8F5F1;
   --noir-card:#FFFFFF;
   --blanc:#F8F5F1;
-  --blanc-dim:#A89880;
+  --blanc-dim:#6B5A4E;
   --cendre:#6B5F52;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -76,15 +76,15 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--or),var(--or-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1rem;color:var(--noir);flex-shrink:0;box-shadow:0 0 16px rgba(217,144,45,0.3)}
 .logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--blanc);letter-spacing:0.06em;text-transform:uppercase}
 .logo-text span{color:var(--or)}
-.studio-badge{font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--or);background:rgba(217,144,45,0.1);border:1px solid var(--border-or);padding:0.15rem 0.4rem;border-radius:100px;margin-left:auto;flex-shrink:0}
+.studio-badge{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--or);background:rgba(217,144,45,0.1);border:1px solid var(--border-or);padding:0.15rem 0.4rem;border-radius:100px;margin-left:auto;flex-shrink:0}
 
 .sidebar-author{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.75rem}
 .author-ava{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#3d1a0a,#8B4513);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#f5c07a;flex-shrink:0;border:2px solid rgba(217,144,45,0.2)}
 .author-name{font-size:0.8rem;font-weight:700;color:var(--blanc)}
-.author-status{font-family:'DM Mono',monospace;font-size:0.55rem;color:var(--green);margin-top:0.1rem}
+.author-status{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--green);margin-top:0.1rem}
 
 .nav{flex:1;padding:0.75rem 0}
-.nav-section{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(107,97,87,0.5);padding:0.75rem 1.5rem 0.3rem}
+.nav-section{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:#4A3F35;padding:0.75rem 1.5rem 0.3rem}
 .nav-item{display:flex;align-items:center;gap:0.65rem;padding:0.6rem 1.5rem;cursor:pointer;color:var(--cendre);font-size:0.78rem;font-weight:600;text-decoration:none;border-left:2px solid transparent;transition:all 0.15s;user-select:none}
 .nav-item:hover{color:var(--blanc);background:rgba(248,246,242,0.03)}
 .nav-item.active{color:var(--or);border-left-color:var(--or);background:var(--or-glow)}
@@ -92,20 +92,20 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .nav-item.danger{color:rgba(248,113,113,0.6)}
 .nav-item.danger:hover{color:var(--red)}
 .nav-ico{font-size:0.85rem;width:16px;text-align:center;flex-shrink:0}
-.nav-count{margin-left:auto;background:var(--or);color:var(--noir);font-family:'DM Mono',monospace;font-size:0.5rem;padding:0.1rem 0.4rem;border-radius:100px}
+.nav-count{margin-left:auto;background:var(--or);color:var(--noir);font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.1rem 0.4rem;border-radius:100px}
 
 .sidebar-stats{padding:1rem 1.5rem;border-top:1px solid var(--border)}
 .mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
 .mini-stat{background:rgba(217,144,45,0.05);border:1px solid rgba(217,144,45,0.1);border-radius:8px;padding:0.65rem;text-align:center}
 .mini-stat-val{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--or);line-height:1}
-.mini-stat-label{font-family:'DM Mono',monospace;font-size:0.52rem;color:var(--cendre);margin-top:0.2rem;letter-spacing:0.06em}
+.mini-stat-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-top:0.2rem;letter-spacing:0.06em}
 
 /* MAIN */
 .main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
 .topbar{height:56px;background:rgba(8,6,4,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;position:sticky;top:0;z-index:50}
 .topbar-title{font-size:0.92rem;font-weight:700;color:var(--blanc)}
 .topbar-right{display:flex;align-items:center;gap:0.75rem}
-.topbar-date{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre)}
+.topbar-date{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
 .btn-new-book{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;padding:0.5rem 1.2rem;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em}
 .btn-new-book:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(217,144,45,0.3)}
 
@@ -116,7 +116,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 /* PAGE MES OEUVRES */
 .oeuvres-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem}
 .page-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--blanc)}
-.page-sub{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);margin-top:0.3rem;letter-spacing:0.06em}
+.page-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-top:0.3rem;letter-spacing:0.06em}
 .oeuvres-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
 .oeuvre-card{background:var(--noir-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;cursor:pointer}
 .oeuvre-card:hover{border-color:var(--border-or);transform:translateY(-2px)}
@@ -126,19 +126,19 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .oeuvre-cover-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
 .oeuvre-meta{flex:1;min-width:0}
 .oeuvre-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--blanc);margin-bottom:0.25rem;line-height:1.2}
-.oeuvre-genre{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);margin-bottom:0.5rem}
+.oeuvre-genre{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.5rem}
 .oeuvre-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.5rem}
-.oeuvre-tag{font-family:'DM Mono',monospace;font-size:0.52rem;padding:0.12rem 0.4rem;border-radius:100px;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.15);color:rgba(217,144,45,0.7)}
-.oeuvre-status{display:inline-flex;align-items:center;gap:0.3rem;font-family:'DM Mono',monospace;font-size:0.52rem;padding:0.15rem 0.45rem;border-radius:100px}
+.oeuvre-tag{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.12rem 0.4rem;border-radius:100px;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.15);color:rgba(217,144,45,0.7)}
+.oeuvre-status{display:inline-flex;align-items:center;gap:0.3rem;font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.15rem 0.45rem;border-radius:100px}
 .status-published{background:rgba(74,222,128,0.1);color:var(--green)}
 .status-draft{background:rgba(248,246,242,0.06);color:var(--cendre)}
 .oeuvre-card-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border)}
 .oc-stat{padding:0.75rem;text-align:center;border-right:1px solid var(--border)}
 .oc-stat:last-child{border-right:none}
 .oc-val{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--or);line-height:1}
-.oc-label{font-family:'DM Mono',monospace;font-size:0.52rem;color:var(--cendre);margin-top:0.2rem}
+.oc-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-top:0.2rem}
 .oeuvre-card-actions{display:flex;gap:0.5rem;padding:0.75rem 1.2rem;border-top:1px solid var(--border)}
-.btn-action{flex:1;padding:0.5rem;border-radius:8px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;border:1px solid var(--border);background:none;color:var(--cendre)}
+.btn-action{flex:1;padding:0.5rem;border-radius:8px;font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;border:1px solid var(--border);background:none;color:var(--cendre)}
 .btn-action:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2)}
 .btn-action.primary{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);border-color:transparent;font-weight:700}
 .btn-action.primary:hover{filter:brightness(1.1)}
@@ -147,16 +147,16 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .empty-studio{text-align:center;padding:5rem 2rem;border:1px dashed rgba(217,144,45,0.2);border-radius:16px;background:rgba(217,144,45,0.02)}
 .empty-ico{font-size:4rem;margin-bottom:1rem;opacity:0.4}
 .empty-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--blanc-dim);margin-bottom:0.5rem}
-.empty-sub{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);line-height:1.7;margin-bottom:2rem}
+.empty-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);line-height:1.7;margin-bottom:2rem}
 
 /* PAGE CRÉATION (multi-step) */
 .steps-bar{display:flex;align-items:center;gap:0;margin-bottom:3rem}
 .step-item{display:flex;align-items:center;gap:0.75rem;flex:1}
-.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.68rem;font-weight:700;flex-shrink:0;transition:all 0.3s}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.75rem;font-weight:700;flex-shrink:0;transition:all 0.3s}
 .step-num.done{background:var(--green);color:#FFFFFF}
 .step-num.active{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir)}
 .step-num.pending{background:rgba(248,246,242,0.06);color:var(--cendre);border:1px solid var(--border)}
-.step-label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.08em}
+.step-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.08em}
 .step-label.active{color:var(--or)}
 .step-label.done{color:var(--green)}
 .step-label.pending{color:var(--cendre)}
@@ -173,72 +173,72 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .cover-preview img{width:100%;height:100%;object-fit:cover}
 .cover-preview-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;background:linear-gradient(160deg,#2d1b0e,#8B4513)}
 .cover-ico{font-size:2rem;opacity:0.6}
-.cover-upload-label{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);line-height:1.6}
+.cover-upload-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);line-height:1.6}
 .cover-upload-label span{color:var(--or);cursor:pointer}
-.cover-specs{font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(107,97,87,0.5);margin-top:0.5rem}
+.cover-specs{font-family:'DM Mono',monospace;font-size:0.75rem;color:#4A3F35;margin-top:0.5rem}
 
 /* Form */
 .form-card{background:var(--noir-card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;margin-bottom:1.5rem}
 .form-card-title{font-size:0.85rem;font-weight:700;color:var(--blanc);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem}
 .form-group{margin-bottom:1.1rem}
-.form-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--cendre);display:block;margin-bottom:0.4rem}
+.form-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--cendre);display:block;margin-bottom:0.4rem}
 .form-input,.form-select,.form-textarea{width:100%;background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;font-family:'Syne',sans-serif;font-size:0.85rem;color:var(--blanc);outline:none;transition:border-color 0.2s}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(217,144,45,0.4);background:rgba(248,246,242,0.04)}
-.form-input::placeholder,.form-textarea::placeholder{color:rgba(107,97,87,0.5)}
+.form-input::placeholder,.form-textarea::placeholder{color:#4A3F35}
 .form-textarea{resize:vertical;font-family:'Cormorant Garamond',serif;font-size:0.95rem;line-height:1.8;min-height:120px}
 .form-select option{background:var(--noir-card)}
 .form-2col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.form-hint{font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(107,97,87,0.5);margin-top:0.3rem}
+.form-hint{font-family:'DM Mono',monospace;font-size:0.75rem;color:#4A3F35;margin-top:0.3rem}
 
 /* Character counter */
 .input-wrap{position:relative}
-.char-count{position:absolute;right:0.75rem;bottom:0.65rem;font-family:'DM Mono',monospace;font-size:0.55rem;color:var(--cendre)}
+.char-count{position:absolute;right:0.75rem;bottom:0.65rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
 
 /* Tags */
 .tags-area{background:rgba(248,246,242,0.02);border:1px solid var(--border);border-radius:10px;padding:0.75rem;min-height:48px}
 .tags-chips{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:0.5rem}
-.tag-chip{display:inline-flex;align-items:center;gap:0.3rem;background:rgba(217,144,45,0.1);border:1px solid rgba(217,144,45,0.25);border-radius:100px;padding:0.2rem 0.6rem;font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--or)}
+.tag-chip{display:inline-flex;align-items:center;gap:0.3rem;background:rgba(217,144,45,0.1);border:1px solid rgba(217,144,45,0.25);border-radius:100px;padding:0.2rem 0.6rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or)}
 .tag-chip-remove{cursor:pointer;opacity:0.6;transition:opacity 0.2s}
 .tag-chip-remove:hover{opacity:1}
 .tags-input-row{display:flex;gap:0.5rem}
-.tags-input{flex:1;background:none;border:none;outline:none;font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--blanc);padding:0.2rem 0}
-.tags-input::placeholder{color:rgba(107,97,87,0.5)}
-.tag-add-btn{background:rgba(217,144,45,0.1);border:1px solid rgba(217,144,45,0.2);border-radius:6px;color:var(--or);font-family:'Syne',sans-serif;font-weight:700;font-size:0.65rem;padding:0.3rem 0.65rem;cursor:pointer;transition:all 0.2s}
+.tags-input{flex:1;background:none;border:none;outline:none;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--blanc);padding:0.2rem 0}
+.tags-input::placeholder{color:#4A3F35}
+.tag-add-btn{background:rgba(217,144,45,0.1);border:1px solid rgba(217,144,45,0.2);border-radius:6px;color:var(--or);font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;padding:0.3rem 0.65rem;cursor:pointer;transition:all 0.2s}
 .tag-add-btn:hover{background:rgba(217,144,45,0.2)}
 .tag-suggestions{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.6rem}
-.tag-sug{font-family:'DM Mono',monospace;font-size:0.56rem;padding:0.15rem 0.5rem;border-radius:100px;border:1px solid rgba(248,246,242,0.07);color:var(--cendre);cursor:pointer;transition:all 0.2s}
+.tag-sug{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.15rem 0.5rem;border-radius:100px;border:1px solid rgba(248,246,242,0.07);color:var(--cendre);cursor:pointer;transition:all 0.2s}
 .tag-sug:hover{border-color:rgba(217,144,45,0.3);color:var(--or)}
-.tag-count{font-family:'DM Mono',monospace;font-size:0.56rem;color:var(--cendre);margin-top:0.4rem;text-align:right}
+.tag-count{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-top:0.4rem;text-align:right}
 
 /* Preview card */
 .preview-card{background:var(--noir-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;position:sticky;top:76px}
-.preview-title{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cendre);margin-bottom:1rem}
+.preview-title{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cendre);margin-bottom:1rem}
 .preview-book{display:flex;gap:1rem;margin-bottom:1.2rem}
 .preview-cover{width:80px;height:115px;border-radius:3px 10px 10px 3px;flex-shrink:0;overflow:hidden;box-shadow:-4px 0 0 rgba(0,0,0,0.3)}
 .preview-cover img{width:100%;height:100%;object-fit:cover}
 .preview-cover-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
 .preview-info{}
 .preview-book-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--blanc);line-height:1.2;margin-bottom:0.25rem}
-.preview-book-author{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);margin-bottom:0.4rem}
-.preview-book-genre{font-family:'DM Mono',monospace;font-size:0.55rem;padding:0.15rem 0.45rem;border-radius:100px;background:rgba(248,246,242,0.06);color:var(--cendre);display:inline-block;margin-bottom:0.5rem}
+.preview-book-author{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.4rem}
+.preview-book-genre{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.15rem 0.45rem;border-radius:100px;background:rgba(248,246,242,0.06);color:var(--cendre);display:inline-block;margin-bottom:0.5rem}
 .preview-synopsis{font-family:'Cormorant Garamond',serif;font-size:0.82rem;color:var(--blanc-dim);line-height:1.5;font-style:italic;margin-bottom:0.75rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
 .preview-tags{display:flex;flex-wrap:wrap;gap:0.3rem}
-.preview-tag{font-family:'DM Mono',monospace;font-size:0.52rem;padding:0.12rem 0.4rem;border-radius:100px;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.12);color:rgba(217,144,45,0.6)}
+.preview-tag{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.12rem 0.4rem;border-radius:100px;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.12);color:rgba(217,144,45,0.6)}
 
 /* Potential score */
 .potential-box{background:linear-gradient(135deg,rgba(217,144,45,0.08),rgba(184,117,31,0.04));border:1px solid rgba(217,144,45,0.15);border-radius:10px;padding:1rem;margin-top:1rem}
-.potential-label{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem}
+.potential-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem}
 .potential-score{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.3rem}
 .potential-bar-track{height:4px;background:rgba(248,246,242,0.06);border-radius:2px;overflow:hidden;margin-bottom:0.5rem}
 .potential-bar-fill{height:100%;background:linear-gradient(90deg,var(--or-dark),var(--or));border-radius:2px;transition:width 0.5s ease}
 .potential-items{display:flex;flex-direction:column;gap:0.35rem}
-.pot-item{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.58rem}
+.pot-item{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:0.75rem}
 .pot-key{color:var(--cendre)}
 .pot-val{color:var(--blanc)}
 
 /* Step buttons */
 .step-actions{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
-.btn-prev{background:none;border:1px solid var(--border);color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;padding:0.75rem 1.5rem;border-radius:100px;cursor:pointer;transition:all 0.2s}
+.btn-prev{background:none;border:1px solid var(--border);color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.08em;padding:0.75rem 1.5rem;border-radius:100px;cursor:pointer;transition:all 0.2s}
 .btn-prev:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2)}
 .btn-next{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;padding:0.75rem 2rem;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s;letter-spacing:0.04em}
 .btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(217,144,45,0.3)}
@@ -254,12 +254,12 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .chapter-row:hover .chapter-num{color:rgba(217,144,45,0.5)}
 .chapter-meta{flex:1;min-width:0}
 .chapter-title-text{font-size:0.85rem;font-weight:700;color:var(--blanc);margin-bottom:0.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chapter-info{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);display:flex;gap:0.75rem}
-.chapter-status-badge{font-family:'DM Mono',monospace;font-size:0.52rem;padding:0.15rem 0.5rem;border-radius:100px;flex-shrink:0}
+.chapter-info{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);display:flex;gap:0.75rem}
+.chapter-status-badge{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.15rem 0.5rem;border-radius:100px;flex-shrink:0}
 .cstatus-published{background:rgba(74,222,128,0.1);color:var(--green)}
 .cstatus-draft{background:rgba(248,246,242,0.05);color:var(--cendre)}
 .cstatus-scheduled{background:rgba(96,165,250,0.1);color:var(--blue)}
-.chapter-type{font-family:'DM Mono',monospace;font-size:0.52rem;padding:0.15rem 0.5rem;border-radius:100px;flex-shrink:0}
+.chapter-type{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.15rem 0.5rem;border-radius:100px;flex-shrink:0}
 .ctype-free{background:rgba(74,222,128,0.08);color:rgba(74,222,128,0.6)}
 .ctype-premium{background:rgba(217,144,45,0.08);color:rgba(217,144,45,0.6)}
 .chapter-actions{display:flex;gap:0.35rem;flex-shrink:0}
@@ -276,7 +276,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .editor-textarea{width:100%;padding:1.5rem;background:none;border:none;outline:none;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--blanc);line-height:1.9;resize:none;min-height:400px}
 .editor-textarea::placeholder{color:rgba(107,97,87,0.4)}
 .editor-footer{display:flex;justify-content:space-between;align-items:center;padding:0.75rem 1rem;border-top:1px solid var(--border);background:rgba(248,246,242,0.02)}
-.editor-words{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre)}
+.editor-words{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
 .editor-save{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;padding:0.5rem 1.2rem;border:none;border-radius:100px;cursor:pointer}
 
 /* STATS PAGE */
@@ -284,26 +284,26 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .skpi{background:var(--noir-card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;transition:border-color 0.2s,transform 0.2s}
 .skpi:hover{border-color:rgba(217,144,45,0.2);transform:translateY(-2px)}
 .skpi-icon{font-size:1.3rem;margin-bottom:0.7rem;display:block}
-.skpi-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.3rem}
+.skpi-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.3rem}
 .skpi-value{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.4rem}
-.skpi-trend{font-family:'DM Mono',monospace;font-size:0.58rem;padding:0.15rem 0.45rem;border-radius:100px;display:inline-block}
+.skpi-trend{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.15rem 0.45rem;border-radius:100px;display:inline-block}
 .trend-up{background:rgba(74,222,128,0.1);color:var(--green)}
 .trend-neutral{background:rgba(248,246,242,0.05);color:var(--cendre)}
 .stats-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
 .stat-card{background:var(--noir-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
 .stat-card-title{font-size:0.85rem;font-weight:700;color:var(--blanc);margin-bottom:0.3rem}
-.stat-card-sub{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--cendre);margin-bottom:1.2rem}
+.stat-card-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:1.2rem}
 
 /* Chart */
 .chart-wrap{height:140px;display:flex;align-items:flex-end;gap:5px;margin-bottom:0.75rem;position:relative}
 .chart-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end;position:relative}
 .chart-bar-fill{width:100%;border-radius:3px 3px 0 0;min-height:4px;cursor:pointer;transition:opacity 0.2s,transform 0.2s;position:relative}
 .chart-bar-fill:hover{opacity:0.8;transform:scaleY(1.02);transform-origin:bottom}
-.chart-bar-fill::after{content:attr(data-val);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--noir-card);border:1px solid var(--border-or);color:var(--or);font-family:'DM Mono',monospace;font-size:0.52rem;padding:0.2rem 0.4rem;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;margin-bottom:4px}
+.chart-bar-fill::after{content:attr(data-val);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--noir-card);border:1px solid var(--border-or);color:var(--or);font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.2rem 0.4rem;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;margin-bottom:4px}
 .chart-bar-fill:hover::after{opacity:1}
 .bar-gold{background:linear-gradient(to top,var(--or-dark),var(--or-light))}
 .bar-dim{background:rgba(217,144,45,0.18)}
-.chart-lbl{font-family:'DM Mono',monospace;font-size:0.5rem;color:var(--cendre)}
+.chart-lbl{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
 
 /* Perf list */
 .perf-list{display:flex;flex-direction:column;gap:0.85rem}
@@ -313,7 +313,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .perf-name{font-size:0.78rem;font-weight:600;color:var(--blanc);margin-bottom:0.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .perf-bar-track{height:3px;background:rgba(248,246,242,0.06);border-radius:2px;overflow:hidden}
 .perf-bar-fill{height:100%;background:linear-gradient(90deg,var(--or-dark),var(--or));border-radius:2px}
-.perf-val{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--or);flex-shrink:0}
+.perf-val{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);flex-shrink:0}
 
 /* Geo */
 .geo-list{display:flex;flex-direction:column;gap:0.75rem}
@@ -321,23 +321,23 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .geo-flag{font-size:1rem;width:20px;flex-shrink:0;text-align:center}
 .geo-info{flex:1}
 .geo-name{font-size:0.75rem;color:var(--blanc);margin-bottom:0.2rem;display:flex;justify-content:space-between}
-.geo-pct{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--or)}
+.geo-pct{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or)}
 .geo-track{height:3px;background:rgba(248,246,242,0.06);border-radius:2px;overflow:hidden}
 .geo-fill{height:100%;background:linear-gradient(90deg,var(--or-dark),var(--or));border-radius:2px}
 
 /* RETRAIT */
 .revenus-layout{display:grid;grid-template-columns:1fr 360px;gap:1.5rem}
 .retrait-card{background:var(--noir-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;position:sticky;top:76px}
-.retrait-solde-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.4rem}
+.retrait-solde-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.4rem}
 .retrait-solde-amount{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.25rem}
-.retrait-solde-sub{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:1.5rem;display:flex;gap:1.5rem}
+.retrait-solde-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:1.5rem;display:flex;gap:1.5rem}
 .retrait-pending{color:var(--blue)}
 .retrait-form{display:flex;flex-direction:column;gap:0.85rem;margin-bottom:1.2rem}
 .retrait-btn{width:100%;padding:0.85rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:10px;color:var(--noir);font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s}
 .retrait-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .retrait-history{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border)}
-.rh-title{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.75rem}
-.rh-empty{font-family:'DM Mono',monospace;font-size:0.65rem;color:rgba(107,97,87,0.5);text-align:center;padding:1rem}
+.rh-title{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.75rem}
+.rh-empty{font-family:'DM Mono',monospace;font-size:0.75rem;color:#4A3F35;text-align:center;padding:1rem}
 
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px);padding:1rem}
@@ -347,11 +347,11 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--or),transparent);border-radius:20px 20px 0 0}
 .modal-close{position:absolute;top:1.2rem;right:1.2rem;width:30px;height:30px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--cendre);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--blanc);margin-bottom:0.25rem}
-.modal-sub{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--cendre);margin-bottom:1.5rem}
+.modal-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:1.5rem}
 .chapter-type-select{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:1rem}
 .ctype-btn{border:1px solid var(--border);border-radius:8px;padding:0.65rem;cursor:pointer;background:none;text-align:center;transition:all 0.2s}
 .ctype-btn.active{border-color:var(--border-or);background:var(--or-glow)}
-.ctype-btn-label{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);transition:color 0.2s}
+.ctype-btn-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);transition:color 0.2s}
 .ctype-btn.active .ctype-btn-label{color:var(--or)}
 .ctype-ico{font-size:1.2rem;margin-bottom:0.3rem;display:block}
 .modal-actions{display:flex;gap:0.75rem;margin-top:1.5rem}
@@ -361,6 +361,130 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 /* TOAST */
 .toast{position:fixed;bottom:2rem;right:2rem;background:var(--noir-card);border:1px solid rgba(248,246,242,0.12);border-radius:12px;padding:0.85rem 1.3rem;display:flex;align-items:center;gap:0.7rem;font-size:0.8rem;color:var(--blanc);box-shadow:0 10px 40px rgba(0,0,0,0.5);transform:translateY(20px);opacity:0;pointer-events:none;transition:all .3s;z-index:600}
 .toast.show{opacity:1;transform:translateY(0)}
+
+/* ════════════════════════════════════════════════
+   GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
+   Applied across all pages for WCAG AA compliance
+   ════════════════════════════════════════════════ */
+
+/* 1. Strengthen base variables */
+:root {
+  --text-main:   #1A1410 !important;   /* near-black, high contrast */
+  --text-soft:   #4A3F35 !important;   /* dark brown-grey, readable */
+  --text-muted:  #6B5A4E !important;   /* medium brown, still readable */
+  --blanc-dim:   #6B5A4E !important;
+  --cendre:      #4A3F35 !important;
+}
+
+/* 2. Body & base text */
+body { color: #1A1410 !important; background: #F8F5F1 !important; }
+
+/* 3. All paragraphs, labels, small text */
+p, span, label, li, td, th, caption, figcaption,
+.section-sub, .hero-sub, .step-desc, .feature-desc,
+.footer-tagline, .testi-quote, .book-author, .dash-book-reads,
+.auth-sub { color: #4A3F35; }
+
+/* 4. Headings always dark */
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title, .auth-title,
+.dash-title, .feature-title, .step-title { color: #1A1410 !important; }
+
+/* 5. Nav links */
+.nav-links a, .sidebar-link, .sidebar-nav a,
+[class*="nav-link"], [class*="menu-link"] { color: #3A2F25 !important; }
+
+/* 6. Sidebar — enforce dark text on white bg */
+.sidebar, .aside, [class*="sidebar"] {
+  background: #FFFFFF !important;
+  color: #1A1410 !important;
+}
+.sidebar *, .aside * { color: #1A1410; }
+.nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
+
+/* 7. Cards — always readable */
+.card, [class*="-card"], .book-card, .testi-card,
+.stat-card, .dash-stat, .concept-visual, .author-dashboard {
+  background: #FFFFFF !important;
+  color: #1A1410 !important;
+  border-color: rgba(26,20,16,0.1) !important;
+}
+.card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
+
+/* 8. Topbar */
+.topbar, [class*="topbar"], #navbar {
+  background: rgba(248,245,241,0.95) !important;
+  color: #1A1410 !important;
+}
+.topbar *, #navbar * { color: #1A1410; }
+
+/* 9. Buttons — always visible */
+[class*="btn"][class*="primary"],
+[class*="btn"][class*="hero"],
+[class*="btn-nav-cta"], .btn-hero-primary,
+.btn-cta-primary, .auth-btn {
+  background: #FF6B00 !important;
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+[class*="btn"][class*="ghost"],
+[class*="btn"][class*="secondary"],
+.btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
+  color: #1A1410 !important;
+  border-color: rgba(26,20,16,0.25) !important;
+  opacity: 1 !important;
+}
+
+/* 10. Footer — dark bg with proper white text */
+footer {
+  background: #1A1410 !important;
+  color: rgba(255,255,255,0.75) !important;
+}
+footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
+footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
+.footer-links a { color: rgba(255,255,255,0.65) !important; }
+.footer-links a:hover { color: #FF6B00 !important; }
+.footer-copy, .footer-legal a { color: rgba(255,255,255,0.35) !important; }
+.footer-col-title { color: rgba(255,255,255,0.4) !important; }
+
+/* 11. Orange accent — always full opacity */
+.or, [style*="color:var(--or)"], [style*="color: var(--or)"] { color: #FF6B00 !important; opacity: 1 !important; }
+em { color: #FF6B00 !important; opacity: 1 !important; }
+
+/* 12. Stat values — bold and dark */
+.hero-stat-value, .stat-value, .dash-stat-val,
+.pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
+.hero-stat-label, .stat-label, .dash-stat-lbl {
+  color: #6B5A4E !important; opacity: 1 !important;
+}
+
+/* 13. Auth modal */
+.auth-box { background: #FFFFFF !important; }
+.auth-input { background: #F8F5F1 !important; color: #1A1410 !important; border-color: rgba(26,20,16,0.15) !important; }
+.auth-label { color: #4A3F35 !important; }
+
+/* 14. Section badges & DM Mono labels */
+.section-badge, .hero-badge, .dash-badge,
+[class*="badge"], [class*="-label"], .nav-section {
+  opacity: 1 !important;
+}
+
+/* 15. Minimum font sizes */
+.nav-section, .footer-col-title, .hero-badge,
+.section-badge, .ticker-item, .book-price,
+.testi-role, .auth-sub, [class*="-label"],
+[class*="-lbl"], [class*="badge"] {
+  font-size: max(0.72rem, 11px) !important;
+}
+
+/* 16. Reader — dark text on white */
+.reader-content, .reader-text, [class*="reader-body"] {
+  color: #1A1410 !important;
+  background: #FFFFFF !important;
+}
+
+/* ═══════════════════════════════════════════════ */
+
 </style>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 </head>
@@ -582,20 +706,20 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
               <div class="cover-preview" id="coverPreview">
                 <div class="cover-preview-placeholder" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)">
                   <div class="cover-ico">📖</div>
-                  <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(255,255,255,0.5)">Votre couverture</div>
+                  <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(255,255,255,0.8)">Votre couverture</div>
                 </div>
               </div>
               <div class="cover-upload-label">Glissez votre image ici<br/>ou <span>parcourez vos fichiers</span></div>
               <div class="cover-specs">JPG · PNG · WEBP · Max 5 Mo · Recommandé : 1600×2400px</div>
             </div>
             <div style="display:flex;gap:0.5rem;margin-top:0.75rem">
-              <button onclick="document.getElementById('coverInput').click()" style="flex:1;padding:0.6rem;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.2);border-radius:8px;color:var(--or);font-family:'DM Mono',monospace;font-size:0.62rem;cursor:pointer">📁 Parcourir</button>
-              <button onclick="removeCover()" style="flex:1;padding:0.6rem;background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.62rem;cursor:pointer">🗑 Supprimer</button>
+              <button onclick="document.getElementById('coverInput').click()" style="flex:1;padding:0.6rem;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.2);border-radius:8px;color:var(--or);font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer">📁 Parcourir</button>
+              <button onclick="removeCover()" style="flex:1;padding:0.6rem;background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer">🗑 Supprimer</button>
             </div>
           </div>
 
           <div class="form-card">
-            <div class="form-card-title">🏷️ Tags <span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);font-weight:400;margin-left:0.5rem">Max 15 tags</span></div>
+            <div class="form-card-title">🏷️ Tags <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);font-weight:400;margin-left:0.5rem">Max 15 tags</span></div>
             <div class="tags-area">
               <div class="tags-chips" id="tagsChips"></div>
               <div class="tags-input-row">
@@ -638,9 +762,9 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
           </div>
           <div style="text-align:center;margin-bottom:1.2rem">
             <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--blanc)" id="previewTitle2">Titre</div>
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre)" id="previewAuthor2">Auteur</div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)" id="previewAuthor2">Auteur</div>
           </div>
-          <div style="font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.6rem">Tags sélectionnés</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.6rem">Tags sélectionnés</div>
           <div class="preview-tags" id="previewTagsList"></div>
         </div>
       </div>
@@ -659,7 +783,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
             <div style="width:60px;height:85px;border-radius:3px 8px 8px 3px;flex-shrink:0;overflow:hidden;background:linear-gradient(160deg,#2d1b0e,#8B4513)" id="recap-cover-preview"></div>
             <div>
               <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--blanc);margin-bottom:0.2rem" id="recapTitle">—</div>
-              <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre);margin-bottom:0.4rem" id="recapGenre">—</div>
+              <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.4rem" id="recapGenre">—</div>
               <div class="preview-tags" id="recapTags"></div>
             </div>
           </div>
@@ -667,14 +791,14 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 
         <div class="chapitres-toolbar">
           <div>
-            <div style="font-size:0.88rem;font-weight:700;color:var(--blanc);margin-bottom:0.2rem">Chapitres <span style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre)" id="chapCount">(0)</span></div>
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--cendre)">Ajoutez autant de chapitres que vous souhaitez</div>
+            <div style="font-size:0.88rem;font-weight:700;color:var(--blanc);margin-bottom:0.2rem">Chapitres <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)" id="chapCount">(0)</span></div>
+            <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Ajoutez autant de chapitres que vous souhaitez</div>
           </div>
           <button class="btn-add-chapter" onclick="openChapterModal()">+ Nouveau chapitre</button>
         </div>
 
         <div class="chapters-list" id="chaptersList">
-          <div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.68rem">
+          <div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">
             Aucun chapitre · Ajoutez votre premier chapitre ci-dessus
           </div>
         </div>
@@ -711,7 +835,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
           <div class="chart-bar-col"><div class="chart-bar-fill bar-gold" style="height:98%" data-val="23 100 FCFA"></div><span class="chart-lbl">Mai</span></div>
         </div>
         <div class="perf-list" id="perfList">
-          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre)">Chargement des performances...</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Chargement des performances...</div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:1.5rem">
@@ -729,7 +853,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
         <div class="stat-card">
           <div class="stat-card-title">Tags performants</div>
           <div class="stat-card-sub">Lecteurs par tag</div>
-          <div id="tagStats" style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre)">Publiez un livre avec des tags pour voir les stats.</div>
+          <div id="tagStats" style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Publiez un livre avec des tags pour voir les stats.</div>
         </div>
       </div>
     </div>
@@ -748,7 +872,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
         <div class="stat-card" style="margin-bottom:1.5rem">
           <div class="stat-card-title">Historique des paiements</div>
           <div class="stat-card-sub">Revenus générés par page lue</div>
-          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--cendre);padding:2rem;text-align:center">Aucun paiement enregistré pour le moment.</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);padding:2rem;text-align:center">Aucun paiement enregistré pour le moment.</div>
         </div>
       </div>
       <div class="retrait-card">
@@ -1097,7 +1221,7 @@ function processCoverFile(file){
 window.removeCover=function(){
   coverDataUrl=null;
   const cp=document.getElementById('coverPreview');
-  if(cp) cp.innerHTML='<div class="cover-preview-placeholder" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)"><div class="cover-ico">📖</div><div style="font-family:\'DM Mono\',monospace;font-size:0.58rem;color:rgba(255,255,255,0.5)">Votre couverture</div></div>';
+  if(cp) cp.innerHTML='<div class="cover-preview-placeholder" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)"><div class="cover-ico">📖</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:rgba(255,255,255,0.8)">Votre couverture</div></div>';
   const cpb=document.getElementById('previewCoverBig');
   if(cpb) cpb.innerHTML='<div style="width:100%;height:100%;background:linear-gradient(160deg,#2d1b0e,#8B4513);display:flex;align-items:center;justify-content:center;font-size:3rem">📖</div>';
   showToast('Couverture supprimée','🗑');
@@ -1199,7 +1323,7 @@ function renderChapters(){
   if(cc) cc.textContent='('+chapters.length+')';
   if(!cl) return;
   if(chapters.length===0){
-    cl.innerHTML='<div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.68rem">Aucun chapitre · Ajoutez votre premier chapitre ci-dessus</div>';
+    cl.innerHTML='<div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun chapitre · Ajoutez votre premier chapitre ci-dessus</div>';
     return;
   }
   const typeLabel={'free':'Gratuit','premium':'Premium','scheduled':'Programmé'};

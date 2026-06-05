@@ -52,8 +52,8 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
   --bg-sidebar:#FFFFFF;
   /* Texte */
   --text-main:#1A1410;
-  --text-soft:#6B5F52;
-  --text-muted:#A89880;
+  --text-soft:#4A3F35;
+  --text-muted:#6B5A4E;
   /* Bordures */
   --border:rgba(26,20,16,0.09);
   --border-strong:rgba(26,20,16,0.16);
@@ -62,7 +62,7 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
   --noir-soft:#F8F5F1;
   --noir-card:#FFFFFF;
   --blanc:#F8F5F1;
-  --blanc-dim:#A89880;
+  --blanc-dim:#6B5A4E;
   --cendre:#6B5F52;
 }
 
@@ -822,6 +822,130 @@ footer {
   .cta-form { flex-direction: column; }
   .rm-item { grid-template-columns: 110px 1px 1fr; }
 }
+
+/* ════════════════════════════════════════════════
+   GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
+   Applied across all pages for WCAG AA compliance
+   ════════════════════════════════════════════════ */
+
+/* 1. Strengthen base variables */
+:root {
+  --text-main:   #1A1410 !important;   /* near-black, high contrast */
+  --text-soft:   #4A3F35 !important;   /* dark brown-grey, readable */
+  --text-muted:  #6B5A4E !important;   /* medium brown, still readable */
+  --blanc-dim:   #6B5A4E !important;
+  --cendre:      #4A3F35 !important;
+}
+
+/* 2. Body & base text */
+body { color: #1A1410 !important; background: #F8F5F1 !important; }
+
+/* 3. All paragraphs, labels, small text */
+p, span, label, li, td, th, caption, figcaption,
+.section-sub, .hero-sub, .step-desc, .feature-desc,
+.footer-tagline, .testi-quote, .book-author, .dash-book-reads,
+.auth-sub { color: #4A3F35; }
+
+/* 4. Headings always dark */
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title, .auth-title,
+.dash-title, .feature-title, .step-title { color: #1A1410 !important; }
+
+/* 5. Nav links */
+.nav-links a, .sidebar-link, .sidebar-nav a,
+[class*="nav-link"], [class*="menu-link"] { color: #3A2F25 !important; }
+
+/* 6. Sidebar — enforce dark text on white bg */
+.sidebar, .aside, [class*="sidebar"] {
+  background: #FFFFFF !important;
+  color: #1A1410 !important;
+}
+.sidebar *, .aside * { color: #1A1410; }
+.nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
+
+/* 7. Cards — always readable */
+.card, [class*="-card"], .book-card, .testi-card,
+.stat-card, .dash-stat, .concept-visual, .author-dashboard {
+  background: #FFFFFF !important;
+  color: #1A1410 !important;
+  border-color: rgba(26,20,16,0.1) !important;
+}
+.card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
+
+/* 8. Topbar */
+.topbar, [class*="topbar"], #navbar {
+  background: rgba(248,245,241,0.95) !important;
+  color: #1A1410 !important;
+}
+.topbar *, #navbar * { color: #1A1410; }
+
+/* 9. Buttons — always visible */
+[class*="btn"][class*="primary"],
+[class*="btn"][class*="hero"],
+[class*="btn-nav-cta"], .btn-hero-primary,
+.btn-cta-primary, .auth-btn {
+  background: #FF6B00 !important;
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+[class*="btn"][class*="ghost"],
+[class*="btn"][class*="secondary"],
+.btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
+  color: #1A1410 !important;
+  border-color: rgba(26,20,16,0.25) !important;
+  opacity: 1 !important;
+}
+
+/* 10. Footer — dark bg with proper white text */
+footer {
+  background: #1A1410 !important;
+  color: rgba(255,255,255,0.75) !important;
+}
+footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
+footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
+.footer-links a { color: rgba(255,255,255,0.65) !important; }
+.footer-links a:hover { color: #FF6B00 !important; }
+.footer-copy, .footer-legal a { color: rgba(255,255,255,0.35) !important; }
+.footer-col-title { color: rgba(255,255,255,0.4) !important; }
+
+/* 11. Orange accent — always full opacity */
+.or, [style*="color:var(--or)"], [style*="color: var(--or)"] { color: #FF6B00 !important; opacity: 1 !important; }
+em { color: #FF6B00 !important; opacity: 1 !important; }
+
+/* 12. Stat values — bold and dark */
+.hero-stat-value, .stat-value, .dash-stat-val,
+.pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
+.hero-stat-label, .stat-label, .dash-stat-lbl {
+  color: #6B5A4E !important; opacity: 1 !important;
+}
+
+/* 13. Auth modal */
+.auth-box { background: #FFFFFF !important; }
+.auth-input { background: #F8F5F1 !important; color: #1A1410 !important; border-color: rgba(26,20,16,0.15) !important; }
+.auth-label { color: #4A3F35 !important; }
+
+/* 14. Section badges & DM Mono labels */
+.section-badge, .hero-badge, .dash-badge,
+[class*="badge"], [class*="-label"], .nav-section {
+  opacity: 1 !important;
+}
+
+/* 15. Minimum font sizes */
+.nav-section, .footer-col-title, .hero-badge,
+.section-badge, .ticker-item, .book-price,
+.testi-role, .auth-sub, [class*="-label"],
+[class*="-lbl"], [class*="badge"] {
+  font-size: max(0.72rem, 11px) !important;
+}
+
+/* 16. Reader — dark text on white */
+.reader-content, .reader-text, [class*="reader-body"] {
+  color: #1A1410 !important;
+  background: #FFFFFF !important;
+}
+
+/* ═══════════════════════════════════════════════ */
+
 </style>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 </head>
