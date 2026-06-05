@@ -8,7 +8,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<script src="./brand-logo.js" defer></script>
+<script src="./brand-logo.js" defer>
+function landingFilter(btn, filter) {
+  document.querySelectorAll('.lcat-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#lcat-grid .lcat-card').forEach(card => {
+    const genre = (card.querySelector('.lcat-author-cover')?.closest('.lcat-cover-inner')?.previousElementSibling?.textContent || card.querySelector('[data-genre]')?.dataset.genre || '').toLowerCase();
+    const titleEl = card.querySelector('.lcat-title-cover');
+    const authorEl = card.querySelector('.lcat-author-cover');
+    if (filter === 'tous') { card.style.display = ''; return; }
+    // Check genre from card cover text
+    const coverHTML = card.querySelector('.lcat-cover').innerHTML.toLowerCase();
+    card.style.display = coverHTML.includes(filter) ? '' : 'none';
+  });
+}
+function landingSearch(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('#lcat-grid .lcat-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+}
+
+</script>
 <style>
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
    Une seule taille, une seule source, partout identique
@@ -635,6 +657,66 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .auth-role.active,.auth-role:hover{border-color:var(--or);color:var(--or);background:rgba(255,107,0,0.06)}
 /* ── FIN AUTH EXTRAS ── */
 
+
+/* ── CATALOGUE LANDING ── */
+.lcat-card{cursor:pointer;transition:transform 0.25s ease}
+.lcat-card:hover{transform:translateY(-6px)}
+.lcat-card:hover .lcat-cover{box-shadow:0 12px 40px rgba(26,20,16,0.18)}
+.lcat-card:hover .lcat-hover{opacity:1}
+.lcat-cover{
+  aspect-ratio:2/3;border-radius:10px 14px 14px 10px;
+  position:relative;overflow:hidden;
+  box-shadow:-3px 0 0 rgba(0,0,0,0.2),0 2px 16px rgba(26,20,16,0.1);
+  transition:box-shadow 0.25s ease
+}
+.lcat-cover-inner{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0.9rem
+}
+.lcat-spine{position:absolute;left:0;top:0;bottom:0;width:7px;background:rgba(0,0,0,0.25)}
+.lcat-title-cover{font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:0.2rem}
+.lcat-author-cover{font-size:0.6rem;color:rgba(255,255,255,0.6);font-family:'DM Mono',monospace}
+.lcat-badge{
+  position:absolute;top:0.6rem;right:0.6rem;
+  font-size:0.55rem;font-weight:700;font-family:'DM Mono',monospace;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:0.18rem 0.5rem;border-radius:50px
+}
+.lcat-hover{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.5);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.25s;
+  border-radius:10px 14px 14px 10px
+}
+.lcat-hover span{
+  color:#fff;font-family:'Inter',sans-serif;
+  font-size:0.8rem;font-weight:600;
+  background:var(--or);padding:0.45rem 1.1rem;
+  border-radius:50px
+}
+.lcat-meta{padding:0.8rem 0.2rem 0}
+.lcat-title{font-size:0.82rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:0.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lcat-author{font-size:0.72rem;color:var(--text-muted);margin-bottom:0.35rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lcat-stats{display:flex;gap:0.6rem;margin-bottom:0.3rem;align-items:center}
+.lcat-rating{font-size:0.7rem;font-weight:600;color:#ca8a04}
+.lcat-reads{font-size:0.65rem;color:var(--text-muted);font-family:'DM Mono',monospace}
+.lcat-price{font-family:'DM Mono',monospace;font-size:0.7rem;font-weight:700;color:var(--or)}
+.lcat-price span{font-weight:400;color:var(--text-muted);font-size:0.62rem}
+.lcat-filter{
+  font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:500;
+  padding:0.35rem 1rem;border-radius:50px;
+  border:1.5px solid rgba(26,20,16,0.1);background:#fff;
+  color:var(--text-soft);cursor:pointer;transition:all 0.18s
+}
+.lcat-filter:hover{border-color:var(--or);color:var(--or)}
+.lcat-filter.active{background:var(--or);color:#fff;border-color:var(--or)}
+@media(max-width:1100px){#lcat-grid{grid-template-columns:repeat(4,1fr)!important}}
+@media(max-width:800px){#lcat-grid{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:560px){#lcat-grid{grid-template-columns:repeat(2,1fr)!important;gap:1rem!important}}
+/* ── FIN CATALOGUE ── */
+
 </style>
 </head>
 <body>
@@ -733,26 +815,263 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
   </div>
 </section>
 
-<section id="catalogue">
-  <div class="section-inner">
-    <div class="section-header fade-up">
+
+<!-- ── CATALOGUE SECTION ── -->
+<section id="catalogue" style="padding:5rem 0;background:#F4F1ED">
+  <div style="max-width:1200px;margin:0 auto;padding:0 2.5rem">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:3rem">
       <div class="section-badge">Catalogue</div>
-      <h2 class="section-title">Plongez dans <em>l'Afrique</em> littéraire</h2>
-      <p class="section-sub">Des romans, nouvelles, poésies et essais d'auteurs africains contemporains.</p>
+      <h2 class="section-title" style="margin-top:0.75rem">
+        Le plus grand catalogue<br/>de <em>littérature africaine</em>
+      </h2>
+      <p class="section-sub" style="margin-top:0.75rem">
+        1 200+ œuvres d'auteurs africains contemporains.<br/>Payez uniquement les pages que vous lisez — 10 FCFA par page.
+      </p>
     </div>
-    <div class="cat-grid fade-up">
-      <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-price">10 FCFA/page · 320p</div></div></div>
-      <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">La Griotte de Bamako</div></div><div class="book-meta"><div class="book-author">Seydou Diallo</div><div class="book-price">10 FCFA/page · 280p</div></div></div>
-      <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div><div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-price">10 FCFA/page · 410p</div></div></div>
-      <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a1828,#183860)"><div class="book-cover-overlay"></div><div class="book-cover-title">L'Enfant du Fleuve</div></div><div class="book-meta"><div class="book-author">Mamadou Traoré</div><div class="book-price">10 FCFA/page · 190p</div></div></div>
-      <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a1000,#4a3000)"><div class="book-cover-overlay"></div><div class="book-cover-title">Terres Rouges</div></div><div class="book-meta"><div class="book-author">Khadija Bah</div><div class="book-price">10 FCFA/page · 245p</div></div></div>
-      <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a1a1a,#105050)"><div class="book-cover-overlay"></div><div class="book-cover-title">Le Masque et le Miroir</div></div><div class="book-meta"><div class="book-author">Idrissa Konaté</div><div class="book-price">10 FCFA/page · 310p</div></div></div>
+
+    <!-- Search -->
+    <div style="max-width:480px;margin:0 auto 2rem;position:relative">
+      <svg style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:#9A8878;pointer-events:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input
+        type="text"
+        placeholder="Rechercher un livre, un auteur…"
+        oninput="landingSearch(this.value)"
+        style="width:100%;background:#fff;border:1.5px solid rgba(26,20,16,0.1);border-radius:12px;padding:0.85rem 1rem 0.85rem 2.75rem;font-family:'Inter',sans-serif;font-size:0.88rem;color:#1A1410;outline:none;transition:border-color 0.2s"
+        onfocus="this.style.borderColor='#FF6B00'"
+        onblur="this.style.borderColor='rgba(26,20,16,0.1)'"
+      />
     </div>
-    <div style="text-align:center;margin-top:2.5rem" class="fade-up">
-      <button class="btn-nav-cta" style="font-size:0.95rem;padding:0.75rem 2rem" onclick="window.location.href='./griotte-welcome.html'">Voir tout le catalogue →</button>
+
+    <!-- Filters -->
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem" id="lcat-filters">
+      <button class="lcat-filter active" onclick="landingFilter(this,'tous')">Tous</button>
+      <button class="lcat-filter" onclick="landingFilter(this,'roman')">Romans</button>
+      <button class="lcat-filter" onclick="landingFilter(this,'thriller')">Thriller</button>
+      <button class="lcat-filter" onclick="landingFilter(this,'romance')">Romance</button>
+      <button class="lcat-filter" onclick="landingFilter(this,'fantasy')">Fantasy</button>
+      <button class="lcat-filter" onclick="landingFilter(this,'poésie')">Poésie</button>
+      <button class="lcat-filter" onclick="landingFilter(this,'nouvelles')">Nouvelles</button>
     </div>
+
+    <!-- Grid -->
+    <div id="lcat-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem">
+      <div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#1a0533 0%,#4a0d6e 50%,#7b2d8b 100%)">
+        <div class="lcat-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Les Fils du Sahel</div>
+          <div class="lcat-author-cover">Ama Kouyaté</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Les Fils du Sahel</div>
+        <div class="lcat-author">Ama Kouyaté</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.8</span>
+          <span class="lcat-reads">12 450</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#0a1628 0%,#0f3460 50%,#16213e 100%)">
+        <div class="lcat-badge" style="background:rgba(59,130,246,0.15);color:#2563eb">Populaire</div>
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Nuit sur le Fleuve</div>
+          <div class="lcat-author-cover">Seydou Diallo</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Nuit sur le Fleuve</div>
+        <div class="lcat-author">Seydou Diallo</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.6</span>
+          <span class="lcat-reads">8 230</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#3b0a0a 0%,#7f1d1d 50%,#991b1b 100%)">
+        <div class="lcat-badge" style="background:rgba(234,179,8,0.15);color:#ca8a04">Top du mois</div>
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">La Griotte de Bamako</div>
+          <div class="lcat-author-cover">Fatou Sow</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">La Griotte de Bamako</div>
+        <div class="lcat-author">Fatou Sow</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.9</span>
+          <span class="lcat-reads">15 800</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#1c1008 0%,#451a03 50%,#78350f 100%)">
+        <div class="lcat-badge" style="background:rgba(34,197,94,0.15);color:#16a34a">Nouveau</div>
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Terres Rouges</div>
+          <div class="lcat-author-cover">Khadija Bah</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Terres Rouges</div>
+        <div class="lcat-author">Khadija Bah</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.5</span>
+          <span class="lcat-reads">6 100</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#052e16 0%,#14532d 50%,#166534 100%)">
+        
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">L'Enfant du Fleuve</div>
+          <div class="lcat-author-cover">Mamadou Traoré</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">L'Enfant du Fleuve</div>
+        <div class="lcat-author">Mamadou Traoré</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.7</span>
+          <span class="lcat-reads">9 870</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#0c1445 0%,#1e3a8a 50%,#1d4ed8 100%)">
+        
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Sahara Blues</div>
+          <div class="lcat-author-cover">Ibrahim Keïta</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Sahara Blues</div>
+        <div class="lcat-author">Ibrahim Keïta</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.4</span>
+          <span class="lcat-reads">4 320</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#1a0a2e 0%,#3730a3 50%,#4338ca 100%)">
+        <div class="lcat-badge" style="background:rgba(59,130,246,0.15);color:#2563eb">Populaire</div>
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Le Masque et l'Âme</div>
+          <div class="lcat-author-cover">Adjoa Mensah</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Le Masque et l'Âme</div>
+        <div class="lcat-author">Adjoa Mensah</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.8</span>
+          <span class="lcat-reads">11 200</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#0f172a 0%,#1e293b 50%,#334155 100%)">
+        
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Lomé la Nuit</div>
+          <div class="lcat-author-cover">Kofi Agbemavor</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Lomé la Nuit</div>
+        <div class="lcat-author">Kofi Agbemavor</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.6</span>
+          <span class="lcat-reads">7 650</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#1c1917 0%,#57534e 50%,#78716c 100%)">
+        <div class="lcat-badge" style="background:rgba(34,197,94,0.15);color:#16a34a">Nouveau</div>
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Éclats d'Ivoire</div>
+          <div class="lcat-author-cover">Marie-Claire Ndiaye</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Éclats d'Ivoire</div>
+        <div class="lcat-author">Marie-Claire Ndiaye</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.5</span>
+          <span class="lcat-reads">5 430</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+<div class="lcat-card" onclick="window.location.href='./griotte-catalogue.html'">
+      <div class="lcat-cover" style="background:linear-gradient(160deg,#422006 0%,#92400e 50%,#b45309 100%)">
+        <div class="lcat-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
+        <div class="lcat-cover-inner">
+          <div class="lcat-spine"></div>
+          <div class="lcat-title-cover">Le Roi de Kano</div>
+          <div class="lcat-author-cover">Ousmane Bello</div>
+        </div>
+        <div class="lcat-hover"><span>Voir →</span></div>
+      </div>
+      <div class="lcat-meta">
+        <div class="lcat-title">Le Roi de Kano</div>
+        <div class="lcat-author">Ousmane Bello</div>
+        <div class="lcat-stats">
+          <span class="lcat-rating">★ 4.9</span>
+          <span class="lcat-reads">18 900</span>
+        </div>
+        <div class="lcat-price">10 FCFA<span>/page</span></div>
+      </div>
+    </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center;margin-top:3rem">
+      <a href="./griotte-catalogue.html"
+        style="display:inline-flex;align-items:center;gap:0.5rem;background:#1A1410;color:#fff;padding:0.9rem 2rem;border-radius:11px;font-family:'Inter',sans-serif;font-weight:600;font-size:0.9rem;text-decoration:none;transition:background 0.2s"
+        onmouseover="this.style.background='#FF6B00'"
+        onmouseout="this.style.background='#1A1410'">
+        Explorer tout le catalogue →
+      </a>
+    </div>
+
   </div>
 </section>
+
 
 <section id="concept">
   <div class="concept-grid">
