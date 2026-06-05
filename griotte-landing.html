@@ -874,26 +874,26 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
       <button class="auth-tab active" id="tabConnexion" onclick="switchTab('connexion')">Se connecter</button>
       <button class="auth-tab" id="tabInscription" onclick="switchTab('inscription')">S'inscrire</button>
     </div>
-    <div id="formConnexion">
+    <form id="formConnexion" onsubmit="return false" autocomplete="on">
       <label class="auth-label">Email</label>
-      <input class="auth-input" type="email" placeholder="votre@email.com"/>
+      <input class="auth-input" type="email" name="email" placeholder="votre@email.com" autocomplete="email"/>
       <label class="auth-label">Mot de passe</label>
-      <input class="auth-input" type="password" placeholder="••••••••"/>
+      <input class="auth-input" type="password" name="password" placeholder="••••••••" autocomplete="current-password"/>
       <button class="auth-btn">Se connecter →</button>
       <div class="auth-divider">ou</div>
       <button class="auth-google">🌐 Continuer avec Google</button>
-    </div>
-    <div id="formInscription" style="display:none">
+    </form>
+    <form id="formInscription" style="display:none" onsubmit="return false" autocomplete="on">
       <label class="auth-label">Nom complet</label>
-      <input class="auth-input" type="text" placeholder="Votre nom"/>
+      <input class="auth-input" type="text" name="fullname" placeholder="Votre nom" autocomplete="name"/>
       <label class="auth-label">Email</label>
-      <input class="auth-input" type="email" placeholder="votre@email.com"/>
+      <input class="auth-input" type="email" name="email" placeholder="votre@email.com" autocomplete="email"/>
       <label class="auth-label">Mot de passe</label>
-      <input class="auth-input" type="password" placeholder="••••••••"/>
+      <input class="auth-input" type="password" name="password" placeholder="••••••••" autocomplete="current-password"/>
       <button class="auth-btn">Créer mon compte →</button>
       <div class="auth-divider">ou</div>
       <button class="auth-google">🌐 Continuer avec Google</button>
-    </div>
+    </form>
   </div>
 </div>
 
