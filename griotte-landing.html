@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="./brand-logo.js" defer></script>
 <style>
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
    Une seule taille, une seule source, partout identique
@@ -624,93 +625,20 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .auth-error.visible{display:block}
 /* ── FIN AUTH EXTRAS ── */
 
+
+/* ── AUTH MODAL EXTRAS ── */
+.auth-pw-wrap{position:relative;margin-bottom:0}
+.auth-pw-toggle{position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--text-muted);padding:0.25rem;line-height:1;transition:color 0.2s}
+.auth-pw-toggle:hover{color:var(--or)}
+.auth-role-selector{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0}
+.auth-role{padding:0.65rem;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:500;color:var(--text-soft);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.4rem}
+.auth-role.active,.auth-role:hover{border-color:var(--or);color:var(--or);background:rgba(255,107,0,0.06)}
+/* ── FIN AUTH EXTRAS ── */
+
 </style>
-<script src="./brand-logo.js" defer>// ── AUTH MODAL ──────────────────────────────────────────
-function ouvrirModalConnexion(tab) {
-  console.log('[AUTH] Ouverture modale, tab:', tab || 'connexion');
-  document.getElementById('authOverlay').classList.add('active');
-  switchTab(tab || 'connexion');
-}
-function fermerModalConnexion() {
-  console.log('[AUTH] Fermeture modale');
-  document.getElementById('authOverlay').classList.remove('active');
-}
-// Fermer en cliquant hors de la box
-document.getElementById('authOverlay').addEventListener('click', function(e) {
-  if (e.target === this) fermerModalConnexion();
-});
-// Fermer avec Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') fermerModalConnexion();
-});
-
-function switchTab(t) {
-  console.log('[AUTH] switchTab →', t);
-  const isConnexion = t === 'connexion';
-  document.getElementById('formConnexion').style.display  = isConnexion ? 'block' : 'none';
-  document.getElementById('formInscription').style.display = isConnexion ? 'none'  : 'block';
-  document.getElementById('tabConnexion').classList.toggle('active', isConnexion);
-  document.getElementById('tabInscription').classList.toggle('active', !isConnexion);
-  document.getElementById('tabConnexion').setAttribute('aria-selected', isConnexion);
-  document.getElementById('tabInscription').setAttribute('aria-selected', !isConnexion);
-}
-
-function togglePw(inputId, btn) {
-  const input = document.getElementById(inputId);
-  const isHidden = input.type === 'password';
-  input.type = isHidden ? 'text' : 'password';
-  btn.textContent = isHidden ? '🙈' : '👁';
-  console.log('[AUTH] togglePw', inputId, '→', input.type);
-}
-
-function selectRole(role) {
-  console.log('[AUTH] selectRole →', role);
-  document.getElementById('roleValue').value = role;
-  document.getElementById('roleLecteur').classList.toggle('active', role === 'lecteur');
-  document.getElementById('roleAuteur').classList.toggle('active',  role === 'auteur');
-}
-
-function soumettreConnexion(e) {
-  e.preventDefault();
-  const email    = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
-  console.log('[AUTH] Connexion →', { email, passwordLength: password.length });
-  if (!email || !password) {
-    console.warn('[AUTH] Champs manquants');
-    return;
-  }
-  // TODO: connecter au backend Railway
-  console.log('[AUTH] ✅ Formulaire connexion valide — prêt pour API');
-  alert('Connexion : ' + email + ' (backend non connecté)');
-}
-
-function soumettreInscription(e) {
-  e.preventDefault();
-  const name     = document.getElementById('regName').value.trim();
-  const email    = document.getElementById('regEmail').value.trim();
-  const password = document.getElementById('regPassword').value;
-  const role     = document.getElementById('roleValue').value;
-  console.log('[AUTH] Inscription →', { name, email, passwordLength: password.length, role });
-  if (!name || !email || !password) {
-    console.warn('[AUTH] Champs manquants');
-    return;
-  }
-  if (password.length < 8) {
-    console.warn('[AUTH] Mot de passe trop court');
-    return;
-  }
-  // TODO: connecter au backend Railway
-  console.log('[AUTH] ✅ Formulaire inscription valide — prêt pour API');
-  alert('Inscription : ' + name + ' (' + role + ') — backend non connecté');
-}
-// ── FIN AUTH ─────────────────────────────────────────────
-
-
-</script>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav id="navbar">
   <a href="#" style="text-decoration:none"><brand-logo></brand-logo></a>
   <ul class="nav-links">
@@ -725,7 +653,6 @@ function soumettreInscription(e) {
   </div>
 </nav>
 
-<!-- TICKER -->
 <div style="margin-top:64px">
 <div class="ticker">
   <div class="ticker-inner">
@@ -736,10 +663,8 @@ function soumettreInscription(e) {
     <span class="ticker-item"><span>Populaire</span> La Griotte de Bamako <span class="ticker-sep">·</span> Seydou Diallo</span>
     <span class="ticker-item"><span>Trending</span> Nuit sur le Sahara <span class="ticker-sep">·</span> Fatou Sow</span>
   </div>
-</div>
-</div>
 
-<!-- HERO -->
+
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -808,7 +733,6 @@ function soumettreInscription(e) {
   </div>
 </section>
 
-<!-- CATALOGUE -->
 <section id="catalogue">
   <div class="section-inner">
     <div class="section-header fade-up">
@@ -830,7 +754,6 @@ function soumettreInscription(e) {
   </div>
 </section>
 
-<!-- CONCEPT -->
 <section id="concept">
   <div class="concept-grid">
     <div class="fade-up">
@@ -859,7 +782,6 @@ function soumettreInscription(e) {
   </div>
 </section>
 
-<!-- AUTHORS -->
 <section id="authors">
   <div class="authors-split">
     <div class="fade-up">
@@ -893,7 +815,6 @@ function soumettreInscription(e) {
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="testimonials-inner fade-up">
     <div class="section-badge">Témoignages</div>
@@ -908,7 +829,6 @@ function soumettreInscription(e) {
   </div>
 </section>
 
-<!-- CTA -->
 <section id="cta">
   <h2 class="section-title">L'histoire africaine<br/><em>commence ici.</em></h2>
   <p class="cta-sub">Rejoignez 48 000 lecteurs et 340 auteurs qui font vivre la littérature africaine sur GRIOTTE.</p>
@@ -918,7 +838,6 @@ function soumettreInscription(e) {
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -976,141 +895,106 @@ function soumettreInscription(e) {
 <!-- AUTH MODAL -->
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-box">
-
-    <!-- Fermer -->
-    <button class="auth-close" type="button" onclick="fermerModalConnexion()" aria-label="Fermer">✕</button>
-
-    <!-- Logo -->
-    <div class="auth-logo-wrap">
-      <brand-logo variant="auth"></brand-logo>
-    </div>
-
+    <button class="auth-close" type="button" onclick="fermerModalConnexion()">✕</button>
+    <div class="auth-logo-wrap"><brand-logo variant="auth"></brand-logo></div>
     <h2 class="auth-title">Bienvenue sur GRIOTTE</h2>
-    <p class="auth-sub">La littérature africaine à portée de main</p>
-
-    <!-- Onglets -->
-    <div class="auth-tabs" role="tablist">
-      <button
-        class="auth-tab active"
-        id="tabConnexion"
-        type="button"
-        role="tab"
-        aria-selected="true"
-        onclick="switchTab('connexion')"
-      >Se connecter</button>
-      <button
-        class="auth-tab"
-        id="tabInscription"
-        type="button"
-        role="tab"
-        aria-selected="false"
-        onclick="switchTab('inscription')"
-      >S'inscrire</button>
+    <p class="auth-sub">Lisez et publiez — un seul espace pour tout</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabConnexion" type="button" onclick="switchTab('connexion')">Se connecter</button>
+      <button class="auth-tab" id="tabInscription" type="button" onclick="switchTab('inscription')">S'inscrire</button>
     </div>
-
-    <!-- FORM CONNEXION -->
     <form id="formConnexion" onsubmit="soumettreConnexion(event)" autocomplete="on" novalidate>
       <label class="auth-label" for="loginEmail">Email</label>
-      <input
-        class="auth-input" id="loginEmail"
-        type="email" name="email"
-        placeholder="votre@email.com"
-        autocomplete="email" required
-      />
-
+      <input class="auth-input" id="loginEmail" type="email" name="email" placeholder="votre@email.com" autocomplete="email" required/>
       <label class="auth-label" for="loginPassword">Mot de passe</label>
       <div class="auth-pw-wrap">
-        <input
-          class="auth-input" id="loginPassword"
-          type="password" name="password"
-          placeholder="••••••••"
-          autocomplete="current-password" required
-          style="margin-bottom:0;padding-right:3rem"
-        />
-        <button type="button" class="auth-pw-toggle" onclick="togglePw('loginPassword',this)" aria-label="Afficher mot de passe">👁</button>
+        <input class="auth-input" id="loginPassword" type="password" name="password" placeholder="••••••••" autocomplete="current-password" required style="margin-bottom:0;padding-right:3rem"/>
+        <button type="button" class="auth-pw-toggle" onclick="togglePw('loginPassword',this)">👁</button>
       </div>
       <div style="height:1rem"></div>
-
       <button class="auth-btn" type="submit">Se connecter →</button>
       <div class="auth-divider">ou</div>
       <button type="button" class="auth-google">🌐 Continuer avec Google</button>
     </form>
-
-    <!-- FORM INSCRIPTION -->
     <form id="formInscription" style="display:none" onsubmit="soumettreInscription(event)" autocomplete="on" novalidate>
       <label class="auth-label" for="regName">Nom complet</label>
-      <input
-        class="auth-input" id="regName"
-        type="text" name="fullname"
-        placeholder="Votre nom"
-        autocomplete="name" required
-      />
-
+      <input class="auth-input" id="regName" type="text" name="fullname" placeholder="Votre nom" autocomplete="name" required/>
       <label class="auth-label" for="regEmail">Email</label>
-      <input
-        class="auth-input" id="regEmail"
-        type="email" name="email"
-        placeholder="votre@email.com"
-        autocomplete="email" required
-      />
-
+      <input class="auth-input" id="regEmail" type="email" name="email" placeholder="votre@email.com" autocomplete="email" required/>
       <label class="auth-label" for="regPassword">Mot de passe</label>
       <div class="auth-pw-wrap">
-        <input
-          class="auth-input" id="regPassword"
-          type="password" name="password"
-          placeholder="Minimum 8 caractères"
-          autocomplete="new-password" required minlength="8"
-          style="margin-bottom:0;padding-right:3rem"
-        />
-        <button type="button" class="auth-pw-toggle" onclick="togglePw('regPassword',this)" aria-label="Afficher mot de passe">👁</button>
+        <input class="auth-input" id="regPassword" type="password" name="password" placeholder="Minimum 8 caractères" autocomplete="new-password" required minlength="8" style="margin-bottom:0;padding-right:3rem"/>
+        <button type="button" class="auth-pw-toggle" onclick="togglePw('regPassword',this)">👁</button>
       </div>
       <div style="height:1rem"></div>
-
-      <label class="auth-label">Je suis</label>
-      <div class="auth-role-selector">
-        <button type="button" class="auth-role active" id="roleLecteur" onclick="selectRole('lecteur')">
-          📚 Lecteur
-        </button>
-        <button type="button" class="auth-role" id="roleAuteur" onclick="selectRole('auteur')">
-          ✍️ Auteur
-        </button>
-      </div>
-      <input type="hidden" name="role" id="roleValue" value="lecteur"/>
-      <div style="height:1rem"></div>
-
+      <div style="height:0.5rem"></div>
       <button class="auth-btn" type="submit">Créer mon compte →</button>
       <div class="auth-divider">ou</div>
       <button type="button" class="auth-google">🌐 Continuer avec Google</button>
     </form>
-
   </div>
 </div>
 
 <script>
-<script>
 // Navbar scroll
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20)
-})
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
 
-// Auth modal
-function ouvrirModalConnexion(){document.getElementById('authOverlay').classList.add('active')}
-function fermerModalConnexion(){document.getElementById('authOverlay').classList.remove('active')}
-document.getElementById('authOverlay').addEventListener('click',function(e){if(e.target===this)fermerModalConnexion()})
-
-function switchTab(t){
-  document.getElementById('formConnexion').style.display=t==='connexion'?'block':'none'
-  document.getElementById('formInscription').style.display=t==='inscription'?'block':'none'
-  document.getElementById('tabConnexion').classList.toggle('active',t==='connexion')
-  document.getElementById('tabInscription').classList.toggle('active',t==='inscription')
+// ── AUTH ──
+function ouvrirModalConnexion(tab) {
+  document.getElementById('authOverlay').classList.add('active');
+  switchTab(tab || 'connexion');
+}
+function fermerModalConnexion() {
+  document.getElementById('authOverlay').classList.remove('active');
+}
+document.getElementById('authOverlay').addEventListener('click', function(e) {
+  if (e.target === this) fermerModalConnexion();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') fermerModalConnexion();
+});
+function switchTab(t) {
+  var isConn = t === 'connexion';
+  document.getElementById('formConnexion').style.display  = isConn ? 'block' : 'none';
+  document.getElementById('formInscription').style.display = isConn ? 'none'  : 'block';
+  document.getElementById('tabConnexion').classList.toggle('active', isConn);
+  document.getElementById('tabInscription').classList.toggle('active', !isConn);
+}
+function togglePw(id, btn) {
+  var inp = document.getElementById(id);
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+function selectRole(role) {
+  document.getElementById('roleValue').value = role;
+  document.getElementById('roleLecteur').classList.toggle('active', role === 'lecteur');
+  document.getElementById('roleAuteur').classList.toggle('active',  role === 'auteur');
+}
+function soumettreConnexion(e) {
+  e.preventDefault();
+  var email = document.getElementById('loginEmail').value.trim();
+  var pw    = document.getElementById('loginPassword').value;
+  if (!email || !pw) { alert('Veuillez remplir tous les champs.'); return; }
+  alert('Connexion : ' + email + '\n(Backend en cours de connexion)');
+}
+function soumettreInscription(e) {
+  e.preventDefault();
+  var name  = document.getElementById('regName').value.trim();
+  var email = document.getElementById('regEmail').value.trim();
+  var pw    = document.getElementById('regPassword').value;
+  var role  = document.getElementById('roleValue').value;
+  if (!name || !email || !pw) { alert('Veuillez remplir tous les champs.'); return; }
+  if (pw.length < 8) { alert('Mot de passe : 8 caractères minimum.'); return; }
+  alert('Inscription : ' + name + ' (' + role + ')\n(Backend en cours de connexion)');
 }
 
-// Scroll animations
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
-},{threshold:0.1})
-document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el))
+// ── SCROLL ANIMATIONS ──
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
 </script>
 </body>
 </html>
