@@ -595,8 +595,118 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 /* ═══════════════════════════════════════════════ */
 
+
+/* ── AUTH MODAL EXTRAS ── */
+.auth-pw-wrap{position:relative;margin-bottom:0}
+.auth-pw-toggle{
+  position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;font-size:1rem;
+  color:var(--text-muted);padding:0.25rem;line-height:1;
+  transition:color 0.2s
+}
+.auth-pw-toggle:hover{color:var(--or)}
+.auth-role-selector{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.auth-role{
+  padding:0.65rem;background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;font-family:'Inter',sans-serif;font-size:0.88rem;
+  font-weight:500;color:var(--text-soft);cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:0.4rem
+}
+.auth-role.active,.auth-role:hover{
+  border-color:var(--or);color:var(--or);
+  background:rgba(255,107,0,0.06)
+}
+.auth-error{
+  font-family:'Inter',sans-serif;font-size:0.8rem;color:#dc2626;
+  background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);
+  border-radius:8px;padding:0.5rem 0.75rem;margin-bottom:0.75rem;display:none
+}
+.auth-error.visible{display:block}
+/* ── FIN AUTH EXTRAS ── */
+
 </style>
-<script src="./brand-logo.js" defer></script>
+<script src="./brand-logo.js" defer>// ── AUTH MODAL ──────────────────────────────────────────
+function ouvrirModalConnexion(tab) {
+  console.log('[AUTH] Ouverture modale, tab:', tab || 'connexion');
+  document.getElementById('authOverlay').classList.add('active');
+  switchTab(tab || 'connexion');
+}
+function fermerModalConnexion() {
+  console.log('[AUTH] Fermeture modale');
+  document.getElementById('authOverlay').classList.remove('active');
+}
+// Fermer en cliquant hors de la box
+document.getElementById('authOverlay').addEventListener('click', function(e) {
+  if (e.target === this) fermerModalConnexion();
+});
+// Fermer avec Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') fermerModalConnexion();
+});
+
+function switchTab(t) {
+  console.log('[AUTH] switchTab →', t);
+  const isConnexion = t === 'connexion';
+  document.getElementById('formConnexion').style.display  = isConnexion ? 'block' : 'none';
+  document.getElementById('formInscription').style.display = isConnexion ? 'none'  : 'block';
+  document.getElementById('tabConnexion').classList.toggle('active', isConnexion);
+  document.getElementById('tabInscription').classList.toggle('active', !isConnexion);
+  document.getElementById('tabConnexion').setAttribute('aria-selected', isConnexion);
+  document.getElementById('tabInscription').setAttribute('aria-selected', !isConnexion);
+}
+
+function togglePw(inputId, btn) {
+  const input = document.getElementById(inputId);
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  btn.textContent = isHidden ? '🙈' : '👁';
+  console.log('[AUTH] togglePw', inputId, '→', input.type);
+}
+
+function selectRole(role) {
+  console.log('[AUTH] selectRole →', role);
+  document.getElementById('roleValue').value = role;
+  document.getElementById('roleLecteur').classList.toggle('active', role === 'lecteur');
+  document.getElementById('roleAuteur').classList.toggle('active',  role === 'auteur');
+}
+
+function soumettreConnexion(e) {
+  e.preventDefault();
+  const email    = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  console.log('[AUTH] Connexion →', { email, passwordLength: password.length });
+  if (!email || !password) {
+    console.warn('[AUTH] Champs manquants');
+    return;
+  }
+  // TODO: connecter au backend Railway
+  console.log('[AUTH] ✅ Formulaire connexion valide — prêt pour API');
+  alert('Connexion : ' + email + ' (backend non connecté)');
+}
+
+function soumettreInscription(e) {
+  e.preventDefault();
+  const name     = document.getElementById('regName').value.trim();
+  const email    = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const role     = document.getElementById('roleValue').value;
+  console.log('[AUTH] Inscription →', { name, email, passwordLength: password.length, role });
+  if (!name || !email || !password) {
+    console.warn('[AUTH] Champs manquants');
+    return;
+  }
+  if (password.length < 8) {
+    console.warn('[AUTH] Mot de passe trop court');
+    return;
+  }
+  // TODO: connecter au backend Railway
+  console.log('[AUTH] ✅ Formulaire inscription valide — prêt pour API');
+  alert('Inscription : ' + name + ' (' + role + ') — backend non connecté');
+}
+// ── FIN AUTH ─────────────────────────────────────────────
+
+
+</script>
 </head>
 <body>
 
@@ -866,37 +976,118 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 <!-- AUTH MODAL -->
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-box">
-    <button class="auth-close" onclick="fermerModalConnexion()">✕</button>
-    <div class="auth-logo-wrap"><brand-logo variant="auth"></brand-logo></div>
-    <div class="auth-title">Bienvenue sur GRIOTTE</div>
-    <p class="auth-sub">La littérature africaine à portée de main</p>
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="tabConnexion" onclick="switchTab('connexion')">Se connecter</button>
-      <button class="auth-tab" id="tabInscription" onclick="switchTab('inscription')">S'inscrire</button>
+
+    <!-- Fermer -->
+    <button class="auth-close" type="button" onclick="fermerModalConnexion()" aria-label="Fermer">✕</button>
+
+    <!-- Logo -->
+    <div class="auth-logo-wrap">
+      <brand-logo variant="auth"></brand-logo>
     </div>
-    <form id="formConnexion" onsubmit="return false" autocomplete="on">
-      <label class="auth-label">Email</label>
-      <input class="auth-input" type="email" name="email" placeholder="votre@email.com" autocomplete="email"/>
-      <label class="auth-label">Mot de passe</label>
-      <input class="auth-input" type="password" name="password" placeholder="••••••••" autocomplete="current-password"/>
-      <button class="auth-btn">Se connecter →</button>
+
+    <h2 class="auth-title">Bienvenue sur GRIOTTE</h2>
+    <p class="auth-sub">La littérature africaine à portée de main</p>
+
+    <!-- Onglets -->
+    <div class="auth-tabs" role="tablist">
+      <button
+        class="auth-tab active"
+        id="tabConnexion"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        onclick="switchTab('connexion')"
+      >Se connecter</button>
+      <button
+        class="auth-tab"
+        id="tabInscription"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        onclick="switchTab('inscription')"
+      >S'inscrire</button>
+    </div>
+
+    <!-- FORM CONNEXION -->
+    <form id="formConnexion" onsubmit="soumettreConnexion(event)" autocomplete="on" novalidate>
+      <label class="auth-label" for="loginEmail">Email</label>
+      <input
+        class="auth-input" id="loginEmail"
+        type="email" name="email"
+        placeholder="votre@email.com"
+        autocomplete="email" required
+      />
+
+      <label class="auth-label" for="loginPassword">Mot de passe</label>
+      <div class="auth-pw-wrap">
+        <input
+          class="auth-input" id="loginPassword"
+          type="password" name="password"
+          placeholder="••••••••"
+          autocomplete="current-password" required
+          style="margin-bottom:0;padding-right:3rem"
+        />
+        <button type="button" class="auth-pw-toggle" onclick="togglePw('loginPassword',this)" aria-label="Afficher mot de passe">👁</button>
+      </div>
+      <div style="height:1rem"></div>
+
+      <button class="auth-btn" type="submit">Se connecter →</button>
       <div class="auth-divider">ou</div>
-      <button class="auth-google">🌐 Continuer avec Google</button>
+      <button type="button" class="auth-google">🌐 Continuer avec Google</button>
     </form>
-    <form id="formInscription" style="display:none" onsubmit="return false" autocomplete="on">
-      <label class="auth-label">Nom complet</label>
-      <input class="auth-input" type="text" name="fullname" placeholder="Votre nom" autocomplete="name"/>
-      <label class="auth-label">Email</label>
-      <input class="auth-input" type="email" name="email" placeholder="votre@email.com" autocomplete="email"/>
-      <label class="auth-label">Mot de passe</label>
-      <input class="auth-input" type="password" name="password" placeholder="••••••••" autocomplete="current-password"/>
-      <button class="auth-btn">Créer mon compte →</button>
+
+    <!-- FORM INSCRIPTION -->
+    <form id="formInscription" style="display:none" onsubmit="soumettreInscription(event)" autocomplete="on" novalidate>
+      <label class="auth-label" for="regName">Nom complet</label>
+      <input
+        class="auth-input" id="regName"
+        type="text" name="fullname"
+        placeholder="Votre nom"
+        autocomplete="name" required
+      />
+
+      <label class="auth-label" for="regEmail">Email</label>
+      <input
+        class="auth-input" id="regEmail"
+        type="email" name="email"
+        placeholder="votre@email.com"
+        autocomplete="email" required
+      />
+
+      <label class="auth-label" for="regPassword">Mot de passe</label>
+      <div class="auth-pw-wrap">
+        <input
+          class="auth-input" id="regPassword"
+          type="password" name="password"
+          placeholder="Minimum 8 caractères"
+          autocomplete="new-password" required minlength="8"
+          style="margin-bottom:0;padding-right:3rem"
+        />
+        <button type="button" class="auth-pw-toggle" onclick="togglePw('regPassword',this)" aria-label="Afficher mot de passe">👁</button>
+      </div>
+      <div style="height:1rem"></div>
+
+      <label class="auth-label">Je suis</label>
+      <div class="auth-role-selector">
+        <button type="button" class="auth-role active" id="roleLecteur" onclick="selectRole('lecteur')">
+          📚 Lecteur
+        </button>
+        <button type="button" class="auth-role" id="roleAuteur" onclick="selectRole('auteur')">
+          ✍️ Auteur
+        </button>
+      </div>
+      <input type="hidden" name="role" id="roleValue" value="lecteur"/>
+      <div style="height:1rem"></div>
+
+      <button class="auth-btn" type="submit">Créer mon compte →</button>
       <div class="auth-divider">ou</div>
-      <button class="auth-google">🌐 Continuer avec Google</button>
+      <button type="button" class="auth-google">🌐 Continuer avec Google</button>
     </form>
+
   </div>
 </div>
 
+<script>
 <script>
 // Navbar scroll
 window.addEventListener('scroll',()=>{
