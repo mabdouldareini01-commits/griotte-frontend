@@ -155,7 +155,7 @@ em{font-style:italic;color:var(--or)}
 
 /* ── HERO ── */
 .hero{
-  position:relative;min-height:100vh;display:flex;align-items:center;
+  position:relative;min-height:80vh;display:flex;align-items:center;
   padding:64px 3rem 0;overflow:hidden
 }
 .hero-bg{position:absolute;inset:0;z-index:0}
@@ -170,7 +170,7 @@ em{font-style:italic;color:var(--or)}
     rgba(248,245,241,0.98) 0%,rgba(248,245,241,0.93) 40%,
     rgba(248,245,241,0.75) 65%,rgba(248,245,241,0.3) 100%)
 }
-.hero-content{position:relative;z-index:2;max-width:600px;padding:5rem 0 6rem}
+.hero-content{position:relative;z-index:2;max-width:600px;padding:0.5rem 0 2rem}
 .hero-badge{
   display:inline-flex;align-items:center;gap:0.5rem;
   font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.14em;
@@ -190,7 +190,7 @@ em{font-style:italic;color:var(--or)}
   font-size:clamp(1rem,1.4vw,1.15rem);color:var(--text-soft);
   line-height:1.75;margin-bottom:2.5rem;max-width:520px
 }
-.hero-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.hero-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
 .btn-hero-primary{
   font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;
   color:#fff;background:var(--or);border:none;border-radius:10px;
@@ -237,7 +237,7 @@ em{font-style:italic;color:var(--or)}
 /* ── SECTION BASE ── */
 section{position:relative}
 .section-inner{max-width:1100px;margin:0 auto;padding:0 2rem}
-.section-header{text-align:center;margin-bottom:3.5rem}
+.section-header{text-align:center;margin-bottom:2rem}
 .section-badge{
   display:inline-block;font-family:'DM Mono',monospace;font-size:0.75rem;
   letter-spacing:0.18em;text-transform:uppercase;color:var(--or);
@@ -273,7 +273,7 @@ section{position:relative}
 .book-price{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);margin-top:0.25rem}
 
 /* ── CONCEPT ── */
-#concept{padding:5rem 3rem;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-card2) 50%,var(--bg) 100%)}
+#concept{padding:3.5rem 3rem;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-card2) 50%,var(--bg) 100%)}
 .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto}
 .steps-list{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
 .step-item{display:flex;gap:1.25rem;align-items:flex-start}
@@ -332,8 +332,8 @@ section{position:relative}
 .dash-book-reads{font-family:'Inter',sans-serif;font-size:0.7rem;color:var(--text-muted)}
 
 /* ── TESTIMONIALS ── */
-#testimonials{padding:5rem 0;background:var(--bg-card2);overflow:hidden}
-.testimonials-inner{max-width:1100px;margin:0 auto;padding:0 3rem;margin-bottom:3rem}
+#testimonials{padding:3.5rem 0;background:var(--bg-card2);overflow:hidden}
+.testimonials-inner{max-width:1100px;margin:0 auto;padding:0 3rem;margin-bottom:1.75rem}
 .testimonials-grid{display:none}
 .testimonials-grid::-webkit-scrollbar{display:none}
 .testi-card{}
@@ -352,7 +352,7 @@ section{position:relative}
 
 /* ── CTA ── */
 #cta{
-  padding:5rem 3rem;
+  padding:3.5rem 3rem;
   background:linear-gradient(135deg,var(--text) 0%,#2d1f14 100%);
   text-align:center;position:relative;overflow:hidden
 }
@@ -387,7 +387,7 @@ footer{
 .footer-inner{max-width:1100px;margin:0 auto}
 .footer-top{
   display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;
-  gap:3rem;margin-bottom:3rem
+  gap:3rem;margin-bottom:1.75rem
 }
 .footer-brand-logo{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
 .footer-brand-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff}
@@ -460,7 +460,7 @@ footer{
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
   .hero-books{display:none}
-  .hero-content{max-width:100%;padding:5rem 0 5rem}
+  .hero-content{max-width:100%;padding:2rem 0 4rem}
   .concept-grid,.authors-split{grid-template-columns:1fr;gap:2.5rem}
   .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
 }
@@ -468,7 +468,7 @@ footer{
   #navbar{padding:0 1.25rem;height:58px}
   .nav-links,.nav-actions .btn-nav-ghost{display:none}
   .hero{padding:58px 1.25rem 0}
-  .hero-content{padding:3.5rem 0 4rem}
+  .hero-content{padding:2rem 0 4rem}
   .hero-title{font-size:2.5rem}
   .hero-stats{gap:1.5rem}
   #catalogue,#concept,#authors,#cta{padding:3.5rem 1.25rem}
@@ -857,7 +857,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 
 <!-- ── CATALOGUE SECTION ── -->
-<section id="catalogue" style="padding:5rem 0;background:#F4F1ED">
+<section id="catalogue" style="padding:3.5rem 0;background:#F4F1ED">
   <div style="max-width:1200px;margin:0 auto;padding:0 2.5rem">
 
     <!-- Header -->
@@ -915,9 +915,9 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 </section>
 
 
-<section id="concept" style="padding:5rem 0;background:#F4F1ED">
+<section id="concept" style="padding:3.5rem 0;background:#F4F1ED">
   <div style="max-width:1000px;margin:0 auto;padding:0 2.5rem">
-    <div style="text-align:center;margin-bottom:4rem" class="fade-up">
+    <div style="text-align:center;margin-bottom:2.5rem" class="fade-up">
       <div class="section-badge">Comment ça marche</div>
       <h2 class="section-title" style="margin-top:0.75rem">Un modèle simple,<br/><em>transparent</em> et équitable.</h2>
       <p class="section-sub" style="margin-top:0.75rem;max-width:480px;margin-left:auto;margin-right:auto">Découvrez des milliers d'œuvres africaines et ne payez que ce que vous lisez.</p>
@@ -936,7 +936,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
       </div>
     </div>
     <!-- Grid 2 colonnes -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem" class="fade-up">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem" class="fade-up">
       <div style="display:flex;flex-direction:column;gap:1.5rem">
         <!-- 60/40 -->
         <div style="background:#fff;border-radius:16px;padding:1.75rem;border:1px solid rgba(26,20,16,0.07)">
@@ -1007,7 +1007,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
   </div>
 </section>
 
-<section id="authors" style="padding:5rem 0;background:#F4F1ED">
+<section id="authors" style="padding:3.5rem 0;background:#F4F1ED">
   <div class="authors-split">
     <div class="fade-up">
       <div class="section-badge">Pour les auteurs</div>
@@ -1040,11 +1040,11 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
   </div>
 </section>
 
-<section id="testimonials" style="padding:5rem 0;background:#fff">
+<section id="testimonials" style="padding:3.5rem 0;background:#fff">
   <div style="max-width:1100px;margin:0 auto;padding:0 2.5rem">
 
     <!-- Header -->
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem" class="fade-up">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.75rem;flex-wrap:wrap;gap:1rem" class="fade-up">
       <div>
         <div class="section-badge">Témoignages</div>
         <h2 class="section-title" style="margin-top:0.75rem">Ce que disent <em>nos membres</em></h2>
