@@ -145,22 +145,22 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
 
     <div class="auth-error" id="regError"></div>
 
-    <form id="regForm" onsubmit="doRegister(event)" novalidate>
+    <form id="regForm" onsubmit="doRegister(event)" novalidate autocomplete="off">
       <div class="field">
         <label for="regName">Nom complet</label>
         <input id="regName" type="text" name="name"
-          placeholder="Votre nom" autocomplete="name" required/>
+          placeholder="Votre nom" autocomplete="off" required/>
       </div>
       <div class="field">
         <label for="regEmail">Adresse email</label>
         <input id="regEmail" type="email" name="email"
-          placeholder="votre@email.com" autocomplete="email" required/>
+          placeholder="votre@email.com" autocomplete="off" required/>
       </div>
       <div class="field">
         <label for="regPassword">Mot de passe</label>
         <div class="field-pw">
           <input id="regPassword" type="password" name="password"
-            placeholder="Minimum 8 caractères" autocomplete="new-password"
+            placeholder="Minimum 8 caractères" autocomplete="off"
             required minlength="8"/>
           <button type="button" class="pw-toggle" onclick="togglePw('regPassword',this)">👁</button>
         </div>
@@ -169,7 +169,7 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
         <label for="regConfirm">Confirmer le mot de passe</label>
         <div class="field-pw">
           <input id="regConfirm" type="password" name="confirm"
-            placeholder="Répétez votre mot de passe" autocomplete="new-password" required/>
+            placeholder="Répétez votre mot de passe" autocomplete="off" required/>
           <button type="button" class="pw-toggle" onclick="togglePw('regConfirm',this)">👁</button>
         </div>
       </div>
@@ -206,11 +206,15 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
   </div>
 </div>
 <script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.querySelectorAll('#regForm input').forEach(function(f) { f.value = ''; });
+  }, 100);
+});
+
 const API = 'https://griotte-backend-2-production.up.railway.app/api/v1';
 
-if (localStorage.getItem('griotte_token')) {
-  window.location.href = './griotte-dashboard.html';
-}
+// Pas de redirect automatique — l'utilisateur doit remplir le formulaire
 
 function togglePw(id, btn) {
   var inp = document.getElementById(id);
