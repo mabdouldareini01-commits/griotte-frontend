@@ -8,1147 +8,947 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<script src="./brand-logo.js" defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-font-smoothing:antialiased}
 body{font-family:'Inter',sans-serif;background:#F4F1ED;color:#1A1410;min-height:100vh}
 :root{
-  --or:#FF6B00;--or-dark:#CC5200;--or-glow:rgba(255,107,0,0.1);
-  --bg:#F4F1ED;--card:#FFFFFF;
+  --or:#FF6B00;--or-dark:#CC5200;
+  --bg:#F4F1ED;--card:#fff;
   --text:#1A1410;--soft:#4A3F35;--muted:#8A7A6E;
-  --border:rgba(26,20,16,0.08);--border-md:rgba(26,20,16,0.12);
-  --radius:14px;--shadow:0 2px 16px rgba(26,20,16,0.07);
-  --shadow-hover:0 12px 40px rgba(26,20,16,0.14)
+  --border:rgba(26,20,16,0.08);--border-md:rgba(26,20,16,0.13);
+  --shadow:0 2px 12px rgba(26,20,16,0.07);
+  --shadow-lg:0 12px 40px rgba(26,20,16,0.16)
 }
 
 /* ── NAV ── */
 .nav{
   position:sticky;top:0;z-index:100;
-  background:rgba(244,241,237,0.96);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:0 2.5rem;height:60px;
-  display:flex;align-items:center;justify-content:space-between
+  height:58px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+  background:rgba(244,241,237,0.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border)
 }
-.nav-left{display:flex;align-items:center;gap:2rem}
 .nav-logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none}
-.nav-logo img{width:32px;height:32px;border-radius:9px;object-fit:contain}
-.nav-logo-name{font-size:0.78rem;font-weight:700;color:var(--text);letter-spacing:0.1em;text-transform:uppercase}
+.nav-logo img{width:30px;height:30px;border-radius:8px;object-fit:contain}
+.nav-logo-name{font-size:0.75rem;font-weight:700;color:var(--text);letter-spacing:0.1em;text-transform:uppercase}
 .nav-links{display:flex;gap:1.75rem;list-style:none}
-.nav-links a{font-size:0.85rem;color:var(--muted);text-decoration:none;font-weight:500;transition:color 0.2s}
-.nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-right{display:flex;align-items:center;gap:0.75rem}
-.nav-btn{font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:500;padding:0.45rem 1.1rem;border-radius:8px;cursor:pointer;transition:all 0.2s;border:none}
-.nav-btn-ghost{background:none;color:var(--soft);border:1.5px solid var(--border-md)}
-.nav-btn-ghost:hover{border-color:var(--or);color:var(--or)}
-.nav-btn-primary{background:var(--or);color:#fff}
-.nav-btn-primary:hover{background:var(--or-dark)}
+.nav-links a{font-size:0.82rem;color:var(--muted);text-decoration:none;font-weight:500;transition:color 0.2s}
+.nav-links a.active{color:var(--text);font-weight:600}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;gap:0.65rem}
+.nbtn{font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:500;padding:0.42rem 1rem;border-radius:8px;cursor:pointer;transition:all 0.2s;border:none}
+.nbtn-ghost{background:none;color:var(--soft);border:1.5px solid var(--border-md)}
+.nbtn-ghost:hover{border-color:var(--or);color:var(--or)}
+.nbtn-primary{background:var(--or);color:#fff;font-weight:600}
+.nbtn-primary:hover{background:var(--or-dark)}
 
-/* ── HERO ── */
-.hero{
-  background:linear-gradient(135deg,#0D0B09 0%,#1a1008 60%,#2d1500 100%);
-  padding:4rem 2.5rem;position:relative;overflow:hidden
+/* ── PAGE HEADER ── */
+.page-header{
+  background:var(--card);border-bottom:1px solid var(--border);
+  padding:1.5rem 2.5rem
 }
-.hero::before{
-  content:'';position:absolute;top:-40%;right:-10%;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,107,0,0.12) 0%,transparent 65%);
-  pointer-events:none
+.page-header-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap
 }
-.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-.hero-label{
-  font-family:'DM Mono',monospace;font-size:0.65rem;
-  letter-spacing:0.18em;text-transform:uppercase;
-  color:rgba(255,107,0,0.7);margin-bottom:1rem;display:block
-}
-.hero-title{
+.page-header h1{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:700;color:#fff;
-  line-height:1.15;letter-spacing:-0.02em;
-  margin-bottom:0.75rem
+  font-size:1.5rem;font-weight:700;
+  color:var(--text);letter-spacing:-0.02em;margin-bottom:0.2rem
 }
-.hero-title em{font-style:italic;color:#FF6B00}
-.hero-sub{
-  font-size:1rem;color:rgba(255,255,255,0.5);
-  line-height:1.7;margin-bottom:2rem;max-width:500px
+.page-header-sub{font-size:0.78rem;color:var(--muted)}
+.search-box{
+  position:relative;width:320px;max-width:100%
 }
-.search-wrap{
-  position:relative;max-width:540px
+.search-box svg{
+  position:absolute;left:0.85rem;top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);pointer-events:none
 }
-.search-input{
-  width:100%;background:rgba(255,255,255,0.07);
-  border:1.5px solid rgba(255,255,255,0.12);
-  border-radius:12px;padding:0.9rem 1rem 0.9rem 3rem;
-  font-family:'Inter',sans-serif;font-size:0.92rem;
-  color:#fff;outline:none;transition:all 0.2s;
-  backdrop-filter:blur(10px)
+.search-box input{
+  width:100%;background:var(--bg);
+  border:1.5px solid var(--border-md);
+  border-radius:10px;
+  padding:0.65rem 1rem 0.65rem 2.5rem;
+  font-family:'Inter',sans-serif;font-size:0.85rem;
+  color:var(--text);outline:none;
+  transition:border-color 0.2s
 }
-.search-input::placeholder{color:rgba(255,255,255,0.3)}
-.search-input:focus{border-color:rgba(255,107,0,0.5);background:rgba(255,255,255,0.1)}
-.search-ico{
-  position:absolute;left:1rem;top:50%;transform:translateY(-50%);
-  color:rgba(255,255,255,0.35);pointer-events:none
-}
-.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem}
-.hstat-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#fff;line-height:1}
-.hstat-lbl{font-size:0.68rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.2rem;font-family:'DM Mono',monospace}
+.search-box input:focus{border-color:var(--or)}
 
 /* ── FILTERS ── */
-.filters-bar{
-  background:var(--card);border-bottom:1px solid var(--border);
-  padding:0 2.5rem;display:flex;align-items:center;gap:0.5rem;
-  overflow-x:auto;scrollbar-width:none;height:52px
+.filters{
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:0 2.5rem;
+  display:flex;gap:0.4rem;align-items:center;
+  height:48px;overflow-x:auto;scrollbar-width:none
 }
-.filters-bar::-webkit-scrollbar{display:none}
-.filter-btn{
-  font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:500;
-  padding:0.35rem 1rem;border-radius:50px;
-  border:1.5px solid transparent;background:none;
-  color:var(--muted);cursor:pointer;transition:all 0.18s;
-  white-space:nowrap;flex-shrink:0
+.filters::-webkit-scrollbar{display:none}
+.fbtn{
+  font-family:'Inter',sans-serif;font-size:0.76rem;font-weight:500;
+  padding:0.3rem 0.9rem;border-radius:50px;
+  border:1.5px solid transparent;
+  background:none;color:var(--muted);
+  cursor:pointer;transition:all 0.18s;white-space:nowrap;flex-shrink:0
 }
-.filter-btn:hover{color:var(--text);background:var(--bg)}
-.filter-btn.active{
-  background:var(--or);color:#fff;border-color:var(--or)
-}
+.fbtn:hover{color:var(--text);background:var(--bg)}
+.fbtn.on{background:var(--or);color:#fff;border-color:var(--or)}
 
-/* ── MAIN CONTENT ── */
-.catalogue-body{max-width:1200px;margin:0 auto;padding:2.5rem}
+/* ── BODY ── */
+.body{max-width:1280px;margin:0 auto;padding:2rem 2.5rem 4rem}
 
-/* ── SECTION ── */
-.section{margin-bottom:3.5rem}
-.section-hd{
-  display:flex;align-items:baseline;justify-content:space-between;
-  margin-bottom:1.5rem
+/* ── CAROUSEL SECTION ── */
+.carousel-section{margin-bottom:3rem}
+.carousel-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.25rem
 }
-.section-title{
+.carousel-title{
   font-family:'Playfair Display',serif;
-  font-size:1.35rem;font-weight:700;color:var(--text);
-  letter-spacing:-0.01em
+  font-size:1.2rem;font-weight:700;
+  color:var(--text);letter-spacing:-0.01em
 }
-.section-link{
-  font-size:0.8rem;color:var(--or);text-decoration:none;font-weight:500
+.carousel-nav{display:flex;gap:0.4rem}
+.cnav-btn{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--card);border:1.5px solid var(--border-md);
+  color:var(--soft);font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;line-height:1
 }
-.section-link:hover{text-decoration:underline}
+.cnav-btn:hover{border-color:var(--or);color:var(--or)}
+.carousel-track{
+  display:flex;gap:1.25rem;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;padding-bottom:0.5rem;
+  scroll-behavior:smooth
+}
+.carousel-track::-webkit-scrollbar{display:none}
 
-/* ── BOOK GRID ── */
+/* ── GRID MODE ── */
+.grid-section{margin-bottom:3rem}
 .book-grid{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:1.5rem
+  grid-template-columns:repeat(6,1fr);
+  gap:1.25rem
 }
 
 /* ── BOOK CARD ── */
-.book-card{cursor:pointer;transition:transform 0.25s ease}
-.book-card:hover{transform:translateY(-6px)}
-.book-card:hover .book-cover{box-shadow:var(--shadow-hover)}
-.book-card:hover .book-hover-overlay{opacity:1}
-.book-card:hover .book-cover-inner{transform:scale(1.03)}
+.bc{
+  flex-shrink:0;
+  width:160px; /* carousel fixed width */
+  cursor:pointer;
+  transition:transform 0.25s ease;
+  scroll-snap-align:start
+}
+.grid-section .bc{width:auto} /* grid: no fixed width */
+.bc:hover{transform:translateY(-5px)}
+.bc:hover .bc-cover{box-shadow:var(--shadow-lg)}
+.bc:hover .bc-overlay{opacity:1}
 
-.book-cover{
-  aspect-ratio:2/3;border-radius:10px 14px 14px 10px;
+.bc-cover{
+  aspect-ratio:10/14; /* slightly less tall than 2/3 */
+  border-radius:3px 10px 10px 3px;
   position:relative;overflow:hidden;
-  box-shadow:-3px 0 0 rgba(0,0,0,0.2),var(--shadow);
-  transition:box-shadow 0.25s ease
+  box-shadow:-3px 0 0 rgba(0,0,0,0.3),var(--shadow);
+  transition:box-shadow 0.25s
 }
-.book-cover-inner{
+.bc-cover-content{
   position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;padding:1rem;
-  transition:transform 0.3s ease
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0.85rem 0.75rem;
+  background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.1) 55%,transparent 100%)
 }
-.book-spine{
-  position:absolute;left:0;top:0;bottom:0;width:8px;
-  background:rgba(0,0,0,0.25);border-radius:2px 0 0 2px
+.bc-genre{
+  font-family:'DM Mono',monospace;
+  font-size:0.48rem;letter-spacing:0.14em;
+  text-transform:uppercase;margin-bottom:0.35rem;
+  font-weight:500
 }
-.book-genre-tag{
-  font-family:'DM Mono',monospace;font-size:0.55rem;
-  text-transform:uppercase;letter-spacing:0.12em;
-  color:rgba(255,255,255,0.55);margin-bottom:0.5rem
-}
-.book-title-cover{
+.bc-title{
   font-family:'Playfair Display',serif;
-  font-size:0.85rem;font-weight:700;color:#fff;
-  line-height:1.3;margin-bottom:0.25rem
+  font-size:0.78rem;font-weight:700;
+  color:#fff;line-height:1.3;margin-bottom:0.2rem
 }
-.book-author-cover{
-  font-size:0.65rem;color:rgba(255,255,255,0.6);
-  font-family:'DM Mono',monospace
+.bc-author-cover{
+  font-size:0.6rem;color:rgba(255,255,255,0.55);
+  font-family:'DM Mono',monospace;letter-spacing:0.04em
 }
-.book-badge{
-  position:absolute;top:0.65rem;right:0.65rem;
-  font-size:0.58rem;font-weight:700;
-  font-family:'DM Mono',monospace;
-  letter-spacing:0.06em;text-transform:uppercase;
-  padding:0.2rem 0.55rem;border-radius:50px;
-  backdrop-filter:blur(8px)
-}
-.book-hover-overlay{
+.bc-overlay{
   position:absolute;inset:0;
-  background:rgba(0,0,0,0.55);
+  background:rgba(0,0,0,0.45);
   display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity 0.25s ease;
-  border-radius:10px 14px 14px 10px
+  opacity:0;transition:opacity 0.22s;
+  border-radius:3px 10px 10px 3px
 }
-.btn-read{
-  font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:600;
-  color:#fff;background:var(--or);border:none;
-  padding:0.55rem 1.25rem;border-radius:50px;cursor:pointer;
-  transition:background 0.2s
+.bc-overlay span{
+  font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;
+  color:#fff;background:var(--or);
+  padding:0.4rem 1rem;border-radius:50px
 }
-.btn-read:hover{background:var(--or-dark)}
 
-.book-meta{padding:0.85rem 0.25rem 0}
-.book-title{
-  font-family:'Inter',sans-serif;font-size:0.85rem;
-  font-weight:600;color:var(--text);
-  line-height:1.3;margin-bottom:0.2rem;
+.bc-info{padding:0.7rem 0.1rem 0}
+.bc-title-info{
+  font-size:0.78rem;font-weight:600;color:var(--text);
+  line-height:1.3;margin-bottom:0.15rem;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis
 }
-.book-author{
-  font-size:0.75rem;color:var(--muted);
-  margin-bottom:0.4rem;
+.bc-author-info{
+  font-size:0.7rem;color:var(--muted);
+  margin-bottom:0.3rem;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis
 }
-.book-stats{
-  display:flex;align-items:center;gap:0.75rem;
-  margin-bottom:0.35rem
+.bc-rating{
+  font-size:0.68rem;color:#ca8a04;font-weight:600;
+  display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem
 }
-.book-rating{
-  font-size:0.72rem;font-weight:600;color:#ca8a04;
-  display:flex;align-items:center;gap:0.2rem
-}
-.book-reads{
-  font-size:0.68rem;color:var(--muted);
-  font-family:'DM Mono',monospace
-}
-.book-price{
+.bc-reads{font-size:0.62rem;color:var(--muted);font-family:'DM Mono',monospace;font-weight:400}
+.bc-price{
   font-family:'DM Mono',monospace;
-  font-size:0.72rem;font-weight:700;color:var(--or)
+  font-size:0.68rem;font-weight:600;color:var(--or)
 }
-.book-price span{
-  font-weight:400;color:var(--muted);font-size:0.65rem
-}
+.bc-price span{font-weight:400;color:var(--muted);font-size:0.6rem}
 
-/* ── MODAL LIVRE ── */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(13,11,9,0.75);
-  backdrop-filter:blur(8px);z-index:1000;
-  display:none;align-items:center;justify-content:center;padding:1.5rem
+
+
+/* ── MODAL ── */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(13,11,9,0.8);backdrop-filter:blur(10px);
+  z-index:1000;display:none;
+  align-items:center;justify-content:center;padding:1.5rem
 }
-.modal-overlay.open{display:flex}
+.modal.open{display:flex}
 .modal-box{
-  background:var(--card);border-radius:20px;
-  width:100%;max-width:640px;
+  background:var(--card);border-radius:18px;
+  width:100%;max-width:580px;
   max-height:90vh;overflow-y:auto;
-  box-shadow:0 24px 80px rgba(0,0,0,0.25)
+  box-shadow:0 24px 80px rgba(0,0,0,0.3)
 }
 .modal-cover{
-  height:220px;border-radius:20px 20px 0 0;
+  height:200px;border-radius:18px 18px 0 0;
   position:relative;overflow:hidden;
   display:flex;align-items:flex-end;padding:1.5rem
 }
-.modal-cover-overlay{
+.modal-cover-grad{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 50%)
+  background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 60%)
 }
 .modal-cover-title{
   font-family:'Playfair Display',serif;
-  font-size:1.6rem;font-weight:700;color:#fff;
-  position:relative;z-index:1;line-height:1.2
+  font-size:1.5rem;font-weight:700;
+  color:#fff;line-height:1.2;
+  position:relative;z-index:1
 }
-.modal-body{padding:1.75rem}
-.modal-author{font-size:0.9rem;color:var(--muted);margin-bottom:1.25rem}
-.modal-stats{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.modal-stat{text-align:center}
-.modal-stat-val{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--text)}
-.modal-stat-lbl{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-family:'DM Mono',monospace;margin-top:0.15rem}
+.modal-cover-author{
+  font-size:0.82rem;color:rgba(255,255,255,0.65);
+  position:relative;z-index:1;margin-top:0.3rem
+}
+.modal-body{padding:1.5rem}
+.modal-stats{
+  display:flex;gap:1.5rem;
+  padding:1rem 0;border-bottom:1px solid var(--border);
+  margin-bottom:1.25rem;flex-wrap:wrap
+}
+.mstat{}
+.mstat-val{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:700;color:var(--text);line-height:1
+}
+.mstat-lbl{
+  font-size:0.6rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:0.08em;
+  font-family:'DM Mono',monospace;margin-top:0.2rem
+}
 .modal-desc{
-  font-size:0.88rem;color:var(--soft);line-height:1.75;
-  margin-bottom:1.75rem;padding-top:1.25rem;
-  border-top:1px solid var(--border)
+  font-size:0.88rem;color:var(--soft);
+  line-height:1.75;margin-bottom:1.5rem
 }
 .modal-actions{display:flex;gap:0.75rem}
-.modal-btn{
-  flex:1;padding:0.85rem;border-radius:11px;
-  font-family:'Inter',sans-serif;font-weight:600;font-size:0.88rem;
-  cursor:pointer;border:none;transition:all 0.2s
+.mbtn{
+  flex:1;padding:0.82rem;border-radius:10px;
+  font-family:'Inter',sans-serif;font-weight:600;
+  font-size:0.88rem;cursor:pointer;border:none;
+  transition:all 0.2s
 }
-.modal-btn-primary{background:var(--or);color:#fff}
-.modal-btn-primary:hover{background:var(--or-dark)}
-.modal-btn-ghost{background:var(--bg);color:var(--soft);border:1.5px solid var(--border-md)}
+.mbtn-primary{background:var(--or);color:#fff}
+.mbtn-primary:hover{background:var(--or-dark)}
+.mbtn-ghost{background:var(--bg);color:var(--soft);border:1.5px solid var(--border-md)}
 .modal-close{
-  position:absolute;top:1rem;right:1rem;
-  background:rgba(0,0,0,0.35);border:none;
-  width:32px;height:32px;border-radius:50%;
+  position:absolute;top:0.85rem;right:0.85rem;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(0,0,0,0.4);border:none;
   color:#fff;cursor:pointer;font-size:1rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:background 0.2s;z-index:2
+  display:flex;align-items:center;justify-content:center;z-index:2
 }
-.modal-close:hover{background:rgba(0,0,0,0.6)}
 
 /* ── RESPONSIVE ── */
-@media(max-width:1200px){.book-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:900px){.book-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){
-  .book-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
-  .nav{padding:0 1rem}
-  .hero{padding:2.5rem 1rem}
-  .catalogue-body{padding:1.5rem 1rem}
-  .filters-bar{padding:0 1rem}
+@media(max-width:1100px){.book-grid{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:900px){
+  .book-grid{grid-template-columns:repeat(4,1fr)}
+  .nav-links{display:none}
 }
-@media(max-width:380px){.book-grid{grid-template-columns:1fr}}
+@media(max-width:700px){
+  .book-grid{grid-template-columns:repeat(3,1fr);gap:1rem}
+  .body,.page-header,.filters{padding-left:1rem;padding-right:1rem}
+  .bc{width:140px}
+}
+@media(max-width:480px){
+  .book-grid{grid-template-columns:repeat(2,1fr)}
+  .bc{width:130px}
+  .page-header-inner{flex-direction:column;align-items:flex-start}
+  .search-box{width:100%}
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-left">
-    <a class="nav-logo" href="./griotte-landing.html">
-      <img src="./logo-icon.png" alt="G" onerror="this.style.display='none'"/>
-      <span class="nav-logo-name">Griotte</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="./griotte-landing.html">Accueil</a></li>
-      <li><a href="#" class="active">Catalogue</a></li>
-      <li><a href="./griotte-dashboard.html">Mon espace</a></li>
-    </ul>
-  </div>
+  <a class="nav-logo" href="./griotte-landing.html">
+    <img src="./logo-icon.png" alt="G" onerror="this.style.display='none'"/>
+    <span class="nav-logo-name">Griotte</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="./griotte-landing.html">Accueil</a></li>
+    <li><a href="#" class="active">Catalogue</a></li>
+    <li><a href="./griotte-dashboard.html">Mon espace</a></li>
+  </ul>
   <div class="nav-right">
-    <button class="nav-btn nav-btn-ghost" onclick="window.location.href='./griotte-login.html'">Se connecter</button>
-    <button class="nav-btn nav-btn-primary" onclick="window.location.href='./griotte-welcome.html'">Commencer</button>
+    <button class="nbtn nbtn-ghost" onclick="window.location.href='./griotte-login.html'">Se connecter</button>
+    <button class="nbtn nbtn-primary" onclick="window.location.href='./griotte-welcome.html'">Commencer</button>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <span class="hero-label">Catalogue GRIOTTE</span>
-    <h1 class="hero-title">Le plus grand catalogue<br/>de <em>littérature africaine</em><br/>numérique.</h1>
-    <p class="hero-sub">Des milliers d'œuvres d'auteurs africains contemporains. Payez uniquement les pages que vous lisez.</p>
-    <div class="search-wrap">
-      <svg class="search-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input class="search-input" type="text" placeholder="Rechercher un livre, un auteur, un genre…" id="searchInput" oninput="searchBooks(this.value)"/>
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <h1>Catalogue</h1>
+      <p class="page-header-sub">1 200+ œuvres africaines · 10 FCFA par page · 340 auteurs</p>
     </div>
-    <div class="hero-stats">
-      <div><div class="hstat-val">1 200+</div><div class="hstat-lbl">Œuvres</div></div>
-      <div><div class="hstat-val">340+</div><div class="hstat-lbl">Auteurs</div></div>
-      <div><div class="hstat-val">48k+</div><div class="hstat-lbl">Lecteurs</div></div>
-      <div><div class="hstat-val">10 FCFA</div><div class="hstat-lbl">Par page</div></div>
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Titre, auteur, genre…" oninput="searchBooks(this.value)"/>
+      </div>
+      
     </div>
   </div>
 </div>
 
 <!-- FILTERS -->
-<div class="filters-bar">
-  <button class="filter-btn active" onclick="filterBooks(this,'tous')" data-filter="tous">Tous</button>
-<button class="filter-btn" onclick="filterBooks(this,'romans')" data-filter="romans">Romans</button>
-<button class="filter-btn" onclick="filterBooks(this,'nouvelles')" data-filter="nouvelles">Nouvelles</button>
-<button class="filter-btn" onclick="filterBooks(this,'poésie')" data-filter="poésie">Poésie</button>
-<button class="filter-btn" onclick="filterBooks(this,'thriller')" data-filter="thriller">Thriller</button>
-<button class="filter-btn" onclick="filterBooks(this,'fantasy')" data-filter="fantasy">Fantasy</button>
-<button class="filter-btn" onclick="filterBooks(this,'romance')" data-filter="romance">Romance</button>
-<button class="filter-btn" onclick="filterBooks(this,'essais')" data-filter="essais">Essais</button>
-<button class="filter-btn" onclick="filterBooks(this,'populaires')" data-filter="populaires">Populaires</button>
-<button class="filter-btn" onclick="filterBooks(this,'nouveautés')" data-filter="nouveautés">Nouveautés</button>
+<div class="filters">
+  <button class="fbtn on" onclick="filterBooks(this,'tous')">Tous</button>
+  <button class="fbtn" onclick="filterBooks(this,'roman')">Romans</button>
+  <button class="fbtn" onclick="filterBooks(this,'thriller')">Thriller</button>
+  <button class="fbtn" onclick="filterBooks(this,'romance')">Romance</button>
+  <button class="fbtn" onclick="filterBooks(this,'fantasy')">Fantasy</button>
+  <button class="fbtn" onclick="filterBooks(this,'sci-fi')">Sci-Fi</button>
+  <button class="fbtn" onclick="filterBooks(this,'poésie')">Poésie</button>
+  <button class="fbtn" onclick="filterBooks(this,'nouvelles')">Nouvelles</button>
+  <button class="fbtn" onclick="filterBooks(this,'histoire')">Histoire</button>
 </div>
 
 <!-- BODY -->
-<div class="catalogue-body">
+<div class="body" id="catalogue-body">
 
-  <!-- Nouveautés -->
-  <div class="section" id="section-nouveautes">
-    <div class="section-hd">
-      <h2 class="section-title">Nouveautés</h2>
-      <a href="#" class="section-link">Voir tout →</a>
-    </div>
-    <div class="book-grid" id="grid-nouveautes">
-      <div class="book-card" data-genre="Roman" onclick="openBook('1')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1a0533 0%,#4a0d6e 50%,#7b2d8b 100%)">
-        <div class="book-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Roman</div>
-            <div class="book-title-cover">Les Fils du Sahel</div>
-            <div class="book-author-cover">Ama Kouyaté</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Les Fils du Sahel</div>
-        <div class="book-author">Ama Kouyaté</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.8</span>
-          <span class="book-reads">12 450 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 320p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Thriller" onclick="openBook('2')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#0a1628 0%,#0f3460 50%,#16213e 100%)">
-        <div class="book-badge" style="background:rgba(59,130,246,0.15);color:#2563eb">Populaire</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Thriller</div>
-            <div class="book-title-cover">Nuit sur le Fleuve</div>
-            <div class="book-author-cover">Seydou Diallo</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Nuit sur le Fleuve</div>
-        <div class="book-author">Seydou Diallo</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.6</span>
-          <span class="book-reads">8 230 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 280p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Romance" onclick="openBook('3')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#3b0a0a 0%,#7f1d1d 50%,#991b1b 100%)">
-        <div class="book-badge" style="background:rgba(234,179,8,0.15);color:#ca8a04">Top du mois</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Romance</div>
-            <div class="book-title-cover">La Griotte de Bamako</div>
-            <div class="book-author-cover">Fatou Sow</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">La Griotte de Bamako</div>
-        <div class="book-author">Fatou Sow</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.9</span>
-          <span class="book-reads">15 800 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 245p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Roman" onclick="openBook('4')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1c1008 0%,#451a03 50%,#78350f 100%)">
-        <div class="book-badge" style="background:rgba(34,197,94,0.15);color:#16a34a">Nouveau</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Roman</div>
-            <div class="book-title-cover">Terres Rouges</div>
-            <div class="book-author-cover">Khadija Bah</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Terres Rouges</div>
-        <div class="book-author">Khadija Bah</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.5</span>
-          <span class="book-reads">6 100 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 410p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Récit" onclick="openBook('5')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#052e16 0%,#14532d 50%,#166534 100%)">
-        
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Récit</div>
-            <div class="book-title-cover">L'Enfant du Fleuve</div>
-            <div class="book-author-cover">Mamadou Traoré</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">L'Enfant du Fleuve</div>
-        <div class="book-author">Mamadou Traoré</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.7</span>
-          <span class="book-reads">9 870 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 190p</span></div>
-      </div>
-    </div>
+  <!-- VIEW: CAROUSEL -->
+  <div id="view-carousel">
+    <div class="carousel-section" id="new">
+  <div class="carousel-hd">
+    <h2 class="carousel-title">Nouveautés</h2>
+    <div class="carousel-nav">
+      <button class="cnav-btn" onclick="scrollCarousel('new',-1)">‹</button>
+      <button class="cnav-btn" onclick="scrollCarousel('new',1)">›</button>
     </div>
   </div>
-
-  <!-- Populaires -->
-  <div class="section" id="section-populaires">
-    <div class="section-hd">
-      <h2 class="section-title">Les plus lus ce mois</h2>
-      <a href="#" class="section-link">Voir tout →</a>
+  <div class="carousel-track" id="track-new">
+    <div class="bc" data-genre="roman" data-id="4" onclick="openModal('4')">
+  <div class="bc-cover" style="background:#1c1008">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="12" cy="12" r="2" fill="#fdba74"/><circle cx="37" cy="12" r="2" fill="#fdba74"/><circle cx="62" cy="12" r="2" fill="#fdba74"/><circle cx="87" cy="12" r="2" fill="#fdba74"/><circle cx="112" cy="12" r="2" fill="#fdba74"/><circle cx="137" cy="12" r="2" fill="#fdba74"/><circle cx="162" cy="12" r="2" fill="#fdba74"/><circle cx="187" cy="12" r="2" fill="#fdba74"/><circle cx="12" cy="37" r="2" fill="#fdba74"/><circle cx="37" cy="37" r="2" fill="#fdba74"/><circle cx="62" cy="37" r="2" fill="#fdba74"/><circle cx="87" cy="37" r="2" fill="#fdba74"/><circle cx="112" cy="37" r="2" fill="#fdba74"/><circle cx="137" cy="37" r="2" fill="#fdba74"/><circle cx="162" cy="37" r="2" fill="#fdba74"/><circle cx="187" cy="37" r="2" fill="#fdba74"/><circle cx="12" cy="62" r="2" fill="#fdba74"/><circle cx="37" cy="62" r="2" fill="#fdba74"/><circle cx="62" cy="62" r="2" fill="#fdba74"/><circle cx="87" cy="62" r="2" fill="#fdba74"/><circle cx="112" cy="62" r="2" fill="#fdba74"/><circle cx="137" cy="62" r="2" fill="#fdba74"/><circle cx="162" cy="62" r="2" fill="#fdba74"/><circle cx="187" cy="62" r="2" fill="#fdba74"/><circle cx="12" cy="87" r="2" fill="#fdba74"/><circle cx="37" cy="87" r="2" fill="#fdba74"/><circle cx="62" cy="87" r="2" fill="#fdba74"/><circle cx="87" cy="87" r="2" fill="#fdba74"/><circle cx="112" cy="87" r="2" fill="#fdba74"/><circle cx="137" cy="87" r="2" fill="#fdba74"/><circle cx="162" cy="87" r="2" fill="#fdba74"/><circle cx="187" cy="87" r="2" fill="#fdba74"/><circle cx="12" cy="112" r="2" fill="#fdba74"/><circle cx="37" cy="112" r="2" fill="#fdba74"/><circle cx="62" cy="112" r="2" fill="#fdba74"/><circle cx="87" cy="112" r="2" fill="#fdba74"/><circle cx="112" cy="112" r="2" fill="#fdba74"/><circle cx="137" cy="112" r="2" fill="#fdba74"/><circle cx="162" cy="112" r="2" fill="#fdba74"/><circle cx="187" cy="112" r="2" fill="#fdba74"/><circle cx="12" cy="137" r="2" fill="#fdba74"/><circle cx="37" cy="137" r="2" fill="#fdba74"/><circle cx="62" cy="137" r="2" fill="#fdba74"/><circle cx="87" cy="137" r="2" fill="#fdba74"/><circle cx="112" cy="137" r="2" fill="#fdba74"/><circle cx="137" cy="137" r="2" fill="#fdba74"/><circle cx="162" cy="137" r="2" fill="#fdba74"/><circle cx="187" cy="137" r="2" fill="#fdba74"/><circle cx="12" cy="162" r="2" fill="#fdba74"/><circle cx="37" cy="162" r="2" fill="#fdba74"/><circle cx="62" cy="162" r="2" fill="#fdba74"/><circle cx="87" cy="162" r="2" fill="#fdba74"/><circle cx="112" cy="162" r="2" fill="#fdba74"/><circle cx="137" cy="162" r="2" fill="#fdba74"/><circle cx="162" cy="162" r="2" fill="#fdba74"/><circle cx="187" cy="162" r="2" fill="#fdba74"/><circle cx="12" cy="187" r="2" fill="#fdba74"/><circle cx="37" cy="187" r="2" fill="#fdba74"/><circle cx="62" cy="187" r="2" fill="#fdba74"/><circle cx="87" cy="187" r="2" fill="#fdba74"/><circle cx="112" cy="187" r="2" fill="#fdba74"/><circle cx="137" cy="187" r="2" fill="#fdba74"/><circle cx="162" cy="187" r="2" fill="#fdba74"/><circle cx="187" cy="187" r="2" fill="#fdba74"/><circle cx="12" cy="212" r="2" fill="#fdba74"/><circle cx="37" cy="212" r="2" fill="#fdba74"/><circle cx="62" cy="212" r="2" fill="#fdba74"/><circle cx="87" cy="212" r="2" fill="#fdba74"/><circle cx="112" cy="212" r="2" fill="#fdba74"/><circle cx="137" cy="212" r="2" fill="#fdba74"/><circle cx="162" cy="212" r="2" fill="#fdba74"/><circle cx="187" cy="212" r="2" fill="#fdba74"/><circle cx="12" cy="237" r="2" fill="#fdba74"/><circle cx="37" cy="237" r="2" fill="#fdba74"/><circle cx="62" cy="237" r="2" fill="#fdba74"/><circle cx="87" cy="237" r="2" fill="#fdba74"/><circle cx="112" cy="237" r="2" fill="#fdba74"/><circle cx="137" cy="237" r="2" fill="#fdba74"/><circle cx="162" cy="237" r="2" fill="#fdba74"/><circle cx="187" cy="237" r="2" fill="#fdba74"/><circle cx="12" cy="262" r="2" fill="#fdba74"/><circle cx="37" cy="262" r="2" fill="#fdba74"/><circle cx="62" cy="262" r="2" fill="#fdba74"/><circle cx="87" cy="262" r="2" fill="#fdba74"/><circle cx="112" cy="262" r="2" fill="#fdba74"/><circle cx="137" cy="262" r="2" fill="#fdba74"/><circle cx="162" cy="262" r="2" fill="#fdba74"/><circle cx="187" cy="262" r="2" fill="#fdba74"/><circle cx="12" cy="287" r="2" fill="#fdba74"/><circle cx="37" cy="287" r="2" fill="#fdba74"/><circle cx="62" cy="287" r="2" fill="#fdba74"/><circle cx="87" cy="287" r="2" fill="#fdba74"/><circle cx="112" cy="287" r="2" fill="#fdba74"/><circle cx="137" cy="287" r="2" fill="#fdba74"/><circle cx="162" cy="287" r="2" fill="#fdba74"/><circle cx="187" cy="287" r="2" fill="#fdba74"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(22,163,74,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Nouveau</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#fdba74">ROMAN</div>
+      <div class="bc-title">Terres Rouges</div>
+      <div class="bc-author-cover">Khadija Bah</div>
     </div>
-    <div class="book-grid" id="grid-populaires">
-      <div class="book-card" data-genre="Histoire" onclick="openBook('10')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#422006 0%,#92400e 50%,#b45309 100%)">
-        <div class="book-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Histoire</div>
-            <div class="book-title-cover">Le Roi de Kano</div>
-            <div class="book-author-cover">Ousmane Bello</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Le Roi de Kano</div>
-        <div class="book-author">Ousmane Bello</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.9</span>
-          <span class="book-reads">18 900 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 450p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Romance" onclick="openBook('3')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#3b0a0a 0%,#7f1d1d 50%,#991b1b 100%)">
-        <div class="book-badge" style="background:rgba(234,179,8,0.15);color:#ca8a04">Top du mois</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Romance</div>
-            <div class="book-title-cover">La Griotte de Bamako</div>
-            <div class="book-author-cover">Fatou Sow</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">La Griotte de Bamako</div>
-        <div class="book-author">Fatou Sow</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.9</span>
-          <span class="book-reads">15 800 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 245p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Fantasy" onclick="openBook('15')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#042f2e 0%,#134e4a 50%,#0f766e 100%)">
-        <div class="book-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Fantasy</div>
-            <div class="book-title-cover">Les Gardiens du Lac</div>
-            <div class="book-author-cover">Pascal Daba</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Les Gardiens du Lac</div>
-        <div class="book-author">Pascal Daba</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.9</span>
-          <span class="book-reads">14 300 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 420p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Science-fiction" onclick="openBook('12')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#0f0f1a 0%,#1a1040 50%,#2d1b69 100%)">
-        <div class="book-badge" style="background:rgba(234,179,8,0.15);color:#ca8a04">Top du mois</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Science-fiction</div>
-            <div class="book-title-cover">Poussière d'Étoiles</div>
-            <div class="book-author-cover">Aïcha Diop</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Poussière d'Étoiles</div>
-        <div class="book-author">Aïcha Diop</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.8</span>
-          <span class="book-reads">13 200 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 395p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Roman" onclick="openBook('1')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1a0533 0%,#4a0d6e 50%,#7b2d8b 100%)">
-        <div class="book-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Roman</div>
-            <div class="book-title-cover">Les Fils du Sahel</div>
-            <div class="book-author-cover">Ama Kouyaté</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Les Fils du Sahel</div>
-        <div class="book-author">Ama Kouyaté</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.8</span>
-          <span class="book-reads">12 450 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 320p</span></div>
-      </div>
-    </div>
-    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
   </div>
-
-  <!-- Tous -->
-  <div class="section" id="section-tous">
-    <div class="section-hd">
-      <h2 class="section-title">Tout le catalogue</h2>
-      <span id="count-label" style="font-size:0.8rem;color:var(--muted)">15 œuvres</span>
-    </div>
-    <div class="book-grid" id="grid-tous">
-      <div class="book-card" data-genre="Roman" onclick="openBook('1')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1a0533 0%,#4a0d6e 50%,#7b2d8b 100%)">
-        <div class="book-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Roman</div>
-            <div class="book-title-cover">Les Fils du Sahel</div>
-            <div class="book-author-cover">Ama Kouyaté</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Les Fils du Sahel</div>
-        <div class="book-author">Ama Kouyaté</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.8</span>
-          <span class="book-reads">12 450 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 320p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Thriller" onclick="openBook('2')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#0a1628 0%,#0f3460 50%,#16213e 100%)">
-        <div class="book-badge" style="background:rgba(59,130,246,0.15);color:#2563eb">Populaire</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Thriller</div>
-            <div class="book-title-cover">Nuit sur le Fleuve</div>
-            <div class="book-author-cover">Seydou Diallo</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Nuit sur le Fleuve</div>
-        <div class="book-author">Seydou Diallo</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.6</span>
-          <span class="book-reads">8 230 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 280p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Romance" onclick="openBook('3')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#3b0a0a 0%,#7f1d1d 50%,#991b1b 100%)">
-        <div class="book-badge" style="background:rgba(234,179,8,0.15);color:#ca8a04">Top du mois</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Romance</div>
-            <div class="book-title-cover">La Griotte de Bamako</div>
-            <div class="book-author-cover">Fatou Sow</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">La Griotte de Bamako</div>
-        <div class="book-author">Fatou Sow</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.9</span>
-          <span class="book-reads">15 800 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 245p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Roman" onclick="openBook('4')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1c1008 0%,#451a03 50%,#78350f 100%)">
-        <div class="book-badge" style="background:rgba(34,197,94,0.15);color:#16a34a">Nouveau</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Roman</div>
-            <div class="book-title-cover">Terres Rouges</div>
-            <div class="book-author-cover">Khadija Bah</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Terres Rouges</div>
-        <div class="book-author">Khadija Bah</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.5</span>
-          <span class="book-reads">6 100 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 410p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Récit" onclick="openBook('5')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#052e16 0%,#14532d 50%,#166534 100%)">
-        
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Récit</div>
-            <div class="book-title-cover">L'Enfant du Fleuve</div>
-            <div class="book-author-cover">Mamadou Traoré</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">L'Enfant du Fleuve</div>
-        <div class="book-author">Mamadou Traoré</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.7</span>
-          <span class="book-reads">9 870 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 190p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Poésie" onclick="openBook('6')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#0c1445 0%,#1e3a8a 50%,#1d4ed8 100%)">
-        
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Poésie</div>
-            <div class="book-title-cover">Sahara Blues</div>
-            <div class="book-author-cover">Ibrahim Keïta</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Sahara Blues</div>
-        <div class="book-author">Ibrahim Keïta</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.4</span>
-          <span class="book-reads">4 320 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 120p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Fantasy" onclick="openBook('7')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1a0a2e 0%,#3730a3 50%,#4338ca 100%)">
-        <div class="book-badge" style="background:rgba(59,130,246,0.15);color:#2563eb">Populaire</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Fantasy</div>
-            <div class="book-title-cover">Le Masque et l'Âme</div>
-            <div class="book-author-cover">Adjoa Mensah</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Le Masque et l'Âme</div>
-        <div class="book-author">Adjoa Mensah</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.8</span>
-          <span class="book-reads">11 200 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 380p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Thriller" onclick="openBook('8')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#0f172a 0%,#1e293b 50%,#334155 100%)">
-        
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Thriller</div>
-            <div class="book-title-cover">Lomé la Nuit</div>
-            <div class="book-author-cover">Kofi Agbemavor</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Lomé la Nuit</div>
-        <div class="book-author">Kofi Agbemavor</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.6</span>
-          <span class="book-reads">7 650 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 260p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Nouvelles" onclick="openBook('9')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1c1917 0%,#57534e 50%,#78716c 100%)">
-        <div class="book-badge" style="background:rgba(34,197,94,0.15);color:#16a34a">Nouveau</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Nouvelles</div>
-            <div class="book-title-cover">Éclats d'Ivoire</div>
-            <div class="book-author-cover">Marie-Claire Ndiaye</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Éclats d'Ivoire</div>
-        <div class="book-author">Marie-Claire Ndiaye</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.5</span>
-          <span class="book-reads">5 430 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 180p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Histoire" onclick="openBook('10')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#422006 0%,#92400e 50%,#b45309 100%)">
-        <div class="book-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Histoire</div>
-            <div class="book-title-cover">Le Roi de Kano</div>
-            <div class="book-author-cover">Ousmane Bello</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Le Roi de Kano</div>
-        <div class="book-author">Ousmane Bello</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.9</span>
-          <span class="book-reads">18 900 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 450p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Roman" onclick="openBook('11')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1e1b4b 0%,#312e81 50%,#4338ca 100%)">
-        
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Roman</div>
-            <div class="book-title-cover">Sankofa</div>
-            <div class="book-author-cover">Efua Aidoo</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Sankofa</div>
-        <div class="book-author">Efua Aidoo</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.7</span>
-          <span class="book-reads">8 760 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 310p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Science-fiction" onclick="openBook('12')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#0f0f1a 0%,#1a1040 50%,#2d1b69 100%)">
-        <div class="book-badge" style="background:rgba(234,179,8,0.15);color:#ca8a04">Top du mois</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Science-fiction</div>
-            <div class="book-title-cover">Poussière d'Étoiles</div>
-            <div class="book-author-cover">Aïcha Diop</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Poussière d'Étoiles</div>
-        <div class="book-author">Aïcha Diop</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.8</span>
-          <span class="book-reads">13 200 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 395p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Spirituel" onclick="openBook('13')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#14100a 0%,#3d2b1a 50%,#6b4226 100%)">
-        
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Spirituel</div>
-            <div class="book-title-cover">La Voix des Ancêtres</div>
-            <div class="book-author-cover">Cheikh Tall</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">La Voix des Ancêtres</div>
-        <div class="book-author">Cheikh Tall</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.6</span>
-          <span class="book-reads">6 890 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 230p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Romance" onclick="openBook('14')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#1a0a20 0%,#6b21a8 50%,#9333ea 100%)">
-        <div class="book-badge" style="background:rgba(59,130,246,0.15);color:#2563eb">Populaire</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Romance</div>
-            <div class="book-title-cover">Noire Lumière</div>
-            <div class="book-author-cover">Zara Coulibaly</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Noire Lumière</div>
-        <div class="book-author">Zara Coulibaly</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.7</span>
-          <span class="book-reads">10 450 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 275p</span></div>
-      </div>
-    </div>
-<div class="book-card" data-genre="Fantasy" onclick="openBook('15')">
-      <div class="book-cover" style="background:linear-gradient(160deg,#042f2e 0%,#134e4a 50%,#0f766e 100%)">
-        <div class="book-badge" style="background:rgba(255,107,0,0.15);color:#FF6B00">Bestseller</div>
-        <div class="book-cover-inner">
-          <div class="book-spine"></div>
-          <div class="book-info">
-            <div class="book-genre-tag">Fantasy</div>
-            <div class="book-title-cover">Les Gardiens du Lac</div>
-            <div class="book-author-cover">Pascal Daba</div>
-          </div>
-        </div>
-        <div class="book-hover-overlay">
-          <button class="btn-read">Lire un extrait</button>
-        </div>
-      </div>
-      <div class="book-meta">
-        <div class="book-title">Les Gardiens du Lac</div>
-        <div class="book-author">Pascal Daba</div>
-        <div class="book-stats">
-          <span class="book-rating">★ 4.9</span>
-          <span class="book-reads">14 300 lectures</span>
-        </div>
-        <div class="book-price">10 FCFA <span>/page · 420p</span></div>
-      </div>
-    </div>
-    </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Terres Rouges</div>
+    <div class="bc-author-info">Khadija Bah</div>
+    <div class="bc-rating">★ 4.5 <span class="bc-reads">6 100 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
   </div>
-
 </div>
+<div class="bc" data-genre="nouvelles" data-id="9" onclick="openModal('9')">
+  <div class="bc-cover" style="background:#1c1917">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="12" cy="12" r="2" fill="#d6d3d1"/><circle cx="37" cy="12" r="2" fill="#d6d3d1"/><circle cx="62" cy="12" r="2" fill="#d6d3d1"/><circle cx="87" cy="12" r="2" fill="#d6d3d1"/><circle cx="112" cy="12" r="2" fill="#d6d3d1"/><circle cx="137" cy="12" r="2" fill="#d6d3d1"/><circle cx="162" cy="12" r="2" fill="#d6d3d1"/><circle cx="187" cy="12" r="2" fill="#d6d3d1"/><circle cx="12" cy="37" r="2" fill="#d6d3d1"/><circle cx="37" cy="37" r="2" fill="#d6d3d1"/><circle cx="62" cy="37" r="2" fill="#d6d3d1"/><circle cx="87" cy="37" r="2" fill="#d6d3d1"/><circle cx="112" cy="37" r="2" fill="#d6d3d1"/><circle cx="137" cy="37" r="2" fill="#d6d3d1"/><circle cx="162" cy="37" r="2" fill="#d6d3d1"/><circle cx="187" cy="37" r="2" fill="#d6d3d1"/><circle cx="12" cy="62" r="2" fill="#d6d3d1"/><circle cx="37" cy="62" r="2" fill="#d6d3d1"/><circle cx="62" cy="62" r="2" fill="#d6d3d1"/><circle cx="87" cy="62" r="2" fill="#d6d3d1"/><circle cx="112" cy="62" r="2" fill="#d6d3d1"/><circle cx="137" cy="62" r="2" fill="#d6d3d1"/><circle cx="162" cy="62" r="2" fill="#d6d3d1"/><circle cx="187" cy="62" r="2" fill="#d6d3d1"/><circle cx="12" cy="87" r="2" fill="#d6d3d1"/><circle cx="37" cy="87" r="2" fill="#d6d3d1"/><circle cx="62" cy="87" r="2" fill="#d6d3d1"/><circle cx="87" cy="87" r="2" fill="#d6d3d1"/><circle cx="112" cy="87" r="2" fill="#d6d3d1"/><circle cx="137" cy="87" r="2" fill="#d6d3d1"/><circle cx="162" cy="87" r="2" fill="#d6d3d1"/><circle cx="187" cy="87" r="2" fill="#d6d3d1"/><circle cx="12" cy="112" r="2" fill="#d6d3d1"/><circle cx="37" cy="112" r="2" fill="#d6d3d1"/><circle cx="62" cy="112" r="2" fill="#d6d3d1"/><circle cx="87" cy="112" r="2" fill="#d6d3d1"/><circle cx="112" cy="112" r="2" fill="#d6d3d1"/><circle cx="137" cy="112" r="2" fill="#d6d3d1"/><circle cx="162" cy="112" r="2" fill="#d6d3d1"/><circle cx="187" cy="112" r="2" fill="#d6d3d1"/><circle cx="12" cy="137" r="2" fill="#d6d3d1"/><circle cx="37" cy="137" r="2" fill="#d6d3d1"/><circle cx="62" cy="137" r="2" fill="#d6d3d1"/><circle cx="87" cy="137" r="2" fill="#d6d3d1"/><circle cx="112" cy="137" r="2" fill="#d6d3d1"/><circle cx="137" cy="137" r="2" fill="#d6d3d1"/><circle cx="162" cy="137" r="2" fill="#d6d3d1"/><circle cx="187" cy="137" r="2" fill="#d6d3d1"/><circle cx="12" cy="162" r="2" fill="#d6d3d1"/><circle cx="37" cy="162" r="2" fill="#d6d3d1"/><circle cx="62" cy="162" r="2" fill="#d6d3d1"/><circle cx="87" cy="162" r="2" fill="#d6d3d1"/><circle cx="112" cy="162" r="2" fill="#d6d3d1"/><circle cx="137" cy="162" r="2" fill="#d6d3d1"/><circle cx="162" cy="162" r="2" fill="#d6d3d1"/><circle cx="187" cy="162" r="2" fill="#d6d3d1"/><circle cx="12" cy="187" r="2" fill="#d6d3d1"/><circle cx="37" cy="187" r="2" fill="#d6d3d1"/><circle cx="62" cy="187" r="2" fill="#d6d3d1"/><circle cx="87" cy="187" r="2" fill="#d6d3d1"/><circle cx="112" cy="187" r="2" fill="#d6d3d1"/><circle cx="137" cy="187" r="2" fill="#d6d3d1"/><circle cx="162" cy="187" r="2" fill="#d6d3d1"/><circle cx="187" cy="187" r="2" fill="#d6d3d1"/><circle cx="12" cy="212" r="2" fill="#d6d3d1"/><circle cx="37" cy="212" r="2" fill="#d6d3d1"/><circle cx="62" cy="212" r="2" fill="#d6d3d1"/><circle cx="87" cy="212" r="2" fill="#d6d3d1"/><circle cx="112" cy="212" r="2" fill="#d6d3d1"/><circle cx="137" cy="212" r="2" fill="#d6d3d1"/><circle cx="162" cy="212" r="2" fill="#d6d3d1"/><circle cx="187" cy="212" r="2" fill="#d6d3d1"/><circle cx="12" cy="237" r="2" fill="#d6d3d1"/><circle cx="37" cy="237" r="2" fill="#d6d3d1"/><circle cx="62" cy="237" r="2" fill="#d6d3d1"/><circle cx="87" cy="237" r="2" fill="#d6d3d1"/><circle cx="112" cy="237" r="2" fill="#d6d3d1"/><circle cx="137" cy="237" r="2" fill="#d6d3d1"/><circle cx="162" cy="237" r="2" fill="#d6d3d1"/><circle cx="187" cy="237" r="2" fill="#d6d3d1"/><circle cx="12" cy="262" r="2" fill="#d6d3d1"/><circle cx="37" cy="262" r="2" fill="#d6d3d1"/><circle cx="62" cy="262" r="2" fill="#d6d3d1"/><circle cx="87" cy="262" r="2" fill="#d6d3d1"/><circle cx="112" cy="262" r="2" fill="#d6d3d1"/><circle cx="137" cy="262" r="2" fill="#d6d3d1"/><circle cx="162" cy="262" r="2" fill="#d6d3d1"/><circle cx="187" cy="262" r="2" fill="#d6d3d1"/><circle cx="12" cy="287" r="2" fill="#d6d3d1"/><circle cx="37" cy="287" r="2" fill="#d6d3d1"/><circle cx="62" cy="287" r="2" fill="#d6d3d1"/><circle cx="87" cy="287" r="2" fill="#d6d3d1"/><circle cx="112" cy="287" r="2" fill="#d6d3d1"/><circle cx="137" cy="287" r="2" fill="#d6d3d1"/><circle cx="162" cy="287" r="2" fill="#d6d3d1"/><circle cx="187" cy="287" r="2" fill="#d6d3d1"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(22,163,74,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Nouveau</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#d6d3d1">NOUVELLES</div>
+      <div class="bc-title">Éclats d'Ivoire</div>
+      <div class="bc-author-cover">Marie-Claire Ndiaye</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Éclats d'Ivoire</div>
+    <div class="bc-author-info">Marie-Claire Ndiaye</div>
+    <div class="bc-rating">★ 4.5 <span class="bc-reads">5 430 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="roman" data-id="1" onclick="openModal('1')">
+  <div class="bc-cover" style="background:#1a0533">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice"><path d="M0 80 Q50 60 100 80 Q150 100 200 80 L200 0 L0 0Z" fill="#c084fc"/><path d="M0 160 Q50 140 100 160 Q150 180 200 160 L200 80 Q150 100 100 80 Q50 60 0 80Z" fill="#c084fc"/><path d="M0 240 Q50 220 100 240 Q150 260 200 240 L200 160 Q150 180 100 160 Q50 140 0 160Z" fill="#c084fc"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#c084fc">ROMAN</div>
+      <div class="bc-title">Les Fils du Sahel</div>
+      <div class="bc-author-cover">Ama Kouyaté</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Les Fils du Sahel</div>
+    <div class="bc-author-info">Ama Kouyaté</div>
+    <div class="bc-rating">★ 4.8 <span class="bc-reads">12 450 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="thriller" data-id="2" onclick="openModal('2')">
+  <div class="bc-cover" style="background:#0a1628">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><line x1="0" y1="0" x2="200" y2="40" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="20" x2="200" y2="60" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="40" x2="200" y2="80" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="60" x2="200" y2="100" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="80" x2="200" y2="120" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="100" x2="200" y2="140" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="120" x2="200" y2="160" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="140" x2="200" y2="180" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="160" x2="200" y2="200" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="180" x2="200" y2="220" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="200" x2="200" y2="240" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="220" x2="200" y2="260" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="240" x2="200" y2="280" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="260" x2="200" y2="300" stroke="#60a5fa" stroke-width="1"/><line x1="0" y1="280" x2="200" y2="320" stroke="#60a5fa" stroke-width="1"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#60a5fa">THRILLER</div>
+      <div class="bc-title">Nuit sur le Fleuve</div>
+      <div class="bc-author-cover">Seydou Diallo</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Nuit sur le Fleuve</div>
+    <div class="bc-author-info">Seydou Diallo</div>
+    <div class="bc-rating">★ 4.6 <span class="bc-reads">8 230 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="romance" data-id="3" onclick="openModal('3')">
+  <div class="bc-cover" style="background:#3b0a0a">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="40" cy="40" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="40" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="40" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="120" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="120" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="120" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="200" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="200" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="200" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="280" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="280" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="280" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#fca5a5">ROMANCE</div>
+      <div class="bc-title">La Griotte de Bamako</div>
+      <div class="bc-author-cover">Fatou Sow</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">La Griotte de Bamako</div>
+    <div class="bc-author-info">Fatou Sow</div>
+    <div class="bc-rating">★ 4.9 <span class="bc-reads">15 800 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+  </div>
+</div>
+    <div class="carousel-section" id="pop">
+  <div class="carousel-hd">
+    <h2 class="carousel-title">Les plus lus</h2>
+    <div class="carousel-nav">
+      <button class="cnav-btn" onclick="scrollCarousel('pop',-1)">‹</button>
+      <button class="cnav-btn" onclick="scrollCarousel('pop',1)">›</button>
+    </div>
+  </div>
+  <div class="carousel-track" id="track-pop">
+    <div class="bc" data-genre="histoire" data-id="10" onclick="openModal('10')">
+  <div class="bc-cover" style="background:#422006">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><polygon points="100,20 180,80 180,180 100,240 20,180 20,80" fill="none" stroke="#fcd34d" stroke-width="1.5"/><polygon points="100,60 150,95 150,165 100,200 50,165 50,95" fill="none" stroke="#fcd34d" stroke-width="1"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#fcd34d">HISTOIRE</div>
+      <div class="bc-title">Le Roi de Kano</div>
+      <div class="bc-author-cover">Ousmane Bello</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Le Roi de Kano</div>
+    <div class="bc-author-info">Ousmane Bello</div>
+    <div class="bc-rating">★ 4.9 <span class="bc-reads">18 900 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="romance" data-id="3" onclick="openModal('3')">
+  <div class="bc-cover" style="background:#3b0a0a">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="40" cy="40" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="40" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="40" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="120" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="120" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="120" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="200" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="200" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="200" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="280" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="280" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="280" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#fca5a5">ROMANCE</div>
+      <div class="bc-title">La Griotte de Bamako</div>
+      <div class="bc-author-cover">Fatou Sow</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">La Griotte de Bamako</div>
+    <div class="bc-author-info">Fatou Sow</div>
+    <div class="bc-rating">★ 4.9 <span class="bc-reads">15 800 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="fantasy" data-id="15" onclick="openModal('15')">
+  <div class="bc-cover" style="background:#042f2e">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="40" cy="40" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="40" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="40" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="40" cy="120" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="120" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="120" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="40" cy="200" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="200" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="200" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="40" cy="280" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="280" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="280" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#5eead4">FANTASY</div>
+      <div class="bc-title">Les Gardiens du Lac</div>
+      <div class="bc-author-cover">Pascal Daba</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Les Gardiens du Lac</div>
+    <div class="bc-author-info">Pascal Daba</div>
+    <div class="bc-rating">★ 4.9 <span class="bc-reads">14 300 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="sci-fi" data-id="12" onclick="openModal('12')">
+  <div class="bc-cover" style="background:#0f0f1a">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08" viewBox="0 0 200 300"><polygon points="20,15 23,22 30,22 24,27 26,35 20,30 14,35 16,27 10,22 17,22" fill="#e879f9"/><polygon points="60,15 63,22 70,22 64,27 66,35 60,30 54,35 56,27 50,22 57,22" fill="#e879f9"/><polygon points="100,15 103,22 110,22 104,27 106,35 100,30 94,35 96,27 90,22 97,22" fill="#e879f9"/><polygon points="140,15 143,22 150,22 144,27 146,35 140,30 134,35 136,27 130,22 137,22" fill="#e879f9"/><polygon points="180,15 183,22 190,22 184,27 186,35 180,30 174,35 176,27 170,22 177,22" fill="#e879f9"/><polygon points="20,75 23,82 30,82 24,87 26,95 20,90 14,95 16,87 10,82 17,82" fill="#e879f9"/><polygon points="60,75 63,82 70,82 64,87 66,95 60,90 54,95 56,87 50,82 57,82" fill="#e879f9"/><polygon points="100,75 103,82 110,82 104,87 106,95 100,90 94,95 96,87 90,82 97,82" fill="#e879f9"/><polygon points="140,75 143,82 150,82 144,87 146,95 140,90 134,95 136,87 130,82 137,82" fill="#e879f9"/><polygon points="180,75 183,82 190,82 184,87 186,95 180,90 174,95 176,87 170,82 177,82" fill="#e879f9"/><polygon points="20,135 23,142 30,142 24,147 26,155 20,150 14,155 16,147 10,142 17,142" fill="#e879f9"/><polygon points="60,135 63,142 70,142 64,147 66,155 60,150 54,155 56,147 50,142 57,142" fill="#e879f9"/><polygon points="100,135 103,142 110,142 104,147 106,155 100,150 94,155 96,147 90,142 97,142" fill="#e879f9"/><polygon points="140,135 143,142 150,142 144,147 146,155 140,150 134,155 136,147 130,142 137,142" fill="#e879f9"/><polygon points="180,135 183,142 190,142 184,147 186,155 180,150 174,155 176,147 170,142 177,142" fill="#e879f9"/><polygon points="20,195 23,202 30,202 24,207 26,215 20,210 14,215 16,207 10,202 17,202" fill="#e879f9"/><polygon points="60,195 63,202 70,202 64,207 66,215 60,210 54,215 56,207 50,202 57,202" fill="#e879f9"/><polygon points="100,195 103,202 110,202 104,207 106,215 100,210 94,215 96,207 90,202 97,202" fill="#e879f9"/><polygon points="140,195 143,202 150,202 144,207 146,215 140,210 134,215 136,207 130,202 137,202" fill="#e879f9"/><polygon points="180,195 183,202 190,202 184,207 186,215 180,210 174,215 176,207 170,202 177,202" fill="#e879f9"/><polygon points="20,255 23,262 30,262 24,267 26,275 20,270 14,275 16,267 10,262 17,262" fill="#e879f9"/><polygon points="60,255 63,262 70,262 64,267 66,275 60,270 54,275 56,267 50,262 57,262" fill="#e879f9"/><polygon points="100,255 103,262 110,262 104,267 106,275 100,270 94,275 96,267 90,262 97,262" fill="#e879f9"/><polygon points="140,255 143,262 150,262 144,267 146,275 140,270 134,275 136,267 130,262 137,262" fill="#e879f9"/><polygon points="180,255 183,262 190,262 184,267 186,275 180,270 174,275 176,267 170,262 177,262" fill="#e879f9"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#e879f9">SCI-FI</div>
+      <div class="bc-title">Poussière d'Étoiles</div>
+      <div class="bc-author-cover">Aïcha Diop</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Poussière d'Étoiles</div>
+    <div class="bc-author-info">Aïcha Diop</div>
+    <div class="bc-rating">★ 4.8 <span class="bc-reads">13 200 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="roman" data-id="1" onclick="openModal('1')">
+  <div class="bc-cover" style="background:#1a0533">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice"><path d="M0 80 Q50 60 100 80 Q150 100 200 80 L200 0 L0 0Z" fill="#c084fc"/><path d="M0 160 Q50 140 100 160 Q150 180 200 160 L200 80 Q150 100 100 80 Q50 60 0 80Z" fill="#c084fc"/><path d="M0 240 Q50 220 100 240 Q150 260 200 240 L200 160 Q150 180 100 160 Q50 140 0 160Z" fill="#c084fc"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#c084fc">ROMAN</div>
+      <div class="bc-title">Les Fils du Sahel</div>
+      <div class="bc-author-cover">Ama Kouyaté</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Les Fils du Sahel</div>
+    <div class="bc-author-info">Ama Kouyaté</div>
+    <div class="bc-rating">★ 4.8 <span class="bc-reads">12 450 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="fantasy" data-id="7" onclick="openModal('7')">
+  <div class="bc-cover" style="background:#1a0a2e">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08" viewBox="0 0 200 300"><polygon points="20,15 23,22 30,22 24,27 26,35 20,30 14,35 16,27 10,22 17,22" fill="#a5b4fc"/><polygon points="60,15 63,22 70,22 64,27 66,35 60,30 54,35 56,27 50,22 57,22" fill="#a5b4fc"/><polygon points="100,15 103,22 110,22 104,27 106,35 100,30 94,35 96,27 90,22 97,22" fill="#a5b4fc"/><polygon points="140,15 143,22 150,22 144,27 146,35 140,30 134,35 136,27 130,22 137,22" fill="#a5b4fc"/><polygon points="180,15 183,22 190,22 184,27 186,35 180,30 174,35 176,27 170,22 177,22" fill="#a5b4fc"/><polygon points="20,75 23,82 30,82 24,87 26,95 20,90 14,95 16,87 10,82 17,82" fill="#a5b4fc"/><polygon points="60,75 63,82 70,82 64,87 66,95 60,90 54,95 56,87 50,82 57,82" fill="#a5b4fc"/><polygon points="100,75 103,82 110,82 104,87 106,95 100,90 94,95 96,87 90,82 97,82" fill="#a5b4fc"/><polygon points="140,75 143,82 150,82 144,87 146,95 140,90 134,95 136,87 130,82 137,82" fill="#a5b4fc"/><polygon points="180,75 183,82 190,82 184,87 186,95 180,90 174,95 176,87 170,82 177,82" fill="#a5b4fc"/><polygon points="20,135 23,142 30,142 24,147 26,155 20,150 14,155 16,147 10,142 17,142" fill="#a5b4fc"/><polygon points="60,135 63,142 70,142 64,147 66,155 60,150 54,155 56,147 50,142 57,142" fill="#a5b4fc"/><polygon points="100,135 103,142 110,142 104,147 106,155 100,150 94,155 96,147 90,142 97,142" fill="#a5b4fc"/><polygon points="140,135 143,142 150,142 144,147 146,155 140,150 134,155 136,147 130,142 137,142" fill="#a5b4fc"/><polygon points="180,135 183,142 190,142 184,147 186,155 180,150 174,155 176,147 170,142 177,142" fill="#a5b4fc"/><polygon points="20,195 23,202 30,202 24,207 26,215 20,210 14,215 16,207 10,202 17,202" fill="#a5b4fc"/><polygon points="60,195 63,202 70,202 64,207 66,215 60,210 54,215 56,207 50,202 57,202" fill="#a5b4fc"/><polygon points="100,195 103,202 110,202 104,207 106,215 100,210 94,215 96,207 90,202 97,202" fill="#a5b4fc"/><polygon points="140,195 143,202 150,202 144,207 146,215 140,210 134,215 136,207 130,202 137,202" fill="#a5b4fc"/><polygon points="180,195 183,202 190,202 184,207 186,215 180,210 174,215 176,207 170,202 177,202" fill="#a5b4fc"/><polygon points="20,255 23,262 30,262 24,267 26,275 20,270 14,275 16,267 10,262 17,262" fill="#a5b4fc"/><polygon points="60,255 63,262 70,262 64,267 66,275 60,270 54,275 56,267 50,262 57,262" fill="#a5b4fc"/><polygon points="100,255 103,262 110,262 104,267 106,275 100,270 94,275 96,267 90,262 97,262" fill="#a5b4fc"/><polygon points="140,255 143,262 150,262 144,267 146,275 140,270 134,275 136,267 130,262 137,262" fill="#a5b4fc"/><polygon points="180,255 183,262 190,262 184,267 186,275 180,270 174,275 176,267 170,262 177,262" fill="#a5b4fc"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#a5b4fc">FANTASY</div>
+      <div class="bc-title">Le Masque et l'Âme</div>
+      <div class="bc-author-cover">Adjoa Mensah</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Le Masque et l'Âme</div>
+    <div class="bc-author-info">Adjoa Mensah</div>
+    <div class="bc-rating">★ 4.8 <span class="bc-reads">11 200 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="romance" data-id="14" onclick="openModal('14')">
+  <div class="bc-cover" style="background:#1a0a20">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><polygon points="100,20 180,80 180,180 100,240 20,180 20,80" fill="none" stroke="#d8b4fe" stroke-width="1.5"/><polygon points="100,60 150,95 150,165 100,200 50,165 50,95" fill="none" stroke="#d8b4fe" stroke-width="1"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#d8b4fe">ROMANCE</div>
+      <div class="bc-title">Noire Lumière</div>
+      <div class="bc-author-cover">Zara Coulibaly</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Noire Lumière</div>
+    <div class="bc-author-info">Zara Coulibaly</div>
+    <div class="bc-rating">★ 4.7 <span class="bc-reads">10 450 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="récit" data-id="5" onclick="openModal('5')">
+  <div class="bc-cover" style="background:#052e16">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><polygon points="100,20 180,80 180,180 100,240 20,180 20,80" fill="none" stroke="#86efac" stroke-width="1.5"/><polygon points="100,60 150,95 150,165 100,200 50,165 50,95" fill="none" stroke="#86efac" stroke-width="1"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#86efac">RÉCIT</div>
+      <div class="bc-title">L'Enfant du Fleuve</div>
+      <div class="bc-author-cover">Mamadou Traoré</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">L'Enfant du Fleuve</div>
+    <div class="bc-author-info">Mamadou Traoré</div>
+    <div class="bc-rating">★ 4.7 <span class="bc-reads">9 870 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+  </div>
+</div>
+    <div class="carousel-section" id="rom">
+  <div class="carousel-hd">
+    <h2 class="carousel-title">Romans &amp; Récits</h2>
+    <div class="carousel-nav">
+      <button class="cnav-btn" onclick="scrollCarousel('rom',-1)">‹</button>
+      <button class="cnav-btn" onclick="scrollCarousel('rom',1)">›</button>
+    </div>
+  </div>
+  <div class="carousel-track" id="track-rom">
+    <div class="bc" data-genre="roman" data-id="1" onclick="openModal('1')">
+  <div class="bc-cover" style="background:#1a0533">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice"><path d="M0 80 Q50 60 100 80 Q150 100 200 80 L200 0 L0 0Z" fill="#c084fc"/><path d="M0 160 Q50 140 100 160 Q150 180 200 160 L200 80 Q150 100 100 80 Q50 60 0 80Z" fill="#c084fc"/><path d="M0 240 Q50 220 100 240 Q150 260 200 240 L200 160 Q150 180 100 160 Q50 140 0 160Z" fill="#c084fc"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#c084fc">ROMAN</div>
+      <div class="bc-title">Les Fils du Sahel</div>
+      <div class="bc-author-cover">Ama Kouyaté</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Les Fils du Sahel</div>
+    <div class="bc-author-info">Ama Kouyaté</div>
+    <div class="bc-rating">★ 4.8 <span class="bc-reads">12 450 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="roman" data-id="4" onclick="openModal('4')">
+  <div class="bc-cover" style="background:#1c1008">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="12" cy="12" r="2" fill="#fdba74"/><circle cx="37" cy="12" r="2" fill="#fdba74"/><circle cx="62" cy="12" r="2" fill="#fdba74"/><circle cx="87" cy="12" r="2" fill="#fdba74"/><circle cx="112" cy="12" r="2" fill="#fdba74"/><circle cx="137" cy="12" r="2" fill="#fdba74"/><circle cx="162" cy="12" r="2" fill="#fdba74"/><circle cx="187" cy="12" r="2" fill="#fdba74"/><circle cx="12" cy="37" r="2" fill="#fdba74"/><circle cx="37" cy="37" r="2" fill="#fdba74"/><circle cx="62" cy="37" r="2" fill="#fdba74"/><circle cx="87" cy="37" r="2" fill="#fdba74"/><circle cx="112" cy="37" r="2" fill="#fdba74"/><circle cx="137" cy="37" r="2" fill="#fdba74"/><circle cx="162" cy="37" r="2" fill="#fdba74"/><circle cx="187" cy="37" r="2" fill="#fdba74"/><circle cx="12" cy="62" r="2" fill="#fdba74"/><circle cx="37" cy="62" r="2" fill="#fdba74"/><circle cx="62" cy="62" r="2" fill="#fdba74"/><circle cx="87" cy="62" r="2" fill="#fdba74"/><circle cx="112" cy="62" r="2" fill="#fdba74"/><circle cx="137" cy="62" r="2" fill="#fdba74"/><circle cx="162" cy="62" r="2" fill="#fdba74"/><circle cx="187" cy="62" r="2" fill="#fdba74"/><circle cx="12" cy="87" r="2" fill="#fdba74"/><circle cx="37" cy="87" r="2" fill="#fdba74"/><circle cx="62" cy="87" r="2" fill="#fdba74"/><circle cx="87" cy="87" r="2" fill="#fdba74"/><circle cx="112" cy="87" r="2" fill="#fdba74"/><circle cx="137" cy="87" r="2" fill="#fdba74"/><circle cx="162" cy="87" r="2" fill="#fdba74"/><circle cx="187" cy="87" r="2" fill="#fdba74"/><circle cx="12" cy="112" r="2" fill="#fdba74"/><circle cx="37" cy="112" r="2" fill="#fdba74"/><circle cx="62" cy="112" r="2" fill="#fdba74"/><circle cx="87" cy="112" r="2" fill="#fdba74"/><circle cx="112" cy="112" r="2" fill="#fdba74"/><circle cx="137" cy="112" r="2" fill="#fdba74"/><circle cx="162" cy="112" r="2" fill="#fdba74"/><circle cx="187" cy="112" r="2" fill="#fdba74"/><circle cx="12" cy="137" r="2" fill="#fdba74"/><circle cx="37" cy="137" r="2" fill="#fdba74"/><circle cx="62" cy="137" r="2" fill="#fdba74"/><circle cx="87" cy="137" r="2" fill="#fdba74"/><circle cx="112" cy="137" r="2" fill="#fdba74"/><circle cx="137" cy="137" r="2" fill="#fdba74"/><circle cx="162" cy="137" r="2" fill="#fdba74"/><circle cx="187" cy="137" r="2" fill="#fdba74"/><circle cx="12" cy="162" r="2" fill="#fdba74"/><circle cx="37" cy="162" r="2" fill="#fdba74"/><circle cx="62" cy="162" r="2" fill="#fdba74"/><circle cx="87" cy="162" r="2" fill="#fdba74"/><circle cx="112" cy="162" r="2" fill="#fdba74"/><circle cx="137" cy="162" r="2" fill="#fdba74"/><circle cx="162" cy="162" r="2" fill="#fdba74"/><circle cx="187" cy="162" r="2" fill="#fdba74"/><circle cx="12" cy="187" r="2" fill="#fdba74"/><circle cx="37" cy="187" r="2" fill="#fdba74"/><circle cx="62" cy="187" r="2" fill="#fdba74"/><circle cx="87" cy="187" r="2" fill="#fdba74"/><circle cx="112" cy="187" r="2" fill="#fdba74"/><circle cx="137" cy="187" r="2" fill="#fdba74"/><circle cx="162" cy="187" r="2" fill="#fdba74"/><circle cx="187" cy="187" r="2" fill="#fdba74"/><circle cx="12" cy="212" r="2" fill="#fdba74"/><circle cx="37" cy="212" r="2" fill="#fdba74"/><circle cx="62" cy="212" r="2" fill="#fdba74"/><circle cx="87" cy="212" r="2" fill="#fdba74"/><circle cx="112" cy="212" r="2" fill="#fdba74"/><circle cx="137" cy="212" r="2" fill="#fdba74"/><circle cx="162" cy="212" r="2" fill="#fdba74"/><circle cx="187" cy="212" r="2" fill="#fdba74"/><circle cx="12" cy="237" r="2" fill="#fdba74"/><circle cx="37" cy="237" r="2" fill="#fdba74"/><circle cx="62" cy="237" r="2" fill="#fdba74"/><circle cx="87" cy="237" r="2" fill="#fdba74"/><circle cx="112" cy="237" r="2" fill="#fdba74"/><circle cx="137" cy="237" r="2" fill="#fdba74"/><circle cx="162" cy="237" r="2" fill="#fdba74"/><circle cx="187" cy="237" r="2" fill="#fdba74"/><circle cx="12" cy="262" r="2" fill="#fdba74"/><circle cx="37" cy="262" r="2" fill="#fdba74"/><circle cx="62" cy="262" r="2" fill="#fdba74"/><circle cx="87" cy="262" r="2" fill="#fdba74"/><circle cx="112" cy="262" r="2" fill="#fdba74"/><circle cx="137" cy="262" r="2" fill="#fdba74"/><circle cx="162" cy="262" r="2" fill="#fdba74"/><circle cx="187" cy="262" r="2" fill="#fdba74"/><circle cx="12" cy="287" r="2" fill="#fdba74"/><circle cx="37" cy="287" r="2" fill="#fdba74"/><circle cx="62" cy="287" r="2" fill="#fdba74"/><circle cx="87" cy="287" r="2" fill="#fdba74"/><circle cx="112" cy="287" r="2" fill="#fdba74"/><circle cx="137" cy="287" r="2" fill="#fdba74"/><circle cx="162" cy="287" r="2" fill="#fdba74"/><circle cx="187" cy="287" r="2" fill="#fdba74"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(22,163,74,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Nouveau</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#fdba74">ROMAN</div>
+      <div class="bc-title">Terres Rouges</div>
+      <div class="bc-author-cover">Khadija Bah</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Terres Rouges</div>
+    <div class="bc-author-info">Khadija Bah</div>
+    <div class="bc-rating">★ 4.5 <span class="bc-reads">6 100 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="récit" data-id="5" onclick="openModal('5')">
+  <div class="bc-cover" style="background:#052e16">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><polygon points="100,20 180,80 180,180 100,240 20,180 20,80" fill="none" stroke="#86efac" stroke-width="1.5"/><polygon points="100,60 150,95 150,165 100,200 50,165 50,95" fill="none" stroke="#86efac" stroke-width="1"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#86efac">RÉCIT</div>
+      <div class="bc-title">L'Enfant du Fleuve</div>
+      <div class="bc-author-cover">Mamadou Traoré</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">L'Enfant du Fleuve</div>
+    <div class="bc-author-info">Mamadou Traoré</div>
+    <div class="bc-rating">★ 4.7 <span class="bc-reads">9 870 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="histoire" data-id="10" onclick="openModal('10')">
+  <div class="bc-cover" style="background:#422006">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><polygon points="100,20 180,80 180,180 100,240 20,180 20,80" fill="none" stroke="#fcd34d" stroke-width="1.5"/><polygon points="100,60 150,95 150,165 100,200 50,165 50,95" fill="none" stroke="#fcd34d" stroke-width="1"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#fcd34d">HISTOIRE</div>
+      <div class="bc-title">Le Roi de Kano</div>
+      <div class="bc-author-cover">Ousmane Bello</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Le Roi de Kano</div>
+    <div class="bc-author-info">Ousmane Bello</div>
+    <div class="bc-rating">★ 4.9 <span class="bc-reads">18 900 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="roman" data-id="11" onclick="openModal('11')">
+  <div class="bc-cover" style="background:#1e1b4b">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="40" cy="40" r="25" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="120" cy="40" r="35" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="200" cy="40" r="45" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="40" cy="120" r="25" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="120" cy="120" r="35" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="200" cy="120" r="45" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="40" cy="200" r="25" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="120" cy="200" r="35" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="200" cy="200" r="45" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="40" cy="280" r="25" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="120" cy="280" r="35" fill="none" stroke="#c7d2fe" stroke-width="1.5"/><circle cx="200" cy="280" r="45" fill="none" stroke="#c7d2fe" stroke-width="1.5"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#c7d2fe">ROMAN</div>
+      <div class="bc-title">Sankofa</div>
+      <div class="bc-author-cover">Efua Aidoo</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Sankofa</div>
+    <div class="bc-author-info">Efua Aidoo</div>
+    <div class="bc-rating">★ 4.7 <span class="bc-reads">8 760 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+  </div>
+</div>
+    <div class="carousel-section" id="fan">
+  <div class="carousel-hd">
+    <h2 class="carousel-title">Fantasy &amp; Sci-Fi</h2>
+    <div class="carousel-nav">
+      <button class="cnav-btn" onclick="scrollCarousel('fan',-1)">‹</button>
+      <button class="cnav-btn" onclick="scrollCarousel('fan',1)">›</button>
+    </div>
+  </div>
+  <div class="carousel-track" id="track-fan">
+    <div class="bc" data-genre="fantasy" data-id="7" onclick="openModal('7')">
+  <div class="bc-cover" style="background:#1a0a2e">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08" viewBox="0 0 200 300"><polygon points="20,15 23,22 30,22 24,27 26,35 20,30 14,35 16,27 10,22 17,22" fill="#a5b4fc"/><polygon points="60,15 63,22 70,22 64,27 66,35 60,30 54,35 56,27 50,22 57,22" fill="#a5b4fc"/><polygon points="100,15 103,22 110,22 104,27 106,35 100,30 94,35 96,27 90,22 97,22" fill="#a5b4fc"/><polygon points="140,15 143,22 150,22 144,27 146,35 140,30 134,35 136,27 130,22 137,22" fill="#a5b4fc"/><polygon points="180,15 183,22 190,22 184,27 186,35 180,30 174,35 176,27 170,22 177,22" fill="#a5b4fc"/><polygon points="20,75 23,82 30,82 24,87 26,95 20,90 14,95 16,87 10,82 17,82" fill="#a5b4fc"/><polygon points="60,75 63,82 70,82 64,87 66,95 60,90 54,95 56,87 50,82 57,82" fill="#a5b4fc"/><polygon points="100,75 103,82 110,82 104,87 106,95 100,90 94,95 96,87 90,82 97,82" fill="#a5b4fc"/><polygon points="140,75 143,82 150,82 144,87 146,95 140,90 134,95 136,87 130,82 137,82" fill="#a5b4fc"/><polygon points="180,75 183,82 190,82 184,87 186,95 180,90 174,95 176,87 170,82 177,82" fill="#a5b4fc"/><polygon points="20,135 23,142 30,142 24,147 26,155 20,150 14,155 16,147 10,142 17,142" fill="#a5b4fc"/><polygon points="60,135 63,142 70,142 64,147 66,155 60,150 54,155 56,147 50,142 57,142" fill="#a5b4fc"/><polygon points="100,135 103,142 110,142 104,147 106,155 100,150 94,155 96,147 90,142 97,142" fill="#a5b4fc"/><polygon points="140,135 143,142 150,142 144,147 146,155 140,150 134,155 136,147 130,142 137,142" fill="#a5b4fc"/><polygon points="180,135 183,142 190,142 184,147 186,155 180,150 174,155 176,147 170,142 177,142" fill="#a5b4fc"/><polygon points="20,195 23,202 30,202 24,207 26,215 20,210 14,215 16,207 10,202 17,202" fill="#a5b4fc"/><polygon points="60,195 63,202 70,202 64,207 66,215 60,210 54,215 56,207 50,202 57,202" fill="#a5b4fc"/><polygon points="100,195 103,202 110,202 104,207 106,215 100,210 94,215 96,207 90,202 97,202" fill="#a5b4fc"/><polygon points="140,195 143,202 150,202 144,207 146,215 140,210 134,215 136,207 130,202 137,202" fill="#a5b4fc"/><polygon points="180,195 183,202 190,202 184,207 186,215 180,210 174,215 176,207 170,202 177,202" fill="#a5b4fc"/><polygon points="20,255 23,262 30,262 24,267 26,275 20,270 14,275 16,267 10,262 17,262" fill="#a5b4fc"/><polygon points="60,255 63,262 70,262 64,267 66,275 60,270 54,275 56,267 50,262 57,262" fill="#a5b4fc"/><polygon points="100,255 103,262 110,262 104,267 106,275 100,270 94,275 96,267 90,262 97,262" fill="#a5b4fc"/><polygon points="140,255 143,262 150,262 144,267 146,275 140,270 134,275 136,267 130,262 137,262" fill="#a5b4fc"/><polygon points="180,255 183,262 190,262 184,267 186,275 180,270 174,275 176,267 170,262 177,262" fill="#a5b4fc"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#a5b4fc">FANTASY</div>
+      <div class="bc-title">Le Masque et l'Âme</div>
+      <div class="bc-author-cover">Adjoa Mensah</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Le Masque et l'Âme</div>
+    <div class="bc-author-info">Adjoa Mensah</div>
+    <div class="bc-rating">★ 4.8 <span class="bc-reads">11 200 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="sci-fi" data-id="12" onclick="openModal('12')">
+  <div class="bc-cover" style="background:#0f0f1a">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08" viewBox="0 0 200 300"><polygon points="20,15 23,22 30,22 24,27 26,35 20,30 14,35 16,27 10,22 17,22" fill="#e879f9"/><polygon points="60,15 63,22 70,22 64,27 66,35 60,30 54,35 56,27 50,22 57,22" fill="#e879f9"/><polygon points="100,15 103,22 110,22 104,27 106,35 100,30 94,35 96,27 90,22 97,22" fill="#e879f9"/><polygon points="140,15 143,22 150,22 144,27 146,35 140,30 134,35 136,27 130,22 137,22" fill="#e879f9"/><polygon points="180,15 183,22 190,22 184,27 186,35 180,30 174,35 176,27 170,22 177,22" fill="#e879f9"/><polygon points="20,75 23,82 30,82 24,87 26,95 20,90 14,95 16,87 10,82 17,82" fill="#e879f9"/><polygon points="60,75 63,82 70,82 64,87 66,95 60,90 54,95 56,87 50,82 57,82" fill="#e879f9"/><polygon points="100,75 103,82 110,82 104,87 106,95 100,90 94,95 96,87 90,82 97,82" fill="#e879f9"/><polygon points="140,75 143,82 150,82 144,87 146,95 140,90 134,95 136,87 130,82 137,82" fill="#e879f9"/><polygon points="180,75 183,82 190,82 184,87 186,95 180,90 174,95 176,87 170,82 177,82" fill="#e879f9"/><polygon points="20,135 23,142 30,142 24,147 26,155 20,150 14,155 16,147 10,142 17,142" fill="#e879f9"/><polygon points="60,135 63,142 70,142 64,147 66,155 60,150 54,155 56,147 50,142 57,142" fill="#e879f9"/><polygon points="100,135 103,142 110,142 104,147 106,155 100,150 94,155 96,147 90,142 97,142" fill="#e879f9"/><polygon points="140,135 143,142 150,142 144,147 146,155 140,150 134,155 136,147 130,142 137,142" fill="#e879f9"/><polygon points="180,135 183,142 190,142 184,147 186,155 180,150 174,155 176,147 170,142 177,142" fill="#e879f9"/><polygon points="20,195 23,202 30,202 24,207 26,215 20,210 14,215 16,207 10,202 17,202" fill="#e879f9"/><polygon points="60,195 63,202 70,202 64,207 66,215 60,210 54,215 56,207 50,202 57,202" fill="#e879f9"/><polygon points="100,195 103,202 110,202 104,207 106,215 100,210 94,215 96,207 90,202 97,202" fill="#e879f9"/><polygon points="140,195 143,202 150,202 144,207 146,215 140,210 134,215 136,207 130,202 137,202" fill="#e879f9"/><polygon points="180,195 183,202 190,202 184,207 186,215 180,210 174,215 176,207 170,202 177,202" fill="#e879f9"/><polygon points="20,255 23,262 30,262 24,267 26,275 20,270 14,275 16,267 10,262 17,262" fill="#e879f9"/><polygon points="60,255 63,262 70,262 64,267 66,275 60,270 54,275 56,267 50,262 57,262" fill="#e879f9"/><polygon points="100,255 103,262 110,262 104,267 106,275 100,270 94,275 96,267 90,262 97,262" fill="#e879f9"/><polygon points="140,255 143,262 150,262 144,267 146,275 140,270 134,275 136,267 130,262 137,262" fill="#e879f9"/><polygon points="180,255 183,262 190,262 184,267 186,275 180,270 174,275 176,267 170,262 177,262" fill="#e879f9"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#e879f9">SCI-FI</div>
+      <div class="bc-title">Poussière d'Étoiles</div>
+      <div class="bc-author-cover">Aïcha Diop</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Poussière d'Étoiles</div>
+    <div class="bc-author-info">Aïcha Diop</div>
+    <div class="bc-rating">★ 4.8 <span class="bc-reads">13 200 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="fantasy" data-id="15" onclick="openModal('15')">
+  <div class="bc-cover" style="background:#042f2e">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="40" cy="40" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="40" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="40" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="40" cy="120" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="120" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="120" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="40" cy="200" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="200" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="200" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="40" cy="280" r="25" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="120" cy="280" r="35" fill="none" stroke="#5eead4" stroke-width="1.5"/><circle cx="200" cy="280" r="45" fill="none" stroke="#5eead4" stroke-width="1.5"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#5eead4">FANTASY</div>
+      <div class="bc-title">Les Gardiens du Lac</div>
+      <div class="bc-author-cover">Pascal Daba</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Les Gardiens du Lac</div>
+    <div class="bc-author-info">Pascal Daba</div>
+    <div class="bc-rating">★ 4.9 <span class="bc-reads">14 300 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+  </div>
+</div>
+    <div class="carousel-section" id="rnc">
+  <div class="carousel-hd">
+    <h2 class="carousel-title">Romance</h2>
+    <div class="carousel-nav">
+      <button class="cnav-btn" onclick="scrollCarousel('rnc',-1)">‹</button>
+      <button class="cnav-btn" onclick="scrollCarousel('rnc',1)">›</button>
+    </div>
+  </div>
+  <div class="carousel-track" id="track-rnc">
+    <div class="bc" data-genre="romance" data-id="3" onclick="openModal('3')">
+  <div class="bc-cover" style="background:#3b0a0a">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><circle cx="40" cy="40" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="40" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="40" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="120" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="120" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="120" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="200" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="200" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="200" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="40" cy="280" r="25" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="120" cy="280" r="35" fill="none" stroke="#fca5a5" stroke-width="1.5"/><circle cx="200" cy="280" r="45" fill="none" stroke="#fca5a5" stroke-width="1.5"/></svg>
+    <div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.9);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:3px">Bestseller</div>
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#fca5a5">ROMANCE</div>
+      <div class="bc-title">La Griotte de Bamako</div>
+      <div class="bc-author-cover">Fatou Sow</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">La Griotte de Bamako</div>
+    <div class="bc-author-info">Fatou Sow</div>
+    <div class="bc-rating">★ 4.9 <span class="bc-reads">15 800 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+<div class="bc" data-genre="romance" data-id="14" onclick="openModal('14')">
+  <div class="bc-cover" style="background:#1a0a20">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12" viewBox="0 0 200 300"><polygon points="100,20 180,80 180,180 100,240 20,180 20,80" fill="none" stroke="#d8b4fe" stroke-width="1.5"/><polygon points="100,60 150,95 150,165 100,200 50,165 50,95" fill="none" stroke="#d8b4fe" stroke-width="1"/></svg>
+    
+    <div class="bc-cover-content">
+      <div class="bc-genre" style="color:#d8b4fe">ROMANCE</div>
+      <div class="bc-title">Noire Lumière</div>
+      <div class="bc-author-cover">Zara Coulibaly</div>
+    </div>
+    <div class="bc-overlay"><span>Lire un extrait</span></div>
+  </div>
+  <div class="bc-info">
+    <div class="bc-title-info">Noire Lumière</div>
+    <div class="bc-author-info">Zara Coulibaly</div>
+    <div class="bc-rating">★ 4.7 <span class="bc-reads">10 450 lectures</span></div>
+    <div class="bc-price">10 FCFA<span>/page</span></div>
+  </div>
+</div>
+  </div>
+</div>
+    <!-- Tout le catalogue -->
+    <div class="carousel-section" id="all">
+      <div class="carousel-hd">
+        <h2 class="carousel-title">Tout le catalogue</h2>
+        <span style="font-size:0.78rem;color:var(--muted)">15 œuvres</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1.25rem">
+<div class="bc" data-genre="roman" onclick="openModal('1')"><div class="bc-cover" style="background:#1a0533"><div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.92);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:3px;z-index:2">Bestseller</div><div class="bc-cover-content"><div class="bc-genre" style="color:#c084fc">ROMAN</div><div class="bc-title">Les Fils du Sahel</div><div class="bc-author-cover">Ama Kouyaté</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Les Fils du Sahel</div><div class="bc-author-info">Ama Kouyaté</div><div class="bc-rating">★ 4.8 <span class="bc-reads">12 450 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="thriller" onclick="openModal('2')"><div class="bc-cover" style="background:#0a1628"><div class="bc-cover-content"><div class="bc-genre" style="color:#60a5fa">THRILLER</div><div class="bc-title">Nuit sur le Fleuve</div><div class="bc-author-cover">Seydou Diallo</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Nuit sur le Fleuve</div><div class="bc-author-info">Seydou Diallo</div><div class="bc-rating">★ 4.6 <span class="bc-reads">8 230 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="romance" onclick="openModal('3')"><div class="bc-cover" style="background:#3b0a0a"><div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.92);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:3px;z-index:2">Bestseller</div><div class="bc-cover-content"><div class="bc-genre" style="color:#fca5a5">ROMANCE</div><div class="bc-title">La Griotte de Bamako</div><div class="bc-author-cover">Fatou Sow</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">La Griotte de Bamako</div><div class="bc-author-info">Fatou Sow</div><div class="bc-rating">★ 4.9 <span class="bc-reads">15 800 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="roman" onclick="openModal('4')"><div class="bc-cover" style="background:#1c1008"><div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(22,163,74,0.92);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:3px;z-index:2">Nouveau</div><div class="bc-cover-content"><div class="bc-genre" style="color:#fdba74">ROMAN</div><div class="bc-title">Terres Rouges</div><div class="bc-author-cover">Khadija Bah</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Terres Rouges</div><div class="bc-author-info">Khadija Bah</div><div class="bc-rating">★ 4.5 <span class="bc-reads">6 100 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="récit" onclick="openModal('5')"><div class="bc-cover" style="background:#052e16"><div class="bc-cover-content"><div class="bc-genre" style="color:#86efac">RÉCIT</div><div class="bc-title">L'Enfant du Fleuve</div><div class="bc-author-cover">Mamadou Traoré</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">L'Enfant du Fleuve</div><div class="bc-author-info">Mamadou Traoré</div><div class="bc-rating">★ 4.7 <span class="bc-reads">9 870 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="poésie" onclick="openModal('6')"><div class="bc-cover" style="background:#0c1445"><div class="bc-cover-content"><div class="bc-genre" style="color:#93c5fd">POÉSIE</div><div class="bc-title">Sahara Blues</div><div class="bc-author-cover">Ibrahim Keïta</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Sahara Blues</div><div class="bc-author-info">Ibrahim Keïta</div><div class="bc-rating">★ 4.4 <span class="bc-reads">4 320 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="fantasy" onclick="openModal('7')"><div class="bc-cover" style="background:#1a0a2e"><div class="bc-cover-content"><div class="bc-genre" style="color:#a5b4fc">FANTASY</div><div class="bc-title">Le Masque et l'Âme</div><div class="bc-author-cover">Adjoa Mensah</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Le Masque et l'Âme</div><div class="bc-author-info">Adjoa Mensah</div><div class="bc-rating">★ 4.8 <span class="bc-reads">11 200 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="thriller" onclick="openModal('8')"><div class="bc-cover" style="background:#0f172a"><div class="bc-cover-content"><div class="bc-genre" style="color:#94a3b8">THRILLER</div><div class="bc-title">Lomé la Nuit</div><div class="bc-author-cover">Kofi Agbemavor</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Lomé la Nuit</div><div class="bc-author-info">Kofi Agbemavor</div><div class="bc-rating">★ 4.6 <span class="bc-reads">7 650 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="nouvelles" onclick="openModal('9')"><div class="bc-cover" style="background:#1c1917"><div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(22,163,74,0.92);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:3px;z-index:2">Nouveau</div><div class="bc-cover-content"><div class="bc-genre" style="color:#d6d3d1">NOUVELLES</div><div class="bc-title">Éclats d'Ivoire</div><div class="bc-author-cover">Marie-Claire Ndiaye</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Éclats d'Ivoire</div><div class="bc-author-info">Marie-Claire Ndiaye</div><div class="bc-rating">★ 4.5 <span class="bc-reads">5 430 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="histoire" onclick="openModal('10')"><div class="bc-cover" style="background:#422006"><div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.92);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:3px;z-index:2">Bestseller</div><div class="bc-cover-content"><div class="bc-genre" style="color:#fcd34d">HISTOIRE</div><div class="bc-title">Le Roi de Kano</div><div class="bc-author-cover">Ousmane Bello</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Le Roi de Kano</div><div class="bc-author-info">Ousmane Bello</div><div class="bc-rating">★ 4.9 <span class="bc-reads">18 900 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="roman" onclick="openModal('11')"><div class="bc-cover" style="background:#1e1b4b"><div class="bc-cover-content"><div class="bc-genre" style="color:#c7d2fe">ROMAN</div><div class="bc-title">Sankofa</div><div class="bc-author-cover">Efua Aidoo</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Sankofa</div><div class="bc-author-info">Efua Aidoo</div><div class="bc-rating">★ 4.7 <span class="bc-reads">8 760 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="sci-fi" onclick="openModal('12')"><div class="bc-cover" style="background:#0f0f1a"><div class="bc-cover-content"><div class="bc-genre" style="color:#e879f9">SCI-FI</div><div class="bc-title">Poussière d'Étoiles</div><div class="bc-author-cover">Aïcha Diop</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Poussière d'Étoiles</div><div class="bc-author-info">Aïcha Diop</div><div class="bc-rating">★ 4.8 <span class="bc-reads">13 200 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="spirituel" onclick="openModal('13')"><div class="bc-cover" style="background:#14100a"><div class="bc-cover-content"><div class="bc-genre" style="color:#d4a574">SPIRITUEL</div><div class="bc-title">La Voix des Ancêtres</div><div class="bc-author-cover">Cheikh Tall</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">La Voix des Ancêtres</div><div class="bc-author-info">Cheikh Tall</div><div class="bc-rating">★ 4.6 <span class="bc-reads">6 890 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="romance" onclick="openModal('14')"><div class="bc-cover" style="background:#1a0a20"><div class="bc-cover-content"><div class="bc-genre" style="color:#d8b4fe">ROMANCE</div><div class="bc-title">Noire Lumière</div><div class="bc-author-cover">Zara Coulibaly</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Noire Lumière</div><div class="bc-author-info">Zara Coulibaly</div><div class="bc-rating">★ 4.7 <span class="bc-reads">10 450 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+<div class="bc" data-genre="fantasy" onclick="openModal('15')"><div class="bc-cover" style="background:#042f2e"><div style="position:absolute;top:0.6rem;left:0.6rem;background:rgba(255,107,0,0.92);color:#fff;font-size:0.5rem;font-weight:700;font-family:DM Mono,monospace;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:3px;z-index:2">Bestseller</div><div class="bc-cover-content"><div class="bc-genre" style="color:#5eead4">FANTASY</div><div class="bc-title">Les Gardiens du Lac</div><div class="bc-author-cover">Pascal Daba</div></div><div class="bc-overlay"><span>Lire un extrait</span></div></div><div class="bc-info"><div class="bc-title-info">Les Gardiens du Lac</div><div class="bc-author-info">Pascal Daba</div><div class="bc-rating">★ 4.9 <span class="bc-reads">14 300 lectures</span></div><div class="bc-price">10 FCFA<span>/page</span></div></div></div>
+      </div>
+    </div>
+
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
-    <div class="modal-cover" id="modalCover" style="background:linear-gradient(160deg,#1a0533,#4a0d6e)">
-      <div class="modal-cover-overlay"></div>
+    <div class="modal-cover" id="m-cover">
+      <div class="modal-cover-grad"></div>
       <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-cover-title" id="modalTitle">Titre</div>
+      <div>
+        <div class="modal-cover-title" id="m-title"></div>
+        <div class="modal-cover-author" id="m-author"></div>
+      </div>
     </div>
     <div class="modal-body">
-      <div class="modal-author" id="modalAuthor">Auteur</div>
       <div class="modal-stats">
-        <div class="modal-stat"><div class="modal-stat-val" id="modalRating">4.8</div><div class="modal-stat-lbl">Note</div></div>
-        <div class="modal-stat"><div class="modal-stat-val" id="modalReads">12k</div><div class="modal-stat-lbl">Lectures</div></div>
-        <div class="modal-stat"><div class="modal-stat-val" id="modalPages">320</div><div class="modal-stat-lbl">Pages</div></div>
-        <div class="modal-stat"><div class="modal-stat-val" style="color:var(--or)" id="modalPrice">3 200</div><div class="modal-stat-lbl">FCFA total</div></div>
+        <div class="mstat"><div class="mstat-val" id="m-rating"></div><div class="mstat-lbl">Note</div></div>
+        <div class="mstat"><div class="mstat-val" id="m-reads"></div><div class="mstat-lbl">Lectures</div></div>
+        <div class="mstat"><div class="mstat-val" id="m-pages"></div><div class="mstat-lbl">Pages</div></div>
+        <div class="mstat"><div class="mstat-val" id="m-price" style="color:var(--or)"></div><div class="mstat-lbl">FCFA total</div></div>
       </div>
-      <p class="modal-desc" id="modalDesc">Un roman captivant qui plonge le lecteur au cœur de l'Afrique de l'Ouest contemporaine, entre tradition et modernité, amour et trahison.</p>
+      <p class="modal-desc" id="m-desc"></p>
       <div class="modal-actions">
-        <button class="modal-btn modal-btn-primary" onclick="window.location.href='./griotte-reader.html'">Commencer la lecture →</button>
-        <button class="modal-btn modal-btn-ghost" onclick="closeModal()">Fermer</button>
+        <button class="mbtn mbtn-primary" onclick="window.location.href='./griotte-reader.html'">Commencer la lecture →</button>
+        <button class="mbtn mbtn-ghost" onclick="closeModal()">Fermer</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-const API = 'https://griotte-backend-2-production.up.railway.app/api/v1';
-const BOOKS = [{"id": "1", "title": "Les Fils du Sahel", "author": "Ama Kouyaté", "genre": "Roman", "pages": 320, "reads": "12 450", "rating": "4.8", "badge": "Bestseller", "color": "linear-gradient(160deg,#1a0533 0%,#4a0d6e 50%,#7b2d8b 100%)", "accent": "#c084fc"}, {"id": "2", "title": "Nuit sur le Fleuve", "author": "Seydou Diallo", "genre": "Thriller", "pages": 280, "reads": "8 230", "rating": "4.6", "badge": "Populaire", "color": "linear-gradient(160deg,#0a1628 0%,#0f3460 50%,#16213e 100%)", "accent": "#60a5fa"}, {"id": "3", "title": "La Griotte de Bamako", "author": "Fatou Sow", "genre": "Romance", "pages": 245, "reads": "15 800", "rating": "4.9", "badge": "Top du mois", "color": "linear-gradient(160deg,#3b0a0a 0%,#7f1d1d 50%,#991b1b 100%)", "accent": "#fca5a5"}, {"id": "4", "title": "Terres Rouges", "author": "Khadija Bah", "genre": "Roman", "pages": 410, "reads": "6 100", "rating": "4.5", "badge": "Nouveau", "color": "linear-gradient(160deg,#1c1008 0%,#451a03 50%,#78350f 100%)", "accent": "#fdba74"}, {"id": "5", "title": "L"Enfant du Fleuve", "author": "Mamadou Traoré", "genre": "Récit", "pages": 190, "reads": "9 870", "rating": "4.7", "badge": "", "color": "linear-gradient(160deg,#052e16 0%,#14532d 50%,#166534 100%)", "accent": "#86efac"}, {"id": "6", "title": "Sahara Blues", "author": "Ibrahim Keïta", "genre": "Poésie", "pages": 120, "reads": "4 320", "rating": "4.4", "badge": "", "color": "linear-gradient(160deg,#0c1445 0%,#1e3a8a 50%,#1d4ed8 100%)", "accent": "#93c5fd"}, {"id": "7", "title": "Le Masque et l"Âme", "author": "Adjoa Mensah", "genre": "Fantasy", "pages": 380, "reads": "11 200", "rating": "4.8", "badge": "Populaire", "color": "linear-gradient(160deg,#1a0a2e 0%,#3730a3 50%,#4338ca 100%)", "accent": "#a5b4fc"}, {"id": "8", "title": "Lomé la Nuit", "author": "Kofi Agbemavor", "genre": "Thriller", "pages": 260, "reads": "7 650", "rating": "4.6", "badge": "", "color": "linear-gradient(160deg,#0f172a 0%,#1e293b 50%,#334155 100%)", "accent": "#94a3b8"}, {"id": "9", "title": "Éclats d"Ivoire", "author": "Marie-Claire Ndiaye", "genre": "Nouvelles", "pages": 180, "reads": "5 430", "rating": "4.5", "badge": "Nouveau", "color": "linear-gradient(160deg,#1c1917 0%,#57534e 50%,#78716c 100%)", "accent": "#d6d3d1"}, {"id": "10", "title": "Le Roi de Kano", "author": "Ousmane Bello", "genre": "Histoire", "pages": 450, "reads": "18 900", "rating": "4.9", "badge": "Bestseller", "color": "linear-gradient(160deg,#422006 0%,#92400e 50%,#b45309 100%)", "accent": "#fcd34d"}, {"id": "11", "title": "Sankofa", "author": "Efua Aidoo", "genre": "Roman", "pages": 310, "reads": "8 760", "rating": "4.7", "badge": "", "color": "linear-gradient(160deg,#1e1b4b 0%,#312e81 50%,#4338ca 100%)", "accent": "#c7d2fe"}, {"id": "12", "title": "Poussière d"Étoiles", "author": "Aïcha Diop", "genre": "Science-fiction", "pages": 395, "reads": "13 200", "rating": "4.8", "badge": "Top du mois", "color": "linear-gradient(160deg,#0f0f1a 0%,#1a1040 50%,#2d1b69 100%)", "accent": "#e879f9"}, {"id": "13", "title": "La Voix des Ancêtres", "author": "Cheikh Tall", "genre": "Spirituel", "pages": 230, "reads": "6 890", "rating": "4.6", "badge": "", "color": "linear-gradient(160deg,#14100a 0%,#3d2b1a 50%,#6b4226 100%)", "accent": "#d4a574"}, {"id": "14", "title": "Noire Lumière", "author": "Zara Coulibaly", "genre": "Romance", "pages": 275, "reads": "10 450", "rating": "4.7", "badge": "Populaire", "color": "linear-gradient(160deg,#1a0a20 0%,#6b21a8 50%,#9333ea 100%)", "accent": "#d8b4fe"}, {"id": "15", "title": "Les Gardiens du Lac", "author": "Pascal Daba", "genre": "Fantasy", "pages": 420, "reads": "14 300", "rating": "4.9", "badge": "Bestseller", "color": "linear-gradient(160deg,#042f2e 0%,#134e4a 50%,#0f766e 100%)", "accent": "#5eead4"}];
+const BOOKS = [{"id": "1", "title": "Les Fils du Sahel", "author": "Ama Kouyaté", "genre": "Roman", "pages": 320, "reads": "12 450", "rating": "4.8", "bg": "#1a0533", "accent": "#c084fc", "desc": "Un roman épique sur l"identité et la quête des origines au cœur du Sahel."}, {"id": "2", "title": "Nuit sur le Fleuve", "author": "Seydou Diallo", "genre": "Thriller", "pages": 280, "reads": "8 230", "rating": "4.6", "bg": "#0a1628", "accent": "#60a5fa", "desc": "Un thriller haletant entre Dakar et Abidjan où rien n"est ce qu"il paraît."}, {"id": "3", "title": "La Griotte de Bamako", "author": "Fatou Sow", "genre": "Romance", "pages": 245, "reads": "15 800", "rating": "4.9", "bg": "#3b0a0a", "accent": "#fca5a5", "desc": "L"amour impossible entre une griotte et un prince dans le Mali contemporain."}, {"id": "4", "title": "Terres Rouges", "author": "Khadija Bah", "genre": "Roman", "pages": 410, "reads": "6 100", "rating": "4.5", "bg": "#1c1008", "accent": "#fdba74", "desc": "La saga d"une famille guinéenne sur trois générations de résistance."}, {"id": "5", "title": "L"Enfant du Fleuve", "author": "Mamadou Traoré", "genre": "Récit", "pages": 190, "reads": "9 870", "rating": "4.7", "bg": "#052e16", "accent": "#86efac", "desc": "Le récit initiatique d"un garçon élevé entre deux rives du Niger."}, {"id": "6", "title": "Sahara Blues", "author": "Ibrahim Keïta", "genre": "Poésie", "pages": 120, "reads": "4 320", "rating": "4.4", "bg": "#0c1445", "accent": "#93c5fd", "desc": "Cent poèmes du désert. Cent façons de dire l"exil et le retour."}, {"id": "7", "title": "Le Masque et l"Âme", "author": "Adjoa Mensah", "genre": "Fantasy", "pages": 380, "reads": "11 200", "rating": "4.8", "bg": "#1a0a2e", "accent": "#a5b4fc", "desc": "Dans un Ghana imaginaire, les masques ancestraux reprennent vie."}, {"id": "8", "title": "Lomé la Nuit", "author": "Kofi Agbemavor", "genre": "Thriller", "pages": 260, "reads": "7 650", "rating": "4.6", "bg": "#0f172a", "accent": "#94a3b8", "desc": "Une nuit, une ville, sept secrets. Lomé ne dort jamais vraiment."}, {"id": "9", "title": "Éclats d"Ivoire", "author": "Marie-Claire Ndiaye", "genre": "Nouvelles", "pages": 180, "reads": "5 430", "rating": "4.5", "bg": "#1c1917", "accent": "#d6d3d1", "desc": "Sept nouvelles comme sept miroirs de l"âme africaine contemporaine."}, {"id": "10", "title": "Le Roi de Kano", "author": "Ousmane Bello", "genre": "Histoire", "pages": 450, "reads": "18 900", "rating": "4.9", "bg": "#422006", "accent": "#fcd34d", "desc": "La vie romancée du dernier grand roi de Kano avant la colonisation."}, {"id": "11", "title": "Sankofa", "author": "Efua Aidoo", "genre": "Roman", "pages": 310, "reads": "8 760", "rating": "4.7", "bg": "#1e1b4b", "accent": "#c7d2fe", "desc": "Revenir en arrière pour mieux avancer. L"histoire d"une diaspora qui cherche ses racines."}, {"id": "12", "title": "Poussière d"Étoiles", "author": "Aïcha Diop", "genre": "Sci-Fi", "pages": 395, "reads": "13 200", "rating": "4.8", "bg": "#0f0f1a", "accent": "#e879f9", "desc": "2087. L"Afrique est la dernière puissance spatiale. Une astronaute cherche sa vérité."}, {"id": "13", "title": "La Voix des Ancêtres", "author": "Cheikh Tall", "genre": "Spirituel", "pages": 230, "reads": "6 890", "rating": "4.6", "bg": "#14100a", "accent": "#d4a574", "desc": "Un voyage mystique au cœur du soufisme sénégalais."}, {"id": "14", "title": "Noire Lumière", "author": "Zara Coulibaly", "genre": "Romance", "pages": 275, "reads": "10 450", "rating": "4.7", "bg": "#1a0a20", "accent": "#d8b4fe", "desc": "Un amour né dans les rues de Paris entre deux exilés du continent."}, {"id": "15", "title": "Les Gardiens du Lac", "author": "Pascal Daba", "genre": "Fantasy", "pages": 420, "reads": "14 300", "rating": "4.9", "bg": "#042f2e", "accent": "#5eead4", "desc": "Les esprits du lac Tanganyika se réveillent. Seuls trois gardiens peuvent les apaiser."}];
+let currentView = 'grid';
+
+// ── VIEW TOGGLE ──
+
 
 // ── FILTER ──
 function filterBooks(btn, filter) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  
-  const cards = document.querySelectorAll('.book-card');
-  cards.forEach(card => {
-    if (filter === 'tous' || filter === 'tous les') {
-      card.style.display = '';
-    } else {
-      const genre = card.dataset.genre.toLowerCase();
-      const match = genre.includes(filter) || 
-        (filter === 'romans' && genre === 'roman') ||
-        (filter === 'nouvelles' && genre === 'nouvelles') ||
-        (filter === 'poésie' && genre === 'poésie') ||
-        (filter === 'populaires' && card.querySelector('.book-badge'));
-      card.style.display = match ? '' : 'none';
-    }
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('#view-carousel .bc').forEach(card => {
+    const g = card.dataset.genre || '';
+    card.style.display = (filter === 'tous' || g === filter) ? '' : 'none';
   });
   updateCount();
 }
 
 // ── SEARCH ──
-function searchBooks(query) {
-  const q = query.toLowerCase().trim();
-  document.querySelectorAll('.book-card').forEach(card => {
-    const title  = card.querySelector('.book-title')?.textContent.toLowerCase() || '';
-    const author = card.querySelector('.book-author')?.textContent.toLowerCase() || '';
-    const genre  = (card.dataset.genre || '').toLowerCase();
-    card.style.display = (!q || title.includes(q) || author.includes(q) || genre.includes(q)) ? '' : 'none';
+function searchBooks(q) {
+  const query = q.toLowerCase().trim();
+  document.querySelectorAll('#view-carousel .bc').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!query || text.includes(query)) ? '' : 'none';
   });
   updateCount();
 }
 
 function updateCount() {
-  const visible = document.querySelectorAll('#grid-tous .book-card:not([style*="none"])').length;
-  const el = document.getElementById('count-label');
-  if (el) el.textContent = visible + ' œuvre' + (visible > 1 ? 's' : '');
+  const n = document.querySelectorAll('#main-grid .bc:not([style*="none"])').length;
+  const el = document.getElementById('count-lbl');
+  if (el) el.textContent = n + ' œuvre' + (n>1?'s':'');
+}
+
+// ── CAROUSEL SCROLL ──
+function scrollCarousel(id, dir) {
+  const track = document.getElementById('track-' + id);
+  if (track) track.scrollBy({left: dir * 500, behavior: 'smooth'});
 }
 
 // ── MODAL ──
-function openBook(id) {
+function openModal(id) {
   const b = BOOKS.find(x => x.id === id);
   if (!b) return;
-  document.getElementById('modalTitle').textContent  = b.title;
-  document.getElementById('modalAuthor').textContent = b.author + ' · ' + b.genre;
-  document.getElementById('modalRating').textContent = '★ ' + b.rating;
-  document.getElementById('modalReads').textContent  = b.reads;
-  document.getElementById('modalPages').textContent  = b.pages + 'p';
-  document.getElementById('modalPrice').textContent  = (b.pages * 10).toLocaleString('fr-FR');
-  document.getElementById('modalCover').style.background = b.color;
+  document.getElementById('m-cover').style.background = b.bg;
+  document.getElementById('m-title').textContent  = b.title;
+  document.getElementById('m-author').textContent = b.author + ' · ' + b.genre;
+  document.getElementById('m-rating').textContent = '★ ' + b.rating;
+  document.getElementById('m-reads').textContent  = b.reads;
+  document.getElementById('m-pages').textContent  = b.pages + 'p';
+  document.getElementById('m-price').textContent  = (b.pages * 10).toLocaleString('fr-FR');
+  document.getElementById('m-desc').textContent   = b.desc;
   document.getElementById('modal').classList.add('open');
 }
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
 
-// ── LOAD REAL BOOKS FROM BACKEND ──
-async function loadRealBooks() {
+// ── LOAD REAL BOOKS ──
+async function loadReal() {
   try {
-    const res   = await fetch(API + '/auth/books-public');
+    const res = await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books-public');
     const books = await res.json();
-    if (!Array.isArray(books) || books.length === 0) return;
-    const colors = [
-      'linear-gradient(160deg,#1a0533,#4a0d6e,#7b2d8b)',
-      'linear-gradient(160deg,#0a1628,#0f3460,#16213e)',
-      'linear-gradient(160deg,#3b0a0a,#7f1d1d,#991b1b)',
-      'linear-gradient(160deg,#1c1008,#451a03,#78350f)',
-      'linear-gradient(160deg,#052e16,#14532d,#166534)',
-    ];
-    const realCards = books.map((b,i) => `
-      <div class="book-card" data-genre="${b.genre||'Roman'}" onclick="openBookReal('${b.id}','${(b.title||'').replace(/'/g,"\'")}','${(b.author?.name||'').replace(/'/g,"\'")}')">
-        <div class="book-cover" style="background:${colors[i%colors.length]}">
-          <div class="book-cover-inner">
-            <div class="book-spine"></div>
-            <div class="book-info">
-              <div class="book-genre-tag">${b.genre||'Roman'}</div>
-              <div class="book-title-cover">${b.title||''}</div>
-              <div class="book-author-cover">${b.author?.name||''}</div>
-            </div>
-          </div>
-          <div class="book-hover-overlay"><button class="btn-read">Lire un extrait</button></div>
-        </div>
-        <div class="book-meta">
-          <div class="book-title">${b.title||''}</div>
-          <div class="book-author">${b.author?.name||''}</div>
-          <div class="book-stats"><span class="book-rating">★ 4.5</span><span class="book-reads">0 lectures</span></div>
-          <div class="book-price">10 FCFA <span>/page · ${b.totalPages||'?'}p</span></div>
-        </div>
-      </div>`).join('');
-    const realSection = document.createElement('div');
-    realSection.className = 'section';
-    realSection.innerHTML = `<div class="section-hd"><h2 class="section-title">Livres publiés sur GRIOTTE</h2></div><div class="book-grid">${realCards}</div>`;
-    document.querySelector('.catalogue-body').prepend(realSection);
-  } catch(e) { console.log('Backend books not available:', e.message); }
+    if (!Array.isArray(books) || !books.length) return;
+    console.log('Livres Railway chargés:', books.length);
+  } catch(e) { console.log('Backend:', e.message); }
 }
-
-function openBookReal(id, title, author) {
-  document.getElementById('modalTitle').textContent  = title;
-  document.getElementById('modalAuthor').textContent = author;
-  document.getElementById('modal').classList.add('open');
-}
-
-loadRealBooks();
+loadReal();
 </script>
 </body>
 </html>
