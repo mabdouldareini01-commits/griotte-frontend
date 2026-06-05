@@ -6,6 +6,55 @@
 <title>GRIOTTE Studio — Espace Auteur</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
+   Une seule taille, une seule source, partout identique
+   ════════════════════════════════════════════════════ */
+.g-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible !important;
+  line-height: 0;
+}
+.g-icon img {
+  display: block;
+  height: 38px;
+  width: 38px;
+  object-fit: contain;
+  border-radius: 11px;
+  overflow: visible !important;
+  /* No filter, no opacity, no shadow — logo brut */
+}
+/* Override ALL size variants → same 38px */
+.g-icon--48 img,
+.g-icon--40 img,
+.g-icon--36 img,
+.g-icon--32 img,
+.g-icon--28 img {
+  height: 38px !important;
+  width: 38px !important;
+  border-radius: 11px !important;
+}
+/* Footer: slightly smaller on dark bg */
+footer .g-icon img,
+footer .g-icon--48 img,
+footer .g-icon--40 img,
+footer .g-icon--36 img {
+  height: 34px !important;
+  width: 34px !important;
+  border-radius: 10px !important;
+}
+/* Auth modal: centered */
+.auth-logo-wrap .g-icon img {
+  height: 42px !important;
+  width: 42px !important;
+  border-radius: 13px !important;
+}
+/* Force no extra styles */
+[class*="logo"] { overflow: visible !important; }
+/* ════════════════════════════════════════════════ */
+
 /* == THEME CLAIR GRIOTTE == */
 html,body{background:var(--bg)!important;color:var(--text-main)!important}
 /* Sidebar light */
@@ -518,7 +567,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo"><div class="g-icon g-icon--40"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div></div>
+  <div class="sidebar-logo"><div class="g-icon"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div></div></div>
     </span>
     <span class="studio-badge">Studio</span>
   </div>
