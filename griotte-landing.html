@@ -911,7 +911,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
         <input class="auth-input" id="loginPassword" type="password" name="password" placeholder="••••••••" autocomplete="current-password" required style="margin-bottom:0;padding-right:3rem"/>
         <button type="button" class="auth-pw-toggle" onclick="togglePw('loginPassword',this)">👁</button>
       </div>
-      <div style="height:1rem"></div>
+      <div style="text-align:right;margin-top:0.4rem;margin-bottom:0.75rem"><button type="button" onclick="showForgotPassword()" style="background:none;border:none;font-size:0.78rem;color:var(--or);cursor:pointer;font-family:Inter,sans-serif;text-decoration:underline;text-underline-offset:2px">Mot de passe oublié ?</button></div>
       <button class="auth-btn" type="submit">Se connecter →</button>
       <div class="auth-divider">ou</div>
       <button type="button" class="auth-google">🌐 Continuer avec Google</button>
@@ -932,6 +932,32 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
       <div class="auth-divider">ou</div>
       <button type="button" class="auth-google">🌐 Continuer avec Google</button>
     </form>
+
+    <!-- FORM MOT DE PASSE OUBLIÉ -->
+    <div id="formForgot" style="display:none">
+      <button type="button" onclick="showConnexion()" 
+        style="background:none;border:none;font-size:0.82rem;color:var(--text-muted);
+        cursor:pointer;font-family:Inter,sans-serif;display:flex;align-items:center;
+        gap:0.4rem;margin-bottom:1.25rem;padding:0">
+        ← Retour à la connexion
+      </button>
+      <p style="font-family:Inter,sans-serif;font-size:0.88rem;color:var(--text-soft);
+        margin-bottom:1.25rem;line-height:1.6">
+        Entrez votre adresse email. Si un compte existe, vous recevrez un lien de réinitialisation.
+      </p>
+      <form onsubmit="soumettreResetPassword(event)" novalidate>
+        <label class="auth-label" for="forgotEmail">Email</label>
+        <input class="auth-input" id="forgotEmail" type="email" 
+          placeholder="votre@email.com" autocomplete="email" required/>
+        <button class="auth-btn" type="submit">Envoyer le lien →</button>
+      </form>
+      <div id="forgotSuccess" style="display:none;margin-top:1rem;
+        background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.2);
+        border-radius:8px;padding:0.75rem 1rem;font-size:0.82rem;color:#15803d;
+        font-family:Inter,sans-serif;line-height:1.6">
+        ✅ Si un compte existe avec cet email, un lien de réinitialisation vous sera envoyé sous peu.
+      </div>
+    </div>
   </div>
 </div>
 
@@ -957,38 +983,73 @@ document.getElementById('authOverlay').addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') fermerModalConnexion();
 });
+
+// ── ONGLETS ──
 function switchTab(t) {
   var isConn = t === 'connexion';
-  document.getElementById('formConnexion').style.display  = isConn ? 'block' : 'none';
+  document.getElementById('formConnexion').style.display   = isConn ? 'block' : 'none';
   document.getElementById('formInscription').style.display = isConn ? 'none'  : 'block';
+  document.getElementById('formForgot').style.display      = 'none';
   document.getElementById('tabConnexion').classList.toggle('active', isConn);
   document.getElementById('tabInscription').classList.toggle('active', !isConn);
+  document.querySelector('.auth-tabs').style.display = 'flex';
+  document.querySelector('.auth-title').style.display = 'block';
+  document.querySelector('.auth-sub').style.display = 'block';
 }
+
+// ── MOT DE PASSE OUBLIÉ ──
+function showForgotPassword() {
+  document.getElementById('formConnexion').style.display   = 'none';
+  document.getElementById('formInscription').style.display = 'none';
+  document.getElementById('formForgot').style.display      = 'block';
+  document.querySelector('.auth-tabs').style.display       = 'none';
+  document.querySelector('.auth-title').textContent        = 'Mot de passe oublié';
+  document.querySelector('.auth-sub').textContent          = 'Récupération de votre compte';
+}
+function showConnexion() {
+  switchTab('connexion');
+  document.querySelector('.auth-title').textContent = 'Bienvenue sur GRIOTTE';
+  document.querySelector('.auth-sub').textContent   = 'Lisez et publiez — un seul espace pour tout';
+}
+
+// ── RESET PASSWORD ──
+async function soumettreResetPassword(e) {
+  e.preventDefault();
+  var email = document.getElementById('forgotEmail').value.trim();
+  if (!email) return;
+  var btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Envoi en cours…'; btn.disabled = true;
+  // Simulé pour l'instant — à connecter à /auth/forgot-password quand disponible
+  await new Promise(r => setTimeout(r, 1200));
+  document.getElementById('forgotSuccess').style.display = 'block';
+  e.target.style.display = 'none';
+  btn.textContent = 'Envoyer le lien →'; btn.disabled = false;
+}
+
+// ── TOGGLE PASSWORD ──
 function togglePw(id, btn) {
   var inp = document.getElementById(id);
   inp.type = inp.type === 'password' ? 'text' : 'password';
   btn.textContent = inp.type === 'password' ? '👁' : '🙈';
 }
 
-// ── AFFICHER ERREUR AUTH ──
+// ── ERREUR AUTH ──
 function showAuthError(formId, msg) {
   var el = document.getElementById(formId + 'Error');
   if (!el) {
     el = document.createElement('div');
     el.id = formId + 'Error';
     el.style.cssText = 'background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#dc2626;margin-bottom:0.75rem;font-family:Inter,sans-serif';
-    var form = document.getElementById(formId);
-    form.insertBefore(el, form.firstChild);
+    document.getElementById(formId).insertBefore(el, document.getElementById(formId).firstChild);
   }
-  el.textContent = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = 'block';
 }
 function clearAuthError(formId) {
   var el = document.getElementById(formId + 'Error');
   if (el) el.style.display = 'none';
 }
 
-// ── CONNEXION RÉELLE ──
+// ── CONNEXION ──
 async function soumettreConnexion(e) {
   e.preventDefault();
   clearAuthError('formConnexion');
@@ -997,50 +1058,54 @@ async function soumettreConnexion(e) {
   if (!email || !pw) { showAuthError('formConnexion', 'Veuillez remplir tous les champs.'); return; }
 
   var btn = e.target.querySelector('.auth-btn');
-  btn.textContent = 'Connexion en cours…';
-  btn.disabled = true;
+  btn.textContent = 'Connexion…'; btn.disabled = true;
+
+  console.log('[AUTH] POST', API + '/auth/login', '→', email);
 
   try {
     var res = await fetch(API + '/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password: pw })
+      body: JSON.stringify({ email: email, password: pw })
     });
-    var data = await res.json();
 
-    if (!res.ok) {
-      showAuthError('formConnexion', data.message || 'Email ou mot de passe incorrect.');
+    console.log('[AUTH] Response status:', res.status);
+    var data = await res.json();
+    console.log('[AUTH] Response data:', data);
+
+    if (!res.ok || data.error) {
+      var msg = data.message || data.error || 'Email ou mot de passe incorrect.';
+      if (res.status === 404) msg = 'Service temporairement indisponible. Réessayez dans quelques instants.';
+      showAuthError('formConnexion', msg);
       btn.textContent = 'Se connecter →'; btn.disabled = false;
       return;
     }
 
-    // Stocker le token
     localStorage.setItem('griotte_token', data.accessToken);
-    localStorage.setItem('griotte_role', data.role || 'READER');
+    localStorage.setItem('griotte_role',  data.role || 'READER');
 
-    // Récupérer le profil
-    var meRes = await fetch(API + '/auth/me', {
-      headers: { 'Authorization': 'Bearer ' + data.accessToken }
-    });
-    if (meRes.ok) {
-      var me = await meRes.json();
-      localStorage.setItem('griotte_user', JSON.stringify(me));
-    }
+    try {
+      var meRes = await fetch(API + '/auth/me', {
+        headers: { 'Authorization': 'Bearer ' + data.accessToken }
+      });
+      if (meRes.ok) {
+        var me = await meRes.json();
+        localStorage.setItem('griotte_user', JSON.stringify(me));
+      }
+    } catch(e2) {}
 
-    // Rediriger
-    if (data.role === 'ADMIN') {
-      window.location.href = './griotte-admin.html';
-    } else {
-      window.location.href = './griotte-dashboard.html';
-    }
+    window.location.href = data.role === 'ADMIN'
+      ? './griotte-admin.html'
+      : './griotte-dashboard.html';
 
   } catch(err) {
-    showAuthError('formConnexion', 'Erreur réseau. Vérifiez votre connexion.');
+    console.error('[AUTH] Network error:', err);
+    showAuthError('formConnexion', 'Erreur réseau. Vérifiez votre connexion et réessayez.');
     btn.textContent = 'Se connecter →'; btn.disabled = false;
   }
 }
 
-// ── INSCRIPTION RÉELLE ──
+// ── INSCRIPTION ──
 async function soumettreInscription(e) {
   e.preventDefault();
   clearAuthError('formInscription');
@@ -1051,30 +1116,37 @@ async function soumettreInscription(e) {
   if (pw.length < 8) { showAuthError('formInscription', 'Mot de passe : 8 caractères minimum.'); return; }
 
   var btn = e.target.querySelector('.auth-btn');
-  btn.textContent = 'Création en cours…';
-  btn.disabled = true;
+  btn.textContent = 'Création…'; btn.disabled = true;
+
+  console.log('[AUTH] POST', API + '/auth/register', '→', email);
 
   try {
     var res = await fetch(API + '/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password: pw, name, role: 'READER' })
+      body: JSON.stringify({ email: email, password: pw, name: name, role: 'READER' })
     });
-    var data = await res.json();
 
-    if (!res.ok) {
-      showAuthError('formInscription', data.message || 'Erreur lors de la création du compte.');
+    console.log('[AUTH] Register status:', res.status);
+    var data = await res.json();
+    console.log('[AUTH] Register data:', data);
+
+    if (!res.ok || data.error) {
+      var msg = data.message || data.error || 'Erreur lors de la création du compte.';
+      if (res.status === 404) msg = 'Service temporairement indisponible. Réessayez dans quelques instants.';
+      showAuthError('formInscription', msg);
       btn.textContent = 'Créer mon compte →'; btn.disabled = false;
       return;
     }
 
     localStorage.setItem('griotte_token', data.accessToken);
-    localStorage.setItem('griotte_role', data.role || 'READER');
-    localStorage.setItem('griotte_user', JSON.stringify({ name, email, role: data.role }));
+    localStorage.setItem('griotte_role',  data.role || 'READER');
+    localStorage.setItem('griotte_user',  JSON.stringify({ name: name, email: email, role: data.role }));
     window.location.href = './griotte-dashboard.html';
 
   } catch(err) {
-    showAuthError('formInscription', 'Erreur réseau. Vérifiez votre connexion.');
+    console.error('[AUTH] Network error:', err);
+    showAuthError('formInscription', 'Erreur réseau. Vérifiez votre connexion et réessayez.');
     btn.textContent = 'Créer mon compte →'; btn.disabled = false;
   }
 }
