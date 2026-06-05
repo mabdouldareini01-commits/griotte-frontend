@@ -936,12 +936,14 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 </div>
 
 <script>
-// Navbar scroll
+const API = 'https://griotte-backend-2-production.up.railway.app';
+
+// ── NAVBAR SCROLL ──
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-// ── AUTH ──
+// ── AUTH MODAL ──
 function ouvrirModalConnexion(tab) {
   document.getElementById('authOverlay').classList.add('active');
   switchTab(tab || 'connexion');
@@ -967,28 +969,122 @@ function togglePw(id, btn) {
   inp.type = inp.type === 'password' ? 'text' : 'password';
   btn.textContent = inp.type === 'password' ? '👁' : '🙈';
 }
-function selectRole(role) {
-  document.getElementById('roleValue').value = role;
-  document.getElementById('roleLecteur').classList.toggle('active', role === 'lecteur');
-  document.getElementById('roleAuteur').classList.toggle('active',  role === 'auteur');
+
+// ── AFFICHER ERREUR AUTH ──
+function showAuthError(formId, msg) {
+  var el = document.getElementById(formId + 'Error');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = formId + 'Error';
+    el.style.cssText = 'background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:0.6rem 0.9rem;font-size:0.82rem;color:#dc2626;margin-bottom:0.75rem;font-family:Inter,sans-serif';
+    var form = document.getElementById(formId);
+    form.insertBefore(el, form.firstChild);
+  }
+  el.textContent = msg;
+  el.style.display = 'block';
 }
-function soumettreConnexion(e) {
+function clearAuthError(formId) {
+  var el = document.getElementById(formId + 'Error');
+  if (el) el.style.display = 'none';
+}
+
+// ── CONNEXION RÉELLE ──
+async function soumettreConnexion(e) {
   e.preventDefault();
+  clearAuthError('formConnexion');
   var email = document.getElementById('loginEmail').value.trim();
   var pw    = document.getElementById('loginPassword').value;
-  if (!email || !pw) { alert('Veuillez remplir tous les champs.'); return; }
-  alert('Connexion : ' + email + '\n(Backend en cours de connexion)');
+  if (!email || !pw) { showAuthError('formConnexion', 'Veuillez remplir tous les champs.'); return; }
+
+  var btn = e.target.querySelector('.auth-btn');
+  btn.textContent = 'Connexion en cours…';
+  btn.disabled = true;
+
+  try {
+    var res = await fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pw })
+    });
+    var data = await res.json();
+
+    if (!res.ok) {
+      showAuthError('formConnexion', data.message || 'Email ou mot de passe incorrect.');
+      btn.textContent = 'Se connecter →'; btn.disabled = false;
+      return;
+    }
+
+    // Stocker le token
+    localStorage.setItem('griotte_token', data.accessToken);
+    localStorage.setItem('griotte_role', data.role || 'READER');
+
+    // Récupérer le profil
+    var meRes = await fetch(API + '/auth/me', {
+      headers: { 'Authorization': 'Bearer ' + data.accessToken }
+    });
+    if (meRes.ok) {
+      var me = await meRes.json();
+      localStorage.setItem('griotte_user', JSON.stringify(me));
+    }
+
+    // Rediriger
+    if (data.role === 'ADMIN') {
+      window.location.href = './griotte-admin.html';
+    } else {
+      window.location.href = './griotte-dashboard.html';
+    }
+
+  } catch(err) {
+    showAuthError('formConnexion', 'Erreur réseau. Vérifiez votre connexion.');
+    btn.textContent = 'Se connecter →'; btn.disabled = false;
+  }
 }
-function soumettreInscription(e) {
+
+// ── INSCRIPTION RÉELLE ──
+async function soumettreInscription(e) {
   e.preventDefault();
+  clearAuthError('formInscription');
   var name  = document.getElementById('regName').value.trim();
   var email = document.getElementById('regEmail').value.trim();
   var pw    = document.getElementById('regPassword').value;
-  var role  = document.getElementById('roleValue').value;
-  if (!name || !email || !pw) { alert('Veuillez remplir tous les champs.'); return; }
-  if (pw.length < 8) { alert('Mot de passe : 8 caractères minimum.'); return; }
-  alert('Inscription : ' + name + ' (' + role + ')\n(Backend en cours de connexion)');
+  if (!name || !email || !pw) { showAuthError('formInscription', 'Veuillez remplir tous les champs.'); return; }
+  if (pw.length < 8) { showAuthError('formInscription', 'Mot de passe : 8 caractères minimum.'); return; }
+
+  var btn = e.target.querySelector('.auth-btn');
+  btn.textContent = 'Création en cours…';
+  btn.disabled = true;
+
+  try {
+    var res = await fetch(API + '/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pw, name, role: 'READER' })
+    });
+    var data = await res.json();
+
+    if (!res.ok) {
+      showAuthError('formInscription', data.message || 'Erreur lors de la création du compte.');
+      btn.textContent = 'Créer mon compte →'; btn.disabled = false;
+      return;
+    }
+
+    localStorage.setItem('griotte_token', data.accessToken);
+    localStorage.setItem('griotte_role', data.role || 'READER');
+    localStorage.setItem('griotte_user', JSON.stringify({ name, email, role: data.role }));
+    window.location.href = './griotte-dashboard.html';
+
+  } catch(err) {
+    showAuthError('formInscription', 'Erreur réseau. Vérifiez votre connexion.');
+    btn.textContent = 'Créer mon compte →'; btn.disabled = false;
+  }
 }
+
+// ── GOOGLE AUTH ──
+document.querySelectorAll('.auth-google').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    window.location.href = API + '/auth/google';
+  });
+});
 
 // ── SCROLL ANIMATIONS ──
 var obs = new IntersectionObserver(function(entries) {
