@@ -578,7 +578,7 @@ var token = localStorage.getItem('griotte_token');
 var user  = JSON.parse(localStorage.getItem('griotte_user') || 'null');
 
 if (!token) {
-  window.location.href = './griotte-landing.html';
+  window.location.href = './griotte-login.html';
 }
 
 // Récupérer token depuis URL (Google OAuth)
@@ -745,7 +745,7 @@ function logout() {
   localStorage.removeItem('griotte_token');
   localStorage.removeItem('griotte_user');
   localStorage.removeItem('griotte_role');
-  window.location.href = './griotte-landing.html';
+  window.location.href = './griotte-login.html';
 }
 
 // ── PANEL NAVIGATION ──
@@ -804,7 +804,7 @@ function showToast(msg) {
 document.querySelector('.sidebar-footer a[href="./griotte-landing.html"]') &&
   document.querySelector('.sidebar-footer a[href="./griotte-landing.html"]').addEventListener('click', function(e) {
     e.preventDefault();
-    if (confirm('Se déconnecter ?')) { localStorage.clear(); window.location.href = './griotte-landing.html'; }
+    if (confirm('Se déconnecter ?')) { localStorage.clear(); window.location.href = './griotte-login.html'; }
   });
 
 // ── LANCEMENT ──

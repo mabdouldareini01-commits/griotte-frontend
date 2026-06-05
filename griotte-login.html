@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Connexion — GRIOTTE</title>
+<link rel="icon" type="image/png" href="./logo-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+:root{
+  --or:#FF6B00;--or-dark:#CC5200;--or-glow:rgba(255,107,0,0.1);
+  --bg:#F8F5F1;--bg-card:#FFFFFF;
+  --text:#1A1410;--text-soft:#4A3F35;--text-muted:#6B5A4E;
+  --border:rgba(26,20,16,0.1);--border-focus:rgba(255,107,0,0.5);
+  --radius:12px;--shadow:0 4px 32px rgba(26,20,16,0.10)
+}
+.auth-wrap{width:100%;max-width:420px}
+.auth-card{background:#fff;border-radius:20px;padding:2.5rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+
+/* Logo */
+.auth-logo{display:flex;flex-direction:column;align-items:center;margin-bottom:2rem}
+.auth-logo img{width:56px;height:56px;border-radius:16px;object-fit:contain}
+.auth-logo-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--text);margin-top:0.6rem;letter-spacing:-0.01em}
+.auth-logo-name span{color:var(--or)}
+
+/* Titre */
+.auth-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--text);text-align:center;margin-bottom:0.5rem;line-height:1.2}
+.auth-sub{font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--text-muted);text-align:center;margin-bottom:2rem;line-height:1.6}
+
+/* Champs */
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-soft);margin-bottom:0.4rem}
+.field input{
+  width:100%;background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:0.8rem 1rem;font-family:'Inter',sans-serif;
+  font-size:0.92rem;color:var(--text);outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s
+}
+.field input:focus{border-color:var(--or);box-shadow:0 0 0 3px var(--or-glow)}
+.field-pw{position:relative}
+.field-pw input{padding-right:3rem}
+.pw-toggle{
+  position:absolute;right:0.9rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;color:var(--text-muted);
+  font-size:1rem;padding:0.2rem;transition:color 0.2s;line-height:1
+}
+.pw-toggle:hover{color:var(--or)}
+
+/* Lien mot de passe oublié */
+.forgot-link{
+  display:block;text-align:right;font-size:0.78rem;
+  color:var(--or);text-decoration:none;margin-top:-0.5rem;
+  margin-bottom:1.25rem;font-family:'Inter',sans-serif
+}
+.forgot-link:hover{text-decoration:underline}
+
+/* Bouton principal */
+.btn-primary{
+  width:100%;padding:0.9rem;background:var(--or);border:none;
+  border-radius:10px;color:#fff;font-family:'Inter',sans-serif;
+  font-weight:600;font-size:0.95rem;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;margin-bottom:1rem
+}
+.btn-primary:hover{background:var(--or-dark);transform:translateY(-1px)}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+
+/* Divider */
+.divider{
+  display:flex;align-items:center;gap:0.75rem;
+  margin-bottom:1rem;font-size:0.78rem;color:var(--text-muted)
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Bouton Google */
+.btn-google{
+  width:100%;padding:0.8rem;background:#fff;
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:500;
+  color:var(--text);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;gap:0.6rem;transition:border-color 0.2s,background 0.2s;
+  margin-bottom:1.5rem
+}
+.btn-google:hover{border-color:var(--or);background:var(--bg)}
+.btn-google-ico{width:18px;height:18px;flex-shrink:0}
+
+/* Lien bas de page */
+.auth-switch{
+  text-align:center;font-size:0.85rem;color:var(--text-muted)
+}
+.auth-switch a{color:var(--or);text-decoration:none;font-weight:600}
+.auth-switch a:hover{text-decoration:underline}
+
+/* Rôle selector */
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.1rem}
+.role-btn{
+  padding:0.9rem 0.5rem;background:var(--bg);
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:500;
+  color:var(--text-soft);cursor:pointer;transition:all 0.2s;
+  display:flex;flex-direction:column;align-items:center;gap:0.35rem
+}
+.role-btn .ico{font-size:1.4rem}
+.role-btn.active{border-color:var(--or);color:var(--or);background:rgba(255,107,0,0.06)}
+.role-label{font-size:0.7rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;margin-top:0.1rem;color:var(--text-muted)}
+
+/* Erreur */
+.auth-error{
+  background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.2);
+  border-radius:8px;padding:0.65rem 0.9rem;font-size:0.82rem;
+  color:#dc2626;margin-bottom:1rem;display:none;
+  font-family:'Inter',sans-serif;line-height:1.5
+}
+.auth-error.show{display:block}
+
+/* Succès */
+.auth-success{
+  background:rgba(22,163,74,0.07);border:1px solid rgba(22,163,74,0.2);
+  border-radius:8px;padding:0.65rem 0.9rem;font-size:0.82rem;
+  color:#15803d;margin-bottom:1rem;display:none;
+  font-family:'Inter',sans-serif;line-height:1.5
+}
+.auth-success.show{display:block}
+
+@media(max-width:480px){
+  body{padding:1rem;align-items:flex-start;padding-top:2rem}
+  .auth-card{padding:1.75rem 1.25rem}
+}
+</style>
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-logo">
+    <img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"/>
+    <div class="auth-logo-name">Grio<span>tte</span></div>
+  </div>
+    <h1 class="auth-title">Bon retour sur GRIOTTE</h1>
+    <p class="auth-sub">Connectez-vous pour continuer votre lecture</p>
+
+    <div class="auth-error" id="loginError"></div>
+
+    <form id="loginForm" onsubmit="doLogin(event)" novalidate>
+      <div class="field">
+        <label for="loginEmail">Adresse email</label>
+        <input id="loginEmail" type="email" name="email"
+          placeholder="votre@email.com" autocomplete="email" required/>
+      </div>
+      <div class="field">
+        <label for="loginPassword">Mot de passe</label>
+        <div class="field-pw">
+          <input id="loginPassword" type="password" name="password"
+            placeholder="••••••••" autocomplete="current-password" required/>
+          <button type="button" class="pw-toggle" onclick="togglePw('loginPassword',this)">👁</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="loginConfirm">Confirmer le mot de passe</label>
+        <div class="field-pw">
+          <input id="loginConfirm" type="password" name="confirm"
+            placeholder="Répétez votre mot de passe" autocomplete="current-password" required/>
+          <button type="button" class="pw-toggle" onclick="togglePw('loginConfirm',this)">👁</button>
+        </div>
+      </div>
+      <a href="./griotte-forgot-password.html" class="forgot-link">Mot de passe oublié ?</a>
+      <button class="btn-primary" type="submit" id="loginBtn">Se connecter →</button>
+    </form>
+
+    <div class="divider">ou</div>
+    <button class="btn-google" onclick="googleAuth()">
+      <svg class="btn-google-ico" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continuer avec Google
+    </button>
+
+    <p class="auth-switch">
+      Pas encore de compte ? <a href="./griotte-register.html">S'inscrire</a>
+    </p>
+  </div>
+</div>
+<script>
+const API = 'https://griotte-backend-2-production.up.railway.app/api/v1';
+
+// Déjà connecté ?
+if (localStorage.getItem('griotte_token')) {
+  redirectByRole(localStorage.getItem('griotte_role') || 'READER');
+}
+
+function redirectByRole(role) {
+  if (role === 'ADMIN')  window.location.href = './griotte-admin.html';
+  else                   window.location.href = './griotte-dashboard.html';
+}
+
+function showError(msg) {
+  var el = document.getElementById('loginError');
+  el.textContent = msg; el.classList.add('show');
+}
+function clearError() {
+  document.getElementById('loginError').classList.remove('show');
+}
+
+function togglePw(id, btn) {
+  var inp = document.getElementById(id);
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+
+async function doLogin(e) {
+  e.preventDefault();
+  clearError();
+  var email = document.getElementById('loginEmail').value.trim();
+  var pw    = document.getElementById('loginPassword').value;
+  var confirm = document.getElementById('loginConfirm').value;
+  if (!email || !pw || !confirm) { showError('Veuillez remplir tous les champs.'); return; }
+  if (pw !== confirm) { showError('Les mots de passe ne correspondent pas.'); return; }
+
+  var btn = document.getElementById('loginBtn');
+  btn.textContent = 'Connexion…'; btn.disabled = true;
+
+  try {
+    var res  = await fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, password: pw })
+    });
+    var data = await res.json();
+
+    if (!res.ok) {
+      showError(data.message || 'Email ou mot de passe incorrect.');
+      btn.textContent = 'Se connecter →'; btn.disabled = false;
+      return;
+    }
+
+    localStorage.setItem('griotte_token', data.accessToken);
+    localStorage.setItem('griotte_role',  data.role || 'READER');
+
+    try {
+      var me = await (await fetch(API + '/auth/me', {
+        headers: {'Authorization': 'Bearer ' + data.accessToken}
+      })).json();
+      localStorage.setItem('griotte_user', JSON.stringify(me));
+    } catch(e2) {}
+
+    redirectByRole(data.role);
+  } catch(err) {
+    showError('Erreur réseau. Vérifiez votre connexion.');
+    btn.textContent = 'Se connecter →'; btn.disabled = false;
+  }
+}
+
+function googleAuth() {
+  window.location.href = API + '/auth/google';
+}
+
+// Token depuis URL (retour Google OAuth)
+var urlToken = new URLSearchParams(window.location.search).get('token');
+if (urlToken) {
+  localStorage.setItem('griotte_token', urlToken);
+  window.history.replaceState({}, '', window.location.pathname);
+  fetch(API + '/auth/me', {headers: {'Authorization': 'Bearer ' + urlToken}})
+    .then(r => r.json()).then(me => {
+      localStorage.setItem('griotte_user', JSON.stringify(me));
+      localStorage.setItem('griotte_role', me.role || 'READER');
+      redirectByRole(me.role);
+    }).catch(() => redirectByRole('READER'));
+}
+</script>
+</body>
+</html>
