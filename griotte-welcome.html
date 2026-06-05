@@ -83,17 +83,7 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;overflow-x:hid
 }
 
 /* RIGHT */
-.right-bg{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:none;overflow:hidden;z-index:0
-}
-.right-bg img{
-  width:420px;height:420px;
-  object-fit:contain;
-  opacity:0.045;
-  filter:grayscale(100%)
-}
+
 .right{position:relative;
   display:flex;align-items:center;justify-content:center;
   padding:4rem 3rem;
@@ -160,17 +150,7 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;overflow-x:hid
 @media(max-width:800px){
   .split{grid-template-columns:1fr}
   .left{display:none}
-  .right-bg{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:none;overflow:hidden;z-index:0
-}
-.right-bg img{
-  width:420px;height:420px;
-  object-fit:contain;
-  opacity:0.045;
-  filter:grayscale(100%)
-}
+  
 .right{position:relative;
     min-height:100vh;
     padding:3rem 1.5rem;
@@ -185,10 +165,7 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;overflow-x:hid
 <div class="split">
 
   <div class="left">
-    <div class="left-logo">
-      <img src="./logo-icon.png" alt="G" onerror="this.style.display='none'"/>
-      
-    </div>
+    
 
     <div class="left-mid">
       <h1 class="left-title">
@@ -230,12 +207,8 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;overflow-x:hid
   </div>
 
   <div class="right">
-    <div class="right-bg"><img src="./logo-icon.png" alt=""/></div>
-    <div class="card" style="position:relative;z-index:1">
-      <div class="card-logo">
-        <img src="./logo-icon.png" alt="G" onerror="this.style.display='none'"/>
-        
-      </div>
+    <div class="card">
+      
 
       <h2 class="card-title">Commencer<br/>sur GRIOTTE</h2>
       <p class="card-sub">Un compte pour lire, publier et recevoir des revenus.</p>
