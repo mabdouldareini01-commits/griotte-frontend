@@ -596,14 +596,13 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 /* ═══════════════════════════════════════════════ */
 
 </style>
+<script src="./brand-logo.js" defer></script>
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav id="navbar">
-  <a href="#" class="nav-logo-link" style="text-decoration:none"><div class="g-icon"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div>
-    <span class="nav-wordmark">Grio<span>tte</span></span>
-  </a>
+  <a href="#" style="text-decoration:none"><brand-logo></brand-logo></a>
   <ul class="nav-links">
     <li><a href="#catalogue">Catalogue</a></li>
     <li><a href="#concept">Tarifs</a></li>
@@ -814,9 +813,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <div class="footer-brand-logo">
-          <div class="g-icon"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div>
-          <span class="footer-brand-name">Grio<span>tte</span></span>
+        <div class="footer-brand-logo"><brand-logo variant="footer"></brand-logo></span>
         </div>
         <p class="footer-tagline">La première plateforme africaine de littérature numérique. 10 FCFA par page. 60% pour les auteurs.</p>
         <div class="footer-social">
@@ -870,9 +867,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-box">
     <button class="auth-close" onclick="fermerModalConnexion()">✕</button>
-    <div class="auth-logo-wrap">
-      <div class="g-icon"><img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"></div>
-    </div>
+    <div class="auth-logo-wrap"><brand-logo variant="auth"></brand-logo></div>
     <div class="auth-title">Bienvenue sur GRIOTTE</div>
     <p class="auth-sub">La littérature africaine à portée de main</p>
     <div class="auth-tabs">
