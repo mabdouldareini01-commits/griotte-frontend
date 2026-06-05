@@ -140,8 +140,8 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
     <img src="./logo-icon.png" alt="GRIOTTE" onerror="this.style.display='none'"/>
     <div class="auth-logo-name">Grio<span>tte</span></div>
   </div>
-    <h1 class="auth-title">Rejoindre GRIOTTE</h1>
-    <p class="auth-sub">Créez votre compte pour lire et publier</p>
+    <h1 class="auth-title">Créer mon compte</h1>
+    <p class="auth-sub">Lisez et publiez — un seul espace pour tout faire</p>
 
     <div class="auth-error" id="regError"></div>
 
@@ -174,23 +174,6 @@ body{font-family:'Inter',sans-serif;background:#F8F5F1;color:#1A1410;min-height:
         </div>
       </div>
 
-      <div class="field">
-        <label>Je suis</label>
-        <div class="role-grid">
-          <button type="button" class="role-btn active" id="roleLecteur" onclick="setRole('READER')">
-            <span class="ico">📚</span>
-            <span>Lecteur</span>
-            <span class="role-label">Je lis</span>
-          </button>
-          <button type="button" class="role-btn" id="roleAuteur" onclick="setRole('AUTHOR')">
-            <span class="ico">✍️</span>
-            <span>Auteur</span>
-            <span class="role-label">Je publie</span>
-          </button>
-        </div>
-        <input type="hidden" id="roleValue" value="READER"/>
-      </div>
-
       <button class="btn-primary" type="submit" id="regBtn">Créer mon compte →</button>
     </form>
 
@@ -221,11 +204,6 @@ function togglePw(id, btn) {
   inp.type = inp.type === 'password' ? 'text' : 'password';
   btn.textContent = inp.type === 'password' ? '👁' : '🙈';
 }
-function setRole(role) {
-  document.getElementById('roleValue').value = role;
-  document.getElementById('roleLecteur').classList.toggle('active', role === 'READER');
-  document.getElementById('roleAuteur').classList.toggle('active',  role === 'AUTHOR');
-}
 function showError(msg) {
   var el = document.getElementById('regError');
   el.textContent = msg; el.classList.add('show');
@@ -241,7 +219,7 @@ async function doRegister(e) {
   var email   = document.getElementById('regEmail').value.trim();
   var pw      = document.getElementById('regPassword').value;
   var confirm = document.getElementById('regConfirm').value;
-  var role    = document.getElementById('roleValue').value;
+  var role = 'READER';
 
   if (!name || !email || !pw || !confirm) { showError('Veuillez remplir tous les champs.'); return; }
   if (pw.length < 8) { showError('Le mot de passe doit contenir au moins 8 caractères.'); return; }
