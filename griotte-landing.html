@@ -30,6 +30,17 @@ function landingSearch(query) {
   });
 }
 
+
+function updateCalc(pages) {
+  var p = parseInt(pages);
+  var lecteur = p * 10;
+  var auteur  = Math.round(lecteur * 0.6);
+  var griotte = lecteur - auteur;
+  document.getElementById('calc-pages-lbl').textContent = p;
+  document.getElementById('calc-lecteur').textContent   = lecteur.toLocaleString('fr-FR') + ' FCFA';
+  document.getElementById('calc-auteur').textContent    = auteur.toLocaleString('fr-FR')  + ' FCFA';
+  document.getElementById('calc-griotte').textContent   = griotte.toLocaleString('fr-FR') + ' FCFA';
+}
 </script>
 <style>
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
@@ -323,24 +334,10 @@ section{position:relative}
 /* ── TESTIMONIALS ── */
 #testimonials{padding:5rem 0;background:var(--bg-card2);overflow:hidden}
 .testimonials-inner{max-width:1100px;margin:0 auto;padding:0 3rem;margin-bottom:3rem}
-.testimonials-grid{
-  display:flex;gap:1.5rem;padding:0 3rem;
-  overflow-x:auto;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-  animation:scrollCards 40s linear infinite
-}
+.testimonials-grid{display:none}
 .testimonials-grid::-webkit-scrollbar{display:none}
-.testi-card{
-  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:1.75rem;min-width:320px;scroll-snap-align:start;flex-shrink:0;
-  box-shadow:var(--shadow);position:relative
-}
-.testi-book-tag{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--text-muted);
-  background:var(--bg);border-radius:50px;padding:0.25rem 0.7rem;
-  margin-bottom:1rem;border:1px solid var(--border)
-}
+.testi-card{}
+.testi-book-tag{}
 .testi-stars{color:var(--or);font-size:0.85rem;margin-bottom:0.75rem;letter-spacing:0.05em}
 .testi-quote{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:1.25rem}
 .testi-author{display:flex;align-items:center;gap:0.85rem}
@@ -477,7 +474,7 @@ footer{
   #catalogue,#concept,#authors,#cta{padding:3.5rem 1.25rem}
   #testimonials{padding:3.5rem 0}
   .testimonials-inner{padding:0 1.25rem}
-  .testimonials-grid{padding:0 1.25rem}
+  .testimonials-grid{display:none}
   .section-title{font-size:1.9rem}
   footer{padding:3rem 1.25rem 2rem}
   .footer-top{grid-template-columns:1fr;gap:2rem}
@@ -918,45 +915,109 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 </section>
 
 
-<section id="concept">
-  <div class="concept-grid">
-    <div class="fade-up">
+<section id="concept" style="padding:5rem 0;background:#F4F1ED">
+  <div style="max-width:1000px;margin:0 auto;padding:0 2.5rem">
+    <div style="text-align:center;margin-bottom:4rem" class="fade-up">
       <div class="section-badge">Comment ça marche</div>
-      <h2 class="section-title" style="margin-top:0.75rem">Simple, <em>juste</em><br/>et africain.</h2>
-      <p class="section-sub" style="margin-bottom:0">Un modèle pensé pour les lecteurs africains et les auteurs du continent.</p>
-      <div class="steps-list">
-        <div class="step-item"><div class="step-num">01</div><div><div class="step-title">Créez votre compte</div><div class="step-desc">Inscription gratuite en 30 secondes. Lecteur ou auteur, rejoignez la communauté GRIOTTE.</div><button class="step-cta-inline" onclick="window.location.href='./griotte-welcome.html'">S'inscrire maintenant →</button></div></div>
-        <div class="step-item"><div class="step-num">02</div><div><div class="step-title">Rechargez votre solde</div><div class="step-desc">Mobile Money, carte bancaire ou Orange Money. Sécurisé et instantané.</div></div></div>
-        <div class="step-item"><div class="step-num">03</div><div><div class="step-title">Lisez à votre rythme</div><div class="step-desc">Payez uniquement les pages que vous lisez. 10 FCFA par page, rien de plus.</div></div></div>
+      <h2 class="section-title" style="margin-top:0.75rem">Un modèle simple,<br/><em>transparent</em> et équitable.</h2>
+      <p class="section-sub" style="margin-top:0.75rem;max-width:480px;margin-left:auto;margin-right:auto">Découvrez des milliers d'œuvres africaines et ne payez que ce que vous lisez.</p>
+    </div>
+    <!-- Carte 10 FCFA -->
+    <div style="background:#fff;border-radius:20px;padding:2.5rem;border:1px solid rgba(26,20,16,0.07);text-align:center;margin-bottom:2rem;box-shadow:0 2px 20px rgba(26,20,16,0.06)" class="fade-up">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:#8A7A6E;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:0.75rem">Prix par page</div>
+      <div style="font-family:'Playfair Display',serif;font-size:5rem;font-weight:800;color:#1A1410;line-height:1;margin-bottom:0.25rem">10</div>
+      <div style="font-family:'Inter',sans-serif;font-size:1rem;color:#FF6B00;font-weight:600;margin-bottom:1.5rem">FCFA par page lue</div>
+      <p style="font-size:0.88rem;color:#6B5A4E;line-height:1.75;max-width:420px;margin:0 auto 2rem">Contrairement aux abonnements traditionnels, vous payez uniquement les pages réellement consultées.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
+        <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif"><div style="width:16px;height:16px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Aucun abonnement obligatoire</div>
+        <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif"><div style="width:16px;height:16px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Aucun engagement</div>
+        <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif"><div style="width:16px;height:16px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Paiement à l'usage</div>
+        <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif"><div style="width:16px;height:16px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="8" height="8" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Lecture accessible à tous</div>
       </div>
     </div>
-    <div class="concept-visual fade-up">
-      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem">Prix par page</div>
-      <div class="pricing-big">10</div>
-      <div class="pricing-unit">FCFA PAR PAGE LUE</div>
-      <div class="pricing-divider"></div>
-      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem">Répartition des revenus</div>
-      <div class="pricing-split">
-        <div class="pricing-split-item"><div class="pricing-pct">60%</div><div class="pricing-label">Auteur</div></div>
-        <div class="pricing-split-item"><div class="pricing-pct">40%</div><div class="pricing-label">Plateforme</div></div>
+    <!-- Grid 2 colonnes -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem" class="fade-up">
+      <div style="display:flex;flex-direction:column;gap:1.5rem">
+        <!-- 60/40 -->
+        <div style="background:#fff;border-radius:16px;padding:1.75rem;border:1px solid rgba(26,20,16,0.07)">
+          <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#8A7A6E;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:1.25rem">Répartition des revenus</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem">
+            <div style="text-align:center;padding:1.25rem;background:#FFF8F4;border-radius:12px;border:1px solid rgba(255,107,0,0.12)">
+              <div style="font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:800;color:#FF6B00;line-height:1">60%</div>
+              <div style="font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;color:#6B5A4E;text-transform:uppercase;letter-spacing:0.06em;margin-top:0.3rem">Auteur</div>
+              <div style="font-size:0.72rem;color:#8A7A6E;margin-top:0.4rem;line-height:1.5">Rémunéré selon les pages lues</div>
+            </div>
+            <div style="text-align:center;padding:1.25rem;background:#F4F1ED;border-radius:12px;border:1px solid rgba(26,20,16,0.07)">
+              <div style="font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:800;color:#1A1410;line-height:1">40%</div>
+              <div style="font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;color:#6B5A4E;text-transform:uppercase;letter-spacing:0.06em;margin-top:0.3rem">GRIOTTE</div>
+              <div style="font-size:0.72rem;color:#8A7A6E;margin-top:0.4rem;line-height:1.5">Hébergement, paiements, développement</div>
+            </div>
+          </div>
+          <div style="height:5px;border-radius:50px;background:#E8E3DC;overflow:hidden"><div style="height:100%;width:60%;background:linear-gradient(to right,#FF6B00,#FF8C33);border-radius:50px"></div></div>
+          <p style="font-size:0.75rem;color:#8A7A6E;margin-top:0.9rem;font-style:italic;line-height:1.6">Un modèle transparent conçu pour rémunérer équitablement les auteurs africains.</p>
+        </div>
+        <!-- Exemple concret -->
+        <div style="background:#1A1410;border-radius:16px;padding:1.75rem">
+          <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(255,107,0,0.65);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:1rem">Exemple concret</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:1.25rem">Roman de 300 pages</div>
+          <div style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.8rem;color:rgba(255,255,255,0.45);font-family:'Inter',sans-serif">Lecteur paie</span><span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#fff">3 000 FCFA</span></div>
+            <div style="height:1px;background:rgba(255,255,255,0.07)"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.8rem;color:rgba(255,255,255,0.45);font-family:'Inter',sans-serif">Auteur reçoit</span><span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#FF6B00">1 800 FCFA</span></div>
+            <div style="height:1px;background:rgba(255,255,255,0.07)"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:0.78rem;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif">Part GRIOTTE</span><span style="font-family:'DM Mono',monospace;font-size:0.85rem;color:rgba(255,255,255,0.3)">1 200 FCFA</span></div>
+          </div>
+        </div>
       </div>
-      <div class="pricing-divider"></div>
-      <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--text-soft);line-height:1.6">Pour un roman de <strong style="color:var(--text)">300 pages</strong> lu en entier :<br/>Lecteur paie <strong style="color:var(--or)">3 000 FCFA</strong> · Auteur gagne <strong style="color:var(--or)">1 800 FCFA</strong></div>
+      <div style="display:flex;flex-direction:column;gap:1.5rem">
+        <!-- Calculateur -->
+        <div style="background:#fff;border-radius:16px;padding:1.75rem;border:1px solid rgba(26,20,16,0.07)">
+          <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#8A7A6E;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:1.25rem">Simulateur</div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.6rem">
+            <span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6B5A4E">Pages lues</span>
+            <span id="calc-pages-lbl" style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#1A1410">100</span>
+          </div>
+          <input type="range" id="calc-slider" min="10" max="500" value="100" step="10" oninput="updateCalc(this.value)" style="width:100%;accent-color:#FF6B00;cursor:pointer;height:3px;margin-bottom:1.5rem"/>
+          <div style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 1rem;background:#F4F1ED;border-radius:9px"><span style="font-size:0.8rem;color:#6B5A4E;font-family:'Inter',sans-serif">Lecteur paie</span><span id="calc-lecteur" style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#1A1410">1 000 FCFA</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 1rem;background:#FFF8F4;border-radius:9px;border:1px solid rgba(255,107,0,0.1)"><span style="font-size:0.8rem;color:#6B5A4E;font-family:'Inter',sans-serif">Auteur reçoit</span><span id="calc-auteur" style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#FF6B00">600 FCFA</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 1rem;border-radius:9px"><span style="font-size:0.75rem;color:#9A8878;font-family:'Inter',sans-serif">Part GRIOTTE</span><span id="calc-griotte" style="font-family:'DM Mono',monospace;font-size:0.8rem;color:#9A8878">400 FCFA</span></div>
+          </div>
+        </div>
+        <!-- Pourquoi -->
+        <div style="background:#fff;border-radius:16px;padding:1.75rem;border:1px solid rgba(26,20,16,0.07);flex:1">
+          <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#8A7A6E;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:1.25rem">Pourquoi ce modèle ?</div>
+          <div style="display:flex;flex-direction:column;gap:0.9rem">
+            <div style="display:flex;align-items:flex-start;gap:0.75rem"><div style="width:18px;height:18px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span style="font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif;line-height:1.55">Vous soutenez directement les auteurs africains</span></div>
+            <div style="display:flex;align-items:flex-start;gap:0.75rem"><div style="width:18px;height:18px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span style="font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif;line-height:1.55">Les revenus sont totalement transparents</span></div>
+            <div style="display:flex;align-items:flex-start;gap:0.75rem"><div style="width:18px;height:18px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span style="font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif;line-height:1.55">Les auteurs gagnent à chaque page lue</span></div>
+            <div style="display:flex;align-items:flex-start;gap:0.75rem"><div style="width:18px;height:18px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span style="font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif;line-height:1.55">Les lecteurs ne paient que ce qu'ils consomment</span></div>
+            <div style="display:flex;align-items:flex-start;gap:0.75rem"><div style="width:18px;height:18px;border-radius:50%;background:#FF6B00;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span style="font-size:0.82rem;color:#4A3F35;font-family:'Inter',sans-serif;line-height:1.55">Une économie durable pour la littérature africaine</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 4 étapes -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem" class="fade-up">
+      <div style="padding:1.5rem;background:#fff;border-radius:14px;border:1px solid rgba(26,20,16,0.07)"><div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(255,107,0,0.55);letter-spacing:0.14em;margin-bottom:0.85rem">01</div><div style="font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:700;color:#1A1410;margin-bottom:0.4rem;line-height:1.3">Créez votre compte</div><div style="font-size:0.78rem;color:#6B5A4E;line-height:1.65">Inscription gratuite en moins d'une minute.</div></div>
+      <div style="padding:1.5rem;background:#fff;border-radius:14px;border:1px solid rgba(26,20,16,0.07)"><div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(255,107,0,0.55);letter-spacing:0.14em;margin-bottom:0.85rem">02</div><div style="font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:700;color:#1A1410;margin-bottom:0.4rem;line-height:1.3">Découvrez des milliers d'œuvres</div><div style="font-size:0.78rem;color:#6B5A4E;line-height:1.65">Romans, nouvelles, poésie, fantasy du continent.</div></div>
+      <div style="padding:1.5rem;background:#fff;border-radius:14px;border:1px solid rgba(26,20,16,0.07)"><div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(255,107,0,0.55);letter-spacing:0.14em;margin-bottom:0.85rem">03</div><div style="font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:700;color:#1A1410;margin-bottom:0.4rem;line-height:1.3">Lisez à votre rythme</div><div style="font-size:0.78rem;color:#6B5A4E;line-height:1.65">Vous ne payez que les pages réellement lues.</div></div>
+      <div style="padding:1.5rem;background:#fff;border-radius:14px;border:1px solid rgba(26,20,16,0.07)"><div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(255,107,0,0.55);letter-spacing:0.14em;margin-bottom:0.85rem">04</div><div style="font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:700;color:#1A1410;margin-bottom:0.4rem;line-height:1.3">Soutenez les auteurs africains</div><div style="font-size:0.78rem;color:#6B5A4E;line-height:1.65">Chaque page lue rémunère directement les créateurs.</div></div>
     </div>
   </div>
 </section>
 
-<section id="authors">
+<section id="authors" style="padding:5rem 0;background:#F4F1ED">
   <div class="authors-split">
     <div class="fade-up">
       <div class="section-badge">Pour les auteurs</div>
       <h2 class="section-title" style="margin-top:0.75rem">Votre plume,<br/><em>vos revenus.</em></h2>
       <p class="section-sub" style="margin-bottom:0">GRIOTTE est né pour donner une scène aux voix africaines. Publiez, trouvez vos lecteurs, construisez votre œuvre.</p>
       <div class="author-features">
-        <div class="author-feature"><div class="feature-ico">📤</div><div><div class="feature-title">Publication en quelques minutes</div><div class="feature-desc">Uploadez votre manuscrit, définissez votre prix, publiez. Votre livre est live immédiatement.</div></div></div>
-        <div class="author-feature"><div class="feature-ico">📊</div><div><div class="feature-title">Analytics en temps réel</div><div class="feature-desc">Suivez vos lectures page par page, vos revenus, vos lecteurs par pays.</div></div></div>
-        <div class="author-feature"><div class="feature-ico">💰</div><div><div class="feature-title">60% des revenus pour vous</div><div class="feature-desc">Le modèle le plus généreux du marché africain. Paiement chaque mois, sans seuil minimum.</div></div></div>
-        <div class="author-feature"><div class="feature-ico">🌍</div><div><div class="feature-title">Audience panafricaine</div><div class="feature-desc">Touchez des lecteurs au Sénégal, Côte d'Ivoire, Mali, Cameroun et au-delà.</div></div></div>
+        <div class="author-feature"><div class="feature-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><div><div class="feature-title">Publication en quelques minutes</div><div class="feature-desc">Uploadez votre manuscrit, définissez votre prix, publiez. Votre livre est live immédiatement.</div></div></div>
+        <div class="author-feature"><div class="feature-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="feature-title">Analytics en temps réel</div><div class="feature-desc">Suivez vos lectures page par page, vos revenus, vos lecteurs par pays.</div></div></div>
+        <div class="author-feature"><div class="feature-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="feature-title">60% des revenus pour vous</div><div class="feature-desc">Le modèle le plus généreux du marché africain. Paiement chaque mois, sans seuil minimum.</div></div></div>
+        <div class="author-feature"><div class="feature-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div><div class="feature-title">Audience panafricaine</div><div class="feature-desc">Touchez des lecteurs au Sénégal, Côte d'Ivoire, Mali, Cameroun et au-delà.</div></div></div>
       </div>
     </div>
     <div class="author-dashboard fade-up">
@@ -979,26 +1040,120 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
   </div>
 </section>
 
-<section id="testimonials">
-  <div class="testimonials-inner fade-up">
-    <div class="section-badge">Témoignages</div>
-    <h2 class="section-title" style="margin-top:0.75rem">Ce que disent <em>nos membres</em></h2>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testi-card"><div class="testi-book-tag">📖 Les Fils du Sahel</div><div class="testi-stars">★★★★★</div><p class="testi-quote">GRIOTTE m'a permis de vivre de mon écriture pour la première fois. En 3 mois, j'ai gagné plus qu'avec mon ancien éditeur en un an.</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#3d1a0a,#8B4513);color:#f5c07a">A</div><div><div class="testi-name">Ama Kouyaté</div><div class="testi-role">Auteure · Mali</div></div></div></div>
-    <div class="testi-card"><div class="testi-book-tag">📖 La Griotte de Bamako</div><div class="testi-stars">★★★★★</div><p class="testi-quote">Je trouve des romans africains que je ne trouverais nulle part ailleurs. La qualité est incroyable et le prix est parfait pour ma bourse.</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#0a1628,#1e4a8f);color:#7eb8f5">K</div><div><div class="testi-name">Kwame Asante</div><div class="testi-role">Lecteur · Ghana</div></div></div></div>
-    <div class="testi-card"><div class="testi-book-tag">📖 Nuit sur le Sahara</div><div class="testi-stars">★★★★★</div><p class="testi-quote">Enfin une plateforme qui pense aux auteurs africains. Je publie depuis Dakar et mes lecteurs sont au Cameroun, en CI et en France.</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#0a2010,#1a5a20);color:#7ef58f">F</div><div><div class="testi-name">Fatou Sow</div><div class="testi-role">Auteure · Sénégal</div></div></div></div>
-    <div class="testi-card"><div class="testi-book-tag">📖 Terres Rouges</div><div class="testi-stars">★★★★☆</div><p class="testi-quote">Le modèle à la page est révolutionnaire. Je lis 50 pages ici, 30 là-bas. Je ne paye que ce que je lis. C'est honnête et c'est africain.</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#1a0a28,#4a1a60);color:#c87ef5">M</div><div><div class="testi-name">Moussa Coulibaly</div><div class="testi-role">Lecteur · Burkina Faso</div></div></div></div>
-    <div class="testi-card"><div class="testi-book-tag">📖 L'Enfant du Fleuve</div><div class="testi-stars">★★★★★</div><p class="testi-quote">Analytics précis, paiement régulier, communauté engagée. GRIOTTE est la meilleure chose qui soit arrivée à la littérature africaine.</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#1a1000,#503800);color:#f5c87e">I</div><div><div class="testi-name">Idrissa Konaté</div><div class="testi-role">Auteur · Guinée</div></div></div></div>
-  </div>
-</section>
+<section id="testimonials" style="padding:5rem 0;background:#fff">
+  <div style="max-width:1100px;margin:0 auto;padding:0 2.5rem">
 
-<section id="cta">
-  <h2 class="section-title">L'histoire africaine<br/><em>commence ici.</em></h2>
-  <p class="cta-sub">Rejoignez 48 000 lecteurs et 340 auteurs qui font vivre la littérature africaine sur GRIOTTE.</p>
-  <div class="cta-actions">
-    <button class="btn-cta-primary" onclick="window.location.href='./griotte-welcome.html'">Créer mon compte gratuitement →</button>
-    <button class="btn-cta-secondary" onclick="window.location.href='./griotte-welcome.html'" onclick="window.location.href='./griotte-welcome.html'">J'ai déjà un compte</button>
+    <!-- Header -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem" class="fade-up">
+      <div>
+        <div class="section-badge">Témoignages</div>
+        <h2 class="section-title" style="margin-top:0.75rem">Ce que disent <em>nos membres</em></h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:800;color:#1A1410;line-height:1">4.8</div>
+        <div>
+          <div style="color:#ca8a04;font-size:0.85rem;letter-spacing:0.06em">★★★★★</div>
+          <div style="font-size:0.68rem;color:#8A7A6E;font-family:'DM Mono',monospace;margin-top:0.15rem;text-transform:uppercase;letter-spacing:0.08em">Note moyenne</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ligne 1 : 3 cards égales -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem" class="fade-up">
+
+      <!-- Card 1 — fond beige -->
+      <div style="background:#F4F1ED;border-radius:16px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem">
+        <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#8A7A6E;background:#fff;border-radius:50px;padding:0.2rem 0.7rem;display:inline-block;width:fit-content;border:1px solid rgba(26,20,16,0.08)">Les Fils du Sahel</div>
+        <div style="color:#ca8a04;font-size:0.82rem;letter-spacing:0.06em">★★★★★</div>
+        <p style="font-family:'Playfair Display',serif;font-size:0.95rem;font-style:italic;color:#1A1410;line-height:1.75;flex:1">"GRIOTTE m'a permis de vivre de mon écriture pour la première fois. En 3 mois, j'ai gagné plus qu'avec mon ancien éditeur en un an."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1rem;border-top:1px solid rgba(26,20,16,0.07)">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#3d1a0a,#8B4513);color:#f5c07a;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;flex-shrink:0">A</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;color:#1A1410">Ama Kouyaté</div>
+            <div style="font-size:0.7rem;color:#8A7A6E;margin-top:0.1rem">Auteure · Mali</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;background:rgba(255,107,0,0.08);padding:0.18rem 0.55rem;border-radius:50px;border:1px solid rgba(255,107,0,0.15);white-space:nowrap">Auteure</div>
+        </div>
+      </div>
+
+      <!-- Card 2 — fond sombre -->
+      <div style="background:#1A1410;border-radius:16px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem">
+        <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.06);border-radius:50px;padding:0.2rem 0.7rem;display:inline-block;width:fit-content;border:1px solid rgba(255,255,255,0.08)">La Griotte de Bamako</div>
+        <div style="color:#ca8a04;font-size:0.82rem;letter-spacing:0.06em">★★★★★</div>
+        <p style="font-family:'Playfair Display',serif;font-size:0.95rem;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.75;flex:1">"Je trouve des romans africains introuvables ailleurs. La qualité est incroyable et le prix est parfait pour ma bourse."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07)">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0a1628,#1e4a8f);color:#7eb8f5;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;flex-shrink:0">K</div>
+          <div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;color:#fff">Kwame Asante</div>
+            <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:0.1rem">Lecteur · Ghana</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 — fond orange clair -->
+      <div style="background:#FFF8F4;border-radius:16px;padding:1.75rem;border:1px solid rgba(255,107,0,0.1);display:flex;flex-direction:column;gap:1rem">
+        <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#8A7A6E;background:#fff;border-radius:50px;padding:0.2rem 0.7rem;display:inline-block;width:fit-content;border:1px solid rgba(26,20,16,0.08)">Nuit sur le Sahara</div>
+        <div style="color:#ca8a04;font-size:0.82rem;letter-spacing:0.06em">★★★★★</div>
+        <p style="font-family:'Playfair Display',serif;font-size:0.95rem;font-style:italic;color:#1A1410;line-height:1.75;flex:1">"Enfin une plateforme qui pense aux auteurs africains. Je publie depuis Dakar et mes lecteurs sont partout sur le continent."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1rem;border-top:1px solid rgba(255,107,0,0.1)">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0a2010,#1a5a20);color:#7ef58f;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;flex-shrink:0">F</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;color:#1A1410">Fatou Sow</div>
+            <div style="font-size:0.7rem;color:#8A7A6E;margin-top:0.1rem">Auteure · Sénégal</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;background:rgba(255,107,0,0.08);padding:0.18rem 0.55rem;border-radius:50px;border:1px solid rgba(255,107,0,0.15);white-space:nowrap">Auteure</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ligne 2 : 2 cards + 1 stat -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem" class="fade-up">
+
+      <!-- Card 4 -->
+      <div style="background:#F4F1ED;border-radius:16px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem">
+        <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#8A7A6E;background:#fff;border-radius:50px;padding:0.2rem 0.7rem;display:inline-block;width:fit-content;border:1px solid rgba(26,20,16,0.08)">Terres Rouges</div>
+        <div style="color:#ca8a04;font-size:0.82rem;letter-spacing:0.06em">★★★★☆</div>
+        <p style="font-family:'Playfair Display',serif;font-size:0.95rem;font-style:italic;color:#1A1410;line-height:1.75;flex:1">"Le modèle à la page est révolutionnaire. Je ne paie que ce que je lis. C'est honnête et c'est africain."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1rem;border-top:1px solid rgba(26,20,16,0.07)">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#1a0a28,#4a1a60);color:#c87ef5;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;flex-shrink:0">M</div>
+          <div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;color:#1A1410">Moussa Coulibaly</div>
+            <div style="font-size:0.7rem;color:#8A7A6E;margin-top:0.1rem">Lecteur · Burkina Faso</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div style="background:#fff;border-radius:16px;padding:1.75rem;border:1px solid rgba(26,20,16,0.08);display:flex;flex-direction:column;gap:1rem">
+        <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#8A7A6E;background:#F4F1ED;border-radius:50px;padding:0.2rem 0.7rem;display:inline-block;width:fit-content;border:1px solid rgba(26,20,16,0.08)">L'Enfant du Fleuve</div>
+        <div style="color:#ca8a04;font-size:0.82rem;letter-spacing:0.06em">★★★★★</div>
+        <p style="font-family:'Playfair Display',serif;font-size:0.95rem;font-style:italic;color:#1A1410;line-height:1.75;flex:1">"Analytics précis, paiement régulier, communauté engagée. GRIOTTE est la meilleure chose pour la littérature africaine."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1rem;border-top:1px solid rgba(26,20,16,0.07)">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#1a1000,#503800);color:#f5c87e;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;flex-shrink:0">I</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;color:#1A1410">Idrissa Konaté</div>
+            <div style="font-size:0.7rem;color:#8A7A6E;margin-top:0.1rem">Auteur · Guinée</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;background:rgba(255,107,0,0.08);padding:0.18rem 0.55rem;border-radius:50px;border:1px solid rgba(255,107,0,0.15);white-space:nowrap">Auteur</div>
+        </div>
+      </div>
+
+      <!-- Card 6 — stat orange -->
+      <div style="background:#FF6B00;border-radius:16px;padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:800;color:#fff;line-height:1;margin-bottom:0.4rem">48k+</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.62rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem">Lecteurs actifs</div>
+          <div style="display:flex;flex-direction:column;gap:0.6rem">
+            <div style="display:flex;align-items:center;gap:0.5rem"><div style="width:1px;height:24px;background:rgba(255,255,255,0.3)"></div><span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.75)">340+ auteurs vérifiés</span></div>
+            <div style="display:flex;align-items:center;gap:0.5rem"><div style="width:1px;height:24px;background:rgba(255,255,255,0.3)"></div><span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.75)">1 200+ œuvres publiées</span></div>
+            <div style="display:flex;align-items:center;gap:0.5rem"><div style="width:1px;height:24px;background:rgba(255,255,255,0.3)"></div><span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.75)">10 FCFA par page lue</span></div>
+          </div>
+        </div>
+        <button onclick="window.location.href='./griotte-welcome.html'" style="margin-top:1.5rem;width:100%;padding:0.75rem;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);border-radius:10px;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">Rejoindre GRIOTTE →</button>
+      </div>
+
+    </div>
   </div>
 </section>
 
