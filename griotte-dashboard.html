@@ -264,6 +264,107 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
   .stats-grid{grid-template-columns:1fr 1fr}
   .content{padding:1rem}
 }
+
+/* ══ RESPONSIVE PATCH ══════════════════════════════════ */
+@media(max-width:768px){
+  /* Nav */
+  #navbar,.nav{padding:0 1rem!important;height:56px!important}
+  .nav-links{display:none!important}
+  .nav-actions .btn-nav-ghost,.nav-right .nbtn-ghost{display:none!important}
+  
+  /* Hero */
+  .hero{padding:56px 1.25rem 0!important}
+  .hero-content{padding:2rem 0 3rem!important}
+  .hero-title{font-size:2.4rem!important;line-height:1.1!important}
+  .hero-sub{font-size:0.95rem!important}
+  .hero-stats{gap:1.25rem!important}
+  .hero-stat-value{font-size:1.8rem!important}
+  .hero-books{display:none!important}
+  
+  /* Sections */
+  section{padding-left:1.25rem!important;padding-right:1.25rem!important}
+  .section-inner,[style*="max-width:1100px"],[style*="max-width:1000px"],[style*="max-width:1200px"]{padding-left:1.25rem!important;padding-right:1.25rem!important}
+  .section-title{font-size:1.8rem!important}
+  
+  /* Grilles 2 colonnes → 1 colonne */
+  .concept-grid,.authors-split{grid-template-columns:1fr!important;gap:1.5rem!important}
+  
+  /* Catalogue landing */
+  #lc-track{gap:0.85rem!important}
+  .lc-card{width:130px!important}
+  
+  /* Grille témoignages */
+  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr 1fr!important}
+  
+  /* Tarifs */
+  [style*="grid-template-columns:1fr 1fr"][style*="gap:1.5rem"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important}
+  
+  /* Authors section */
+  [style*="grid-template-columns:1fr 1fr;gap:4rem"]{grid-template-columns:1fr!important;gap:2rem!important}
+  
+  /* Footer */
+  footer{padding:2.5rem 1.25rem!important}
+  [style*="grid-template-columns:1.8fr 1fr 1fr 1fr"]{grid-template-columns:1fr 1fr!important;gap:2rem!important}
+  
+  /* Boutons hero */
+  .hero-actions{flex-direction:column!important;gap:0.75rem!important}
+  .btn-hero-primary,.btn-hero-secondary{width:100%!important;justify-content:center!important}
+  
+  /* Catalogue page */
+  .page-header-inner{flex-direction:column!important;align-items:flex-start!important}
+  .search-box{width:100%!important;max-width:none!important}
+  .book-grid{grid-template-columns:repeat(3,1fr)!important}
+  .carousel-track{gap:0.85rem!important}
+  .bc{width:130px!important}
+  .body{padding:1.25rem!important}
+  
+  /* Dashboard */
+  .sidebar{transform:translateX(-100%);transition:transform 0.3s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0!important}
+  .stats-grid{grid-template-columns:repeat(2,1fr)!important}
+  .content{padding:1rem!important}
+  .topbar{padding:0 1rem!important}
+}
+
+@media(max-width:480px){
+  /* Hero */
+  .hero-title{font-size:2rem!important}
+  .hero-stats{flex-direction:column!important;gap:0.75rem!important}
+  .hero-stat-divider{display:none!important}
+  
+  /* Sections */
+  .section-title{font-size:1.6rem!important}
+  
+  /* Tarifs — 4 étapes → 2 col */
+  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important;gap:0.75rem!important}
+  
+  /* Témoignages → 1 col */
+  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
+  
+  /* Footer → 1 col */
+  [style*="grid-template-columns:1.8fr 1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:1fr 1fr;gap:2rem"]{grid-template-columns:1fr!important}
+  
+  /* Catalogue */
+  .book-grid{grid-template-columns:repeat(2,1fr)!important}
+  .bc{width:120px!important}
+  
+  /* Stats dashboard */
+  .stats-grid{grid-template-columns:1fr 1fr!important}
+  
+  /* CTA welcome */
+  .welcome-btns .btn{width:100%!important}
+  
+  /* Footer bottom */
+  [style*="justify-content:space-between"][style*="padding-top:1.75rem"]{flex-direction:column!important;align-items:center!important;text-align:center!important}
+}
+
+/* ══ FIN RESPONSIVE ════════════════════════════════════ */
+
 </style>
 </head>
 <body>

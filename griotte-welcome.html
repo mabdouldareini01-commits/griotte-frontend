@@ -159,6 +159,13 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;overflow-x:hid
   }
   .card{max-width:400px}
 }
+
+@media(max-width:800px){
+  .split{grid-template-columns:1fr!important}
+  .left{display:none!important}
+  .right{min-height:100vh;padding:2.5rem 1.5rem!important}
+  .card{max-width:100%!important}
+}
 </style>
 </head>
 <body>
