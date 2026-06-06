@@ -880,6 +880,9 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .mobile-menu .mm-cta{margin-top:0.75rem;background:var(--or);color:#fff;border-radius:8px;padding:0.75rem 1rem;text-align:center;font-weight:600}
 @media(max-width:768px){.menu-toggle{display:flex!important}}
 
+
+.btn-hero-secondary:hover .btn-arrow{transform:translateX(3px)}
+
 </style>
 </head>
 <body>
@@ -926,8 +929,9 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
     </p>
     <div class="hero-actions">
       <button class="btn-hero-primary" onclick="window.location.href='./griotte-welcome.html'">Rejoindre GRIOTTE →</button>
-      <button class="btn-hero-secondary" onclick="document.getElementById('catalogue').scrollIntoView({behavior:'smooth'})">
-        ▶ Explorer le catalogue
+      <button class="btn-hero-secondary" onclick="document.getElementById('catalogue').scrollIntoView({behavior:'smooth'})" style="display:flex;align-items:center;gap:0.5rem">
+        Explorer le catalogue
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="transition:transform 0.2s ease;flex-shrink:0" class="btn-arrow"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
     <div class="hero-stats">
