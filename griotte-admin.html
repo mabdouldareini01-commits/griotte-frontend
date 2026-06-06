@@ -866,479 +866,430 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <script>
 (function(){
-const API='https://griotte-backend-2-production.up.railway.app/api/v1/auth';
-let allBooks=[],allUsers=[],localTags=[];
-let modalOkCb=null;
+const API = 'https://griotte-backend-2-production.up.railway.app/api/v1/auth';
 
-// Token
-const up=new URLSearchParams(window.location.search);
-const tf=up.get('token');
-if(tf){localStorage.setItem('accessToken',tf);window.history.replaceState({},'',window.location.pathname);}
+// ── TOKEN — support both storage keys ────────────────────────────
+let token = localStorage.getItem('griotte_token') || localStorage.getItem('accessToken');
+const urlParams = new URLSearchParams(window.location.search);
+const urlToken  = urlParams.get('token');
+if (urlToken) {
+  token = urlToken;
+  localStorage.setItem('griotte_token', token);
+  localStorage.setItem('accessToken', token);
+  window.history.replaceState({}, '', window.location.pathname);
+}
+if (!token) { window.location.href = './griotte-landing.html'; }
 
-// Date
-const de=document.getElementById('currentDate');
-if(de) de.textContent=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
+// ── GLOBAL STATE ──────────────────────────────────────────────────
+let allBooks = [], allUsers = [], allStats = {};
+let modalOkCb = null;
 
-// Toast
-window.showToast=function(msg,ico){
- const t=document.getElementById('toast');
- document.getElementById('toastIco').textContent=ico||'✓';
- document.getElementById('toastMsg').textContent=msg;
- t.classList.add('show');
- setTimeout(function(){t.classList.remove('show');},2600);
+// ── DATE ──────────────────────────────────────────────────────────
+const dateEl = document.getElementById('currentDate');
+if (dateEl) dateEl.textContent = new Date().toLocaleDateString('fr-FR', {
+  day: 'numeric', month: 'long', year: 'numeric'
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────
+window.showToast = function(msg, type) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  const ico = document.getElementById('toastIco');
+  const txt = document.getElementById('toastMsg');
+  if (ico) ico.textContent = type === 'error' ? '✗' : '✓';
+  if (txt) txt.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
 };
 
-// Modal
-window.openModal=function(title,sub,body,okLabel,okClass,cb){
- document.getElementById('modalTitle').textContent=title||'Confirmation';
- document.getElementById('modalSub').textContent=sub||'';
- document.getElementById('modalBody').innerHTML=body||'';
- const btn=document.getElementById('modalOk');
- btn.textContent=okLabel||'Confirmer';
- btn.className=okClass==='danger'?'bok bok-r':'bok';
- modalOkCb=cb;
- document.getElementById('modal').classList.add('open');
+// ── MODAL ─────────────────────────────────────────────────────────
+window.openModal  = function(title, sub, body, okLabel, okClass, cb) {
+  setEl('modalTitle', title || 'Confirmation');
+  setEl('modalSub',   sub   || '');
+  const bodyEl = document.getElementById('modalBody');
+  if (bodyEl) bodyEl.innerHTML = body || '';
+  const btn = document.getElementById('modalOk');
+  if (btn) { btn.textContent = okLabel || 'Confirmer'; btn.className = okClass === 'danger' ? 'bok bok-r' : 'bok'; }
+  modalOkCb = cb;
+  const m = document.getElementById('modal');
+  if (m) m.classList.add('open');
 };
-window.closeModal=function(){document.getElementById('modal').classList.remove('open');modalOkCb=null;};
-window.doModalOk=function(){if(modalOkCb)modalOkCb();closeModal();};
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+window.closeModal  = function() { const m = document.getElementById('modal'); if(m) m.classList.remove('open'); modalOkCb = null; };
+window.doModalOk   = function() { if (modalOkCb) modalOkCb(); closeModal(); };
+const modalEl = document.getElementById('modal');
+if (modalEl) modalEl.addEventListener('click', e => { if (e.target === modalEl) closeModal(); });
 
-// Build sidebar
-function buildSidebar(){
- const nav=document.getElementById('sidebarNav');
- const groups=[
- {label:'Vue d\'ensemble',items:[
- {ico:'',label:'Tableau de bord',page:'dashboard'},
- {ico:'',label:'Analytics',page:'analytics'},
- ]},
- {label:'Contenu',items:[
- {ico:'',label:'Livres',page:'livres',badge:'nb-blue',badgeId:'navBooks'},
- {ico:'⏳',label:'Validation',page:'validation',badge:'nb-or',badgeId:'navPending',warn:true},
- {ico:'',label:'Chapitres',page:'chapitres'},
- {ico:'',label:'Tags',page:'tags'},
- {ico:'',label:'Modération',page:'moderation'},
- ]},
- {label:'Utilisateurs',items:[
- {ico:'',label:'Utilisateurs',page:'users',badge:'nb-blue',badgeId:'navUsers'},
- {ico:'',label:'Auteurs',page:'auteurs'},
- ]},
- {label:'Finance',items:[
- {ico:'',label:'Paiements',page:'paiements'},
- {ico:'',label:'Retraits',page:'retraits',badge:'nb-red',badgeId:'navRetraits'},
- ]},
- {label:'Système',items:[
- {ico:'',label:'Paramètres',page:'parametres'},
- {ico:'',label:'Dashboard principal',page:null,action:"window.location.href='griotte-dashboard.html'"},
- {ico:'',label:'Déconnexion',page:null,action:'deconnecter()',danger:true},
- ]},
- ];
- let html='';
- groups.forEach(function(g){
- html+='<div class="nav-group-header" onclick="toggleGroup(this)"><span class="nav-group-label">'+g.label+'</span><span class="nav-group-arrow open"></span></div>';
- html+='<div class="nav-group-items">';
- g.items.forEach(function(item){
- const cls='nav-item'+(item.warn?' warn':'')+(item.danger?' danger':'');
- const onclick=item.page?'showPage(\''+item.page+'\',this)':item.action;
- const badge=item.badge?'<span class="nav-badge '+item.badge+'" id="'+(item.badgeId||'')+'">0</span>':'';
- html+='<a class="'+cls+'" onclick="'+onclick+'"><span class="nav-ico">'+item.ico+'</span> '+item.label+badge+'</a>';
- });
- html+='</div>';
- });
- nav.innerHTML=html;
+// ── HELPERS ───────────────────────────────────────────────────────
+function setEl(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+function fmt(n) { return (n || 0).toLocaleString('fr-FR'); }
+function fmtDate(d) { return d ? new Date(d).toLocaleDateString('fr-FR') : '—'; }
+
+// ── INIT ──────────────────────────────────────────────────────────
+async function loadAdmin() {
+  try {
+    const res  = await fetch(API + '/me', { headers: { 'Authorization': 'Bearer ' + token } });
+    if (!res.ok) { window.location.href = './griotte-landing.html'; return; }
+    const user = await res.json();
+
+    if (user.role !== 'ADMIN') {
+      showToast('Accès refusé — Admins uniquement', 'error');
+      setTimeout(() => window.location.href = './griotte-dashboard.html', 1500);
+      return;
+    }
+
+    setEl('adminAva',  user.name ? user.name.charAt(0).toUpperCase() : 'A');
+    setEl('adminName', user.name || 'Administrateur');
+
+    await loadData();
+    buildSidebar();
+    initGroups();
+    showPage('dashboard', null);
+
+  } catch(e) {
+    console.error('loadAdmin:', e);
+    window.location.href = './griotte-landing.html';
+  }
 }
 
-// Toggle nav groups
-window.toggleGroup=function(header){
- const items=header.nextElementSibling;
- const arrow=header.querySelector('.nav-group-arrow');
- const isOpen=items.style.maxHeight!=='0px'&&items.style.maxHeight!=='';
- if(isOpen||items.style.maxHeight===''){
- items.style.maxHeight='0px';
- arrow.classList.remove('open');
- } else {
- items.style.maxHeight=items.scrollHeight+'px';
- arrow.classList.add('open');
- }
-};
-
-// Init group heights
-function initGroups(){
- document.querySelectorAll('.nav-group-items').forEach(function(el){
- el.style.maxHeight=el.scrollHeight+'px';
- });
+// ── LOAD ALL DATA ─────────────────────────────────────────────────
+async function loadData() {
+  await Promise.allSettled([loadBooks(), loadUsers(), loadStats()]);
 }
 
-// Nav
-window.showPage=function(page,el){
- document.querySelectorAll('.page').forEach(function(p){p.style.display='none';p.classList.remove('active');});
- const t=document.getElementById('page-'+page);
- if(t){t.style.display='block';t.classList.add('active');}
- document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
- if(el) el.classList.add('active');
- const titles={dashboard:'Tableau de bord',users:'Utilisateurs',auteurs:'Auteurs',livres:'Livres',validation:'Validation',chapitres:'Chapitres',paiements:'Paiements',retraits:'Retraits',analytics:'Analytics',tags:'Tags',moderation:'Modération',parametres:'Paramètres'};
- const te=document.getElementById('pageTitle');
- if(te) te.textContent=titles[page]||page;
- const bc=document.getElementById('breadcrumb');
- if(bc) bc.textContent=titles[page]||page;
- if(page==='users') renderUsers(allUsers);
- if(page==='auteurs') renderAuteurs();
- if(page==='livres') renderBooks(allBooks);
- if(page==='validation') renderValidation();
- if(page==='tags') renderTags();
-};
-
-// Load admin
-async function loadAdmin(){
- const token=localStorage.getItem('accessToken');
- if(!token){window.location.href='/griotte-landing.html';return;}
- try{
- const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
- const d=await res.json();
- if(!d.name||d.role!=='ADMIN'){showToast('Accès refusé — Admins uniquement','');setTimeout(function(){window.location.href='/griotte-dashboard.html';},1500);return;}
- const aa=document.getElementById('adminAva');
- if(aa) aa.textContent=d.name.charAt(0).toUpperCase();
- const an=document.getElementById('adminName');
- if(an) an.textContent=d.name;
- loadData(token);
- }catch(e){window.location.href='/griotte-landing.html';}
+async function loadBooks() {
+  try {
+    const res = await fetch(API + '/books-public');
+    const data = await res.json();
+    allBooks = Array.isArray(data) ? data : [];
+    updateBooksUI();
+  } catch(e) { console.warn('loadBooks:', e.message); }
 }
 
-async function loadData(token){
- // Load books
- try{
- const res=await fetch(API+'/books-public');
- allBooks=await res.json()||[];
- updateBooksUI();
- }catch(e){}
-
- // Load users
- try{
- const res=await fetch(API+'/admin/users',{headers:{'Authorization':'Bearer '+token}});
- const data=await res.json();
- if(Array.isArray(data)) allUsers=data;
- updateUsersUI();
- }catch(e){}
-
- // Load stats
- try{
- const res=await fetch(API+'/admin/stats',{headers:{'Authorization':'Bearer '+token}});
- const d=await res.json();
- if(d.totalUsers){
- const ku=document.getElementById('kpiUsers');
- if(ku) ku.textContent=d.totalUsers.toLocaleString();
- const nu=document.getElementById('navUsers');
- if(nu) nu.textContent=d.totalUsers;
- const us=document.getElementById('usersSub');
- if(us) us.textContent=d.totalUsers+' utilisateurs inscrits';
- const ka=document.getElementById('kpiAuthors');
- if(ka) ka.textContent=d.totalAuthors||'—';
- // Rôles progress
- if(d.totalUsers>0){
- const rPct=Math.round((d.totalReaders/d.totalUsers)*100);
- const aPct=Math.round((d.totalAuthors/d.totalUsers)*100);
- const pr=document.getElementById('pctReaders');if(pr) pr.textContent=rPct+'%';
- const br=document.getElementById('barReaders');if(br) br.style.width=rPct+'%';
- const pa=document.getElementById('pctAuthors');if(pa) pa.textContent=aPct+'%';
- const ba=document.getElementById('barAuthors');if(ba) ba.style.width=aPct+'%';
- }
- }
- }catch(e){}
+async function loadUsers() {
+  try {
+    const res  = await fetch(API + '/admin/users', { headers: { 'Authorization': 'Bearer ' + token } });
+    const data = await res.json();
+    allUsers = Array.isArray(data) ? data : [];
+    updateUsersUI();
+  } catch(e) { console.warn('loadUsers:', e.message); }
 }
 
-function updateBooksUI(){
- const nb=allBooks.length;
- const kb=document.getElementById('kpiBooks');if(kb) kb.textContent=nb;
- const nab=document.getElementById('navBooks');if(nab) nab.textContent=nb;
- const bs=document.getElementById('booksSub');if(bs) bs.textContent=nb+' livre'+(nb>1?'s':'');
- // Dashboard recent
- const db=document.getElementById('dashBooks');
- if(db&&allBooks.length>0){
- db.innerHTML=allBooks.slice(0,5).map(function(b){
- return '<tr><td class="b">'+b.title+'</td><td>'+(b.author?b.author.name:'—')+'</td><td>'+b.genre+'</td><td><span class="tag tg">'+b.status+'</span></td></tr>';
- }).join('');
- }else if(db){
- db.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem;padding:1.2rem">Aucun livre</td></tr>';
- }
- // Top authors
- const ta=document.getElementById('topAuthors');
- if(ta){
- const authMap={};
- allBooks.forEach(function(b){if(b.author){authMap[b.author.name]=(authMap[b.author.name]||0)+1;}});
- const sorted=Object.entries(authMap).sort(function(a,b){return b[1]-a[1];}).slice(0,4);
- if(sorted.length>0){
- ta.innerHTML=sorted.map(function(a,i){
- const colors=['linear-gradient(135deg,#3d1a0a,#8B4513)','linear-gradient(135deg,#0a1628,#2e5f8f)','linear-gradient(135deg,#0a2818,#1e7a4a)','linear-gradient(135deg,#280a0a,#7a1e1e)'];
- const fc=['#f5c07a','#7eb8f5','#7affc0','#f5a0a0'];
- return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0;border-bottom:1px solid rgba(248,246,242,0.025)">'
- +'<div class="uava" style="background:'+colors[i%4]+';color:'+fc[i%4]+'">'+a[0].charAt(0)+'</div>'
- +'<div style="flex:1"><div style="font-size:0.72rem;font-weight:600;color:var(--blanc)">'+a[0]+'</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+a[1]+' livre'+(a[1]>1?'s':'')+'</div></div>'
- +'</div>';
- }).join('');
- }
- }
- // Validation alert
- const pending=allBooks.filter(function(b){return b.status==='DRAFT';});
- const ap=document.getElementById('alertPending');
- if(ap) ap.textContent=pending.length+' livre(s) en attente de validation';
- const np=document.getElementById('navPending');
- if(np) np.textContent=pending.length;
+async function loadStats() {
+  try {
+    const res  = await fetch(API + '/admin/stats', { headers: { 'Authorization': 'Bearer ' + token } });
+    allStats   = await res.json();
+    updateStatsUI();
+  } catch(e) { console.warn('loadStats:', e.message); }
 }
 
-function updateUsersUI(){
- // already rendered on page open
+// ── UPDATE UIs ────────────────────────────────────────────────────
+function updateBooksUI() {
+  const n = allBooks.length;
+  setEl('kpiBooks', fmt(n));
+  setEl('navBooks', n);
+  setEl('booksSub', n + ' œuvres publiées');
+  renderBooks();
+  renderValidation();
 }
 
-// RENDER USERS
-function renderUsers(users){
- const tb=document.getElementById('usersTable');
- if(!tb) return;
- if(!users||users.length===0){
- tb.innerHTML='<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun utilisateur.<br/><span style="opacity:0.5">Vérifiez la connexion au backend.</span></td></tr>';
- return;
- }
- const rc={READER:'tc',AUTHOR:'to',ADMIN:'tb'};
- const colors=['linear-gradient(135deg,#3d1a0a,#8B4513)','linear-gradient(135deg,#0a1628,#2e5f8f)','linear-gradient(135deg,#0a2818,#1e7a4a)','linear-gradient(135deg,#280a0a,#7a1e1e)','linear-gradient(135deg,#1a0a28,#5a1e8f)'];
- const fc=['#f5c07a','#7eb8f5','#7affc0','#f5a0a0','#c0a0f5'];
- tb.innerHTML=users.map(function(u,i){
- const susp=u.isSuspended?'<span class="tag tr">Suspendu</span>':'<span class="tag tg">Actif</span>';
- const bal=u.wallet?u.wallet.balance.toLocaleString():'0';
- const date=new Date(u.createdAt).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'2-digit'});
- return '<tr>'
- +'<td style="padding-left:1.2rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">#'+(i+1)+'</td>'
- +'<td><div style="display:flex;align-items:center;gap:0.5rem"><div class="uava" style="background:'+colors[i%5]+';color:'+fc[i%5]+'">'+u.name.charAt(0).toUpperCase()+'</div><div><div style="font-size:0.74rem;font-weight:600;color:var(--blanc)">'+u.name+'</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+(u.country||'—')+'</div></div></div></td>'
- +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+u.email+'</td>'
- +'<td><span style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+(u.country||'—')+'</span></td>'
- +'<td><span class="tag '+(rc[u.role]||'tc')+'">'+u.role+'</span></td>'
- +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--or)">'+bal+' F</td>'
- +'<td>'+susp+'</td>'
- +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+date+'</td>'
- +'<td><div style="display:flex;gap:0.3rem">'
- +(u.role==='READER'?'<button class="btn btn-b" onclick="verifyAuthor(\''+u.id+'\')">→ Auteur</button>':'')
- +(u.isSuspended
- ?'<button class="btn btn-g" onclick="toggleSuspend(\''+u.id+'\',false)">Réactiver</button>'
- :'<button class="btn btn-r" onclick="toggleSuspend(\''+u.id+'\',true)">Suspendre</button>')
- +'</div></td>'
- +'</tr>';
- }).join('');
+function updateUsersUI() {
+  const n = allUsers.length;
+  const authors  = allUsers.filter(u => u.role === 'AUTHOR').length;
+  const readers  = allUsers.filter(u => u.role === 'READER').length;
+  setEl('kpiUsers',   fmt(n));
+  setEl('navUsers',   n);
+  setEl('usersSub',   n + ' utilisateurs inscrits');
+  setEl('kpiAuthors', fmt(authors));
+  if (n > 0) {
+    const rPct = Math.round(readers  / n * 100);
+    const aPct = Math.round(authors  / n * 100);
+    setEl('pctReaders', rPct + '%');
+    setEl('pctAuthors', aPct + '%');
+    const br = document.getElementById('barReaders'); if (br) br.style.width = rPct + '%';
+    const ba = document.getElementById('barAuthors'); if (ba) ba.style.width = aPct + '%';
+  }
+  renderUsers();
+  renderAuteurs();
 }
 
-// RENDER AUTEURS
-function renderAuteurs(){
- const tb=document.getElementById('auteursTable');
- if(!tb) return;
- const authMap={};
- allBooks.forEach(function(b){
- if(b.author){
- if(!authMap[b.author.name]) authMap[b.author.name]={name:b.author.name,books:[],tags:[]};
- authMap[b.author.name].books.push(b);
- if(b.tags) b.tags.forEach(function(t){if(!authMap[b.author.name].tags.includes(t)) authMap[b.author.name].tags.push(t);});
- }
- });
- const auteurs=Object.values(authMap);
- if(auteurs.length===0){
- tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun auteur avec des livres publiés.</td></tr>';
- return;
- }
- tb.innerHTML=auteurs.map(function(a){
- const totalPages=a.books.reduce(function(s,b){return s+(b.totalPages||0);},0);
- const tags=a.tags.slice(0,3).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
- return '<tr>'
- +'<td style="padding-left:1.2rem" class="b">'+a.name+'</td>'
- +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+a.books.length+'</td>'
- +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+totalPages.toLocaleString()+'</td>'
- +'<td>'+tags+'</td>'
- +'<td><span class="tag tg">Vérifié</span></td>'
- +'<td><div style="display:flex;gap:0.3rem"><button class="btn btn-o">Profil</button><button class="btn">Contacter</button></div></td>'
- +'</tr>';
- }).join('');
+function updateStatsUI() {
+  const s = allStats;
+  if (s.totalUsers)    setEl('kpiUsers',    fmt(s.totalUsers));
+  if (s.totalAuthors)  setEl('kpiAuthors',  fmt(s.totalAuthors));
+  if (s.totalRevenue)  setEl('kpiRevenue',  fmt(s.totalRevenue) + ' F');
+  if (s.totalBooks)    setEl('kpiBooks',    fmt(s.totalBooks));
+  if (s.pendingBooks)  setEl('navPending',  s.pendingBooks);
+  if (s.pendingWithdrawals) setEl('navRetraits', s.pendingWithdrawals);
+
+  // Revenue stats
+  if (s.totalRevenue)  setEl('kpiRevStat',  fmt(s.totalRevenue) + ' FCFA');
+  if (s.monthRevenue)  setEl('kpiMonthRev', fmt(s.monthRevenue) + ' FCFA');
 }
 
-// RENDER BOOKS
-function renderBooks(books){
- const tb=document.getElementById('booksTable');
- if(!tb) return;
- if(!books||books.length===0){
- tb.innerHTML='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun livre</td></tr>';
- return;
- }
- tb.innerHTML=books.map(function(b,i){
- const tags=(b.tags||[]).slice(0,2).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
- const statusCls=b.status==='PUBLISHED'?'tg':b.status==='DRAFT'?'tc':'ty';
- return '<tr>'
- +'<td style="padding-left:1.2rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">#'+(i+1)+'</td>'
- +'<td class="b">'+b.title+'</td>'
- +'<td>'+(b.author?b.author.name:'—')+'</td>'
- +'<td><span class="tag tc">'+b.genre+'</span></td>'
- +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+b.totalPages+'</td>'
- +'<td>'+tags+'</td>'
- +'<td><span class="tag '+statusCls+'">'+b.status+'</span></td>'
- +'<td><div style="display:flex;gap:0.3rem">'
- +'<button class="btn btn-o" onclick="showToast(\'Vue détaillée à venir\',\'\')">Voir</button>'
- +'<button class="btn btn-r" onclick="confirmDeleteBook(\''+b.id+'\')">Suppr.</button>'
- +'</div></td>'
- +'</tr>';
- }).join('');
+// ── RENDER TABLES ─────────────────────────────────────────────────
+function renderUsers() {
+  const grid = document.getElementById('usersGrid');
+  if (!grid) return;
+  if (!allUsers.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun utilisateur</div>';
+    return;
+  }
+  grid.innerHTML = allUsers.map(u => `
+    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
+      <div>
+        <div style="font-weight:600;color:#1A1410">${u.name || '—'}</div>
+        <div style="font-size:0.72rem;color:#8A7A6E">${u.email || ''}</div>
+      </div>
+      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(u.createdAt)}</div>
+      <div><span style="font-family:'DM Mono',monospace;font-size:0.68rem;padding:0.18rem 0.55rem;border-radius:50px;background:${u.role==='ADMIN'?'rgba(255,107,0,0.1)':u.role==='AUTHOR'?'rgba(59,130,246,0.1)':'rgba(26,20,16,0.06)'};color:${u.role==='ADMIN'?'#FF6B00':u.role==='AUTHOR'?'#2563eb':'#6B5A4E'}">${u.role||'READER'}</span></div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#1A1410">${fmt(u.balance || 0)} F</div>
+      <div style="display:flex;gap:0.4rem">
+        <button onclick="suspendUser('${u.id}', ${!u.suspended})" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid ${u.suspended?'rgba(22,163,74,0.3)':'rgba(220,38,38,0.3)'};background:none;color:${u.suspended?'#16a34a':'#dc2626'};cursor:pointer">${u.suspended?'Réactiver':'Suspendre'}</button>
+      </div>
+    </div>`).join('');
 }
 
-// RENDER VALIDATION
-function renderValidation(){
- const vc=document.getElementById('validationContent');
- if(!vc) return;
- const pending=allBooks.filter(function(b){return b.status==='DRAFT';});
- if(pending.length===0){
- vc.innerHTML='<div class="empty"><span class="empty-ico">✓</span>Aucun livre en attente de validation</div>';
- return;
- }
- const gradients=['linear-gradient(160deg,#2d1b0e,#8B4513)','linear-gradient(160deg,#0a1628,#2e5f8f)','linear-gradient(160deg,#1a2a0a,#5f8f2e)','linear-gradient(160deg,#280a0a,#8f2e2e)'];
- vc.innerHTML=pending.map(function(b,i){
- const tags=(b.tags||[]).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
- return '<div class="val-card">'
- +'<div class="val-top">'
- +'<div class="val-cover" style="background:'+gradients[i%4]+'"></div>'
- +'<div class="val-info">'
- +'<div class="val-title">'+b.title+'</div>'
- +'<div class="val-author">'+(b.author?b.author.name:'—')+' · '+b.genre+' · '+b.totalPages+' pages</div>'
- +'<div class="val-synopsis">'+(b.synopsis||'Aucun synopsis fourni.')+'</div>'
- +'<div class="val-tags">'+tags+'</div>'
- +'</div></div>'
- +'<div class="val-actions">'
- +'<button class="btn btn-g" onclick="approveBook(\''+b.id+'\')">✓ Approuver</button>'
- +'<button class="btn btn-r" onclick="rejectBook(\''+b.id+'\')">✗ Refuser</button>'
- +'<button class="btn btn-y" onclick="showToast(\'Demande de modification envoyée\',\'\')">Modifier</button>'
- +'</div>'
- +'</div>';
- }).join('');
+function renderAuteurs() {
+  const grid = document.getElementById('auteursGrid');
+  if (!grid) return;
+  const authors = allUsers.filter(u => u.role === 'AUTHOR');
+  if (!authors.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun auteur vérifié</div>';
+    return;
+  }
+  grid.innerHTML = authors.map(a => `
+    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
+      <div>
+        <div style="font-weight:600;color:#1A1410">${a.name || '—'}</div>
+        <div style="font-size:0.72rem;color:#8A7A6E">${a.email || ''}</div>
+      </div>
+      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(a.createdAt)}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#FF6B00">${fmt(a.balance || 0)} F</div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#1A1410">${fmt((a.books || []).length)} livre(s)</div>
+    </div>`).join('');
 }
 
-// RENDER TAGS
-function renderTags(){
- const tl=document.getElementById('tagsList');
- const tc=document.getElementById('tagsCount');
- // Collect tags from books
- const tagMap={};
- allBooks.forEach(function(b){if(b.tags&&b.tags.length) b.tags.forEach(function(t){tagMap[t]=(tagMap[t]||0)+1;});});
- const sorted=Object.entries(tagMap).sort(function(a,b){return b[1]-a[1];});
- if(tc) tc.textContent=sorted.length+' tag'+(sorted.length>1?'s':'');
- if(!tl) return;
- if(sorted.length===0){
- tl.innerHTML='<div class="empty"><span class="empty-ico"></span>Aucun tag utilisé pour le moment.</div>';
- return;
- }
- const max=sorted[0]?sorted[0][1]:1;
- tl.innerHTML=sorted.map(function(t){
- const pct=Math.round((t[1]/max)*100);
- return '<div class="tag-mgr-row">'
- +'<div class="tag-mgr-name">'+t[0]+'</div>'
- +'<div class="tag-mgr-count">'+t[1]+' livre'+(t[1]>1?'s':'')+'</div>'
- +'<div class="tag-mgr-bar"><div class="prog-track"><div class="prog-fill" style="width:'+pct+'%"></div></div></div>'
- +'<div style="display:flex;gap:0.3rem"><button class="btn btn-o" onclick="showToast(\'Modification à venir\',\'\')">Édit.</button><button class="btn btn-r" onclick="showToast(\'Suppression à venir\',\'\')">Suppr.</button></div>'
- +'</div>';
- }).join('');
+function renderBooks() {
+  const grid = document.getElementById('livresGrid');
+  if (!grid) return;
+  if (!allBooks.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre publié</div>';
+    return;
+  }
+  grid.innerHTML = allBooks.map(b => `
+    <div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
+      <div>
+        <div style="font-weight:600;color:#1A1410;font-family:'Playfair Display',serif">${b.title || '—'}</div>
+        <div style="font-size:0.72rem;color:#8A7A6E">${(b.author && b.author.name) || 'Auteur inconnu'}</div>
+      </div>
+      <div style="font-size:0.78rem;color:#4A3F35">${b.genre || '—'}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.75rem">${b.totalPages || '?'} p.</div>
+      <div><span style="font-family:'DM Mono',monospace;font-size:0.65rem;padding:0.18rem 0.55rem;border-radius:50px;background:rgba(22,163,74,0.1);color:#16a34a">Publié</span></div>
+      <div style="display:flex;gap:0.4rem">
+        <button onclick="deleteBook('${b.id}')" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(220,38,38,0.3);background:none;color:#dc2626;cursor:pointer">Retirer</button>
+      </div>
+    </div>`).join('');
 }
 
-window.openCreateTag=function(){
- document.getElementById('newTagName').focus();
- showToast('Utilisez le formulaire ci-dessous','');
-};
-window.createTag=function(){
- const name=document.getElementById('newTagName').value.trim();
- if(!name){showToast('Entrez un nom de tag','');return;}
- showToast('Tag "'+name+'" créé !','✓');
- document.getElementById('newTagName').value='';
+function renderValidation() {
+  const grid = document.getElementById('validationGrid');
+  if (!grid) return;
+  const pending = allBooks.filter(b => b.status === 'PENDING');
+  if (!pending.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre en attente de validation</div>';
+    return;
+  }
+  grid.innerHTML = pending.map(b => `
+    <div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
+      <div>
+        <div style="font-weight:600;color:#1A1410;font-family:'Playfair Display',serif">${b.title || '—'}</div>
+        <div style="font-size:0.72rem;color:#8A7A6E">${(b.author && b.author.name) || ''}</div>
+      </div>
+      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(b.createdAt)}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.75rem">${b.totalPages || '?'} p.</div>
+      <div style="display:flex;gap:0.4rem">
+        <button onclick="validateBook('${b.id}', true)"  style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(22,163,74,0.3);background:none;color:#16a34a;cursor:pointer">Valider</button>
+        <button onclick="validateBook('${b.id}', false)" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(220,38,38,0.3);background:none;color:#dc2626;cursor:pointer">Rejeter</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderRetraits(retraits) {
+  const grid = document.getElementById('retraitsGrid');
+  if (!grid) return;
+  if (!retraits || !retraits.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun retrait en attente</div>';
+    return;
+  }
+  grid.innerHTML = retraits.map(r => `
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
+      <div>
+        <div style="font-weight:600;color:#1A1410">${r.author || r.user || '—'}</div>
+        <div style="font-size:0.72rem;color:#8A7A6E">${r.method || 'Mobile Money'}</div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-weight:600;color:#FF6B00">${fmt(r.amount)} FCFA</div>
+      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(r.createdAt)}</div>
+      <div style="display:flex;gap:0.4rem">
+        <button onclick="processWithdrawal('${r.id}', true)"  style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(22,163,74,0.3);background:none;color:#16a34a;cursor:pointer">Traiter</button>
+        <button onclick="processWithdrawal('${r.id}', false)" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(220,38,38,0.3);background:none;color:#dc2626;cursor:pointer">Rejeter</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── ACTIONS ───────────────────────────────────────────────────────
+window.suspendUser = function(userId, suspend) {
+  const label = suspend ? 'Suspendre' : 'Réactiver';
+  openModal(label + ' cet utilisateur', 'Cette action est immédiatement appliquée.', '', label, suspend ? 'danger' : '', async () => {
+    try {
+      await fetch(API + '/admin/suspend-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ userId, suspend })
+      });
+      showToast('Utilisateur ' + (suspend ? 'suspendu' : 'réactivé'));
+      await loadUsers();
+    } catch(e) { showToast('Erreur lors de l'action', 'error'); }
+  });
 };
 
-// ACTIONS
-window.toggleSuspend=async function(userId,suspend){
- const token=localStorage.getItem('accessToken');
- const action=suspend?'Suspendre':'Réactiver';
- openModal(action+' cet utilisateur ?',suspend?'L\'utilisateur ne pourra plus se connecter.':'L\'utilisateur pourra se reconnecter.',null,action,suspend?'danger':null,async function(){
- try{
- await fetch(API+'/admin/suspend-user',{
- method:'POST',
- headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
- body:JSON.stringify({userId,suspend})
- });
- const u=allUsers.find(function(u){return u.id===userId;});
- if(u) u.isSuspended=suspend;
- renderUsers(allUsers);
- showToast('Utilisateur '+(suspend?'suspendu':'réactivé')+' !',suspend?'':'✓');
- }catch(e){showToast('Erreur','✗');}
- });
+window.validateBook = function(bookId, approve) {
+  openModal(approve ? 'Valider ce livre' : 'Rejeter ce livre',
+    approve ? 'Le livre sera visible dans le catalogue.' : 'L'auteur sera notifié du refus.',
+    '', approve ? 'Valider' : 'Rejeter', approve ? '' : 'danger', async () => {
+    try {
+      await fetch(API + '/admin/validate-book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ bookId, approve })
+      });
+      showToast(approve ? 'Livre validé et publié' : 'Livre rejeté');
+      await loadBooks();
+    } catch(e) { showToast('Erreur (route peut-être manquante)', 'error'); }
+  });
 };
 
-window.verifyAuthor=async function(userId){
- const token=localStorage.getItem('accessToken');
- openModal('Promouvoir en auteur ?','Le compte passera de Lecteur à Auteur vérifié.',null,'Promouvoir',null,async function(){
- try{
- await fetch(API+'/admin/verify-author',{
- method:'POST',
- headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
- body:JSON.stringify({userId})
- });
- const u=allUsers.find(function(u){return u.id===userId;});
- if(u) u.role='AUTHOR';
- renderUsers(allUsers);
- showToast('Auteur vérifié !','');
- }catch(e){showToast('Erreur','✗');}
- });
+window.deleteBook = function(bookId) {
+  openModal('Retirer ce livre', 'Le livre sera retiré du catalogue.', '', 'Retirer', 'danger', async () => {
+    try {
+      await fetch(API + '/books/' + bookId, {
+        method: 'DELETE',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      showToast('Livre retiré du catalogue');
+      await loadBooks();
+    } catch(e) { showToast('Erreur (route peut-être manquante)', 'error'); }
+  });
 };
 
-window.approveBook=function(id){
- openModal('Approuver ce livre ?','Il sera visible dans le catalogue public.',null,'Approuver',null,function(){
- allBooks=allBooks.map(function(b){return b.id===id?Object.assign({},b,{status:'PUBLISHED'}):b;});
- renderValidation();
- updateBooksUI();
- showToast('Livre approuvé et publié !','✓');
- });
-};
-window.rejectBook=function(id){
- openModal('Refuser ce livre ?','L\'auteur sera notifié du refus.',null,'Refuser','danger',function(){
- allBooks=allBooks.filter(function(b){return b.id!==id;});
- renderValidation();
- updateBooksUI();
- showToast('Livre refusé','✗');
- });
-};
-window.confirmDeleteBook=function(id){
- openModal('Supprimer ce livre ?','Cette action est irréversible.',null,'Supprimer','danger',function(){
- allBooks=allBooks.filter(function(b){return b.id!==id;});
- renderBooks(allBooks);
- showToast('Livre supprimé','');
- });
+window.processWithdrawal = function(withdrawalId, approve) {
+  openModal(approve ? 'Traiter ce retrait' : 'Rejeter ce retrait', '', '', approve ? 'Traiter' : 'Rejeter', approve ? '' : 'danger', async () => {
+    try {
+      await fetch(API + '/admin/process-withdrawal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ withdrawalId, approve })
+      });
+      showToast(approve ? 'Retrait traité' : 'Retrait rejeté');
+    } catch(e) { showToast('Erreur (route peut-être manquante)', 'error'); }
+  });
 };
 
-// Filters
-window.filterBooks=function(status,btn){
- document.querySelectorAll('.fbar .fc').forEach(function(c){c.classList.remove('active');});
- btn.classList.add('active');
- renderBooks(status==='all'?allBooks:allBooks.filter(function(b){return b.status===status;}));
-};
-window.filterUsers=function(role,btn){
- document.querySelectorAll('.fbar .fc').forEach(function(c){c.classList.remove('active');});
- btn.classList.add('active');
- const filtered=role==='all'?allUsers:role==='suspended'?allUsers.filter(function(u){return u.isSuspended;}):allUsers.filter(function(u){return u.role===role;});
- renderUsers(filtered);
+window.deconnecter = function() {
+  localStorage.removeItem('griotte_token');
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('griotte_user');
+  window.location.href = './griotte-landing.html';
 };
 
-// Search
-window.searchBooks=function(val){renderBooks(val?allBooks.filter(function(b){return b.title.toLowerCase().includes(val.toLowerCase())||(b.author&&b.author.name.toLowerCase().includes(val.toLowerCase()));}):allBooks);};
-window.searchUsers=function(val){renderUsers(val?allUsers.filter(function(u){return u.name.toLowerCase().includes(val.toLowerCase())||u.email.toLowerCase().includes(val.toLowerCase());}):allUsers);};
-window.globalSearch=function(val){
- if(!val||val.length<2) return;
- showPage('livres',null);
- renderBooks(allBooks.filter(function(b){return b.title.toLowerCase().includes(val.toLowerCase())||(b.author&&b.author.name.toLowerCase().includes(val.toLowerCase()));}));
+// ── SIDEBAR ───────────────────────────────────────────────────────
+function buildSidebar() {
+  const nav = document.getElementById('sidebarNav');
+  if (!nav) return;
+  const groups = [
+    { label: 'Vue d'ensemble', items: [
+      { label: 'Tableau de bord', page: 'dashboard' },
+      { label: 'Analytics',       page: 'analytics'  },
+    ]},
+    { label: 'Contenu', items: [
+      { label: 'Livres',      page: 'livres',      badgeId: 'navBooks'   },
+      { label: 'Validation',  page: 'validation',  badgeId: 'navPending', warn: true },
+      { label: 'Tags',        page: 'tags'         },
+    ]},
+    { label: 'Utilisateurs', items: [
+      { label: 'Utilisateurs', page: 'users',   badgeId: 'navUsers'   },
+      { label: 'Auteurs',      page: 'auteurs'                        },
+    ]},
+    { label: 'Finance', items: [
+      { label: 'Retraits', page: 'retraits', badgeId: 'navRetraits', warn: true },
+    ]},
+    { label: 'Système', items: [
+      { label: 'Retour dashboard', page: null, action: "window.location.href='./griotte-dashboard.html'" },
+      { label: 'Déconnexion',      page: null, action: 'deconnecter()', danger: true },
+    ]},
+  ];
+  nav.innerHTML = groups.map(g => `
+    <div class="nav-group-header" onclick="toggleGroup(this)">
+      <span class="nav-group-label">${g.label}</span>
+      <span class="nav-group-arrow open"></span>
+    </div>
+    <div class="nav-group-items">
+      ${g.items.map(item => {
+        const cls = 'nav-item' + (item.warn ? ' warn' : '') + (item.danger ? ' danger' : '');
+        const onclick = item.page ? `showPage('${item.page}',this)` : item.action;
+        const badge = item.badgeId ? `<span class="nav-badge" id="${item.badgeId}">0</span>` : '';
+        return `<a class="${cls}" onclick="${onclick}">${item.label}${badge}</a>`;
+      }).join('')}
+    </div>`).join('');
+}
+
+window.toggleGroup = function(header) {
+  const items = header.nextElementSibling;
+  const arrow = header.querySelector('.nav-group-arrow');
+  const isOpen = items.style.maxHeight !== '0px' && items.style.maxHeight !== '';
+  if (isOpen || items.style.maxHeight === '') {
+    items.style.maxHeight = '0px';
+    arrow.classList.remove('open');
+  } else {
+    items.style.maxHeight = items.scrollHeight + 'px';
+    arrow.classList.add('open');
+  }
 };
 
-// Déconnexion
-window.deconnecter=function(){
- localStorage.removeItem('accessToken');
- localStorage.removeItem('refreshToken');
- window.location.href='/griotte-landing.html';
+function initGroups() {
+  document.querySelectorAll('.nav-group-items').forEach(el => {
+    el.style.maxHeight = el.scrollHeight + 'px';
+  });
+}
+
+// ── SHOW PAGE ─────────────────────────────────────────────────────
+window.showPage = function(page, el) {
+  document.querySelectorAll('.admin-page').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const panel = document.getElementById('page-' + page);
+  if (panel) panel.style.display = 'block';
+  if (el) el.classList.add('active');
+
+  // Load page-specific data
+  if (page === 'retraits') loadRetraitsPage();
+  if (page === 'users')    renderUsers();
+  if (page === 'auteurs')  renderAuteurs();
+  if (page === 'livres')   renderBooks();
+  if (page === 'validation') renderValidation();
 };
 
-// Init
-buildSidebar();
-setTimeout(initGroups,50);
+async function loadRetraitsPage() {
+  try {
+    const res  = await fetch(API + '/admin/withdrawals', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await res.json();
+    renderRetraits(Array.isArray(data) ? data : []);
+  } catch(e) {
+    renderRetraits([]);
+  }
+}
+
+// ── START ─────────────────────────────────────────────────────────
 loadAdmin();
 })();
 </script>
