@@ -153,6 +153,7 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
 /* ──────────────────────────────────────────────────────── */
 
 :root{
+ --sidebar-w:260px;
  /* Couleurs logo */
  --or:#FF6B00;
  --or-dark:#CC5200;
@@ -187,7 +188,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 ::-webkit-scrollbar-thumb{background:rgba(217,144,45,0.2);border-radius:2px}
 
 /* SIDEBAR */
-.sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--noir-soft);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column;overflow-y:auto}
+.sidebar{width:var(--sidebar-w);height:100vh;background:#fff;border-right:1px solid var(--border);position:fixed;top:0;left:0;z-index:100;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}
 .sidebar-logo{padding:1.3rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.55rem}
 .logo-mark{width:28px;height:28px;background:linear-gradient(135deg,var(--or),var(--or-dark));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:0.85rem;color:var(--noir);flex-shrink:0}
 .logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:0.9rem;color:var(--blanc);letter-spacing:0.06em;text-transform:uppercase}
@@ -226,7 +227,7 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
 /* MAIN */
-.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column;background:#F8F5F1}
 .topbar{height:50px;background:rgba(8,6,4,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1.8rem;position:sticky;top:0;z-index:50}
 .topbar-left{display:flex;align-items:center;gap:0.75rem}
 .topbar-title{font-size:0.82rem;font-weight:700;color:var(--blanc)}
@@ -544,6 +545,35 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 /* ═══════════════════════════════════════════════ */
 
+
+/* ── SIDEBAR NAV BUTTONS ── */
+.snav-btn{
+  width:100%;display:flex;align-items:center;gap:0.7rem;
+  font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:500;
+  color:#4A3F35;background:none;border:none;
+  padding:0.6rem 0.75rem;border-radius:8px;
+  cursor:pointer;text-align:left;
+  transition:all 0.15s;position:relative
+}
+.snav-btn:hover{background:#F4F1ED;color:#1A1410}
+.snav-btn.active{
+  background:rgba(255,107,0,0.08);
+  color:#FF6B00;font-weight:600;
+  border-left:2.5px solid #FF6B00;
+  padding-left:calc(0.75rem - 2.5px)
+}
+.snav-btn.snav-warn{color:#b45309}
+.snav-btn.snav-warn:hover{background:rgba(180,83,9,0.06)}
+.snav-badge{
+  margin-left:auto;font-family:'DM Mono',monospace;
+  font-size:0.62rem;font-weight:600;
+  background:rgba(26,20,16,0.08);color:#4A3F35;
+  padding:0.1rem 0.45rem;border-radius:50px;
+  min-width:18px;text-align:center
+}
+.snav-badge-warn{background:rgba(255,107,0,0.12);color:#FF6B00}
+/* ── FIN SIDEBAR NAV ── */
+
 </style>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 <script src="./brand-logo.js" defer></script>
@@ -569,23 +599,102 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
- <div class="sidebar-logo"><brand-logo></brand-logo></div></div>
- </span>
- <span class="admin-badge">Admin</span>
- </div>
- <div class="sidebar-admin">
- <div class="admin-ava" id="adminAva">A</div>
- <div>
- <div class="admin-name" id="adminName">Chargement...</div>
- <div class="admin-role">Super Admin</div>
- </div>
- </div>
- <nav class="nav" id="sidebarNav">
- <!-- Built by JS -->
- </nav>
- <div class="sidebar-system">
- <div class="sys-status"><span class="sys-dot"></span>Système opérationnel · Railway</div>
- </div>
+
+  <!-- Logo -->
+  <div style="padding:1.25rem 1.25rem 0.75rem;border-bottom:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem">
+      <img src="./logo-icon.png" alt="G" style="width:32px;height:32px;border-radius:9px;object-fit:contain" onerror="this.style.display='none'"/>
+      <div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:700;color:#1A1410;letter-spacing:0.06em;text-transform:uppercase">Griotte</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;letter-spacing:0.1em;text-transform:uppercase">Back-office</div>
+      </div>
+    </div>
+    <!-- Admin identity -->
+    <div style="display:flex;align-items:center;gap:0.65rem;padding:0.65rem 0.75rem;background:#F4F1ED;border-radius:10px">
+      <div style="width:34px;height:34px;border-radius:50%;background:#1A1410;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;font-size:0.9rem;flex-shrink:0" id="adminAva">A</div>
+      <div style="min-width:0">
+        <div style="font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;color:#1A1410;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="adminName">—</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#FF6B00;letter-spacing:0.06em;text-transform:uppercase">Super Administrateur</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav style="flex:1;padding:1rem 0.75rem;display:flex;flex-direction:column;gap:0.2rem;overflow-y:auto" id="sidebarNav">
+
+    <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.5rem 0.3rem;margin-top:0.25rem">Vue d'ensemble</div>
+    <button class="snav-btn active" id="snav-dashboard" onclick="showPage('dashboard',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Tableau de bord
+    </button>
+    <button class="snav-btn" id="snav-analytics" onclick="showPage('analytics',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Analytics
+    </button>
+
+    <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.5rem 0.3rem;margin-top:0.5rem">Contenu</div>
+    <button class="snav-btn" id="snav-livres" onclick="showPage('livres',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Livres publiés
+      <span class="snav-badge" id="navBooks">0</span>
+    </button>
+    <button class="snav-btn snav-warn" id="snav-validation" onclick="showPage('validation',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Validation
+      <span class="snav-badge snav-badge-warn" id="navPending">0</span>
+    </button>
+    <button class="snav-btn" id="snav-tags" onclick="showPage('tags',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      Tags & Genres
+    </button>
+
+    <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.5rem 0.3rem;margin-top:0.5rem">Utilisateurs</div>
+    <button class="snav-btn" id="snav-users" onclick="showPage('users',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Utilisateurs
+      <span class="snav-badge" id="navUsers">0</span>
+    </button>
+    <button class="snav-btn" id="snav-auteurs" onclick="showPage('auteurs',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Auteurs
+    </button>
+
+    <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.5rem 0.3rem;margin-top:0.5rem">Finance</div>
+    <button class="snav-btn" id="snav-paiements" onclick="showPage('paiements',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Paiements
+    </button>
+    <button class="snav-btn snav-warn" id="snav-retraits" onclick="showPage('retraits',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Retraits auteurs
+      <span class="snav-badge snav-badge-warn" id="navRetraits">0</span>
+    </button>
+
+    <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.5rem 0.3rem;margin-top:0.5rem">Système</div>
+    <button class="snav-btn" id="snav-frontend" onclick="showPage('frontend',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Gestion frontend
+    </button>
+    <button class="snav-btn" id="snav-parametres" onclick="showPage('parametres',this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Paramètres
+    </button>
+
+  </nav>
+
+  <!-- Footer sidebar -->
+  <div style="padding:0.75rem 1rem;border-top:1px solid var(--border)">
+    <button onclick="window.location.href='./griotte-dashboard.html'" style="width:100%;display:flex;align-items:center;gap:0.6rem;font-family:'Inter',sans-serif;font-size:0.78rem;color:#4A3F35;background:none;border:none;cursor:pointer;padding:0.5rem;border-radius:7px;text-align:left;margin-bottom:0.3rem" onmouseover="this.style.background='#F4F1ED'" onmouseout="this.style.background='none'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Dashboard principal
+    </button>
+    <button onclick="deconnecter()" style="width:100%;display:flex;align-items:center;gap:0.6rem;font-family:'Inter',sans-serif;font-size:0.78rem;color:#dc2626;background:none;border:none;cursor:pointer;padding:0.5rem;border-radius:7px;text-align:left" onmouseover="this.style.background='rgba(220,38,38,0.06)'" onmouseout="this.style.background='none'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Déconnexion
+    </button>
+    <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;margin-top:0.5rem;padding:0 0.5rem">Système · Railway</div>
+  </div>
+
 </aside>
 
 <!-- MAIN -->
@@ -941,8 +1050,6 @@ async function loadAdmin() {
     setEl('adminName', user.name || 'Administrateur');
 
     await loadData();
-    buildSidebar();
-    initGroups();
     showPage('dashboard', null);
 
   } catch(e) {
@@ -962,6 +1069,7 @@ async function loadBooks() {
     const data = await res.json();
     allBooks = Array.isArray(data) ? data : [];
     updateBooksUI();
+    updateStatsUI();
   } catch(e) { console.warn('loadBooks:', e.message); }
 }
 
@@ -971,6 +1079,7 @@ async function loadUsers() {
     const data = await res.json();
     allUsers = Array.isArray(data) ? data : [];
     updateUsersUI();
+    updateStatsUI();
   } catch(e) { console.warn('loadUsers:', e.message); }
 }
 
@@ -1014,16 +1123,30 @@ function updateUsersUI() {
 
 function updateStatsUI() {
   const s = allStats;
-  if (s.totalUsers)    setEl('kpiUsers',    fmt(s.totalUsers));
-  if (s.totalAuthors)  setEl('kpiAuthors',  fmt(s.totalAuthors));
-  if (s.totalRevenue)  setEl('kpiRevenue',  fmt(s.totalRevenue) + ' F');
-  if (s.totalBooks)    setEl('kpiBooks',    fmt(s.totalBooks));
-  if (s.pendingBooks)  setEl('navPending',  s.pendingBooks);
-  if (s.pendingWithdrawals) setEl('navRetraits', s.pendingWithdrawals);
+
+  // Try stats API fields first, fallback to computed from allUsers/allBooks
+  const totalUsers   = s.totalUsers   || s.users   || allUsers.length;
+  const totalAuthors = s.totalAuthors || s.authors  || allUsers.filter(u => u.role === 'AUTHOR').length;
+  const totalBooks   = s.totalBooks   || s.books    || allBooks.length;
+  const totalRevenue = s.totalRevenue || s.revenue  || 0;
+  const pendingBooks = s.pendingBooks || s.pending  || allBooks.filter(b => b.status === 'PENDING').length;
+
+  setEl('kpiUsers',   fmt(totalUsers));
+  setEl('kpiAuthors', fmt(totalAuthors));
+  setEl('kpiBooks',   fmt(totalBooks));
+  if (totalRevenue) setEl('kpiRevenue', fmt(totalRevenue) + ' F');
+
+  // Nav badges
+  setEl('navUsers',   totalUsers);
+  setEl('navBooks',   totalBooks);
+  setEl('navPending', pendingBooks);
+
+  // Alert pending books
+  setEl('alertPending', pendingBooks + ' livre(s) en attente');
 
   // Revenue stats
-  if (s.totalRevenue)  setEl('kpiRevStat',  fmt(s.totalRevenue) + ' FCFA');
-  if (s.monthRevenue)  setEl('kpiMonthRev', fmt(s.monthRevenue) + ' FCFA');
+  if (s.totalRevenue || s.revenue)  setEl('kpiRevStat',  fmt(totalRevenue) + ' FCFA');
+  if (s.monthRevenue)               setEl('kpiMonthRev', fmt(s.monthRevenue) + ' FCFA');
 }
 
 // ── RENDER TABLES ─────────────────────────────────────────────────
@@ -1264,7 +1387,7 @@ function initGroups() {
 // ── SHOW PAGE ─────────────────────────────────────────────────────
 window.showPage = function(page, el) {
   document.querySelectorAll('.admin-page').forEach(p => p.style.display = 'none');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.snav-btn,.nav-item').forEach(n => n.classList.remove('active'));
   const panel = document.getElementById('page-' + page);
   if (panel) panel.style.display = 'block';
   if (el) el.classList.add('active');
