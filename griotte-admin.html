@@ -2,1226 +2,534 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>GRIOTTE Admin — Back-office</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin — GRIOTTE</title>
+<link rel="icon" type="image/png" href="./logo-icon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-/* ══ TYPOGRAPHIE GRIOTTE ══════════════════════════════ */
-body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-
-/* Titres — Playfair uniquement */
-h1,h2,.hero-title,.section-title,.auth-title,.card-title,.modal-cover-title,.carousel-title{
-  font-family:'Playfair Display',serif;
-  letter-spacing:-0.02em;
-  line-height:1.12
-}
-
-/* Tout le reste — Inter */
-h3,h4,h5,h6,p,span,a,button,input,select,textarea,label,li,td,th{
-  font-family:'Inter',sans-serif
-}
-
-/* Hiérarchie des tailles */
-h1,.hero-title{font-size:clamp(2.6rem,5vw,4.8rem);font-weight:800}
-h2,.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700}
-h3{font-size:1.15rem;font-weight:600}
-p{font-size:1rem;line-height:1.75;color:#4A3F35}
-
-/* Labels, badges, prix — DM Mono */
-.section-badge,.hero-badge,.hero-label,.hero-stat-label,
-.book-genre,.bc-genre,.lc-genre,
-.book-price,.bc-price,.lc-price,
-[class*="-label"],[class*="-badge"],
-[class*="mono"],[class*="price"],[class*="stat-lbl"]{
-  font-family:'DM Mono',monospace
-}
-
-/* Navigation */
-.nav-links a,.nav-wordmark,.nav-logo-name,
-.sidebar .nav-item,.filters .fbtn,.lc-filter{
-  font-family:'Inter',sans-serif;
-  font-size:0.875rem;
-  letter-spacing:0.005em
-}
-
-/* Boutons */
-button,.btn,.auth-btn,.btn-primary,.btn-hero-primary,.nbtn{
-  font-family:'Inter',sans-serif;
-  font-weight:600;
-  letter-spacing:0.01em
-}
-
-/* Corps texte amélioré */
-.hero-sub,.section-sub,.auth-sub,.perk-desc,.step-desc,.feature-desc{
-  font-family:'Inter',sans-serif;
-  font-size:1.05rem;
-  font-weight:400;
-  line-height:1.75;
-  color:#4A3F35
-}
-
-/* Citations témoignages — Playfair italic */
-.testi-quote,[class*="testi-quote"],
-blockquote{
-  font-family:'Playfair Display',serif;
-  font-style:italic;
-  font-size:1rem;
-  line-height:1.75
-}
-
-/* Remplacer anciennes polices si présentes */
-[style*="Cormorant"],[style*="Syne"]{font-family:'Playfair Display',serif!important}
-/* ══ FIN TYPOGRAPHIE ══════════════════════════════════ */
-
-/* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
- Une seule taille, une seule source, partout identique
- ════════════════════════════════════════════════════ */
-.g-icon {
- display: inline-flex;
- align-items: center;
- justify-content: center;
- flex-shrink: 0;
- overflow: visible !important;
- line-height: 0;
-}
-.g-icon img {
- display: block;
- height: 38px;
- width: 38px;
- object-fit: contain;
- border-radius: 11px;
- overflow: visible !important;
- /* No filter, no opacity, no shadow — logo brut */
-}
-/* Override ALL size variants → same 38px */
-.g-icon--48 img,
-.g-icon--40 img,
-.g-icon--36 img,
-.g-icon--32 img,
-.g-icon--28 img {
- height: 38px !important;
- width: 38px !important;
- border-radius: 11px !important;
-}
-/* Footer: slightly smaller on dark bg */
-footer .g-icon img,
-footer .g-icon--48 img,
-footer .g-icon--40 img,
-footer .g-icon--36 img {
- height: 34px !important;
- width: 34px !important;
- border-radius: 10px !important;
-}
-/* Auth modal: centered */
-.auth-logo-wrap .g-icon img {
- height: 42px !important;
- width: 42px !important;
- border-radius: 13px !important;
-}
-/* Force no extra styles */
-[class*="logo"] { overflow: visible !important; }
-/* ════════════════════════════════════════════════ */
-
-/* == THEME CLAIR GRIOTTE == */
-html,body{background:var(--bg)!important;color:var(--text-main)!important}
-/* Sidebar light */
-.sidebar,.aside,[class*="sidebar"]{background:var(--bg-sidebar)!important;border-color:var(--border)!important}
-/* Cards */
-.card,[class*="-card"]{background:var(--bg-card)!important;border-color:var(--border)!important}
-/* Topbar */
-.topbar,[class*="topbar"]{background:rgba(248,245,241,0.96)!important;border-color:var(--border)!important;color:var(--text-main)!important}
-/* Orange buttons */
-[class*="btn"][class*="primary"],
-[class*="btn"][class*="hero"],
-[class*="hero-btn"]{background:var(--or)!important;color:#fff!important}
-/* Orange accents */
-[class*="or-"],[style*="#FF6B00"],[style*="#FF6B00"]{color:var(--or)!important}
-/* == FIN THEME == */
-
-/* ── LOGO GRIOTTE UNIQUE ─────────────────────────────────── */
-.g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0;overflow:visible}
-.g-icon img{display:block;object-fit:contain;border-radius:16px;overflow:visible}
-.g-icon--48 img{height:48px;width:48px}
-.g-icon--40 img{height:40px;width:40px}
-.g-icon--36 img{height:36px;width:36px}
-.g-icon--32 img{height:32px;width:32px}
-[class*="logo"],[class*="sidebar-logo"],[class*="cat-logo"],[class*="s-logo"],[class*="footer-logo"]{overflow:visible!important}
-@media(max-width:768px){
- .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
- .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
-}
-/* ──────────────────────────────────────────────────────── */
-
-:root{
- --sidebar-w:260px;
- /* Couleurs logo */
- --or:#FF6B00;
- --or-dark:#CC5200;
- --or-light:#FF8C33;
- --or-glow:rgba(255,107,0,0.12);
- --or-border:rgba(255,107,0,0.25);
- /* Fond & surfaces */
- --bg:#F8F5F1;
- --bg-card:#FFFFFF;
- --bg-card2:#FFF8F4;
- --bg-sidebar:#FFFFFF;
- /* Texte */
- --text-main:#1A1410;
- --text-soft:#4A3F35;
- --text-muted:#6B5A4E;
- /* Bordures */
- --border:rgba(26,20,16,0.09);
- --border-strong:rgba(26,20,16,0.16);
- /* Compatibilité ancien code */
- --noir:#1A1410;
- --noir-soft:#F8F5F1;
- --noir-card:#FFFFFF;
- --blanc:#F8F5F1;
- --blanc-dim:#6B5A4E;
- --cendre:#6B5F52;
-}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px}
-body{background:var(--noir);color:var(--blanc);font-family:'Inter',sans-serif;min-height:100vh;display:flex}
-::selection{background:rgba(217,144,45,0.2)}
-::-webkit-scrollbar{width:2px}
-::-webkit-scrollbar-thumb{background:rgba(217,144,45,0.2);border-radius:2px}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;background:#F4F1ED;color:#1A1410;display:flex;min-height:100vh}
 
 /* SIDEBAR */
-.sidebar{width:var(--sidebar-w);height:100vh;background:#fff;border-right:1px solid var(--border);position:fixed;top:0;left:0;z-index:100;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}
-.sidebar-logo{padding:1.3rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.55rem}
-.logo-mark{width:28px;height:28px;background:linear-gradient(135deg,var(--or),var(--or-dark));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:0.85rem;color:var(--noir);flex-shrink:0}
-.logo-text{font-family:'Inter',sans-serif;font-weight:800;font-size:0.9rem;color:var(--blanc);letter-spacing:0.06em;text-transform:uppercase}
-.logo-text span{color:var(--or)}
-.admin-badge{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);padding:0.1rem 0.32rem;border-radius:4px;margin-left:auto}
-
-.sidebar-admin{padding:0.9rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem}
-.admin-ava{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#0a1628,#1e4a8f);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.72rem;font-weight:700;color:var(--blue);flex-shrink:0;border:1px solid rgba(96,165,250,0.2)}
-.admin-name{font-size:0.72rem;font-weight:700;color:var(--blanc);line-height:1.2}
-.admin-role{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--blue)}
-
-/* NAV GROUPS (collapsible) */
-.nav{flex:1;padding:0.4rem 0}
-.nav-group-header{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1.4rem 0.2rem;cursor:pointer;user-select:none;transition:background 0.15s}
-.nav-group-header:hover{background:rgba(248,246,242,0.02)}
-.nav-group-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(90,82,72,0.6)}
-.nav-group-arrow{font-size:0.75rem;color:rgba(90,82,72,0.4);transition:transform 0.2s}
-.nav-group-arrow.open{transform:rotate(90deg)}
-.nav-group-items{overflow:hidden;transition:max-height 0.3s ease}
-.nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.48rem 1.4rem;cursor:pointer;color:var(--cendre);font-size:0.73rem;font-weight:600;text-decoration:none;border-left:2px solid transparent;transition:all 0.12s;user-select:none}
-.nav-item:hover{color:var(--blanc);background:rgba(248,246,242,0.02)}
-.nav-item.active{color:var(--or);border-left-color:var(--or);background:var(--or-glow)}
-.nav-item.warn{color:rgba(251,191,36,0.65)}
-.nav-item.danger{color:rgba(248,113,113,0.5)}
-.nav-item.danger:hover{color:var(--red)}
-.nav-ico{font-size:0.76rem;width:13px;text-align:center;flex-shrink:0}
-.nav-badge{margin-left:auto;font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.07rem 0.32rem;border-radius:100px}
-.nb-red{background:var(--red);color:#fff}
-.nb-blue{background:var(--blue);color:var(--noir)}
-.nb-green{background:var(--green);color:var(--noir)}
-.nb-or{background:var(--or);color:var(--noir)}
-
-.sidebar-system{padding:0.7rem 1.4rem;border-top:1px solid var(--border)}
-.sys-status{display:flex;align-items:center;gap:0.45rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-.sys-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.sb{width:260px;height:100vh;position:fixed;top:0;left:0;background:#fff;border-right:1px solid rgba(26,20,16,0.08);display:flex;flex-direction:column;z-index:50;overflow:hidden}
+.sb-head{padding:1.25rem;border-bottom:1px solid rgba(26,20,16,0.08);flex-shrink:0}
+.sb-logo{display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem}
+.sb-logo img{width:30px;height:30px;border-radius:8px;object-fit:contain}
+.sb-logo-name{font-size:0.78rem;font-weight:700;color:#1A1410;letter-spacing:0.06em;text-transform:uppercase}
+.sb-logo-sub{font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;letter-spacing:0.1em;text-transform:uppercase}
+.sb-user{display:flex;align-items:center;gap:0.65rem;padding:0.65rem 0.75rem;background:#F4F1ED;border-radius:10px}
+.sb-ava{width:34px;height:34px;border-radius:50%;background:#1A1410;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0}
+.sb-uname{font-size:0.82rem;font-weight:600;color:#1A1410}
+.sb-urole{font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;letter-spacing:0.06em;text-transform:uppercase}
+.sb-nav{flex:1;padding:0.75rem;overflow-y:auto}
+.sb-section{font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.6rem 0.5rem 0.25rem;margin-top:0.25rem}
+.sb-btn{width:100%;display:flex;align-items:center;gap:0.7rem;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:500;color:#4A3F35;background:none;border:none;padding:0.6rem 0.75rem;border-radius:8px;cursor:pointer;text-align:left;transition:background 0.15s}
+.sb-btn:hover{background:#F4F1ED;color:#1A1410}
+.sb-btn.on{background:rgba(255,107,0,0.08);color:#FF6B00;font-weight:600;border-left:2.5px solid #FF6B00;padding-left:calc(0.75rem - 2.5px)}
+.sb-badge{margin-left:auto;font-family:'DM Mono',monospace;font-size:0.6rem;font-weight:600;background:rgba(26,20,16,0.08);color:#4A3F35;padding:0.1rem 0.45rem;border-radius:50px;min-width:18px;text-align:center}
+.sb-badge.warn{background:rgba(255,107,0,0.12);color:#FF6B00}
+.sb-foot{flex-shrink:0;padding:0.75rem 1rem;border-top:1px solid rgba(26,20,16,0.08)}
+.sb-foot-btn{width:100%;display:flex;align-items:center;gap:0.6rem;font-family:'Inter',sans-serif;font-size:0.78rem;background:none;border:none;cursor:pointer;padding:0.45rem 0.5rem;border-radius:7px;text-align:left;margin-bottom:0.2rem;color:#4A3F35}
+.sb-foot-btn:hover{background:#F4F1ED}
+.sb-foot-btn.red{color:#dc2626}
+.sb-foot-btn.red:hover{background:rgba(220,38,38,0.05)}
+.sb-sys{font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;padding:0.35rem 0.5rem 0}
 
 /* MAIN */
-.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column;background:#F8F5F1}
-.topbar{height:50px;background:rgba(8,6,4,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1.8rem;position:sticky;top:0;z-index:50}
-.topbar-left{display:flex;align-items:center;gap:0.75rem}
-.topbar-title{font-size:0.82rem;font-weight:700;color:var(--blanc)}
-.breadcrumb{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);display:flex;align-items:center;gap:0.35rem}
-.breadcrumb .bc-active{color:var(--or)}
-.topbar-right{display:flex;align-items:center;gap:0.55rem}
-.topbar-date{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-.search-admin{background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:6px;padding:0.32rem 0.7rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--blanc);outline:none;width:180px;transition:border-color 0.2s}
-.search-admin:focus{border-color:var(--border-or)}
-.search-admin::placeholder{color:var(--cendre)}
-.icon-btn{width:26px;height:26px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--cendre);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.75rem;position:relative;transition:all 0.15s}
-.icon-btn:hover{color:var(--blanc);border-color:var(--border-strong)}
-.notif-dot{position:absolute;top:3px;right:3px;width:4px;height:4px;background:var(--red);border-radius:50%}
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{height:52px;background:rgba(244,241,237,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(26,20,16,0.08);display:flex;align-items:center;justify-content:space-between;padding:0 1.75rem;position:sticky;top:0;z-index:40}
+.topbar-title{font-family:'Inter',sans-serif;font-size:0.92rem;font-weight:600;color:#1A1410}
+.topbar-crumb{font-size:0.78rem;color:#8A7A6E;margin-left:0.75rem}
+.content{padding:1.75rem;flex:1}
 
 /* PAGES */
-.page{display:none;padding:1.8rem;flex:1;min-height:200px}
-.page.active{display:block!important}
+.pg{display:none}
+.pg.on{display:block}
 
-/* PAGE HEADER */
-.ph{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.4rem}
-.ph-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--blanc)}
-.ph-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-top:0.15rem}
-.ph-right{display:flex;gap:0.45rem;align-items:center}
-
-/* KPIs */
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.9rem;margin-bottom:1.4rem}
-.kpi{background:var(--noir-card);border:1px solid var(--border);border-radius:10px;padding:1.1rem;transition:all 0.2s;cursor:default}
-.kpi:hover{border-color:rgba(217,144,45,0.12);transform:translateY(-1px)}
-.kpi-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.65rem}
-.kpi-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0}
-.ico-or{background:rgba(217,144,45,0.1)} .ico-green{background:rgba(74,222,128,0.1)} .ico-blue{background:rgba(96,165,250,0.1)} .ico-red{background:rgba(248,113,113,0.1)} .ico-purple{background:rgba(167,139,250,0.1)}
-.kpi-badge{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.1rem 0.38rem;border-radius:100px}
-.kb-up{background:rgba(74,222,128,0.1);color:var(--green)} .kb-down{background:rgba(248,113,113,0.1);color:var(--red)} .kb-neu{background:rgba(248,246,242,0.05);color:var(--cendre)}
-.kpi-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.2rem}
-.kpi-val{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--blanc);line-height:1;margin-bottom:0.2rem}
-.kpi-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-
-/* GRIDS */
-.g2{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin-bottom:1rem}
-.g11{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1rem}
-
-/* CARD */
-.card{background:var(--noir-card);border:1px solid var(--border);border-radius:10px;padding:1.2rem}
-.ch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
-.ct{font-size:0.78rem;font-weight:700;color:var(--blanc)}
-.cs{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-top:0.12rem}
-.ca{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);cursor:pointer;border:none;background:none;padding:0;transition:opacity 0.2s}
-.ca:hover{opacity:0.7}
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:#fff;border:1px solid rgba(26,20,16,0.07);border-radius:14px;padding:1.25rem}
+.kpi-label{font-family:'DM Mono',monospace;font-size:0.62rem;color:#8A7A6E;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem}
+.kpi-val{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#1A1410;line-height:1}
+.kpi-val.or{color:#FF6B00}
+.kpi-sub{font-size:0.75rem;color:#8A7A6E;margin-top:0.3rem}
 
 /* TABLE */
+.card{background:#fff;border:1px solid rgba(26,20,16,0.07);border-radius:14px;overflow:hidden;margin-bottom:1rem}
+.card-head{padding:1rem 1.25rem;border-bottom:1px solid rgba(26,20,16,0.07);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:0.9rem;font-weight:600;color:#1A1410}
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cendre);text-align:left;padding:0.55rem 0.7rem;border-bottom:1px solid var(--border)}
-.tbl td{padding:0.65rem 0.7rem;font-size:0.74rem;color:var(--blanc-dim);border-bottom:1px solid rgba(248,246,242,0.025);vertical-align:middle}
+.tbl th{font-family:'DM Mono',monospace;font-size:0.62rem;color:#8A7A6E;letter-spacing:0.08em;text-transform:uppercase;padding:0.65rem 1rem;text-align:left;border-bottom:1px solid rgba(26,20,16,0.07);font-weight:500}
+.tbl td{padding:0.75rem 1rem;font-size:0.85rem;color:#1A1410;border-bottom:1px solid rgba(26,20,16,0.04)}
 .tbl tr:last-child td{border-bottom:none}
-.tbl tr:hover td{background:rgba(248,246,242,0.012);color:var(--blanc)}
-.tbl .b{color:var(--blanc);font-weight:600}
+.tbl tr:hover td{background:rgba(26,20,16,0.015)}
+.chip{font-family:'DM Mono',monospace;font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:50px;display:inline-block}
+.chip-or{background:rgba(255,107,0,0.1);color:#FF6B00}
+.chip-bl{background:rgba(59,130,246,0.1);color:#2563eb}
+.chip-gr{background:rgba(22,163,74,0.1);color:#16a34a}
+.chip-gy{background:rgba(26,20,16,0.07);color:#6B5A4E}
+.empty{text-align:center;padding:3rem;color:#8A7A6E;font-size:0.85rem}
+.action-btn{font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:6px;border:1.5px solid;background:none;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500}
+.action-btn.red{border-color:rgba(220,38,38,0.3);color:#dc2626}
+.action-btn.green{border-color:rgba(22,163,74,0.3);color:#16a34a}
 
-/* TAGS */
-.tag{font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.1rem 0.42rem;border-radius:100px;display:inline-block}
-.tg{background:rgba(74,222,128,0.1);color:var(--green)}
-.tr{background:rgba(248,113,113,0.1);color:var(--red)}
-.tb{background:rgba(96,165,250,0.1);color:var(--blue)}
-.to{background:rgba(217,144,45,0.1);color:var(--or)}
-.tc{background:rgba(248,246,242,0.06);color:var(--cendre)}
-.ty{background:rgba(251,191,36,0.1);color:var(--yellow)}
-.tp{background:rgba(167,139,250,0.1);color:var(--purple)}
-
-/* BUTTONS */
-.btn{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.05em;padding:0.28rem 0.6rem;border-radius:6px;cursor:pointer;transition:all 0.15s;border:1px solid var(--border);background:none;color:var(--cendre);white-space:nowrap}
-.btn:hover{color:var(--blanc);border-color:var(--border-strong)}
-.btn-g{border-color:rgba(74,222,128,0.2);color:var(--green);background:rgba(74,222,128,0.05)}
-.btn-g:hover{background:rgba(74,222,128,0.12)}
-.btn-r{border-color:rgba(248,113,113,0.2);color:var(--red);background:rgba(248,113,113,0.05)}
-.btn-r:hover{background:rgba(248,113,113,0.12)}
-.btn-o{border-color:var(--border-or);color:var(--or);background:var(--or-glow)}
-.btn-o:hover{background:rgba(217,144,45,0.14)}
-.btn-b{border-color:rgba(96,165,250,0.2);color:var(--blue);background:rgba(96,165,250,0.05)}
-.btn-b:hover{background:rgba(96,165,250,0.12)}
-.btn-y{border-color:rgba(251,191,36,0.2);color:var(--yellow);background:rgba(251,191,36,0.05)}
-.btn-y:hover{background:rgba(251,191,36,0.12)}
-.btn-primary{background:linear-gradient(135deg,var(--or),var(--or-dark));color:var(--noir);border:none;font-family:'Inter',sans-serif;font-weight:700;padding:0.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:0.72rem;transition:all 0.2s}
-.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
-
-/* FORM */
-.fi{background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:8px;padding:0.65rem 0.9rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--blanc);outline:none;width:100%;transition:border-color 0.2s}
-.fi:focus{border-color:var(--border-or)}
-.fi::placeholder{color:var(--cendre)}
-.fis{background:rgba(248,246,242,0.03);border:1px solid var(--border);border-radius:8px;padding:0.65rem 0.9rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--blanc);outline:none;width:100%}
-.fis option{background:var(--noir-card)}
-.fl{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cendre);display:block;margin-bottom:0.35rem}
-.fg{margin-bottom:0.9rem}
-
-/* FILTERS BAR */
-.fbar{display:flex;gap:0.4rem;margin-bottom:1rem;flex-wrap:wrap}
-.fc{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.05em;padding:0.28rem 0.65rem;border:1px solid var(--border);border-radius:100px;cursor:pointer;transition:all 0.15s;color:var(--cendre);background:none;user-select:none}
-.fc:hover{color:var(--blanc);border-color:var(--border-strong)}
-.fc.active{color:var(--or);border-color:var(--border-or);background:var(--or-glow)}
-
-/* USER AVATAR */
-.uava{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;flex-shrink:0}
-
-/* ACTIVITY */
-.act-list{display:flex;flex-direction:column}
-.act-item{display:flex;gap:0.65rem;padding:0.58rem 0;border-bottom:1px solid rgba(248,246,242,0.025);align-items:flex-start}
-.act-item:last-child{border-bottom:none}
-.act-ico{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;margin-top:1px}
-.act-text{font-size:0.72rem;color:var(--blanc-dim);line-height:1.3;margin-bottom:0.12rem}
-.act-text strong{color:var(--blanc);font-weight:600}
-.act-time{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-
-/* ALERT */
-.alert-box{display:flex;gap:0.6rem;padding:0.7rem;border-radius:8px;border:1px solid;margin-bottom:0.6rem;align-items:flex-start}
-.al-warn{background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.12)}
-.al-err{background:rgba(248,113,113,0.04);border-color:rgba(248,113,113,0.12)}
-.al-ok{background:rgba(74,222,128,0.04);border-color:rgba(74,222,128,0.12)}
-.al-info{background:rgba(96,165,250,0.04);border-color:rgba(96,165,250,0.12)}
-.al-ico{font-size:0.82rem;flex-shrink:0;margin-top:1px}
-.al-title{font-size:0.72rem;font-weight:700;margin-bottom:0.12rem}
-.al-text{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);line-height:1.5}
-.al-btn{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);background:none;border:none;padding:0;cursor:pointer;margin-top:0.25rem}
-
-/* CHART */
-.chart-wrap{height:110px;display:flex;align-items:flex-end;gap:4px;margin-bottom:0.5rem}
-.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;height:100%;justify-content:flex-end}
-.bfill{width:100%;border-radius:2px 2px 0 0;min-height:3px;cursor:pointer;position:relative;transition:opacity 0.2s}
-.bfill:hover{opacity:0.75}
-.bfill::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--noir-card);border:1px solid var(--border-or);color:var(--or);font-family:'DM Mono',monospace;font-size:0.75rem;padding:0.15rem 0.35rem;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;margin-bottom:3px;z-index:10}
-.bfill:hover::after{opacity:1}
-.bg{background:linear-gradient(to top,var(--or-dark),var(--or))}
-.bd{background:rgba(217,144,45,0.14)}
-.blbl{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-
-/* PROG */
-.prog{margin-bottom:0.75rem}
-.prog-h{display:flex;justify-content:space-between;margin-bottom:0.25rem;font-family:'DM Mono',monospace;font-size:0.75rem}
-.prog-lbl{color:var(--blanc-dim)} .prog-val{color:var(--or)}
-.prog-track{height:3px;background:rgba(248,246,242,0.05);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--or-dark),var(--or));border-radius:2px}
-
-/* METRIC */
-.met{display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0;border-bottom:1px solid rgba(248,246,242,0.025)}
-.met:last-child{border-bottom:none}
-.met-lbl{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-.met-val{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--or)}
-
-/* BOOK CARD (validation) */
-.val-card{background:var(--noir-card);border:1px solid var(--border);border-radius:10px;padding:1.1rem;margin-bottom:0.9rem;transition:border-color 0.2s}
-.val-card:hover{border-color:rgba(217,144,45,0.12)}
-.val-top{display:flex;gap:1rem;margin-bottom:0.85rem}
-.val-cover{width:56px;height:80px;border-radius:3px 8px 8px 3px;flex-shrink:0;box-shadow:-3px 0 0 rgba(0,0,0,0.3);overflow:hidden}
-.val-info{flex:1}
-.val-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--blanc);margin-bottom:0.18rem}
-.val-author{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.35rem}
-.val-synopsis{font-family:'Playfair Display',serif;font-size:0.82rem;color:var(--blanc-dim);font-style:italic;line-height:1.5;margin-bottom:0.5rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
-.val-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.6rem}
-.val-actions{display:flex;gap:0.45rem}
-
-/* USER DETAIL */
-.user-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.85rem}
-.ud-item{background:rgba(248,246,242,0.02);border:1px solid var(--border);border-radius:7px;padding:0.65rem}
-.ud-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.2rem}
-.ud-value{font-size:0.78rem;font-weight:600;color:var(--blanc)}
-
-/* TAG MANAGER */
-.tag-mgr-row{display:flex;align-items:center;gap:0.65rem;padding:0.6rem 0;border-bottom:1px solid rgba(248,246,242,0.025)}
-.tag-mgr-row:last-child{border-bottom:none}
-.tag-mgr-name{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);flex:1}
-.tag-mgr-count{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);min-width:60px}
-.tag-mgr-bar{flex:2}
+/* PAGE HEADER */
+.pg-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.pg-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#1A1410}
+.pg-sub{font-size:0.8rem;color:#8A7A6E;margin-top:0.2rem}
 
 /* MODAL */
-.mo{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);padding:1rem}
-.mo.open{display:flex}
-.mb{background:var(--noir-card);border:1px solid var(--border-strong);border-radius:14px;padding:1.8rem;width:100%;max-width:500px;position:relative;animation:mIn .22s ease;max-height:90vh;overflow-y:auto}
-@keyframes mIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
-.mb::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--or),transparent)}
-.mc{position:absolute;top:1rem;right:1rem;width:26px;height:26px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--cendre);cursor:pointer;font-size:0.78rem;display:flex;align-items:center;justify-content:center}
-.mt{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--blanc);margin-bottom:0.2rem}
-.ms{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:1.3rem}
-.ma{display:flex;gap:0.55rem;margin-top:1.2rem}
-.bc{flex:1;padding:0.68rem;background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);font-family:'Inter',sans-serif;font-weight:600;font-size:0.72rem;cursor:pointer}
-.bok{flex:2;padding:0.68rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:8px;color:var(--noir);font-family:'Inter',sans-serif;font-weight:700;font-size:0.72rem;cursor:pointer}
-.bok-r{background:linear-gradient(135deg,#ef4444,#dc2626)}
+.mo{position:fixed;inset:0;background:rgba(13,11,9,0.75);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.mo.on{display:flex}
+.mo-box{background:#fff;border-radius:16px;padding:1.75rem;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.mo-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#1A1410;margin-bottom:0.5rem}
+.mo-sub{font-size:0.85rem;color:#8A7A6E;margin-bottom:1.5rem}
+.mo-actions{display:flex;gap:0.75rem}
+.mo-btn{flex:1;padding:0.75rem;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:0.88rem;cursor:pointer;border:none}
+.mo-btn-primary{background:#1A1410;color:#fff}
+.mo-btn-danger{background:#dc2626;color:#fff}
+.mo-btn-ghost{background:#F4F1ED;color:#4A3F35}
 
 /* TOAST */
-.toast{position:fixed;bottom:1.8rem;right:1.8rem;background:var(--noir-card);border:1px solid var(--border-strong);border-radius:10px;padding:0.72rem 1.1rem;display:flex;align-items:center;gap:0.6rem;font-size:0.76rem;color:var(--blanc);box-shadow:0 8px 32px rgba(0,0,0,0.5);transform:translateY(14px);opacity:0;pointer-events:none;transition:all .25s;z-index:600}
-.toast.show{opacity:1;transform:translateY(0)}
-
-/* EMPTY */
-.empty{text-align:center;padding:2.5rem 1rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;border:1px dashed rgba(217,144,45,0.12);border-radius:8px}
-.empty-ico{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.35;display:block}
-
-/* ════════════════════════════════════════════════
- GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
- Applied across all pages for WCAG AA compliance
- ════════════════════════════════════════════════ */
-
-/* 1. Strengthen base variables */
-:root {
- --text-main: #1A1410 !important; /* near-black, high contrast */
- --text-soft: #4A3F35 !important; /* dark brown-grey, readable */
- --text-muted: #6B5A4E !important; /* medium brown, still readable */
- --blanc-dim: #6B5A4E !important;
- --cendre: #4A3F35 !important;
-}
-
-/* 2. Body & base text */
-body { color: #1A1410 !important; background: #F8F5F1 !important; }
-
-/* 3. All paragraphs, labels, small text */
-p, span, label, li, td, th, caption, figcaption,
-.section-sub, .hero-sub, .step-desc, .feature-desc,
-.footer-tagline, .testi-quote, .book-author, .dash-book-reads,
-.auth-sub { color: #4A3F35; }
-
-/* 4. Headings always dark */
-h1, h2, h3, h4, h5, h6,
-.hero-title, .section-title, .auth-title,
-.dash-title, .feature-title, .step-title { color: #1A1410 !important; }
-
-/* 5. Nav links */
-.nav-links a, .sidebar-link, .sidebar-nav a,
-[class*="nav-link"], [class*="menu-link"] { color: #3A2F25 !important; }
-
-/* 6. Sidebar — enforce dark text on white bg */
-.sidebar, .aside, [class*="sidebar"] {
- background: #FFFFFF !important;
- color: #1A1410 !important;
-}
-.sidebar *, .aside * { color: #1A1410; }
-.nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
-
-/* 7. Cards — always readable */
-.card, [class*="-card"], .book-card, .testi-card,
-.stat-card, .dash-stat, .concept-visual, .author-dashboard {
- background: #FFFFFF !important;
- color: #1A1410 !important;
- border-color: rgba(26,20,16,0.1) !important;
-}
-.card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
-
-/* 8. Topbar */
-.topbar, [class*="topbar"], #navbar {
- background: rgba(248,245,241,0.95) !important;
- color: #1A1410 !important;
-}
-.topbar *, #navbar * { color: #1A1410; }
-
-/* 9. Buttons — always visible */
-[class*="btn"][class*="primary"],
-[class*="btn"][class*="hero"],
-[class*="btn-nav-cta"], .btn-hero-primary,
-.btn-cta-primary, .auth-btn {
- background: #FF6B00 !important;
- color: #FFFFFF !important;
- opacity: 1 !important;
-}
-[class*="btn"][class*="ghost"],
-[class*="btn"][class*="secondary"],
-.btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
- color: #1A1410 !important;
- border-color: rgba(26,20,16,0.25) !important;
- opacity: 1 !important;
-}
-
-/* 10. Footer — dark bg with proper white text */
-footer {
- background: #1A1410 !important;
- color: rgba(255,255,255,0.75) !important;
-}
-footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
-footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
-.footer-links a { color: rgba(255,255,255,0.65) !important; }
-.footer-links a:hover { color: #FF6B00 !important; }
-.footer-copy, .footer-legal a { color: rgba(255,255,255,0.35) !important; }
-.footer-col-title { color: rgba(255,255,255,0.4) !important; }
-
-/* 11. Orange accent — always full opacity */
-.or, [style*="color:var(--or)"], [style*="color: var(--or)"] { color: #FF6B00 !important; opacity: 1 !important; }
-em { color: #FF6B00 !important; opacity: 1 !important; }
-
-/* 12. Stat values — bold and dark */
-.hero-stat-value, .stat-value, .dash-stat-val,
-.pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
-.hero-stat-label, .stat-label, .dash-stat-lbl {
- color: #6B5A4E !important; opacity: 1 !important;
-}
-
-/* 13. Auth modal */
-.auth-box { background: #FFFFFF !important; }
-.auth-input { background: #F8F5F1 !important; color: #1A1410 !important; border-color: rgba(26,20,16,0.15) !important; }
-.auth-label { color: #4A3F35 !important; }
-
-/* 14. Section badges & DM Mono labels */
-.section-badge, .hero-badge, .dash-badge,
-[class*="badge"], [class*="-label"], .nav-section {
- opacity: 1 !important;
-}
-
-/* 15. Minimum font sizes */
-.nav-section, .footer-col-title, .hero-badge,
-.section-badge, .ticker-item, .book-price,
-.testi-role, .auth-sub, [class*="-label"],
-[class*="-lbl"], [class*="badge"] {
- font-size: max(0.72rem, 11px) !important;
-}
-
-/* 16. Reader — dark text on white */
-.reader-content, .reader-text, [class*="reader-body"] {
- color: #1A1410 !important;
- background: #FFFFFF !important;
-}
-
-/* ═══════════════════════════════════════════════ */
-
-
-/* ── SIDEBAR NAV BUTTONS ── */
-.snav-btn{
-  width:100%;display:flex;align-items:center;gap:0.7rem;
-  font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:500;
-  color:#4A3F35;background:none;border:none;
-  padding:0.6rem 0.75rem;border-radius:8px;
-  cursor:pointer;text-align:left;
-  transition:all 0.15s;position:relative
-}
-.snav-btn:hover{background:#F4F1ED;color:#1A1410}
-.snav-btn.active{
-  background:rgba(255,107,0,0.08);
-  color:#FF6B00;font-weight:600;
-  border-left:2.5px solid #FF6B00;
-  padding-left:calc(0.75rem - 2.5px)
-}
-.snav-btn.snav-warn{color:#b45309}
-.snav-btn.snav-warn:hover{background:rgba(180,83,9,0.06)}
-.snav-badge{
-  margin-left:auto;font-family:'DM Mono',monospace;
-  font-size:0.62rem;font-weight:600;
-  background:rgba(26,20,16,0.08);color:#4A3F35;
-  padding:0.1rem 0.45rem;border-radius:50px;
-  min-width:18px;text-align:center
-}
-.snav-badge-warn{background:rgba(255,107,0,0.12);color:#FF6B00}
-/* ── FIN SIDEBAR NAV ── */
-
-
-/* ── ADMIN PAGES ── */
-
-
-/* ── FIN ADMIN PAGES ── */
-
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(10px);background:#1A1410;color:#fff;font-family:'Inter',sans-serif;font-size:0.82rem;padding:0.65rem 1.25rem;border-radius:50px;opacity:0;transition:all 0.28s;pointer-events:none;white-space:nowrap;z-index:300}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{background:#16a34a}
+.toast.er{background:#dc2626}
 </style>
-<link rel="icon" type="image/png" href="./logo-icon.png"/>
-<script src="./brand-logo.js" defer></script>
 </head>
 <body>
 
-<!-- TOAST -->
-<div class="toast" id="toast"><span id="toastIco"></span><span id="toastMsg"></span></div>
-
-<!-- MODAL -->
-<div class="mo" id="modal">
- <div class="mb">
- <button class="mc" onclick="closeModal()"></button>
- <div class="mt" id="modalTitle">Confirmation</div>
- <div class="ms" id="modalSub">Cette action est irréversible.</div>
- <div id="modalBody"></div>
- <div class="ma">
- <button class="bc" onclick="closeModal()">Annuler</button>
- <button class="bok" id="modalOk" onclick="doModalOk()">Confirmer</button>
- </div>
- </div>
-</div>
-
 <!-- SIDEBAR -->
-<aside style="width:260px;height:100vh;background:#fff;border-right:1px solid rgba(26,20,16,0.08);position:fixed;top:0;left:0;z-index:100;display:flex;flex-direction:column;overflow:hidden">
-
-  <!-- Logo + Identity -->
-  <div style="padding:1.25rem;border-bottom:1px solid rgba(26,20,16,0.08);flex-shrink:0">
-    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem">
-      <img src="./logo-icon.png" alt="G" style="width:30px;height:30px;border-radius:8px;object-fit:contain" onerror="this.style.display='none'"/>
+<aside class="sb">
+  <div class="sb-head">
+    <div class="sb-logo">
+      <img src="./logo-icon.png" alt="G" onerror="this.style.display='none'"/>
       <div>
-        <div style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:700;color:#1A1410;letter-spacing:0.05em;text-transform:uppercase">Griotte</div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;letter-spacing:0.1em;text-transform:uppercase">Back-office</div>
+        <div class="sb-logo-name">Griotte</div>
+        <div class="sb-logo-sub">Back-office</div>
       </div>
     </div>
-    <div style="display:flex;align-items:center;gap:0.65rem;padding:0.6rem 0.75rem;background:#F4F1ED;border-radius:10px">
-      <div style="width:32px;height:32px;border-radius:50%;background:#1A1410;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;font-size:0.85rem;flex-shrink:0" id="adminAva">A</div>
-      <div style="min-width:0">
-        <div style="font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;color:#1A1410;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="adminName">—</div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.55rem;color:#FF6B00;letter-spacing:0.06em;text-transform:uppercase">Super Administrateur</div>
+    <div class="sb-user">
+      <div class="sb-ava" id="adminAva">A</div>
+      <div>
+        <div class="sb-uname" id="adminName">—</div>
+        <div class="sb-urole">Super Administrateur</div>
       </div>
     </div>
   </div>
 
-  <!-- Nav scrollable -->
-  <div style="flex:1;overflow-y:auto;padding:0.75rem" id="sidebarNav">
-
-    <div style="font-size:0.6rem;font-family:'DM Mono',monospace;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0.5rem 0.25rem">Vue d'ensemble</div>
-    <button class="snav-btn active" id="snav-dashboard" onclick="showPage('dashboard',this)">
+  <div class="sb-nav">
+    <div class="sb-section">Vue d'ensemble</div>
+    <button class="sb-btn on" id="nav-dashboard" onclick="go('dashboard',this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       Tableau de bord
     </button>
-    <button class="snav-btn" id="snav-analytics" onclick="showPage('analytics',this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-      Analytics
-    </button>
 
-    <div style="font-size:0.6rem;font-family:'DM Mono',monospace;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.75rem 0.5rem 0.25rem">Contenu</div>
-    <button class="snav-btn" id="snav-livres" onclick="showPage('livres',this)">
+    <div class="sb-section">Contenu</div>
+    <button class="sb-btn" id="nav-livres" onclick="go('livres',this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       Livres publiés
-      <span class="snav-badge" id="navBooks" style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(26,20,16,0.08);color:#4A3F35;padding:0.1rem 0.45rem;border-radius:50px">0</span>
+      <span class="sb-badge" id="nb-livres">0</span>
     </button>
-    <button class="snav-btn" id="snav-validation" onclick="showPage('validation',this)" style="color:#b45309">
+    <button class="sb-btn" id="nav-validation" onclick="go('validation',this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       Validation
-      <span class="snav-badge" id="navPending" style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(255,107,0,0.12);color:#FF6B00;padding:0.1rem 0.45rem;border-radius:50px">0</span>
-    </button>
-    <button class="snav-btn" id="snav-tags" onclick="showPage('tags',this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-      Tags & Genres
+      <span class="sb-badge warn" id="nb-pending">0</span>
     </button>
 
-    <div style="font-size:0.6rem;font-family:'DM Mono',monospace;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.75rem 0.5rem 0.25rem">Utilisateurs</div>
-    <button class="snav-btn" id="snav-users" onclick="showPage('users',this)">
+    <div class="sb-section">Utilisateurs</div>
+    <button class="sb-btn" id="nav-users" onclick="go('users',this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       Utilisateurs
-      <span class="snav-badge" id="navUsers" style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(26,20,16,0.08);color:#4A3F35;padding:0.1rem 0.45rem;border-radius:50px">0</span>
+      <span class="sb-badge" id="nb-users">0</span>
     </button>
-    <button class="snav-btn" id="snav-auteurs" onclick="showPage('auteurs',this)">
+    <button class="sb-btn" id="nav-auteurs" onclick="go('auteurs',this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
       Auteurs
     </button>
 
-    <div style="font-size:0.6rem;font-family:'DM Mono',monospace;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.75rem 0.5rem 0.25rem">Finance</div>
-    <button class="snav-btn" id="snav-paiements" onclick="showPage('paiements',this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      Paiements
-    </button>
-    <button class="snav-btn" id="snav-retraits" onclick="showPage('retraits',this)" style="color:#b45309">
+    <div class="sb-section">Finance</div>
+    <button class="sb-btn" id="nav-retraits" onclick="go('retraits',this)">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       Retraits auteurs
-      <span class="snav-badge" id="navRetraits" style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(255,107,0,0.12);color:#FF6B00;padding:0.1rem 0.45rem;border-radius:50px">0</span>
+      <span class="sb-badge warn" id="nb-retraits">0</span>
     </button>
-
-    <div style="font-size:0.6rem;font-family:'DM Mono',monospace;color:#9A8878;letter-spacing:0.12em;text-transform:uppercase;padding:0.75rem 0.5rem 0.25rem">Système</div>
-    <button class="snav-btn" id="snav-frontend" onclick="showPage('frontend',this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Gestion frontend
-    </button>
-    <button class="snav-btn" id="snav-parametres" onclick="showPage('parametres',this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      Paramètres
-    </button>
-
   </div>
 
-  <!-- Footer -->
-  <div style="flex-shrink:0;padding:0.75rem 1rem;border-top:1px solid rgba(26,20,16,0.08)">
-    <button onclick="window.location.href='./griotte-dashboard.html'" style="width:100%;display:flex;align-items:center;gap:0.6rem;font-family:'Inter',sans-serif;font-size:0.78rem;color:#4A3F35;background:none;border:none;cursor:pointer;padding:0.45rem 0.5rem;border-radius:7px;margin-bottom:0.2rem;text-align:left" onmouseover="this.style.background='#F4F1ED'" onmouseout="this.style.background='none'">
+  <div class="sb-foot">
+    <button class="sb-foot-btn" onclick="window.location.href='./griotte-dashboard.html'">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
       Dashboard principal
     </button>
-    <button onclick="deconnecter()" style="width:100%;display:flex;align-items:center;gap:0.6rem;font-family:'Inter',sans-serif;font-size:0.78rem;color:#dc2626;background:none;border:none;cursor:pointer;padding:0.45rem 0.5rem;border-radius:7px;text-align:left" onmouseover="this.style.background='rgba(220,38,38,0.05)'" onmouseout="this.style.background='none'">
+    <button class="sb-foot-btn red" onclick="logout()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       Déconnexion
     </button>
-    <div style="font-family:'DM Mono',monospace;font-size:0.58rem;color:#9A8878;margin-top:0.35rem;padding:0 0.5rem">Système · Railway</div>
+    <div class="sb-sys">Système · Railway</div>
   </div>
-
 </aside>
 
 <!-- MAIN -->
 <div class="main">
- <div class="topbar">
- <div class="topbar-left">
- <div class="topbar-title" id="pageTitle">Tableau de bord</div>
- <div class="breadcrumb">GRIOTTE <span>›</span><span class="bc-active" id="breadcrumb">Dashboard</span></div>
- </div>
- <div class="topbar-right">
- <input type="text" class="search-admin" id="globalSearch" placeholder=" Rechercher..." oninput="globalSearch(this.value)"/>
- <div class="topbar-date" id="currentDate"></div>
- <button class="icon-btn" title="Notifications"><span></span><span class="notif-dot"></span></button>
- </div>
- </div>
+  <div class="topbar">
+    <div style="display:flex;align-items:baseline;gap:0.5rem">
+      <span class="topbar-title" id="pageTitle">Tableau de bord</span>
+      <span class="topbar-crumb" id="pageCrumb">GRIOTTE › Dashboard</span>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#8A7A6E" id="currentDate"></div>
+  </div>
 
- <!-- DASHBOARD -->
- <div class="page active" id="page-dashboard">
- <div class="kpi-row">
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or"></div><span class="kpi-badge kb-up">↑ +23%</span></div><div class="kpi-label">Revenus plateforme</div><div class="kpi-val">87 400</div><div class="kpi-sub">FCFA ce mois</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green"></div><span class="kpi-badge kb-up">↑ +12%</span></div><div class="kpi-label">Utilisateurs</div><div class="kpi-val" id="kpiUsers">—</div><div class="kpi-sub">inscrits total</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue"></div><span class="kpi-badge kb-up">↑ +8%</span></div><div class="kpi-label">Livres publiés</div><div class="kpi-val" id="kpiBooks">—</div><div class="kpi-sub">sur la plateforme</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple"></div><span class="kpi-badge kb-up">↑ +5%</span></div><div class="kpi-label">Auteurs actifs</div><div class="kpi-val" id="kpiAuthors">—</div><div class="kpi-sub">vérifiés</div></div>
- </div>
- <div class="g2">
- <div class="card">
- <div class="ch"><div><div class="ct">Revenus — 7 derniers jours</div><div class="cs">FCFA · Données Railway</div></div><button class="ca">Exporter →</button></div>
- <div class="chart-wrap">
- <div class="bcol"><div class="bfill bd" style="height:32%" data-tip="6 200 F"></div><span class="blbl">L</span></div>
- <div class="bcol"><div class="bfill bd" style="height:51%" data-tip="9 900 F"></div><span class="blbl">M</span></div>
- <div class="bcol"><div class="bfill bd" style="height:44%" data-tip="8 500 F"></div><span class="blbl">M</span></div>
- <div class="bcol"><div class="bfill bg" style="height:68%" data-tip="13 200 F"></div><span class="blbl">J</span></div>
- <div class="bcol"><div class="bfill bg" style="height:82%" data-tip="15 900 F"></div><span class="blbl">V</span></div>
- <div class="bcol"><div class="bfill bg" style="height:94%" data-tip="18 200 F"></div><span class="blbl">S</span></div>
- <div class="bcol"><div class="bfill bg" style="height:76%" data-tip="14 700 F"></div><span class="blbl">D</span></div>
- </div>
- <div style="display:flex;justify-content:space-between;padding-top:0.7rem;border-top:1px solid var(--border)">
- <div><div class="kpi-label">Total semaine</div><div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--or)">86 600 FCFA</div></div>
- <div style="text-align:right"><div class="kpi-label">Croissance</div><div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">↑ +23% vs semaine dernière</div></div>
- </div>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Alertes système</div><div class="cs">Actions requises</div></div></div>
- <div class="alert-box al-warn"><span class="al-ico">⏳</span><div><div class="al-title" style="color:var(--yellow)">Livres en attente</div><div class="al-text" id="alertPending">Chargement...</div><button class="al-btn" onclick="showPage('validation',null)">Valider →</button></div></div>
- <div class="alert-box al-info"><span class="al-ico"></span><div><div class="al-title" style="color:var(--blue)">Retraits à traiter</div><div class="al-text">0 demande(s) en attente</div><button class="al-btn" onclick="showPage('retraits',null)">Traiter →</button></div></div>
- <div class="alert-box al-ok"><span class="al-ico">✓</span><div><div class="al-title" style="color:var(--green)">Système opérationnel</div><div class="al-text">Railway · Vercel · PostgreSQL · FedaPay</div></div></div>
- </div>
- </div>
- <div class="g11">
- <div class="card">
- <div class="ch"><div><div class="ct">Livres récents</div></div><button class="ca" onclick="showPage('livres',null)">Tout voir →</button></div>
- <table class="tbl"><thead><tr><th>Titre</th><th>Auteur</th><th>Genre</th><th>Statut</th></tr></thead>
- <tbody id="dashBooks"><tr><td colspan="4" style="text-align:center;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;padding:1.2rem">Chargement...</td></tr></tbody></table>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Activité récente</div></div></div>
- <div class="act-list">
- <div class="act-item"><div class="act-ico ico-green"></div><div><div class="act-text">Inscription — <strong>nouveau@griotte.com</strong></div><div class="act-time">Il y a 3 min</div></div></div>
- <div class="act-item"><div class="act-ico ico-or"></div><div><div class="act-text">Publication — <strong>Les Fils du Sahel</strong></div><div class="act-time">Il y a 18 min</div></div></div>
- <div class="act-item"><div class="act-ico ico-blue"></div><div><div class="act-text">Recharge — <strong>+2 000 FCFA</strong></div><div class="act-time">Il y a 1h</div></div></div>
- <div class="act-item"><div class="act-ico ico-green"></div><div><div class="act-text"><strong>52 pages</strong> lues cette heure</div><div class="act-time">Il y a 1h</div></div></div>
- <div class="act-item"><div class="act-ico ico-red"></div><div><div class="act-text">Retrait demandé — <strong>5 000 FCFA</strong></div><div class="act-time">Il y a 2h</div></div></div>
- </div>
- </div>
- </div>
- <div class="g3">
- <div class="card">
- <div class="ch"><div><div class="ct">Répartition rôles</div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Lecteurs</span><span class="prog-val" id="pctReaders">—</span></div><div class="prog-track"><div class="prog-fill" id="barReaders" style="width:0%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Auteurs</span><span class="prog-val" id="pctAuthors">—</span></div><div class="prog-track"><div class="prog-fill" id="barAuthors" style="width:0%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl"> Admins</span><span class="prog-val">1%</span></div><div class="prog-track"><div class="prog-fill" style="width:1%"></div></div></div>
- <div style="padding-top:0.6rem;border-top:1px solid var(--border);margin-top:0.4rem">
- <div class="met"><span class="met-lbl">Nouveaux ce mois</span><span class="met-val" style="font-size:0.85rem">+247</span></div>
- <div class="met"><span class="met-lbl">Taux rétention</span><span class="met-val" style="font-size:0.85rem">68%</span></div>
- </div>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Top auteurs</div><div class="cs">Par livres publiés</div></div></div>
- <div id="topAuthors"><div style="color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</div></div>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Santé plateforme</div></div></div>
- <div class="met"><span class="met-lbl">Uptime Railway</span><span class="met-val" style="font-size:0.85rem">99.8%</span></div>
- <div class="met"><span class="met-lbl">Réponse API</span><span class="met-val" style="font-size:0.85rem">142ms</span></div>
- <div class="met"><span class="met-lbl">Erreurs 5xx</span><span class="met-val" style="font-size:0.85rem;color:var(--green)">0</span></div>
- <div class="met"><span class="met-lbl">Taux conversion</span><span class="met-val" style="font-size:0.85rem">34%</span></div>
- <div class="met"><span class="met-lbl">Revenu moyen/user</span><span class="met-val" style="font-size:0.85rem">1 820 F</span></div>
- </div>
- </div>
- </div>
+  <div class="content">
 
- <!-- USERS -->
- <div class="page" id="page-users">
- <div class="ph">
- <div><div class="ph-title">Utilisateurs</div><div class="ph-sub" id="usersSub">Chargement...</div></div>
- <div class="ph-right">
- <input type="text" class="fi" style="width:200px" placeholder="Rechercher..." oninput="searchUsers(this.value)"/>
- </div>
- </div>
- <div class="fbar">
- <span class="fc active" onclick="filterUsers('all',this)">Tous</span>
- <span class="fc" onclick="filterUsers('READER',this)">Lecteurs</span>
- <span class="fc" onclick="filterUsers('AUTHOR',this)">Auteurs</span>
- <span class="fc" onclick="filterUsers('ADMIN',this)"> Admins</span>
- <span class="fc" onclick="filterUsers('suspended',this)"> Suspendus</span>
- </div>
- <div class="card" style="padding:0">
- <table class="tbl">
- <thead><tr><th style="padding-left:1.2rem">#</th><th>Utilisateur</th><th>Email</th><th>Pays</th><th>Rôle</th><th>Solde</th><th>Statut</th><th>Inscrit</th><th>Actions</th></tr></thead>
- <tbody id="usersTable"><tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
- </table>
- </div>
- </div>
+    <!-- DASHBOARD -->
+    <div class="pg on" id="pg-dashboard">
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Utilisateurs</div>
+          <div class="kpi-val" id="kpi-users">—</div>
+          <div class="kpi-sub">inscrits total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Auteurs</div>
+          <div class="kpi-val" id="kpi-authors">—</div>
+          <div class="kpi-sub">vérifiés</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Livres publiés</div>
+          <div class="kpi-val" id="kpi-books">—</div>
+          <div class="kpi-sub">sur la plateforme</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Revenus</div>
+          <div class="kpi-val or" id="kpi-revenue">—</div>
+          <div class="kpi-sub">FCFA total</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">Activité récente</span></div>
+        <div id="recent-activity" style="padding:1.5rem;color:#8A7A6E;font-size:0.85rem">Chargement...</div>
+      </div>
+    </div>
 
- <!-- AUTEURS -->
- <div class="page" id="page-auteurs">
- <div class="ph"><div><div class="ph-title">Auteurs</div><div class="ph-sub">Gestion des auteurs GRIOTTE</div></div></div>
- <div class="card" style="padding:0">
- <table class="tbl">
- <thead><tr><th style="padding-left:1.2rem">Auteur</th><th>Livres</th><th>Pages totales</th><th>Tags utilisés</th><th>Statut</th><th>Actions</th></tr></thead>
- <tbody id="auteursTable"><tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
- </table>
- </div>
- </div>
+    <!-- LIVRES -->
+    <div class="pg" id="pg-livres">
+      <div class="pg-head">
+        <div><div class="pg-title">Livres publiés</div><div class="pg-sub" id="books-sub">—</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">Catalogue complet</span></div>
+        <table class="tbl">
+          <thead><tr>
+            <th>Titre</th><th>Auteur</th><th>Genre</th><th>Pages</th><th>Statut</th>
+          </tr></thead>
+          <tbody id="books-tbody"><tr><td colspan="5" class="empty">Chargement...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
 
- <!-- LIVRES -->
- <div class="page" id="page-livres">
- <div class="ph">
- <div><div class="ph-title">Livres</div><div class="ph-sub" id="booksSub">Chargement...</div></div>
- <div class="ph-right"><input type="text" class="fi" style="width:200px" placeholder="Rechercher..." oninput="searchBooks(this.value)"/></div>
- </div>
- <div class="fbar">
- <span class="fc active" onclick="filterBooks('all',this)">Tous</span>
- <span class="fc" onclick="filterBooks('PUBLISHED',this)">✓ Publiés</span>
- <span class="fc" onclick="filterBooks('DRAFT',this)">Brouillons</span>
- </div>
- <div class="card" style="padding:0">
- <table class="tbl">
- <thead><tr><th style="padding-left:1.2rem">#</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Pages</th><th>Tags</th><th>Statut</th><th>Actions</th></tr></thead>
- <tbody id="booksTable"><tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
- </table>
- </div>
- </div>
+    <!-- VALIDATION -->
+    <div class="pg" id="pg-validation">
+      <div class="pg-head">
+        <div><div class="pg-title">Validation des œuvres</div><div class="pg-sub">Livres en attente de validation</div></div>
+      </div>
+      <div class="card">
+        <table class="tbl">
+          <thead><tr><th>Titre</th><th>Auteur</th><th>Date soumission</th><th>Pages</th><th>Actions</th></tr></thead>
+          <tbody id="validation-tbody"><tr><td colspan="5" class="empty">Aucun livre en attente</td></tr></tbody>
+        </table>
+      </div>
+    </div>
 
- <!-- VALIDATION -->
- <div class="page" id="page-validation">
- <div class="ph"><div><div class="ph-title">Validation des livres</div><div class="ph-sub">Livres en attente d'approbation éditoriale</div></div></div>
- <div id="validationContent"><div class="empty"><span class="empty-ico">✓</span>Aucun livre en attente</div></div>
- </div>
+    <!-- USERS -->
+    <div class="pg" id="pg-users">
+      <div class="pg-head">
+        <div><div class="pg-title">Utilisateurs</div><div class="pg-sub" id="users-sub">—</div></div>
+      </div>
+      <div class="card">
+        <table class="tbl">
+          <thead><tr><th>Nom</th><th>Email</th><th>Rôle</th><th>Solde</th><th>Inscription</th><th>Action</th></tr></thead>
+          <tbody id="users-tbody"><tr><td colspan="6" class="empty">Chargement...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
 
- <!-- CHAPITRES -->
- <div class="page" id="page-chapitres">
- <div class="ph"><div><div class="ph-title">Chapitres</div><div class="ph-sub">Gestion de tous les chapitres publiés</div></div></div>
- <div class="empty"><span class="empty-ico"></span>Les chapitres apparaîtront ici une fois le système de chapitres connecté au backend.</div>
- </div>
+    <!-- AUTEURS -->
+    <div class="pg" id="pg-auteurs">
+      <div class="pg-head">
+        <div><div class="pg-title">Auteurs</div><div class="pg-sub" id="authors-sub">—</div></div>
+      </div>
+      <div class="card">
+        <table class="tbl">
+          <thead><tr><th>Nom</th><th>Email</th><th>Solde</th><th>Inscription</th></tr></thead>
+          <tbody id="authors-tbody"><tr><td colspan="4" class="empty">Chargement...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
 
- <!-- PAIEMENTS -->
- <div class="page" id="page-paiements">
- <div class="ph"><div><div class="ph-title">Paiements</div><div class="ph-sub">Centre financier GRIOTTE</div></div></div>
- <div class="kpi-row">
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or"></div></div><div class="kpi-label">Revenus du jour</div><div class="kpi-val">0</div><div class="kpi-sub">FCFA</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green"></div></div><div class="kpi-label">Revenus du mois</div><div class="kpi-val">87 400</div><div class="kpi-sub">FCFA</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue"></div></div><div class="kpi-label">Part plateforme 40%</div><div class="kpi-val">34 960</div><div class="kpi-sub">FCFA</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple"></div></div><div class="kpi-label">Part auteurs 60%</div><div class="kpi-val">52 440</div><div class="kpi-sub">FCFA</div></div>
- </div>
- <div class="g11">
- <div class="card">
- <div class="ch"><div><div class="ct">Transactions récentes</div></div></div>
- <div class="empty" style="padding:1.5rem"><span class="empty-ico"></span>Aucune transaction enregistrée.</div>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Métriques financières</div></div></div>
- <div class="met"><span class="met-lbl">Valeur moyenne transaction</span><span class="met-val" style="font-size:0.85rem">3 200 F</span></div>
- <div class="met"><span class="met-lbl">Méthode la + utilisée</span><span class="met-val" style="font-size:0.75rem;color:var(--blue)">Mobile Money</span></div>
- <div class="met"><span class="met-lbl">Taux de succès paiements</span><span class="met-val" style="font-size:0.85rem">94%</span></div>
- <div class="met"><span class="met-lbl">Paiements ce mois</span><span class="met-val" style="font-size:0.85rem">—</span></div>
- </div>
- </div>
- </div>
+    <!-- RETRAITS -->
+    <div class="pg" id="pg-retraits">
+      <div class="pg-head">
+        <div><div class="pg-title">Retraits auteurs</div><div class="pg-sub">Demandes en attente de traitement</div></div>
+      </div>
+      <div class="card">
+        <table class="tbl">
+          <thead><tr><th>Auteur</th><th>Montant</th><th>Méthode</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="retraits-tbody"><tr><td colspan="5" class="empty">Aucun retrait en attente</td></tr></tbody>
+        </table>
+      </div>
+    </div>
 
- <!-- RETRAITS -->
- <div class="page" id="page-retraits"><div id="retraitsContent" style="padding:1rem"></div>
- <div class="ph"><div><div class="ph-title">Retraits</div><div class="ph-sub">Demandes de retrait des auteurs</div></div></div>
- <div class="empty"><span class="empty-ico"></span>Aucune demande de retrait en attente.</div>
- </div>
-
- <!-- TAGS -->
- <div class="page" id="page-tags">
- <div class="ph">
- <div><div class="ph-title">Gestion des tags</div><div class="ph-sub">Tags utilisés sur la plateforme</div></div>
- <button class="btn-primary" onclick="openCreateTag()">+ Créer un tag</button>
- </div>
- <div class="g11">
- <div class="card">
- <div class="ch"><div><div class="ct">Tags actifs</div><div class="cs" id="tagsCount">Chargement...</div></div></div>
- <div id="tagsList"><div style="color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</div></div>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Créer / Modifier un tag</div></div></div>
- <div class="fg"><label class="fl">Nom du tag</label><input id="newTagName" type="text" class="fi" placeholder="Ex: Immigration"/></div>
- <div class="fg"><label class="fl">Catégorie</label>
- <select id="newTagCat" class="fis">
- <option value="theme">Thème</option>
- <option value="pays">Pays / Région</option>
- <option value="genre">Genre</option>
- <option value="societe">Société</option>
- <option value="personnage">Personnage</option>
- </select>
- </div>
- <button class="btn-primary" style="width:100%" onclick="createTag()">Créer le tag →</button>
- </div>
- </div>
- </div>
-
- <!-- MODERATION -->
- <div class="page" id="page-moderation">
- <div class="ph"><div><div class="ph-title">Modération</div><div class="ph-sub">Contenus signalés par les utilisateurs</div></div></div>
- <div class="g3">
- <div class="card"><div class="ch"><div><div class="ct">Livres signalés</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✓</span>Aucun livre signalé</div></div>
- <div class="card"><div class="ch"><div><div class="ct">Commentaires</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✓</span>Aucun commentaire signalé</div></div>
- <div class="card"><div class="ch"><div><div class="ct">Utilisateurs</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✓</span>Aucun utilisateur signalé</div></div>
- </div>
- </div>
-
- <!-- ANALYTICS -->
- <div class="page" id="page-analytics">
- <div class="ph"><div><div class="ph-title">Analytics</div><div class="ph-sub">Métriques détaillées de la plateforme</div></div></div>
- <div class="kpi-row">
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or"></div><span class="kpi-badge kb-up">↑ +34%</span></div><div class="kpi-label">Pages vues</div><div class="kpi-val">142k</div><div class="kpi-sub">ce mois</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green">⏱</div><span class="kpi-badge kb-up">↑ +12%</span></div><div class="kpi-label">Durée session</div><div class="kpi-val">24min</div><div class="kpi-sub">moyenne</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue"></div><span class="kpi-badge kb-neu">→ stable</span></div><div class="kpi-label">Taux retour</div><div class="kpi-val">68%</div><div class="kpi-sub">récurrents</div></div>
- <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple"></div><span class="kpi-badge kb-up">↑ +5%</span></div><div class="kpi-label">NPS Score</div><div class="kpi-val">72</div><div class="kpi-sub">satisfaction</div></div>
- </div>
- <div class="g11">
- <div class="card">
- <div class="ch"><div><div class="ct">Top genres lus</div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Romance</span><span class="prog-val">34%</span></div><div class="prog-track"><div class="prog-fill" style="width:34%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Roman africain</span><span class="prog-val">28%</span></div><div class="prog-track"><div class="prog-fill" style="width:28%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Fantastique</span><span class="prog-val">18%</span></div><div class="prog-track"><div class="prog-fill" style="width:18%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Policier</span><span class="prog-val">12%</span></div><div class="prog-track"><div class="prog-fill" style="width:12%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Histoire</span><span class="prog-val">8%</span></div><div class="prog-track"><div class="prog-fill" style="width:8%"></div></div></div>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Pays les + actifs</div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">🇲🇱 Mali</span><span class="prog-val">28%</span></div><div class="prog-track"><div class="prog-fill" style="width:28%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">🇸🇳 Sénégal</span><span class="prog-val">22%</span></div><div class="prog-track"><div class="prog-fill" style="width:22%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">🇳🇬 Nigeria</span><span class="prog-val">19%</span></div><div class="prog-track"><div class="prog-fill" style="width:19%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">🇨🇮 Côte d'Ivoire</span><span class="prog-val">14%</span></div><div class="prog-track"><div class="prog-fill" style="width:14%"></div></div></div>
- <div class="prog"><div class="prog-h"><span class="prog-lbl">Autres</span><span class="prog-val">17%</span></div><div class="prog-track"><div class="prog-fill" style="width:17%"></div></div></div>
- </div>
- </div>
- </div>
-
- <!-- PARAMETRES -->
- <div class="page" id="page-parametres">
- <div class="ph"><div><div class="ph-title">Paramètres</div><div class="ph-sub">Configuration de la plateforme GRIOTTE</div></div></div>
- <div class="g11">
- <div class="card">
- <div class="ch"><div><div class="ct">Règles financières</div></div></div>
- <div class="met"><span class="met-lbl">Prix par page lue</span><span class="met-val" style="font-size:0.85rem">10 FCFA</span></div>
- <div class="met"><span class="met-lbl">Commission auteur</span><span class="met-val" style="font-size:0.85rem">60%</span></div>
- <div class="met"><span class="met-lbl">Commission plateforme</span><span class="met-val" style="font-size:0.85rem">40%</span></div>
- <div class="met"><span class="met-lbl">Retrait minimum</span><span class="met-val" style="font-size:0.85rem">500 FCFA</span></div>
- <div class="met"><span class="met-lbl">Délai de retrait</span><span class="met-val" style="font-size:0.85rem">24–48h</span></div>
- </div>
- <div class="card">
- <div class="ch"><div><div class="ct">Stack technique</div></div></div>
- <div class="met"><span class="met-lbl">Backend</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">Railway · NestJS · Prisma</div></div></div>
- <div class="met"><span class="met-lbl">Frontend</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">Vercel · HTML/CSS/JS</div></div></div>
- <div class="met"><span class="met-lbl">Base de données</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">PostgreSQL</div></div></div>
- <div class="met"><span class="met-lbl">Paiements</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">FedaPay</div></div></div>
- <div class="met"><span class="met-lbl">Stockage</span><div><div class="met-val" style="font-size:0.7rem;color:var(--cendre)">Cloudflare R2 (à venir)</div></div></div>
- </div>
- </div>
- </div>
-
+  </div>
 </div>
 
+<!-- MODAL -->
+<div class="mo" id="modal">
+  <div class="mo-box">
+    <div class="mo-title" id="mo-title">Confirmation</div>
+    <div class="mo-sub" id="mo-sub"></div>
+    <div class="mo-actions">
+      <button class="mo-btn mo-btn-ghost" onclick="closeModal()">Annuler</button>
+      <button class="mo-btn mo-btn-primary" id="mo-ok" onclick="doOk()">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script>
-const API = 'https://griotte-backend-2-production.up.railway.app/api/v1/auth';
-let token = localStorage.getItem('griotte_token') || localStorage.getItem('accessToken');
+var API   = 'https://griotte-backend-2-production.up.railway.app/api/v1/auth';
+var token = localStorage.getItem('griotte_token') || localStorage.getItem('accessToken');
+var allUsers = [], allBooks = [];
+var modalCb  = null;
 
-// Handle URL token
-(function(){
-  var up = new URLSearchParams(window.location.search);
-  var tf = up.get('token');
-  if (tf) {
-    token = tf;
-    localStorage.setItem('griotte_token', tf);
-    localStorage.setItem('accessToken', tf);
-    window.history.replaceState({}, '', window.location.pathname);
-  }
-  if (!token) window.location.href = './griotte-landing.html';
-})();
+// Token check
+if (!token) { window.location.href = './griotte-landing.html'; }
+var urlT = new URLSearchParams(window.location.search).get('token');
+if (urlT) { token = urlT; localStorage.setItem('griotte_token', urlT); window.history.replaceState({}, '', location.pathname); }
 
-// ── SHOW PAGE — GLOBAL ────────────────────────────────────────────
-function showPage(page, el) {
-  document.querySelectorAll('.page').forEach(function(p) {
-    p.classList.remove('active');
-  });
-  document.querySelectorAll('.snav-btn').forEach(function(n) {
-    n.classList.remove('active');
-  });
-  var panel = document.getElementById('page-' + page);
-  if (panel) panel.classList.add('active');
-  if (el) el.classList.add('active');
-  // Update topbar title
-  var titles = {
-    dashboard:'Tableau de bord', users:'Utilisateurs', auteurs:'Auteurs',
-    livres:'Livres', validation:'Validation', tags:'Tags',
-    paiements:'Paiements', retraits:'Retraits', frontend:'Frontend', parametres:'Paramètres',
-    analytics:'Analytics'
-  };
-  var tb = document.getElementById('pageTitle');
-  if (tb && titles[page]) tb.textContent = titles[page];
-  // Load data
-  if (page === 'users')      renderUsers();
-  if (page === 'auteurs')    renderAuteurs();
-  if (page === 'livres')     renderBooks();
-  if (page === 'validation') renderValidation();
-  if (page === 'retraits')   loadRetraitsPage();
+// ── NAVIGATION ────────────────────────────────────────────────────
+function go(page, btn) {
+  // Hide all pages
+  document.querySelectorAll('.pg').forEach(function(el) { el.classList.remove('on'); });
+  // Remove active from all nav buttons
+  document.querySelectorAll('.sb-btn').forEach(function(el) { el.classList.remove('on'); });
+  // Show target page
+  var pg = document.getElementById('pg-' + page);
+  if (pg) pg.classList.add('on');
+  // Activate nav button
+  if (btn) btn.classList.add('on');
+  // Update topbar
+  var titles = {dashboard:'Tableau de bord',livres:'Livres publiés',validation:'Validation',users:'Utilisateurs',auteurs:'Auteurs',retraits:'Retraits'};
+  var crumbs = {dashboard:'GRIOTTE › Dashboard',livres:'GRIOTTE › Livres',validation:'GRIOTTE › Validation',users:'GRIOTTE › Utilisateurs',auteurs:'GRIOTTE › Auteurs',retraits:'GRIOTTE › Retraits'};
+  var t = document.getElementById('pageTitle'); if (t) t.textContent = titles[page] || page;
+  var c = document.getElementById('pageCrumb'); if (c) c.textContent = crumbs[page] || '';
+  // Render data
+  if (page === 'livres')      renderBooks();
+  if (page === 'validation')  renderValidation();
+  if (page === 'users')       renderUsers();
+  if (page === 'auteurs')     renderAuthors();
+  if (page === 'retraits')    loadRetraits();
 }
-
-// ── HELPERS ───────────────────────────────────────────────────────
-var allBooks = [], allUsers = [], allStats = {};
-var modalOkCb = null;
-
-function setEl(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
-function fmt(n) { return (n||0).toLocaleString('fr-FR'); }
-function fmtDate(d) { return d ? new Date(d).toLocaleDateString('fr-FR') : '—'; }
-
-// ── TOAST ─────────────────────────────────────────────────────────
-function showToast(msg, type) {
-  var t = document.getElementById('toast');
-  if (!t) return;
-  var ico = document.getElementById('toastIco');
-  var txt = document.getElementById('toastMsg');
-  if (ico) ico.textContent = type === 'error' ? '✗' : '✓';
-  if (txt) txt.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 2800);
-}
-
-// ── MODAL ─────────────────────────────────────────────────────────
-function openModal(title, sub, body, okLabel, okClass, cb) {
-  setEl('modalTitle', title || 'Confirmation');
-  setEl('modalSub', sub || '');
-  var bodyEl = document.getElementById('modalBody');
-  if (bodyEl) bodyEl.innerHTML = body || '';
-  var btn = document.getElementById('modalOk');
-  if (btn) { btn.textContent = okLabel || 'Confirmer'; btn.className = okClass === 'danger' ? 'bok bok-r' : 'bok'; }
-  modalOkCb = cb;
-  var m = document.getElementById('modal');
-  if (m) m.classList.add('open');
-}
-function closeModal() { var m = document.getElementById('modal'); if (m) m.classList.remove('open'); modalOkCb = null; }
-function doModalOk() { if (modalOkCb) modalOkCb(); closeModal(); }
 
 // ── LOAD DATA ─────────────────────────────────────────────────────
-async function loadAdmin() {
+async function init() {
   try {
-    var res = await fetch(API + '/me', { headers: { 'Authorization': 'Bearer ' + token } });
-    if (!res.ok) { window.location.href = './griotte-landing.html'; return; }
-    var user = await res.json();
-    if (user.role !== 'ADMIN') {
-      showToast('Accès refusé', 'error');
-      setTimeout(function() { window.location.href = './griotte-dashboard.html'; }, 1500);
-      return;
-    }
-    setEl('adminAva', user.name ? user.name.charAt(0).toUpperCase() : 'A');
-    setEl('adminName', user.name || 'Administrateur');
-    await Promise.allSettled([loadBooks(), loadUsers(), loadStats()]);
-  } catch(e) {
-    console.error('loadAdmin:', e);
-  }
+    var r = await fetch(API + '/me', {headers:{'Authorization':'Bearer '+token}});
+    if (!r.ok) { window.location.href = './griotte-landing.html'; return; }
+    var u = await r.json();
+    if (u.role !== 'ADMIN') { toast('Accès refusé','er'); setTimeout(function(){window.location.href='./griotte-dashboard.html';},1500); return; }
+    var ava = document.getElementById('adminAva'); if (ava) ava.textContent = (u.name||'A').charAt(0).toUpperCase();
+    var nm  = document.getElementById('adminName');  if (nm) nm.textContent = u.name || 'Administrateur';
+  } catch(e) { console.error(e); }
+  
+  // Load books and users in parallel
+  await Promise.allSettled([fetchBooks(), fetchUsers(), fetchStats()]);
 }
 
-async function loadBooks() {
+async function fetchBooks() {
   try {
-    var res = await fetch(API + '/books-public');
-    var data = await res.json();
-    allBooks = Array.isArray(data) ? data : [];
-    setEl('navBooks', allBooks.length);
-    setEl('kpiBooks', fmt(allBooks.length));
-    setEl('booksSub', allBooks.length + ' œuvres publiées');
-  } catch(e) { console.warn('loadBooks:', e.message); }
+    var r = await fetch(API + '/books-public');
+    var d = await r.json();
+    allBooks = Array.isArray(d) ? d : [];
+    var n = allBooks.length;
+    setText('kpi-books', n);
+    setText('nb-livres', n);
+    setText('books-sub', n + ' livres dans le catalogue');
+  } catch(e) {}
 }
 
-async function loadUsers() {
+async function fetchUsers() {
   try {
-    var res = await fetch(API + '/admin/users', { headers: { 'Authorization': 'Bearer ' + token } });
-    var data = await res.json();
-    allUsers = Array.isArray(data) ? data : [];
-    var authors = allUsers.filter(function(u) { return u.role === 'AUTHOR'; }).length;
-    setEl('navUsers', allUsers.length);
-    setEl('kpiUsers', fmt(allUsers.length));
-    setEl('kpiAuthors', fmt(authors));
-    setEl('usersSub', allUsers.length + ' utilisateurs inscrits');
-  } catch(e) { console.warn('loadUsers:', e.message); }
+    var r = await fetch(API + '/admin/users', {headers:{'Authorization':'Bearer '+token}});
+    var d = await r.json();
+    allUsers = Array.isArray(d) ? d : [];
+    var authors = allUsers.filter(function(u){return u.role==='AUTHOR';}).length;
+    setText('kpi-users',   allUsers.length);
+    setText('kpi-authors', authors);
+    setText('nb-users',    allUsers.length);
+    setText('users-sub',   allUsers.length + ' utilisateurs inscrits');
+    setText('authors-sub', authors + ' auteurs vérifiés');
+  } catch(e) {}
 }
 
-async function loadStats() {
+async function fetchStats() {
   try {
-    var res = await fetch(API + '/admin/stats', { headers: { 'Authorization': 'Bearer ' + token } });
-    allStats = await res.json();
-    if (allStats.totalRevenue) setEl('kpiRevenue', fmt(allStats.totalRevenue) + ' F');
-    if (allStats.pendingBooks) setEl('navPending', allStats.pendingBooks);
-    if (allStats.pendingWithdrawals) setEl('navRetraits', allStats.pendingWithdrawals);
-  } catch(e) { console.warn('loadStats:', e.message); }
+    var r = await fetch(API + '/admin/stats', {headers:{'Authorization':'Bearer '+token}});
+    var s = await r.json();
+    if (s.totalRevenue) setText('kpi-revenue', fmt(s.totalRevenue) + ' FCFA');
+    if (s.pendingBooks) setText('nb-pending', s.pendingBooks);
+    setText('recent-activity', 'Données chargées depuis Railway.');
+  } catch(e) { setText('recent-activity', 'Connecté. Données stats non disponibles.'); }
 }
 
 // ── RENDER ────────────────────────────────────────────────────────
-function renderUsers() {
-  var grid = document.getElementById('usersGrid') || document.getElementById('usersTable');
-  if (!grid) return;
-  if (!allUsers.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun utilisateur</div>';
-    return;
-  }
-  grid.innerHTML = allUsers.map(function(u) {
-    return '<div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">' +
-      '<div><div style="font-weight:600;color:#1A1410">' + (u.name||'—') + '</div><div style="font-size:0.72rem;color:#8A7A6E">' + (u.email||'') + '</div></div>' +
-      '<div style="font-size:0.78rem;color:#4A3F35">' + fmtDate(u.createdAt) + '</div>' +
-      '<div><span style="font-family:DM Mono,monospace;font-size:0.68rem;padding:0.18rem 0.55rem;border-radius:50px;background:' + (u.role==='ADMIN'?'rgba(255,107,0,0.1)':u.role==='AUTHOR'?'rgba(59,130,246,0.1)':'rgba(26,20,16,0.06)') + ';color:' + (u.role==='ADMIN'?'#FF6B00':u.role==='AUTHOR'?'#2563eb':'#6B5A4E') + '">' + (u.role||'READER') + '</span></div>' +
-      '<div style="font-family:DM Mono,monospace;font-size:0.75rem">' + fmt(u.balance||0) + ' F</div>' +
-      '<div><button onclick="suspendUser('' + u.id + '',' + !u.suspended + ')" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid ' + (u.suspended?'rgba(22,163,74,0.3)':'rgba(220,38,38,0.3)') + ';background:none;color:' + (u.suspended?'#16a34a':'#dc2626') + ';cursor:pointer">' + (u.suspended?'Réactiver':'Suspendre') + '</button></div>' +
-      '</div>';
-  }).join('');
-}
-
-function renderAuteurs() {
-  var grid = document.getElementById('auteursTable');
-  if (!grid) return;
-  var authors = allUsers.filter(function(u) { return u.role === 'AUTHOR'; });
-  if (!authors.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun auteur</div>';
-    return;
-  }
-  grid.innerHTML = authors.map(function(a) {
-    return '<div style="display:grid;grid-template-columns:2fr 2fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">' +
-      '<div><div style="font-weight:600;color:#1A1410">' + (a.name||'—') + '</div><div style="font-size:0.72rem;color:#8A7A6E">' + (a.email||'') + '</div></div>' +
-      '<div style="font-size:0.78rem;color:#4A3F35">' + fmtDate(a.createdAt) + '</div>' +
-      '<div style="font-family:DM Mono,monospace;font-size:0.75rem;color:#FF6B00">' + fmt(a.balance||0) + ' F</div>' +
-      '</div>';
-  }).join('');
-}
-
 function renderBooks() {
-  var grid = document.getElementById('livresGrid') || document.getElementById('booksTable');
-  if (!grid) return;
-  if (!allBooks.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre</div>';
-    return;
-  }
-  grid.innerHTML = allBooks.map(function(b) {
-    return '<div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">' +
-      '<div><div style="font-weight:600;color:#1A1410;font-family:Playfair Display,serif">' + (b.title||'—') + '</div><div style="font-size:0.72rem;color:#8A7A6E">' + ((b.author&&b.author.name)||'') + '</div></div>' +
-      '<div style="font-size:0.78rem;color:#4A3F35">' + (b.genre||'—') + '</div>' +
-      '<div style="font-family:DM Mono,monospace;font-size:0.75rem">' + (b.totalPages||'?') + ' p.</div>' +
-      '<div><span style="font-family:DM Mono,monospace;font-size:0.65rem;padding:0.18rem 0.55rem;border-radius:50px;background:rgba(22,163,74,0.1);color:#16a34a">Publié</span></div>' +
-      '</div>';
+  var tb = document.getElementById('books-tbody');
+  if (!tb) return;
+  if (!allBooks.length) { tb.innerHTML = '<tr><td colspan="5" class="empty">Aucun livre publié</td></tr>'; return; }
+  tb.innerHTML = allBooks.map(function(b) {
+    return '<tr><td style="font-family:'Playfair Display',serif;font-weight:600">' + esc(b.title||'—') + '</td>' +
+      '<td>' + esc((b.author&&b.author.name)||'—') + '</td>' +
+      '<td>' + esc(b.genre||'—') + '</td>' +
+      '<td style="font-family:'DM Mono',monospace;font-size:0.78rem">' + (b.totalPages||'?') + '</td>' +
+      '<td><span class="chip chip-gr">Publié</span></td></tr>';
   }).join('');
 }
 
 function renderValidation() {
-  var grid = document.getElementById('validationContent');
-  if (!grid) return;
-  var pending = allBooks.filter(function(b) { return b.status === 'PENDING'; });
-  grid.innerHTML = pending.length ? pending.map(function(b) {
-    return '<div style="padding:1rem;border-bottom:1px solid rgba(26,20,16,0.06)"><strong>' + b.title + '</strong> — ' + ((b.author&&b.author.name)||'') + '</div>';
-  }).join('') : '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre en attente</div>';
+  var tb = document.getElementById('validation-tbody');
+  if (!tb) return;
+  var pending = allBooks.filter(function(b){return b.status==='PENDING';});
+  if (!pending.length) { tb.innerHTML = '<tr><td colspan="5" class="empty">Aucun livre en attente de validation</td></tr>'; return; }
+  tb.innerHTML = pending.map(function(b) {
+    return '<tr><td style="font-family:'Playfair Display',serif;font-weight:600">' + esc(b.title||'—') + '</td>' +
+      '<td>' + esc((b.author&&b.author.name)||'—') + '</td>' +
+      '<td style="font-family:'DM Mono',monospace;font-size:0.75rem">' + fmtDate(b.createdAt) + '</td>' +
+      '<td style="font-family:'DM Mono',monospace;font-size:0.75rem">' + (b.totalPages||'?') + '</td>' +
+      '<td><button class="action-btn green" onclick="validateBook(''+b.id+'',true)">Valider</button> ' +
+      '<button class="action-btn red" onclick="validateBook(''+b.id+'',false)">Rejeter</button></td></tr>';
+  }).join('');
 }
 
-async function loadRetraitsPage() {
-  var grid = document.getElementById('retraitsContent');
-  if (!grid) return;
+function renderUsers() {
+  var tb = document.getElementById('users-tbody');
+  if (!tb) return;
+  if (!allUsers.length) { tb.innerHTML = '<tr><td colspan="6" class="empty">Aucun utilisateur</td></tr>'; return; }
+  tb.innerHTML = allUsers.map(function(u) {
+    var chip = u.role==='ADMIN'?'chip-or':u.role==='AUTHOR'?'chip-bl':'chip-gy';
+    return '<tr>' +
+      '<td style="font-weight:600">' + esc(u.name||'—') + '</td>' +
+      '<td style="color:#8A7A6E;font-size:0.8rem">' + esc(u.email||'') + '</td>' +
+      '<td><span class="chip '+chip+'">' + (u.role||'READER') + '</span></td>' +
+      '<td style="font-family:'DM Mono',monospace;font-size:0.78rem">' + fmt(u.balance||0) + ' F</td>' +
+      '<td style="font-family:'DM Mono',monospace;font-size:0.75rem">' + fmtDate(u.createdAt) + '</td>' +
+      '<td><button class="action-btn '+(u.suspended?'green':'red')+'" onclick="suspendUser(''+u.id+'','+((!u.suspended))+')">'+
+      (u.suspended?'Réactiver':'Suspendre')+'</button></td></tr>';
+  }).join('');
+}
+
+function renderAuthors() {
+  var tb = document.getElementById('authors-tbody');
+  if (!tb) return;
+  var authors = allUsers.filter(function(u){return u.role==='AUTHOR';});
+  if (!authors.length) { tb.innerHTML = '<tr><td colspan="4" class="empty">Aucun auteur</td></tr>'; return; }
+  tb.innerHTML = authors.map(function(a) {
+    return '<tr><td style="font-weight:600">' + esc(a.name||'—') + '</td>' +
+      '<td style="color:#8A7A6E;font-size:0.8rem">' + esc(a.email||'') + '</td>' +
+      '<td style="font-family:'DM Mono',monospace;font-size:0.78rem;color:#FF6B00">' + fmt(a.balance||0) + ' F</td>' +
+      '<td style="font-family:'DM Mono',monospace;font-size:0.75rem">' + fmtDate(a.createdAt) + '</td></tr>';
+  }).join('');
+}
+
+async function loadRetraits() {
+  var tb = document.getElementById('retraits-tbody');
+  if (!tb) return;
   try {
-    var res = await fetch(API + '/admin/withdrawals', { headers: { 'Authorization': 'Bearer ' + token } });
-    var data = await res.json();
-    grid.innerHTML = Array.isArray(data) && data.length ? data.map(function(r) {
-      return '<div style="padding:1rem;border-bottom:1px solid rgba(26,20,16,0.06)">' + (r.author||r.user||'—') + ' — ' + fmt(r.amount) + ' FCFA</div>';
-    }).join('') : '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun retrait en attente</div>';
+    var r = await fetch(API + '/admin/withdrawals', {headers:{'Authorization':'Bearer '+token}});
+    var d = await r.json();
+    var list = Array.isArray(d) ? d : [];
+    if (!list.length) { tb.innerHTML = '<tr><td colspan="5" class="empty">Aucun retrait en attente</td></tr>'; return; }
+    tb.innerHTML = list.map(function(w) {
+      return '<tr><td style="font-weight:600">' + esc(w.author||w.userName||'—') + '</td>' +
+        '<td style="font-family:'DM Mono',monospace;color:#FF6B00;font-weight:600">' + fmt(w.amount) + ' FCFA</td>' +
+        '<td>' + esc(w.method||'Mobile Money') + '</td>' +
+        '<td style="font-family:'DM Mono',monospace;font-size:0.75rem">' + fmtDate(w.createdAt) + '</td>' +
+        '<td><button class="action-btn green" onclick="processRetrait(''+w.id+'',true)">Traiter</button> ' +
+        '<button class="action-btn red" onclick="processRetrait(''+w.id+'',false)">Rejeter</button></td></tr>';
+    }).join('');
   } catch(e) {
-    if (grid) grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun retrait en attente</div>';
+    if (tb) tb.innerHTML = '<tr><td colspan="5" class="empty">Aucun retrait en attente</td></tr>';
   }
 }
 
 // ── ACTIONS ───────────────────────────────────────────────────────
-function suspendUser(userId, suspend) {
-  openModal(suspend ? 'Suspendre' : 'Réactiver', '', '', suspend ? 'Suspendre' : 'Réactiver', suspend ? 'danger' : '', async function() {
+function suspendUser(id, suspend) {
+  confirm2(suspend?'Suspendre cet utilisateur?':'Réactiver cet utilisateur?', suspend?'danger':'', async function() {
     try {
-      await fetch(API + '/admin/suspend-user', {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify({ userId: userId, suspend: suspend })
-      });
-      showToast(suspend ? 'Utilisateur suspendu' : 'Utilisateur réactivé');
-      await loadUsers();
-      renderUsers();
-    } catch(e) { showToast('Erreur', 'error'); }
+      await fetch(API+'/admin/suspend-user',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({userId:id,suspend:suspend})});
+      toast(suspend?'Utilisateur suspendu':'Utilisateur réactivé','ok');
+      await fetchUsers(); renderUsers();
+    } catch(e) { toast('Erreur','er'); }
   });
 }
 
-function deconnecter() {
-  localStorage.removeItem('griotte_token');
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('griotte_user');
+function validateBook(id, approve) {
+  confirm2(approve?'Valider ce livre?':'Rejeter ce livre?', approve?'':'danger', async function() {
+    try {
+      await fetch(API+'/admin/validate-book',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({bookId:id,approve:approve})});
+      toast(approve?'Livre validé':'Livre rejeté','ok');
+      await fetchBooks(); renderValidation();
+    } catch(e) { toast('Route non disponible — à créer côté backend','er'); }
+  });
+}
+
+function processRetrait(id, approve) {
+  confirm2(approve?'Traiter ce retrait?':'Rejeter ce retrait?', approve?'':'danger', async function() {
+    try {
+      await fetch(API+'/admin/process-withdrawal',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({withdrawalId:id,approve:approve})});
+      toast(approve?'Retrait traité':'Retrait rejeté','ok');
+      loadRetraits();
+    } catch(e) { toast('Route non disponible','er'); }
+  });
+}
+
+function logout() {
+  localStorage.removeItem('griotte_token'); localStorage.removeItem('accessToken'); localStorage.removeItem('griotte_user');
   window.location.href = './griotte-landing.html';
 }
 
-// ── INIT ──────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  // Show dashboard immediately
-  showPage('dashboard', document.getElementById('snav-dashboard'));
-  // Setup modal close
-  var modal = document.getElementById('modal');
-  if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
-  // Load data
-  loadAdmin();
-  // Date
-  var de = document.getElementById('currentDate');
-  if (de) de.textContent = new Date().toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
-});
+// ── MODAL ─────────────────────────────────────────────────────────
+function confirm2(msg, type, cb) {
+  setText('mo-title', msg);
+  setText('mo-sub', '');
+  var btn = document.getElementById('mo-ok');
+  if (btn) { btn.className = type==='danger'?'mo-btn mo-btn-danger':'mo-btn mo-btn-primary'; }
+  modalCb = cb;
+  var m = document.getElementById('modal'); if (m) m.classList.add('on');
+}
+function closeModal() { var m = document.getElementById('modal'); if(m) m.classList.remove('on'); modalCb=null; }
+function doOk() { if(modalCb) modalCb(); closeModal(); }
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function toast(msg, type) {
+  var t = document.getElementById('toast'); if (!t) return;
+  t.textContent = msg;
+  t.className = 'toast on' + (type==='ok'?' ok':type==='er'?' er':'');
+  setTimeout(function(){ t.className='toast'; }, 2800);
+}
+
+// ── UTILS ─────────────────────────────────────────────────────────
+function setText(id, val) { var el=document.getElementById(id); if(el) el.textContent=val; }
+function fmt(n) { return (n||0).toLocaleString('fr-FR'); }
+function fmtDate(d) { return d?new Date(d).toLocaleDateString('fr-FR'):'—'; }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── START ─────────────────────────────────────────────────────────
+document.getElementById('currentDate').textContent = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+init();
 </script>
 </body>
 </html>
