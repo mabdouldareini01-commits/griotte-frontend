@@ -7,24 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
-   Une seule taille, une seule source, partout identique
-   ════════════════════════════════════════════════════ */
+ Une seule taille, une seule source, partout identique
+ ════════════════════════════════════════════════════ */
 .g-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: visible !important;
-  line-height: 0;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0;
+ overflow: visible !important;
+ line-height: 0;
 }
 .g-icon img {
-  display: block;
-  height: 38px;
-  width: 38px;
-  object-fit: contain;
-  border-radius: 11px;
-  overflow: visible !important;
-  /* No filter, no opacity, no shadow — logo brut */
+ display: block;
+ height: 38px;
+ width: 38px;
+ object-fit: contain;
+ border-radius: 11px;
+ overflow: visible !important;
+ /* No filter, no opacity, no shadow — logo brut */
 }
 /* Override ALL size variants → same 38px */
 .g-icon--48 img,
@@ -32,24 +32,24 @@
 .g-icon--36 img,
 .g-icon--32 img,
 .g-icon--28 img {
-  height: 38px !important;
-  width: 38px !important;
-  border-radius: 11px !important;
+ height: 38px !important;
+ width: 38px !important;
+ border-radius: 11px !important;
 }
 /* Footer: slightly smaller on dark bg */
 footer .g-icon img,
 footer .g-icon--48 img,
 footer .g-icon--40 img,
 footer .g-icon--36 img {
-  height: 34px !important;
-  width: 34px !important;
-  border-radius: 10px !important;
+ height: 34px !important;
+ width: 34px !important;
+ border-radius: 10px !important;
 }
 /* Auth modal: centered */
 .auth-logo-wrap .g-icon img {
-  height: 42px !important;
-  width: 42px !important;
-  border-radius: 13px !important;
+ height: 42px !important;
+ width: 42px !important;
+ border-radius: 13px !important;
 }
 /* Force no extra styles */
 [class*="logo"] { overflow: visible !important; }
@@ -80,37 +80,37 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
 .g-icon--32 img{height:32px;width:32px}
 [class*="logo"],[class*="sidebar-logo"],[class*="cat-logo"],[class*="s-logo"],[class*="footer-logo"]{overflow:visible!important}
 @media(max-width:768px){
-  .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
-  .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
+ .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
+ .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
 }
 /* ──────────────────────────────────────────────────────── */
 
 :root{
-  /* Couleurs logo */
-  --or:#FF6B00;
-  --or-dark:#CC5200;
-  --or-light:#FF8C33;
-  --or-glow:rgba(255,107,0,0.12);
-  --or-border:rgba(255,107,0,0.25);
-  /* Fond & surfaces */
-  --bg:#F8F5F1;
-  --bg-card:#FFFFFF;
-  --bg-card2:#FFF8F4;
-  --bg-sidebar:#FFFFFF;
-  /* Texte */
-  --text-main:#1A1410;
-  --text-soft:#4A3F35;
-  --text-muted:#6B5A4E;
-  /* Bordures */
-  --border:rgba(26,20,16,0.09);
-  --border-strong:rgba(26,20,16,0.16);
-  /* Compatibilité ancien code */
-  --noir:#1A1410;
-  --noir-soft:#F8F5F1;
-  --noir-card:#FFFFFF;
-  --blanc:#F8F5F1;
-  --blanc-dim:#6B5A4E;
-  --cendre:#6B5F52;
+ /* Couleurs logo */
+ --or:#FF6B00;
+ --or-dark:#CC5200;
+ --or-light:#FF8C33;
+ --or-glow:rgba(255,107,0,0.12);
+ --or-border:rgba(255,107,0,0.25);
+ /* Fond & surfaces */
+ --bg:#F8F5F1;
+ --bg-card:#FFFFFF;
+ --bg-card2:#FFF8F4;
+ --bg-sidebar:#FFFFFF;
+ /* Texte */
+ --text-main:#1A1410;
+ --text-soft:#4A3F35;
+ --text-muted:#6B5A4E;
+ /* Bordures */
+ --border:rgba(26,20,16,0.09);
+ --border-strong:rgba(26,20,16,0.16);
+ /* Compatibilité ancien code */
+ --noir:#1A1410;
+ --noir-soft:#F8F5F1;
+ --noir-card:#FFFFFF;
+ --blanc:#F8F5F1;
+ --blanc-dim:#6B5A4E;
+ --cendre:#6B5F52;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
@@ -355,17 +355,17 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .empty-ico{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.35;display:block}
 
 /* ════════════════════════════════════════════════
-   GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
-   Applied across all pages for WCAG AA compliance
-   ════════════════════════════════════════════════ */
+ GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
+ Applied across all pages for WCAG AA compliance
+ ════════════════════════════════════════════════ */
 
 /* 1. Strengthen base variables */
 :root {
-  --text-main:   #1A1410 !important;   /* near-black, high contrast */
-  --text-soft:   #4A3F35 !important;   /* dark brown-grey, readable */
-  --text-muted:  #6B5A4E !important;   /* medium brown, still readable */
-  --blanc-dim:   #6B5A4E !important;
-  --cendre:      #4A3F35 !important;
+ --text-main: #1A1410 !important; /* near-black, high contrast */
+ --text-soft: #4A3F35 !important; /* dark brown-grey, readable */
+ --text-muted: #6B5A4E !important; /* medium brown, still readable */
+ --blanc-dim: #6B5A4E !important;
+ --cendre: #4A3F35 !important;
 }
 
 /* 2. Body & base text */
@@ -388,8 +388,8 @@ h1, h2, h3, h4, h5, h6,
 
 /* 6. Sidebar — enforce dark text on white bg */
 .sidebar, .aside, [class*="sidebar"] {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
 }
 .sidebar *, .aside * { color: #1A1410; }
 .nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
@@ -397,16 +397,16 @@ h1, h2, h3, h4, h5, h6,
 /* 7. Cards — always readable */
 .card, [class*="-card"], .book-card, .testi-card,
 .stat-card, .dash-stat, .concept-visual, .author-dashboard {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.1) !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.1) !important;
 }
 .card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
 
 /* 8. Topbar */
 .topbar, [class*="topbar"], #navbar {
-  background: rgba(248,245,241,0.95) !important;
-  color: #1A1410 !important;
+ background: rgba(248,245,241,0.95) !important;
+ color: #1A1410 !important;
 }
 .topbar *, #navbar * { color: #1A1410; }
 
@@ -415,22 +415,22 @@ h1, h2, h3, h4, h5, h6,
 [class*="btn"][class*="hero"],
 [class*="btn-nav-cta"], .btn-hero-primary,
 .btn-cta-primary, .auth-btn {
-  background: #FF6B00 !important;
-  color: #FFFFFF !important;
-  opacity: 1 !important;
+ background: #FF6B00 !important;
+ color: #FFFFFF !important;
+ opacity: 1 !important;
 }
 [class*="btn"][class*="ghost"],
 [class*="btn"][class*="secondary"],
 .btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.25) !important;
-  opacity: 1 !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.25) !important;
+ opacity: 1 !important;
 }
 
 /* 10. Footer — dark bg with proper white text */
 footer {
-  background: #1A1410 !important;
-  color: rgba(255,255,255,0.75) !important;
+ background: #1A1410 !important;
+ color: rgba(255,255,255,0.75) !important;
 }
 footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
 footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
@@ -447,7 +447,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .hero-stat-value, .stat-value, .dash-stat-val,
 .pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
 .hero-stat-label, .stat-label, .dash-stat-lbl {
-  color: #6B5A4E !important; opacity: 1 !important;
+ color: #6B5A4E !important; opacity: 1 !important;
 }
 
 /* 13. Auth modal */
@@ -458,7 +458,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 /* 14. Section badges & DM Mono labels */
 .section-badge, .hero-badge, .dash-badge,
 [class*="badge"], [class*="-label"], .nav-section {
-  opacity: 1 !important;
+ opacity: 1 !important;
 }
 
 /* 15. Minimum font sizes */
@@ -466,13 +466,13 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .section-badge, .ticker-item, .book-price,
 .testi-role, .auth-sub, [class*="-label"],
 [class*="-lbl"], [class*="badge"] {
-  font-size: max(0.72rem, 11px) !important;
+ font-size: max(0.72rem, 11px) !important;
 }
 
 /* 16. Reader — dark text on white */
 .reader-content, .reader-text, [class*="reader-body"] {
-  color: #1A1410 !important;
-  background: #FFFFFF !important;
+ color: #1A1410 !important;
+ background: #FFFFFF !important;
 }
 
 /* ═══════════════════════════════════════════════ */
@@ -488,312 +488,312 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <!-- MODAL -->
 <div class="mo" id="modal">
-  <div class="mb">
-    <button class="mc" onclick="closeModal()">✕</button>
-    <div class="mt" id="modalTitle">Confirmation</div>
-    <div class="ms" id="modalSub">Cette action est irréversible.</div>
-    <div id="modalBody"></div>
-    <div class="ma">
-      <button class="bc" onclick="closeModal()">Annuler</button>
-      <button class="bok" id="modalOk" onclick="doModalOk()">Confirmer</button>
-    </div>
-  </div>
+ <div class="mb">
+ <button class="mc" onclick="closeModal()"></button>
+ <div class="mt" id="modalTitle">Confirmation</div>
+ <div class="ms" id="modalSub">Cette action est irréversible.</div>
+ <div id="modalBody"></div>
+ <div class="ma">
+ <button class="bc" onclick="closeModal()">Annuler</button>
+ <button class="bok" id="modalOk" onclick="doModalOk()">Confirmer</button>
+ </div>
+ </div>
 </div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo"><brand-logo></brand-logo></div></div>
-    </span>
-    <span class="admin-badge">Admin</span>
-  </div>
-  <div class="sidebar-admin">
-    <div class="admin-ava" id="adminAva">A</div>
-    <div>
-      <div class="admin-name" id="adminName">Chargement...</div>
-      <div class="admin-role">● Super Admin</div>
-    </div>
-  </div>
-  <nav class="nav" id="sidebarNav">
-    <!-- Built by JS -->
-  </nav>
-  <div class="sidebar-system">
-    <div class="sys-status"><span class="sys-dot"></span>Système opérationnel · Railway</div>
-  </div>
+ <div class="sidebar-logo"><brand-logo></brand-logo></div></div>
+ </span>
+ <span class="admin-badge">Admin</span>
+ </div>
+ <div class="sidebar-admin">
+ <div class="admin-ava" id="adminAva">A</div>
+ <div>
+ <div class="admin-name" id="adminName">Chargement...</div>
+ <div class="admin-role">Super Admin</div>
+ </div>
+ </div>
+ <nav class="nav" id="sidebarNav">
+ <!-- Built by JS -->
+ </nav>
+ <div class="sidebar-system">
+ <div class="sys-status"><span class="sys-dot"></span>Système opérationnel · Railway</div>
+ </div>
 </aside>
 
 <!-- MAIN -->
 <div class="main">
-  <div class="topbar">
-    <div class="topbar-left">
-      <div class="topbar-title" id="pageTitle">Tableau de bord</div>
-      <div class="breadcrumb">GRIOTTE <span>›</span> <span class="bc-active" id="breadcrumb">Dashboard</span></div>
-    </div>
-    <div class="topbar-right">
-      <input type="text" class="search-admin" id="globalSearch" placeholder="🔍 Rechercher..." oninput="globalSearch(this.value)"/>
-      <div class="topbar-date" id="currentDate"></div>
-      <button class="icon-btn" title="Notifications"><span>🔔</span><span class="notif-dot"></span></button>
-    </div>
-  </div>
+ <div class="topbar">
+ <div class="topbar-left">
+ <div class="topbar-title" id="pageTitle">Tableau de bord</div>
+ <div class="breadcrumb">GRIOTTE <span>›</span><span class="bc-active" id="breadcrumb">Dashboard</span></div>
+ </div>
+ <div class="topbar-right">
+ <input type="text" class="search-admin" id="globalSearch" placeholder=" Rechercher..." oninput="globalSearch(this.value)"/>
+ <div class="topbar-date" id="currentDate"></div>
+ <button class="icon-btn" title="Notifications"><span></span><span class="notif-dot"></span></button>
+ </div>
+ </div>
 
-  <!-- DASHBOARD -->
-  <div class="page active" id="page-dashboard">
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or">💰</div><span class="kpi-badge kb-up">↑ +23%</span></div><div class="kpi-label">Revenus plateforme</div><div class="kpi-val">87 400</div><div class="kpi-sub">FCFA ce mois</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green">👥</div><span class="kpi-badge kb-up">↑ +12%</span></div><div class="kpi-label">Utilisateurs</div><div class="kpi-val" id="kpiUsers">—</div><div class="kpi-sub">inscrits total</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue">📚</div><span class="kpi-badge kb-up">↑ +8%</span></div><div class="kpi-label">Livres publiés</div><div class="kpi-val" id="kpiBooks">—</div><div class="kpi-sub">sur la plateforme</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple">✍️</div><span class="kpi-badge kb-up">↑ +5%</span></div><div class="kpi-label">Auteurs actifs</div><div class="kpi-val" id="kpiAuthors">—</div><div class="kpi-sub">vérifiés</div></div>
-    </div>
-    <div class="g2">
-      <div class="card">
-        <div class="ch"><div><div class="ct">Revenus — 7 derniers jours</div><div class="cs">FCFA · Données Railway</div></div><button class="ca">Exporter →</button></div>
-        <div class="chart-wrap">
-          <div class="bcol"><div class="bfill bd" style="height:32%" data-tip="6 200 F"></div><span class="blbl">L</span></div>
-          <div class="bcol"><div class="bfill bd" style="height:51%" data-tip="9 900 F"></div><span class="blbl">M</span></div>
-          <div class="bcol"><div class="bfill bd" style="height:44%" data-tip="8 500 F"></div><span class="blbl">M</span></div>
-          <div class="bcol"><div class="bfill bg" style="height:68%" data-tip="13 200 F"></div><span class="blbl">J</span></div>
-          <div class="bcol"><div class="bfill bg" style="height:82%" data-tip="15 900 F"></div><span class="blbl">V</span></div>
-          <div class="bcol"><div class="bfill bg" style="height:94%" data-tip="18 200 F"></div><span class="blbl">S</span></div>
-          <div class="bcol"><div class="bfill bg" style="height:76%" data-tip="14 700 F"></div><span class="blbl">D</span></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding-top:0.7rem;border-top:1px solid var(--border)">
-          <div><div class="kpi-label">Total semaine</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--or)">86 600 FCFA</div></div>
-          <div style="text-align:right"><div class="kpi-label">Croissance</div><div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">↑ +23% vs semaine dernière</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Alertes système</div><div class="cs">Actions requises</div></div></div>
-        <div class="alert-box al-warn"><span class="al-ico">⏳</span><div><div class="al-title" style="color:var(--yellow)">Livres en attente</div><div class="al-text" id="alertPending">Chargement...</div><button class="al-btn" onclick="showPage('validation',null)">Valider →</button></div></div>
-        <div class="alert-box al-info"><span class="al-ico">💸</span><div><div class="al-title" style="color:var(--blue)">Retraits à traiter</div><div class="al-text">0 demande(s) en attente</div><button class="al-btn" onclick="showPage('retraits',null)">Traiter →</button></div></div>
-        <div class="alert-box al-ok"><span class="al-ico">✅</span><div><div class="al-title" style="color:var(--green)">Système opérationnel</div><div class="al-text">Railway · Vercel · PostgreSQL · FedaPay</div></div></div>
-      </div>
-    </div>
-    <div class="g11">
-      <div class="card">
-        <div class="ch"><div><div class="ct">Livres récents</div></div><button class="ca" onclick="showPage('livres',null)">Tout voir →</button></div>
-        <table class="tbl"><thead><tr><th>Titre</th><th>Auteur</th><th>Genre</th><th>Statut</th></tr></thead>
-        <tbody id="dashBooks"><tr><td colspan="4" style="text-align:center;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;padding:1.2rem">Chargement...</td></tr></tbody></table>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Activité récente</div></div></div>
-        <div class="act-list">
-          <div class="act-item"><div class="act-ico ico-green">👤</div><div><div class="act-text">Inscription — <strong>nouveau@griotte.com</strong></div><div class="act-time">Il y a 3 min</div></div></div>
-          <div class="act-item"><div class="act-ico ico-or">📚</div><div><div class="act-text">Publication — <strong>Les Fils du Sahel</strong></div><div class="act-time">Il y a 18 min</div></div></div>
-          <div class="act-item"><div class="act-ico ico-blue">💳</div><div><div class="act-text">Recharge — <strong>+2 000 FCFA</strong></div><div class="act-time">Il y a 1h</div></div></div>
-          <div class="act-item"><div class="act-ico ico-green">📖</div><div><div class="act-text"><strong>52 pages</strong> lues cette heure</div><div class="act-time">Il y a 1h</div></div></div>
-          <div class="act-item"><div class="act-ico ico-red">💸</div><div><div class="act-text">Retrait demandé — <strong>5 000 FCFA</strong></div><div class="act-time">Il y a 2h</div></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="g3">
-      <div class="card">
-        <div class="ch"><div><div class="ct">Répartition rôles</div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">📖 Lecteurs</span><span class="prog-val" id="pctReaders">—</span></div><div class="prog-track"><div class="prog-fill" id="barReaders" style="width:0%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">✍️ Auteurs</span><span class="prog-val" id="pctAuthors">—</span></div><div class="prog-track"><div class="prog-fill" id="barAuthors" style="width:0%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">🔑 Admins</span><span class="prog-val">1%</span></div><div class="prog-track"><div class="prog-fill" style="width:1%"></div></div></div>
-        <div style="padding-top:0.6rem;border-top:1px solid var(--border);margin-top:0.4rem">
-          <div class="met"><span class="met-lbl">Nouveaux ce mois</span><span class="met-val" style="font-size:0.85rem">+247</span></div>
-          <div class="met"><span class="met-lbl">Taux rétention</span><span class="met-val" style="font-size:0.85rem">68%</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Top auteurs</div><div class="cs">Par livres publiés</div></div></div>
-        <div id="topAuthors"><div style="color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Santé plateforme</div></div></div>
-        <div class="met"><span class="met-lbl">Uptime Railway</span><span class="met-val" style="font-size:0.85rem">99.8%</span></div>
-        <div class="met"><span class="met-lbl">Réponse API</span><span class="met-val" style="font-size:0.85rem">142ms</span></div>
-        <div class="met"><span class="met-lbl">Erreurs 5xx</span><span class="met-val" style="font-size:0.85rem;color:var(--green)">0</span></div>
-        <div class="met"><span class="met-lbl">Taux conversion</span><span class="met-val" style="font-size:0.85rem">34%</span></div>
-        <div class="met"><span class="met-lbl">Revenu moyen/user</span><span class="met-val" style="font-size:0.85rem">1 820 F</span></div>
-      </div>
-    </div>
-  </div>
+ <!-- DASHBOARD -->
+ <div class="page active" id="page-dashboard">
+ <div class="kpi-row">
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or"></div><span class="kpi-badge kb-up">↑ +23%</span></div><div class="kpi-label">Revenus plateforme</div><div class="kpi-val">87 400</div><div class="kpi-sub">FCFA ce mois</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green"></div><span class="kpi-badge kb-up">↑ +12%</span></div><div class="kpi-label">Utilisateurs</div><div class="kpi-val" id="kpiUsers">—</div><div class="kpi-sub">inscrits total</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue"></div><span class="kpi-badge kb-up">↑ +8%</span></div><div class="kpi-label">Livres publiés</div><div class="kpi-val" id="kpiBooks">—</div><div class="kpi-sub">sur la plateforme</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple"></div><span class="kpi-badge kb-up">↑ +5%</span></div><div class="kpi-label">Auteurs actifs</div><div class="kpi-val" id="kpiAuthors">—</div><div class="kpi-sub">vérifiés</div></div>
+ </div>
+ <div class="g2">
+ <div class="card">
+ <div class="ch"><div><div class="ct">Revenus — 7 derniers jours</div><div class="cs">FCFA · Données Railway</div></div><button class="ca">Exporter →</button></div>
+ <div class="chart-wrap">
+ <div class="bcol"><div class="bfill bd" style="height:32%" data-tip="6 200 F"></div><span class="blbl">L</span></div>
+ <div class="bcol"><div class="bfill bd" style="height:51%" data-tip="9 900 F"></div><span class="blbl">M</span></div>
+ <div class="bcol"><div class="bfill bd" style="height:44%" data-tip="8 500 F"></div><span class="blbl">M</span></div>
+ <div class="bcol"><div class="bfill bg" style="height:68%" data-tip="13 200 F"></div><span class="blbl">J</span></div>
+ <div class="bcol"><div class="bfill bg" style="height:82%" data-tip="15 900 F"></div><span class="blbl">V</span></div>
+ <div class="bcol"><div class="bfill bg" style="height:94%" data-tip="18 200 F"></div><span class="blbl">S</span></div>
+ <div class="bcol"><div class="bfill bg" style="height:76%" data-tip="14 700 F"></div><span class="blbl">D</span></div>
+ </div>
+ <div style="display:flex;justify-content:space-between;padding-top:0.7rem;border-top:1px solid var(--border)">
+ <div><div class="kpi-label">Total semaine</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--or)">86 600 FCFA</div></div>
+ <div style="text-align:right"><div class="kpi-label">Croissance</div><div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">↑ +23% vs semaine dernière</div></div>
+ </div>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Alertes système</div><div class="cs">Actions requises</div></div></div>
+ <div class="alert-box al-warn"><span class="al-ico">⏳</span><div><div class="al-title" style="color:var(--yellow)">Livres en attente</div><div class="al-text" id="alertPending">Chargement...</div><button class="al-btn" onclick="showPage('validation',null)">Valider →</button></div></div>
+ <div class="alert-box al-info"><span class="al-ico"></span><div><div class="al-title" style="color:var(--blue)">Retraits à traiter</div><div class="al-text">0 demande(s) en attente</div><button class="al-btn" onclick="showPage('retraits',null)">Traiter →</button></div></div>
+ <div class="alert-box al-ok"><span class="al-ico">✓</span><div><div class="al-title" style="color:var(--green)">Système opérationnel</div><div class="al-text">Railway · Vercel · PostgreSQL · FedaPay</div></div></div>
+ </div>
+ </div>
+ <div class="g11">
+ <div class="card">
+ <div class="ch"><div><div class="ct">Livres récents</div></div><button class="ca" onclick="showPage('livres',null)">Tout voir →</button></div>
+ <table class="tbl"><thead><tr><th>Titre</th><th>Auteur</th><th>Genre</th><th>Statut</th></tr></thead>
+ <tbody id="dashBooks"><tr><td colspan="4" style="text-align:center;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;padding:1.2rem">Chargement...</td></tr></tbody></table>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Activité récente</div></div></div>
+ <div class="act-list">
+ <div class="act-item"><div class="act-ico ico-green"></div><div><div class="act-text">Inscription — <strong>nouveau@griotte.com</strong></div><div class="act-time">Il y a 3 min</div></div></div>
+ <div class="act-item"><div class="act-ico ico-or"></div><div><div class="act-text">Publication — <strong>Les Fils du Sahel</strong></div><div class="act-time">Il y a 18 min</div></div></div>
+ <div class="act-item"><div class="act-ico ico-blue"></div><div><div class="act-text">Recharge — <strong>+2 000 FCFA</strong></div><div class="act-time">Il y a 1h</div></div></div>
+ <div class="act-item"><div class="act-ico ico-green"></div><div><div class="act-text"><strong>52 pages</strong> lues cette heure</div><div class="act-time">Il y a 1h</div></div></div>
+ <div class="act-item"><div class="act-ico ico-red"></div><div><div class="act-text">Retrait demandé — <strong>5 000 FCFA</strong></div><div class="act-time">Il y a 2h</div></div></div>
+ </div>
+ </div>
+ </div>
+ <div class="g3">
+ <div class="card">
+ <div class="ch"><div><div class="ct">Répartition rôles</div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Lecteurs</span><span class="prog-val" id="pctReaders">—</span></div><div class="prog-track"><div class="prog-fill" id="barReaders" style="width:0%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Auteurs</span><span class="prog-val" id="pctAuthors">—</span></div><div class="prog-track"><div class="prog-fill" id="barAuthors" style="width:0%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl"> Admins</span><span class="prog-val">1%</span></div><div class="prog-track"><div class="prog-fill" style="width:1%"></div></div></div>
+ <div style="padding-top:0.6rem;border-top:1px solid var(--border);margin-top:0.4rem">
+ <div class="met"><span class="met-lbl">Nouveaux ce mois</span><span class="met-val" style="font-size:0.85rem">+247</span></div>
+ <div class="met"><span class="met-lbl">Taux rétention</span><span class="met-val" style="font-size:0.85rem">68%</span></div>
+ </div>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Top auteurs</div><div class="cs">Par livres publiés</div></div></div>
+ <div id="topAuthors"><div style="color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</div></div>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Santé plateforme</div></div></div>
+ <div class="met"><span class="met-lbl">Uptime Railway</span><span class="met-val" style="font-size:0.85rem">99.8%</span></div>
+ <div class="met"><span class="met-lbl">Réponse API</span><span class="met-val" style="font-size:0.85rem">142ms</span></div>
+ <div class="met"><span class="met-lbl">Erreurs 5xx</span><span class="met-val" style="font-size:0.85rem;color:var(--green)">0</span></div>
+ <div class="met"><span class="met-lbl">Taux conversion</span><span class="met-val" style="font-size:0.85rem">34%</span></div>
+ <div class="met"><span class="met-lbl">Revenu moyen/user</span><span class="met-val" style="font-size:0.85rem">1 820 F</span></div>
+ </div>
+ </div>
+ </div>
 
-  <!-- USERS -->
-  <div class="page" id="page-users">
-    <div class="ph">
-      <div><div class="ph-title">Utilisateurs</div><div class="ph-sub" id="usersSub">Chargement...</div></div>
-      <div class="ph-right">
-        <input type="text" class="fi" style="width:200px" placeholder="Rechercher..." oninput="searchUsers(this.value)"/>
-      </div>
-    </div>
-    <div class="fbar">
-      <span class="fc active" onclick="filterUsers('all',this)">Tous</span>
-      <span class="fc" onclick="filterUsers('READER',this)">📖 Lecteurs</span>
-      <span class="fc" onclick="filterUsers('AUTHOR',this)">✍️ Auteurs</span>
-      <span class="fc" onclick="filterUsers('ADMIN',this)">🔑 Admins</span>
-      <span class="fc" onclick="filterUsers('suspended',this)">⛔ Suspendus</span>
-    </div>
-    <div class="card" style="padding:0">
-      <table class="tbl">
-        <thead><tr><th style="padding-left:1.2rem">#</th><th>Utilisateur</th><th>Email</th><th>Pays</th><th>Rôle</th><th>Solde</th><th>Statut</th><th>Inscrit</th><th>Actions</th></tr></thead>
-        <tbody id="usersTable"><tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
+ <!-- USERS -->
+ <div class="page" id="page-users">
+ <div class="ph">
+ <div><div class="ph-title">Utilisateurs</div><div class="ph-sub" id="usersSub">Chargement...</div></div>
+ <div class="ph-right">
+ <input type="text" class="fi" style="width:200px" placeholder="Rechercher..." oninput="searchUsers(this.value)"/>
+ </div>
+ </div>
+ <div class="fbar">
+ <span class="fc active" onclick="filterUsers('all',this)">Tous</span>
+ <span class="fc" onclick="filterUsers('READER',this)">Lecteurs</span>
+ <span class="fc" onclick="filterUsers('AUTHOR',this)">Auteurs</span>
+ <span class="fc" onclick="filterUsers('ADMIN',this)"> Admins</span>
+ <span class="fc" onclick="filterUsers('suspended',this)"> Suspendus</span>
+ </div>
+ <div class="card" style="padding:0">
+ <table class="tbl">
+ <thead><tr><th style="padding-left:1.2rem">#</th><th>Utilisateur</th><th>Email</th><th>Pays</th><th>Rôle</th><th>Solde</th><th>Statut</th><th>Inscrit</th><th>Actions</th></tr></thead>
+ <tbody id="usersTable"><tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
+ </table>
+ </div>
+ </div>
 
-  <!-- AUTEURS -->
-  <div class="page" id="page-auteurs">
-    <div class="ph"><div><div class="ph-title">Auteurs</div><div class="ph-sub">Gestion des auteurs GRIOTTE</div></div></div>
-    <div class="card" style="padding:0">
-      <table class="tbl">
-        <thead><tr><th style="padding-left:1.2rem">Auteur</th><th>Livres</th><th>Pages totales</th><th>Tags utilisés</th><th>Statut</th><th>Actions</th></tr></thead>
-        <tbody id="auteursTable"><tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
+ <!-- AUTEURS -->
+ <div class="page" id="page-auteurs">
+ <div class="ph"><div><div class="ph-title">Auteurs</div><div class="ph-sub">Gestion des auteurs GRIOTTE</div></div></div>
+ <div class="card" style="padding:0">
+ <table class="tbl">
+ <thead><tr><th style="padding-left:1.2rem">Auteur</th><th>Livres</th><th>Pages totales</th><th>Tags utilisés</th><th>Statut</th><th>Actions</th></tr></thead>
+ <tbody id="auteursTable"><tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
+ </table>
+ </div>
+ </div>
 
-  <!-- LIVRES -->
-  <div class="page" id="page-livres">
-    <div class="ph">
-      <div><div class="ph-title">Livres</div><div class="ph-sub" id="booksSub">Chargement...</div></div>
-      <div class="ph-right"><input type="text" class="fi" style="width:200px" placeholder="Rechercher..." oninput="searchBooks(this.value)"/></div>
-    </div>
-    <div class="fbar">
-      <span class="fc active" onclick="filterBooks('all',this)">Tous</span>
-      <span class="fc" onclick="filterBooks('PUBLISHED',this)">✅ Publiés</span>
-      <span class="fc" onclick="filterBooks('DRAFT',this)">📝 Brouillons</span>
-    </div>
-    <div class="card" style="padding:0">
-      <table class="tbl">
-        <thead><tr><th style="padding-left:1.2rem">#</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Pages</th><th>Tags</th><th>Statut</th><th>Actions</th></tr></thead>
-        <tbody id="booksTable"><tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
+ <!-- LIVRES -->
+ <div class="page" id="page-livres">
+ <div class="ph">
+ <div><div class="ph-title">Livres</div><div class="ph-sub" id="booksSub">Chargement...</div></div>
+ <div class="ph-right"><input type="text" class="fi" style="width:200px" placeholder="Rechercher..." oninput="searchBooks(this.value)"/></div>
+ </div>
+ <div class="fbar">
+ <span class="fc active" onclick="filterBooks('all',this)">Tous</span>
+ <span class="fc" onclick="filterBooks('PUBLISHED',this)">✓ Publiés</span>
+ <span class="fc" onclick="filterBooks('DRAFT',this)">Brouillons</span>
+ </div>
+ <div class="card" style="padding:0">
+ <table class="tbl">
+ <thead><tr><th style="padding-left:1.2rem">#</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Pages</th><th>Tags</th><th>Statut</th><th>Actions</th></tr></thead>
+ <tbody id="booksTable"><tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</td></tr></tbody>
+ </table>
+ </div>
+ </div>
 
-  <!-- VALIDATION -->
-  <div class="page" id="page-validation">
-    <div class="ph"><div><div class="ph-title">Validation des livres</div><div class="ph-sub">Livres en attente d'approbation éditoriale</div></div></div>
-    <div id="validationContent"><div class="empty"><span class="empty-ico">✅</span>Aucun livre en attente</div></div>
-  </div>
+ <!-- VALIDATION -->
+ <div class="page" id="page-validation">
+ <div class="ph"><div><div class="ph-title">Validation des livres</div><div class="ph-sub">Livres en attente d'approbation éditoriale</div></div></div>
+ <div id="validationContent"><div class="empty"><span class="empty-ico">✓</span>Aucun livre en attente</div></div>
+ </div>
 
-  <!-- CHAPITRES -->
-  <div class="page" id="page-chapitres">
-    <div class="ph"><div><div class="ph-title">Chapitres</div><div class="ph-sub">Gestion de tous les chapitres publiés</div></div></div>
-    <div class="empty"><span class="empty-ico">📝</span>Les chapitres apparaîtront ici une fois le système de chapitres connecté au backend.</div>
-  </div>
+ <!-- CHAPITRES -->
+ <div class="page" id="page-chapitres">
+ <div class="ph"><div><div class="ph-title">Chapitres</div><div class="ph-sub">Gestion de tous les chapitres publiés</div></div></div>
+ <div class="empty"><span class="empty-ico"></span>Les chapitres apparaîtront ici une fois le système de chapitres connecté au backend.</div>
+ </div>
 
-  <!-- PAIEMENTS -->
-  <div class="page" id="page-paiements">
-    <div class="ph"><div><div class="ph-title">Paiements</div><div class="ph-sub">Centre financier GRIOTTE</div></div></div>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or">💰</div></div><div class="kpi-label">Revenus du jour</div><div class="kpi-val">0</div><div class="kpi-sub">FCFA</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green">📅</div></div><div class="kpi-label">Revenus du mois</div><div class="kpi-val">87 400</div><div class="kpi-sub">FCFA</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue">💳</div></div><div class="kpi-label">Part plateforme 40%</div><div class="kpi-val">34 960</div><div class="kpi-sub">FCFA</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple">✍️</div></div><div class="kpi-label">Part auteurs 60%</div><div class="kpi-val">52 440</div><div class="kpi-sub">FCFA</div></div>
-    </div>
-    <div class="g11">
-      <div class="card">
-        <div class="ch"><div><div class="ct">Transactions récentes</div></div></div>
-        <div class="empty" style="padding:1.5rem"><span class="empty-ico">💳</span>Aucune transaction enregistrée.</div>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Métriques financières</div></div></div>
-        <div class="met"><span class="met-lbl">Valeur moyenne transaction</span><span class="met-val" style="font-size:0.85rem">3 200 F</span></div>
-        <div class="met"><span class="met-lbl">Méthode la + utilisée</span><span class="met-val" style="font-size:0.75rem;color:var(--blue)">Mobile Money</span></div>
-        <div class="met"><span class="met-lbl">Taux de succès paiements</span><span class="met-val" style="font-size:0.85rem">94%</span></div>
-        <div class="met"><span class="met-lbl">Paiements ce mois</span><span class="met-val" style="font-size:0.85rem">—</span></div>
-      </div>
-    </div>
-  </div>
+ <!-- PAIEMENTS -->
+ <div class="page" id="page-paiements">
+ <div class="ph"><div><div class="ph-title">Paiements</div><div class="ph-sub">Centre financier GRIOTTE</div></div></div>
+ <div class="kpi-row">
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or"></div></div><div class="kpi-label">Revenus du jour</div><div class="kpi-val">0</div><div class="kpi-sub">FCFA</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green"></div></div><div class="kpi-label">Revenus du mois</div><div class="kpi-val">87 400</div><div class="kpi-sub">FCFA</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue"></div></div><div class="kpi-label">Part plateforme 40%</div><div class="kpi-val">34 960</div><div class="kpi-sub">FCFA</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple"></div></div><div class="kpi-label">Part auteurs 60%</div><div class="kpi-val">52 440</div><div class="kpi-sub">FCFA</div></div>
+ </div>
+ <div class="g11">
+ <div class="card">
+ <div class="ch"><div><div class="ct">Transactions récentes</div></div></div>
+ <div class="empty" style="padding:1.5rem"><span class="empty-ico"></span>Aucune transaction enregistrée.</div>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Métriques financières</div></div></div>
+ <div class="met"><span class="met-lbl">Valeur moyenne transaction</span><span class="met-val" style="font-size:0.85rem">3 200 F</span></div>
+ <div class="met"><span class="met-lbl">Méthode la + utilisée</span><span class="met-val" style="font-size:0.75rem;color:var(--blue)">Mobile Money</span></div>
+ <div class="met"><span class="met-lbl">Taux de succès paiements</span><span class="met-val" style="font-size:0.85rem">94%</span></div>
+ <div class="met"><span class="met-lbl">Paiements ce mois</span><span class="met-val" style="font-size:0.85rem">—</span></div>
+ </div>
+ </div>
+ </div>
 
-  <!-- RETRAITS -->
-  <div class="page" id="page-retraits">
-    <div class="ph"><div><div class="ph-title">Retraits</div><div class="ph-sub">Demandes de retrait des auteurs</div></div></div>
-    <div class="empty"><span class="empty-ico">💸</span>Aucune demande de retrait en attente.</div>
-  </div>
+ <!-- RETRAITS -->
+ <div class="page" id="page-retraits">
+ <div class="ph"><div><div class="ph-title">Retraits</div><div class="ph-sub">Demandes de retrait des auteurs</div></div></div>
+ <div class="empty"><span class="empty-ico"></span>Aucune demande de retrait en attente.</div>
+ </div>
 
-  <!-- TAGS -->
-  <div class="page" id="page-tags">
-    <div class="ph">
-      <div><div class="ph-title">Gestion des tags</div><div class="ph-sub">Tags utilisés sur la plateforme</div></div>
-      <button class="btn-primary" onclick="openCreateTag()">+ Créer un tag</button>
-    </div>
-    <div class="g11">
-      <div class="card">
-        <div class="ch"><div><div class="ct">Tags actifs</div><div class="cs" id="tagsCount">Chargement...</div></div></div>
-        <div id="tagsList"><div style="color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Créer / Modifier un tag</div></div></div>
-        <div class="fg"><label class="fl">Nom du tag</label><input id="newTagName" type="text" class="fi" placeholder="Ex: Immigration"/></div>
-        <div class="fg"><label class="fl">Catégorie</label>
-          <select id="newTagCat" class="fis">
-            <option value="theme">Thème</option>
-            <option value="pays">Pays / Région</option>
-            <option value="genre">Genre</option>
-            <option value="societe">Société</option>
-            <option value="personnage">Personnage</option>
-          </select>
-        </div>
-        <button class="btn-primary" style="width:100%" onclick="createTag()">Créer le tag →</button>
-      </div>
-    </div>
-  </div>
+ <!-- TAGS -->
+ <div class="page" id="page-tags">
+ <div class="ph">
+ <div><div class="ph-title">Gestion des tags</div><div class="ph-sub">Tags utilisés sur la plateforme</div></div>
+ <button class="btn-primary" onclick="openCreateTag()">+ Créer un tag</button>
+ </div>
+ <div class="g11">
+ <div class="card">
+ <div class="ch"><div><div class="ct">Tags actifs</div><div class="cs" id="tagsCount">Chargement...</div></div></div>
+ <div id="tagsList"><div style="color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">Chargement...</div></div>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Créer / Modifier un tag</div></div></div>
+ <div class="fg"><label class="fl">Nom du tag</label><input id="newTagName" type="text" class="fi" placeholder="Ex: Immigration"/></div>
+ <div class="fg"><label class="fl">Catégorie</label>
+ <select id="newTagCat" class="fis">
+ <option value="theme">Thème</option>
+ <option value="pays">Pays / Région</option>
+ <option value="genre">Genre</option>
+ <option value="societe">Société</option>
+ <option value="personnage">Personnage</option>
+ </select>
+ </div>
+ <button class="btn-primary" style="width:100%" onclick="createTag()">Créer le tag →</button>
+ </div>
+ </div>
+ </div>
 
-  <!-- MODERATION -->
-  <div class="page" id="page-moderation">
-    <div class="ph"><div><div class="ph-title">Modération</div><div class="ph-sub">Contenus signalés par les utilisateurs</div></div></div>
-    <div class="g3">
-      <div class="card"><div class="ch"><div><div class="ct">📚 Livres signalés</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✅</span>Aucun livre signalé</div></div>
-      <div class="card"><div class="ch"><div><div class="ct">💬 Commentaires</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✅</span>Aucun commentaire signalé</div></div>
-      <div class="card"><div class="ch"><div><div class="ct">👤 Utilisateurs</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✅</span>Aucun utilisateur signalé</div></div>
-    </div>
-  </div>
+ <!-- MODERATION -->
+ <div class="page" id="page-moderation">
+ <div class="ph"><div><div class="ph-title">Modération</div><div class="ph-sub">Contenus signalés par les utilisateurs</div></div></div>
+ <div class="g3">
+ <div class="card"><div class="ch"><div><div class="ct">Livres signalés</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✓</span>Aucun livre signalé</div></div>
+ <div class="card"><div class="ch"><div><div class="ct">Commentaires</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✓</span>Aucun commentaire signalé</div></div>
+ <div class="card"><div class="ch"><div><div class="ct">Utilisateurs</div></div></div><div class="empty" style="padding:1rem;border:none"><span class="empty-ico" style="font-size:1.5rem">✓</span>Aucun utilisateur signalé</div></div>
+ </div>
+ </div>
 
-  <!-- ANALYTICS -->
-  <div class="page" id="page-analytics">
-    <div class="ph"><div><div class="ph-title">Analytics</div><div class="ph-sub">Métriques détaillées de la plateforme</div></div></div>
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or">📊</div><span class="kpi-badge kb-up">↑ +34%</span></div><div class="kpi-label">Pages vues</div><div class="kpi-val">142k</div><div class="kpi-sub">ce mois</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green">⏱</div><span class="kpi-badge kb-up">↑ +12%</span></div><div class="kpi-label">Durée session</div><div class="kpi-val">24min</div><div class="kpi-sub">moyenne</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue">🔄</div><span class="kpi-badge kb-neu">→ stable</span></div><div class="kpi-label">Taux retour</div><div class="kpi-val">68%</div><div class="kpi-sub">récurrents</div></div>
-      <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple">💫</div><span class="kpi-badge kb-up">↑ +5%</span></div><div class="kpi-label">NPS Score</div><div class="kpi-val">72</div><div class="kpi-sub">satisfaction</div></div>
-    </div>
-    <div class="g11">
-      <div class="card">
-        <div class="ch"><div><div class="ct">Top genres lus</div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">Romance</span><span class="prog-val">34%</span></div><div class="prog-track"><div class="prog-fill" style="width:34%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">Roman africain</span><span class="prog-val">28%</span></div><div class="prog-track"><div class="prog-fill" style="width:28%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">Fantastique</span><span class="prog-val">18%</span></div><div class="prog-track"><div class="prog-fill" style="width:18%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">Policier</span><span class="prog-val">12%</span></div><div class="prog-track"><div class="prog-fill" style="width:12%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">Histoire</span><span class="prog-val">8%</span></div><div class="prog-track"><div class="prog-fill" style="width:8%"></div></div></div>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Pays les + actifs</div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">🇲🇱 Mali</span><span class="prog-val">28%</span></div><div class="prog-track"><div class="prog-fill" style="width:28%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">🇸🇳 Sénégal</span><span class="prog-val">22%</span></div><div class="prog-track"><div class="prog-fill" style="width:22%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">🇳🇬 Nigeria</span><span class="prog-val">19%</span></div><div class="prog-track"><div class="prog-fill" style="width:19%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">🇨🇮 Côte d'Ivoire</span><span class="prog-val">14%</span></div><div class="prog-track"><div class="prog-fill" style="width:14%"></div></div></div>
-        <div class="prog"><div class="prog-h"><span class="prog-lbl">🌍 Autres</span><span class="prog-val">17%</span></div><div class="prog-track"><div class="prog-fill" style="width:17%"></div></div></div>
-      </div>
-    </div>
-  </div>
+ <!-- ANALYTICS -->
+ <div class="page" id="page-analytics">
+ <div class="ph"><div><div class="ph-title">Analytics</div><div class="ph-sub">Métriques détaillées de la plateforme</div></div></div>
+ <div class="kpi-row">
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-or"></div><span class="kpi-badge kb-up">↑ +34%</span></div><div class="kpi-label">Pages vues</div><div class="kpi-val">142k</div><div class="kpi-sub">ce mois</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-green">⏱</div><span class="kpi-badge kb-up">↑ +12%</span></div><div class="kpi-label">Durée session</div><div class="kpi-val">24min</div><div class="kpi-sub">moyenne</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-blue"></div><span class="kpi-badge kb-neu">→ stable</span></div><div class="kpi-label">Taux retour</div><div class="kpi-val">68%</div><div class="kpi-sub">récurrents</div></div>
+ <div class="kpi"><div class="kpi-top"><div class="kpi-ico ico-purple"></div><span class="kpi-badge kb-up">↑ +5%</span></div><div class="kpi-label">NPS Score</div><div class="kpi-val">72</div><div class="kpi-sub">satisfaction</div></div>
+ </div>
+ <div class="g11">
+ <div class="card">
+ <div class="ch"><div><div class="ct">Top genres lus</div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Romance</span><span class="prog-val">34%</span></div><div class="prog-track"><div class="prog-fill" style="width:34%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Roman africain</span><span class="prog-val">28%</span></div><div class="prog-track"><div class="prog-fill" style="width:28%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Fantastique</span><span class="prog-val">18%</span></div><div class="prog-track"><div class="prog-fill" style="width:18%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Policier</span><span class="prog-val">12%</span></div><div class="prog-track"><div class="prog-fill" style="width:12%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Histoire</span><span class="prog-val">8%</span></div><div class="prog-track"><div class="prog-fill" style="width:8%"></div></div></div>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Pays les + actifs</div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">🇲🇱 Mali</span><span class="prog-val">28%</span></div><div class="prog-track"><div class="prog-fill" style="width:28%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">🇸🇳 Sénégal</span><span class="prog-val">22%</span></div><div class="prog-track"><div class="prog-fill" style="width:22%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">🇳🇬 Nigeria</span><span class="prog-val">19%</span></div><div class="prog-track"><div class="prog-fill" style="width:19%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">🇨🇮 Côte d'Ivoire</span><span class="prog-val">14%</span></div><div class="prog-track"><div class="prog-fill" style="width:14%"></div></div></div>
+ <div class="prog"><div class="prog-h"><span class="prog-lbl">Autres</span><span class="prog-val">17%</span></div><div class="prog-track"><div class="prog-fill" style="width:17%"></div></div></div>
+ </div>
+ </div>
+ </div>
 
-  <!-- PARAMETRES -->
-  <div class="page" id="page-parametres">
-    <div class="ph"><div><div class="ph-title">Paramètres</div><div class="ph-sub">Configuration de la plateforme GRIOTTE</div></div></div>
-    <div class="g11">
-      <div class="card">
-        <div class="ch"><div><div class="ct">Règles financières</div></div></div>
-        <div class="met"><span class="met-lbl">Prix par page lue</span><span class="met-val" style="font-size:0.85rem">10 FCFA</span></div>
-        <div class="met"><span class="met-lbl">Commission auteur</span><span class="met-val" style="font-size:0.85rem">60%</span></div>
-        <div class="met"><span class="met-lbl">Commission plateforme</span><span class="met-val" style="font-size:0.85rem">40%</span></div>
-        <div class="met"><span class="met-lbl">Retrait minimum</span><span class="met-val" style="font-size:0.85rem">500 FCFA</span></div>
-        <div class="met"><span class="met-lbl">Délai de retrait</span><span class="met-val" style="font-size:0.85rem">24–48h</span></div>
-      </div>
-      <div class="card">
-        <div class="ch"><div><div class="ct">Stack technique</div></div></div>
-        <div class="met"><span class="met-lbl">Backend</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">Railway · NestJS · Prisma</div></div></div>
-        <div class="met"><span class="met-lbl">Frontend</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">Vercel · HTML/CSS/JS</div></div></div>
-        <div class="met"><span class="met-lbl">Base de données</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">PostgreSQL</div></div></div>
-        <div class="met"><span class="met-lbl">Paiements</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">FedaPay</div></div></div>
-        <div class="met"><span class="met-lbl">Stockage</span><div><div class="met-val" style="font-size:0.7rem;color:var(--cendre)">Cloudflare R2 (à venir)</div></div></div>
-      </div>
-    </div>
-  </div>
+ <!-- PARAMETRES -->
+ <div class="page" id="page-parametres">
+ <div class="ph"><div><div class="ph-title">Paramètres</div><div class="ph-sub">Configuration de la plateforme GRIOTTE</div></div></div>
+ <div class="g11">
+ <div class="card">
+ <div class="ch"><div><div class="ct">Règles financières</div></div></div>
+ <div class="met"><span class="met-lbl">Prix par page lue</span><span class="met-val" style="font-size:0.85rem">10 FCFA</span></div>
+ <div class="met"><span class="met-lbl">Commission auteur</span><span class="met-val" style="font-size:0.85rem">60%</span></div>
+ <div class="met"><span class="met-lbl">Commission plateforme</span><span class="met-val" style="font-size:0.85rem">40%</span></div>
+ <div class="met"><span class="met-lbl">Retrait minimum</span><span class="met-val" style="font-size:0.85rem">500 FCFA</span></div>
+ <div class="met"><span class="met-lbl">Délai de retrait</span><span class="met-val" style="font-size:0.85rem">24–48h</span></div>
+ </div>
+ <div class="card">
+ <div class="ch"><div><div class="ct">Stack technique</div></div></div>
+ <div class="met"><span class="met-lbl">Backend</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">Railway · NestJS · Prisma</div></div></div>
+ <div class="met"><span class="met-lbl">Frontend</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">Vercel · HTML/CSS/JS</div></div></div>
+ <div class="met"><span class="met-lbl">Base de données</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">PostgreSQL</div></div></div>
+ <div class="met"><span class="met-lbl">Paiements</span><div><div class="met-val" style="font-size:0.7rem;color:var(--blue)">FedaPay</div></div></div>
+ <div class="met"><span class="met-lbl">Stockage</span><div><div class="met-val" style="font-size:0.7rem;color:var(--cendre)">Cloudflare R2 (à venir)</div></div></div>
+ </div>
+ </div>
+ </div>
 
 </div>
 
@@ -814,23 +814,23 @@ if(de) de.textContent=new Date().toLocaleDateString('fr-FR',{day:'numeric',month
 
 // Toast
 window.showToast=function(msg,ico){
-  const t=document.getElementById('toast');
-  document.getElementById('toastIco').textContent=ico||'✅';
-  document.getElementById('toastMsg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},2600);
+ const t=document.getElementById('toast');
+ document.getElementById('toastIco').textContent=ico||'✓';
+ document.getElementById('toastMsg').textContent=msg;
+ t.classList.add('show');
+ setTimeout(function(){t.classList.remove('show');},2600);
 };
 
 // Modal
 window.openModal=function(title,sub,body,okLabel,okClass,cb){
-  document.getElementById('modalTitle').textContent=title||'Confirmation';
-  document.getElementById('modalSub').textContent=sub||'';
-  document.getElementById('modalBody').innerHTML=body||'';
-  const btn=document.getElementById('modalOk');
-  btn.textContent=okLabel||'Confirmer';
-  btn.className=okClass==='danger'?'bok bok-r':'bok';
-  modalOkCb=cb;
-  document.getElementById('modal').classList.add('open');
+ document.getElementById('modalTitle').textContent=title||'Confirmation';
+ document.getElementById('modalSub').textContent=sub||'';
+ document.getElementById('modalBody').innerHTML=body||'';
+ const btn=document.getElementById('modalOk');
+ btn.textContent=okLabel||'Confirmer';
+ btn.className=okClass==='danger'?'bok bok-r':'bok';
+ modalOkCb=cb;
+ document.getElementById('modal').classList.add('open');
 };
 window.closeModal=function(){document.getElementById('modal').classList.remove('open');modalOkCb=null;};
 window.doModalOk=function(){if(modalOkCb)modalOkCb();closeModal();};
@@ -838,435 +838,435 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 
 // Build sidebar
 function buildSidebar(){
-  const nav=document.getElementById('sidebarNav');
-  const groups=[
-    {label:'Vue d\'ensemble',items:[
-      {ico:'📊',label:'Tableau de bord',page:'dashboard'},
-      {ico:'📈',label:'Analytics',page:'analytics'},
-    ]},
-    {label:'Contenu',items:[
-      {ico:'📚',label:'Livres',page:'livres',badge:'nb-blue',badgeId:'navBooks'},
-      {ico:'⏳',label:'Validation',page:'validation',badge:'nb-or',badgeId:'navPending',warn:true},
-      {ico:'📝',label:'Chapitres',page:'chapitres'},
-      {ico:'🏷️',label:'Tags',page:'tags'},
-      {ico:'🛡️',label:'Modération',page:'moderation'},
-    ]},
-    {label:'Utilisateurs',items:[
-      {ico:'👥',label:'Utilisateurs',page:'users',badge:'nb-blue',badgeId:'navUsers'},
-      {ico:'✍️',label:'Auteurs',page:'auteurs'},
-    ]},
-    {label:'Finance',items:[
-      {ico:'💳',label:'Paiements',page:'paiements'},
-      {ico:'💸',label:'Retraits',page:'retraits',badge:'nb-red',badgeId:'navRetraits'},
-    ]},
-    {label:'Système',items:[
-      {ico:'⚙',label:'Paramètres',page:'parametres'},
-      {ico:'🏠',label:'Dashboard principal',page:null,action:"window.location.href='griotte-dashboard.html'"},
-      {ico:'🚪',label:'Déconnexion',page:null,action:'deconnecter()',danger:true},
-    ]},
-  ];
-  let html='';
-  groups.forEach(function(g){
-    html+='<div class="nav-group-header" onclick="toggleGroup(this)"><span class="nav-group-label">'+g.label+'</span><span class="nav-group-arrow open">▶</span></div>';
-    html+='<div class="nav-group-items">';
-    g.items.forEach(function(item){
-      const cls='nav-item'+(item.warn?' warn':'')+(item.danger?' danger':'');
-      const onclick=item.page?'showPage(\''+item.page+'\',this)':item.action;
-      const badge=item.badge?'<span class="nav-badge '+item.badge+'" id="'+(item.badgeId||'')+'">0</span>':'';
-      html+='<a class="'+cls+'" onclick="'+onclick+'"><span class="nav-ico">'+item.ico+'</span> '+item.label+badge+'</a>';
-    });
-    html+='</div>';
-  });
-  nav.innerHTML=html;
+ const nav=document.getElementById('sidebarNav');
+ const groups=[
+ {label:'Vue d\'ensemble',items:[
+ {ico:'',label:'Tableau de bord',page:'dashboard'},
+ {ico:'',label:'Analytics',page:'analytics'},
+ ]},
+ {label:'Contenu',items:[
+ {ico:'',label:'Livres',page:'livres',badge:'nb-blue',badgeId:'navBooks'},
+ {ico:'⏳',label:'Validation',page:'validation',badge:'nb-or',badgeId:'navPending',warn:true},
+ {ico:'',label:'Chapitres',page:'chapitres'},
+ {ico:'',label:'Tags',page:'tags'},
+ {ico:'',label:'Modération',page:'moderation'},
+ ]},
+ {label:'Utilisateurs',items:[
+ {ico:'',label:'Utilisateurs',page:'users',badge:'nb-blue',badgeId:'navUsers'},
+ {ico:'',label:'Auteurs',page:'auteurs'},
+ ]},
+ {label:'Finance',items:[
+ {ico:'',label:'Paiements',page:'paiements'},
+ {ico:'',label:'Retraits',page:'retraits',badge:'nb-red',badgeId:'navRetraits'},
+ ]},
+ {label:'Système',items:[
+ {ico:'',label:'Paramètres',page:'parametres'},
+ {ico:'',label:'Dashboard principal',page:null,action:"window.location.href='griotte-dashboard.html'"},
+ {ico:'',label:'Déconnexion',page:null,action:'deconnecter()',danger:true},
+ ]},
+ ];
+ let html='';
+ groups.forEach(function(g){
+ html+='<div class="nav-group-header" onclick="toggleGroup(this)"><span class="nav-group-label">'+g.label+'</span><span class="nav-group-arrow open"></span></div>';
+ html+='<div class="nav-group-items">';
+ g.items.forEach(function(item){
+ const cls='nav-item'+(item.warn?' warn':'')+(item.danger?' danger':'');
+ const onclick=item.page?'showPage(\''+item.page+'\',this)':item.action;
+ const badge=item.badge?'<span class="nav-badge '+item.badge+'" id="'+(item.badgeId||'')+'">0</span>':'';
+ html+='<a class="'+cls+'" onclick="'+onclick+'"><span class="nav-ico">'+item.ico+'</span> '+item.label+badge+'</a>';
+ });
+ html+='</div>';
+ });
+ nav.innerHTML=html;
 }
 
 // Toggle nav groups
 window.toggleGroup=function(header){
-  const items=header.nextElementSibling;
-  const arrow=header.querySelector('.nav-group-arrow');
-  const isOpen=items.style.maxHeight!=='0px'&&items.style.maxHeight!=='';
-  if(isOpen||items.style.maxHeight===''){
-    items.style.maxHeight='0px';
-    arrow.classList.remove('open');
-  } else {
-    items.style.maxHeight=items.scrollHeight+'px';
-    arrow.classList.add('open');
-  }
+ const items=header.nextElementSibling;
+ const arrow=header.querySelector('.nav-group-arrow');
+ const isOpen=items.style.maxHeight!=='0px'&&items.style.maxHeight!=='';
+ if(isOpen||items.style.maxHeight===''){
+ items.style.maxHeight='0px';
+ arrow.classList.remove('open');
+ } else {
+ items.style.maxHeight=items.scrollHeight+'px';
+ arrow.classList.add('open');
+ }
 };
 
 // Init group heights
 function initGroups(){
-  document.querySelectorAll('.nav-group-items').forEach(function(el){
-    el.style.maxHeight=el.scrollHeight+'px';
-  });
+ document.querySelectorAll('.nav-group-items').forEach(function(el){
+ el.style.maxHeight=el.scrollHeight+'px';
+ });
 }
 
 // Nav
 window.showPage=function(page,el){
-  document.querySelectorAll('.page').forEach(function(p){p.style.display='none';p.classList.remove('active');});
-  const t=document.getElementById('page-'+page);
-  if(t){t.style.display='block';t.classList.add('active');}
-  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
-  if(el) el.classList.add('active');
-  const titles={dashboard:'Tableau de bord',users:'Utilisateurs',auteurs:'Auteurs',livres:'Livres',validation:'Validation',chapitres:'Chapitres',paiements:'Paiements',retraits:'Retraits',analytics:'Analytics',tags:'Tags',moderation:'Modération',parametres:'Paramètres'};
-  const te=document.getElementById('pageTitle');
-  if(te) te.textContent=titles[page]||page;
-  const bc=document.getElementById('breadcrumb');
-  if(bc) bc.textContent=titles[page]||page;
-  if(page==='users') renderUsers(allUsers);
-  if(page==='auteurs') renderAuteurs();
-  if(page==='livres') renderBooks(allBooks);
-  if(page==='validation') renderValidation();
-  if(page==='tags') renderTags();
+ document.querySelectorAll('.page').forEach(function(p){p.style.display='none';p.classList.remove('active');});
+ const t=document.getElementById('page-'+page);
+ if(t){t.style.display='block';t.classList.add('active');}
+ document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+ if(el) el.classList.add('active');
+ const titles={dashboard:'Tableau de bord',users:'Utilisateurs',auteurs:'Auteurs',livres:'Livres',validation:'Validation',chapitres:'Chapitres',paiements:'Paiements',retraits:'Retraits',analytics:'Analytics',tags:'Tags',moderation:'Modération',parametres:'Paramètres'};
+ const te=document.getElementById('pageTitle');
+ if(te) te.textContent=titles[page]||page;
+ const bc=document.getElementById('breadcrumb');
+ if(bc) bc.textContent=titles[page]||page;
+ if(page==='users') renderUsers(allUsers);
+ if(page==='auteurs') renderAuteurs();
+ if(page==='livres') renderBooks(allBooks);
+ if(page==='validation') renderValidation();
+ if(page==='tags') renderTags();
 };
 
 // Load admin
 async function loadAdmin(){
-  const token=localStorage.getItem('accessToken');
-  if(!token){window.location.href='/griotte-landing.html';return;}
-  try{
-    const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
-    const d=await res.json();
-    if(!d.name||d.role!=='ADMIN'){showToast('Accès refusé — Admins uniquement','🚫');setTimeout(function(){window.location.href='/griotte-dashboard.html';},1500);return;}
-    const aa=document.getElementById('adminAva');
-    if(aa) aa.textContent=d.name.charAt(0).toUpperCase();
-    const an=document.getElementById('adminName');
-    if(an) an.textContent=d.name;
-    loadData(token);
-  }catch(e){window.location.href='/griotte-landing.html';}
+ const token=localStorage.getItem('accessToken');
+ if(!token){window.location.href='/griotte-landing.html';return;}
+ try{
+ const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
+ const d=await res.json();
+ if(!d.name||d.role!=='ADMIN'){showToast('Accès refusé — Admins uniquement','');setTimeout(function(){window.location.href='/griotte-dashboard.html';},1500);return;}
+ const aa=document.getElementById('adminAva');
+ if(aa) aa.textContent=d.name.charAt(0).toUpperCase();
+ const an=document.getElementById('adminName');
+ if(an) an.textContent=d.name;
+ loadData(token);
+ }catch(e){window.location.href='/griotte-landing.html';}
 }
 
 async function loadData(token){
-  // Load books
-  try{
-    const res=await fetch(API+'/books-public');
-    allBooks=await res.json()||[];
-    updateBooksUI();
-  }catch(e){}
+ // Load books
+ try{
+ const res=await fetch(API+'/books-public');
+ allBooks=await res.json()||[];
+ updateBooksUI();
+ }catch(e){}
 
-  // Load users
-  try{
-    const res=await fetch(API+'/admin/users',{headers:{'Authorization':'Bearer '+token}});
-    const data=await res.json();
-    if(Array.isArray(data)) allUsers=data;
-    updateUsersUI();
-  }catch(e){}
+ // Load users
+ try{
+ const res=await fetch(API+'/admin/users',{headers:{'Authorization':'Bearer '+token}});
+ const data=await res.json();
+ if(Array.isArray(data)) allUsers=data;
+ updateUsersUI();
+ }catch(e){}
 
-  // Load stats
-  try{
-    const res=await fetch(API+'/admin/stats',{headers:{'Authorization':'Bearer '+token}});
-    const d=await res.json();
-    if(d.totalUsers){
-      const ku=document.getElementById('kpiUsers');
-      if(ku) ku.textContent=d.totalUsers.toLocaleString();
-      const nu=document.getElementById('navUsers');
-      if(nu) nu.textContent=d.totalUsers;
-      const us=document.getElementById('usersSub');
-      if(us) us.textContent=d.totalUsers+' utilisateurs inscrits';
-      const ka=document.getElementById('kpiAuthors');
-      if(ka) ka.textContent=d.totalAuthors||'—';
-      // Rôles progress
-      if(d.totalUsers>0){
-        const rPct=Math.round((d.totalReaders/d.totalUsers)*100);
-        const aPct=Math.round((d.totalAuthors/d.totalUsers)*100);
-        const pr=document.getElementById('pctReaders');if(pr) pr.textContent=rPct+'%';
-        const br=document.getElementById('barReaders');if(br) br.style.width=rPct+'%';
-        const pa=document.getElementById('pctAuthors');if(pa) pa.textContent=aPct+'%';
-        const ba=document.getElementById('barAuthors');if(ba) ba.style.width=aPct+'%';
-      }
-    }
-  }catch(e){}
+ // Load stats
+ try{
+ const res=await fetch(API+'/admin/stats',{headers:{'Authorization':'Bearer '+token}});
+ const d=await res.json();
+ if(d.totalUsers){
+ const ku=document.getElementById('kpiUsers');
+ if(ku) ku.textContent=d.totalUsers.toLocaleString();
+ const nu=document.getElementById('navUsers');
+ if(nu) nu.textContent=d.totalUsers;
+ const us=document.getElementById('usersSub');
+ if(us) us.textContent=d.totalUsers+' utilisateurs inscrits';
+ const ka=document.getElementById('kpiAuthors');
+ if(ka) ka.textContent=d.totalAuthors||'—';
+ // Rôles progress
+ if(d.totalUsers>0){
+ const rPct=Math.round((d.totalReaders/d.totalUsers)*100);
+ const aPct=Math.round((d.totalAuthors/d.totalUsers)*100);
+ const pr=document.getElementById('pctReaders');if(pr) pr.textContent=rPct+'%';
+ const br=document.getElementById('barReaders');if(br) br.style.width=rPct+'%';
+ const pa=document.getElementById('pctAuthors');if(pa) pa.textContent=aPct+'%';
+ const ba=document.getElementById('barAuthors');if(ba) ba.style.width=aPct+'%';
+ }
+ }
+ }catch(e){}
 }
 
 function updateBooksUI(){
-  const nb=allBooks.length;
-  const kb=document.getElementById('kpiBooks');if(kb) kb.textContent=nb;
-  const nab=document.getElementById('navBooks');if(nab) nab.textContent=nb;
-  const bs=document.getElementById('booksSub');if(bs) bs.textContent=nb+' livre'+(nb>1?'s':'');
-  // Dashboard recent
-  const db=document.getElementById('dashBooks');
-  if(db&&allBooks.length>0){
-    db.innerHTML=allBooks.slice(0,5).map(function(b){
-      return '<tr><td class="b">'+b.title+'</td><td>'+(b.author?b.author.name:'—')+'</td><td>'+b.genre+'</td><td><span class="tag tg">'+b.status+'</span></td></tr>';
-    }).join('');
-  }else if(db){
-    db.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem;padding:1.2rem">Aucun livre</td></tr>';
-  }
-  // Top authors
-  const ta=document.getElementById('topAuthors');
-  if(ta){
-    const authMap={};
-    allBooks.forEach(function(b){if(b.author){authMap[b.author.name]=(authMap[b.author.name]||0)+1;}});
-    const sorted=Object.entries(authMap).sort(function(a,b){return b[1]-a[1];}).slice(0,4);
-    if(sorted.length>0){
-      ta.innerHTML=sorted.map(function(a,i){
-        const colors=['linear-gradient(135deg,#3d1a0a,#8B4513)','linear-gradient(135deg,#0a1628,#2e5f8f)','linear-gradient(135deg,#0a2818,#1e7a4a)','linear-gradient(135deg,#280a0a,#7a1e1e)'];
-        const fc=['#f5c07a','#7eb8f5','#7affc0','#f5a0a0'];
-        return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0;border-bottom:1px solid rgba(248,246,242,0.025)">'
-          +'<div class="uava" style="background:'+colors[i%4]+';color:'+fc[i%4]+'">'+a[0].charAt(0)+'</div>'
-          +'<div style="flex:1"><div style="font-size:0.72rem;font-weight:600;color:var(--blanc)">'+a[0]+'</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+a[1]+' livre'+(a[1]>1?'s':'')+'</div></div>'
-          +'</div>';
-      }).join('');
-    }
-  }
-  // Validation alert
-  const pending=allBooks.filter(function(b){return b.status==='DRAFT';});
-  const ap=document.getElementById('alertPending');
-  if(ap) ap.textContent=pending.length+' livre(s) en attente de validation';
-  const np=document.getElementById('navPending');
-  if(np) np.textContent=pending.length;
+ const nb=allBooks.length;
+ const kb=document.getElementById('kpiBooks');if(kb) kb.textContent=nb;
+ const nab=document.getElementById('navBooks');if(nab) nab.textContent=nb;
+ const bs=document.getElementById('booksSub');if(bs) bs.textContent=nb+' livre'+(nb>1?'s':'');
+ // Dashboard recent
+ const db=document.getElementById('dashBooks');
+ if(db&&allBooks.length>0){
+ db.innerHTML=allBooks.slice(0,5).map(function(b){
+ return '<tr><td class="b">'+b.title+'</td><td>'+(b.author?b.author.name:'—')+'</td><td>'+b.genre+'</td><td><span class="tag tg">'+b.status+'</span></td></tr>';
+ }).join('');
+ }else if(db){
+ db.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem;padding:1.2rem">Aucun livre</td></tr>';
+ }
+ // Top authors
+ const ta=document.getElementById('topAuthors');
+ if(ta){
+ const authMap={};
+ allBooks.forEach(function(b){if(b.author){authMap[b.author.name]=(authMap[b.author.name]||0)+1;}});
+ const sorted=Object.entries(authMap).sort(function(a,b){return b[1]-a[1];}).slice(0,4);
+ if(sorted.length>0){
+ ta.innerHTML=sorted.map(function(a,i){
+ const colors=['linear-gradient(135deg,#3d1a0a,#8B4513)','linear-gradient(135deg,#0a1628,#2e5f8f)','linear-gradient(135deg,#0a2818,#1e7a4a)','linear-gradient(135deg,#280a0a,#7a1e1e)'];
+ const fc=['#f5c07a','#7eb8f5','#7affc0','#f5a0a0'];
+ return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0;border-bottom:1px solid rgba(248,246,242,0.025)">'
+ +'<div class="uava" style="background:'+colors[i%4]+';color:'+fc[i%4]+'">'+a[0].charAt(0)+'</div>'
+ +'<div style="flex:1"><div style="font-size:0.72rem;font-weight:600;color:var(--blanc)">'+a[0]+'</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+a[1]+' livre'+(a[1]>1?'s':'')+'</div></div>'
+ +'</div>';
+ }).join('');
+ }
+ }
+ // Validation alert
+ const pending=allBooks.filter(function(b){return b.status==='DRAFT';});
+ const ap=document.getElementById('alertPending');
+ if(ap) ap.textContent=pending.length+' livre(s) en attente de validation';
+ const np=document.getElementById('navPending');
+ if(np) np.textContent=pending.length;
 }
 
 function updateUsersUI(){
-  // already rendered on page open
+ // already rendered on page open
 }
 
 // RENDER USERS
 function renderUsers(users){
-  const tb=document.getElementById('usersTable');
-  if(!tb) return;
-  if(!users||users.length===0){
-    tb.innerHTML='<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun utilisateur.<br/><span style="opacity:0.5">Vérifiez la connexion au backend.</span></td></tr>';
-    return;
-  }
-  const rc={READER:'tc',AUTHOR:'to',ADMIN:'tb'};
-  const colors=['linear-gradient(135deg,#3d1a0a,#8B4513)','linear-gradient(135deg,#0a1628,#2e5f8f)','linear-gradient(135deg,#0a2818,#1e7a4a)','linear-gradient(135deg,#280a0a,#7a1e1e)','linear-gradient(135deg,#1a0a28,#5a1e8f)'];
-  const fc=['#f5c07a','#7eb8f5','#7affc0','#f5a0a0','#c0a0f5'];
-  tb.innerHTML=users.map(function(u,i){
-    const susp=u.isSuspended?'<span class="tag tr">Suspendu</span>':'<span class="tag tg">Actif</span>';
-    const bal=u.wallet?u.wallet.balance.toLocaleString():'0';
-    const date=new Date(u.createdAt).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'2-digit'});
-    return '<tr>'
-      +'<td style="padding-left:1.2rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">#'+(i+1)+'</td>'
-      +'<td><div style="display:flex;align-items:center;gap:0.5rem"><div class="uava" style="background:'+colors[i%5]+';color:'+fc[i%5]+'">'+u.name.charAt(0).toUpperCase()+'</div><div><div style="font-size:0.74rem;font-weight:600;color:var(--blanc)">'+u.name+'</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+(u.country||'—')+'</div></div></div></td>'
-      +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+u.email+'</td>'
-      +'<td><span style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+(u.country||'—')+'</span></td>'
-      +'<td><span class="tag '+(rc[u.role]||'tc')+'">'+u.role+'</span></td>'
-      +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--or)">'+bal+' F</td>'
-      +'<td>'+susp+'</td>'
-      +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+date+'</td>'
-      +'<td><div style="display:flex;gap:0.3rem">'
-      +(u.role==='READER'?'<button class="btn btn-b" onclick="verifyAuthor(\''+u.id+'\')">→ Auteur</button>':'')
-      +(u.isSuspended
-        ?'<button class="btn btn-g" onclick="toggleSuspend(\''+u.id+'\',false)">Réactiver</button>'
-        :'<button class="btn btn-r" onclick="toggleSuspend(\''+u.id+'\',true)">Suspendre</button>')
-      +'</div></td>'
-      +'</tr>';
-  }).join('');
+ const tb=document.getElementById('usersTable');
+ if(!tb) return;
+ if(!users||users.length===0){
+ tb.innerHTML='<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun utilisateur.<br/><span style="opacity:0.5">Vérifiez la connexion au backend.</span></td></tr>';
+ return;
+ }
+ const rc={READER:'tc',AUTHOR:'to',ADMIN:'tb'};
+ const colors=['linear-gradient(135deg,#3d1a0a,#8B4513)','linear-gradient(135deg,#0a1628,#2e5f8f)','linear-gradient(135deg,#0a2818,#1e7a4a)','linear-gradient(135deg,#280a0a,#7a1e1e)','linear-gradient(135deg,#1a0a28,#5a1e8f)'];
+ const fc=['#f5c07a','#7eb8f5','#7affc0','#f5a0a0','#c0a0f5'];
+ tb.innerHTML=users.map(function(u,i){
+ const susp=u.isSuspended?'<span class="tag tr">Suspendu</span>':'<span class="tag tg">Actif</span>';
+ const bal=u.wallet?u.wallet.balance.toLocaleString():'0';
+ const date=new Date(u.createdAt).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'2-digit'});
+ return '<tr>'
+ +'<td style="padding-left:1.2rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">#'+(i+1)+'</td>'
+ +'<td><div style="display:flex;align-items:center;gap:0.5rem"><div class="uava" style="background:'+colors[i%5]+';color:'+fc[i%5]+'">'+u.name.charAt(0).toUpperCase()+'</div><div><div style="font-size:0.74rem;font-weight:600;color:var(--blanc)">'+u.name+'</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+(u.country||'—')+'</div></div></div></td>'
+ +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+u.email+'</td>'
+ +'<td><span style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+(u.country||'—')+'</span></td>'
+ +'<td><span class="tag '+(rc[u.role]||'tc')+'">'+u.role+'</span></td>'
+ +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--or)">'+bal+' F</td>'
+ +'<td>'+susp+'</td>'
+ +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">'+date+'</td>'
+ +'<td><div style="display:flex;gap:0.3rem">'
+ +(u.role==='READER'?'<button class="btn btn-b" onclick="verifyAuthor(\''+u.id+'\')">→ Auteur</button>':'')
+ +(u.isSuspended
+ ?'<button class="btn btn-g" onclick="toggleSuspend(\''+u.id+'\',false)">Réactiver</button>'
+ :'<button class="btn btn-r" onclick="toggleSuspend(\''+u.id+'\',true)">Suspendre</button>')
+ +'</div></td>'
+ +'</tr>';
+ }).join('');
 }
 
 // RENDER AUTEURS
 function renderAuteurs(){
-  const tb=document.getElementById('auteursTable');
-  if(!tb) return;
-  const authMap={};
-  allBooks.forEach(function(b){
-    if(b.author){
-      if(!authMap[b.author.name]) authMap[b.author.name]={name:b.author.name,books:[],tags:[]};
-      authMap[b.author.name].books.push(b);
-      if(b.tags) b.tags.forEach(function(t){if(!authMap[b.author.name].tags.includes(t)) authMap[b.author.name].tags.push(t);});
-    }
-  });
-  const auteurs=Object.values(authMap);
-  if(auteurs.length===0){
-    tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun auteur avec des livres publiés.</td></tr>';
-    return;
-  }
-  tb.innerHTML=auteurs.map(function(a){
-    const totalPages=a.books.reduce(function(s,b){return s+(b.totalPages||0);},0);
-    const tags=a.tags.slice(0,3).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
-    return '<tr>'
-      +'<td style="padding-left:1.2rem" class="b">'+a.name+'</td>'
-      +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+a.books.length+'</td>'
-      +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+totalPages.toLocaleString()+'</td>'
-      +'<td>'+tags+'</td>'
-      +'<td><span class="tag tg">Vérifié</span></td>'
-      +'<td><div style="display:flex;gap:0.3rem"><button class="btn btn-o">Profil</button><button class="btn">Contacter</button></div></td>'
-      +'</tr>';
-  }).join('');
+ const tb=document.getElementById('auteursTable');
+ if(!tb) return;
+ const authMap={};
+ allBooks.forEach(function(b){
+ if(b.author){
+ if(!authMap[b.author.name]) authMap[b.author.name]={name:b.author.name,books:[],tags:[]};
+ authMap[b.author.name].books.push(b);
+ if(b.tags) b.tags.forEach(function(t){if(!authMap[b.author.name].tags.includes(t)) authMap[b.author.name].tags.push(t);});
+ }
+ });
+ const auteurs=Object.values(authMap);
+ if(auteurs.length===0){
+ tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun auteur avec des livres publiés.</td></tr>';
+ return;
+ }
+ tb.innerHTML=auteurs.map(function(a){
+ const totalPages=a.books.reduce(function(s,b){return s+(b.totalPages||0);},0);
+ const tags=a.tags.slice(0,3).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
+ return '<tr>'
+ +'<td style="padding-left:1.2rem" class="b">'+a.name+'</td>'
+ +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+a.books.length+'</td>'
+ +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+totalPages.toLocaleString()+'</td>'
+ +'<td>'+tags+'</td>'
+ +'<td><span class="tag tg">Vérifié</span></td>'
+ +'<td><div style="display:flex;gap:0.3rem"><button class="btn btn-o">Profil</button><button class="btn">Contacter</button></div></td>'
+ +'</tr>';
+ }).join('');
 }
 
 // RENDER BOOKS
 function renderBooks(books){
-  const tb=document.getElementById('booksTable');
-  if(!tb) return;
-  if(!books||books.length===0){
-    tb.innerHTML='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun livre</td></tr>';
-    return;
-  }
-  tb.innerHTML=books.map(function(b,i){
-    const tags=(b.tags||[]).slice(0,2).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
-    const statusCls=b.status==='PUBLISHED'?'tg':b.status==='DRAFT'?'tc':'ty';
-    return '<tr>'
-      +'<td style="padding-left:1.2rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">#'+(i+1)+'</td>'
-      +'<td class="b">'+b.title+'</td>'
-      +'<td>'+(b.author?b.author.name:'—')+'</td>'
-      +'<td><span class="tag tc">'+b.genre+'</span></td>'
-      +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+b.totalPages+'</td>'
-      +'<td>'+tags+'</td>'
-      +'<td><span class="tag '+statusCls+'">'+b.status+'</span></td>'
-      +'<td><div style="display:flex;gap:0.3rem">'
-      +'<button class="btn btn-o" onclick="showToast(\'Vue détaillée à venir\',\'📖\')">Voir</button>'
-      +'<button class="btn btn-r" onclick="confirmDeleteBook(\''+b.id+'\')">Suppr.</button>'
-      +'</div></td>'
-      +'</tr>';
-  }).join('');
+ const tb=document.getElementById('booksTable');
+ if(!tb) return;
+ if(!books||books.length===0){
+ tb.innerHTML='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun livre</td></tr>';
+ return;
+ }
+ tb.innerHTML=books.map(function(b,i){
+ const tags=(b.tags||[]).slice(0,2).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
+ const statusCls=b.status==='PUBLISHED'?'tg':b.status==='DRAFT'?'tc':'ty';
+ return '<tr>'
+ +'<td style="padding-left:1.2rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--cendre)">#'+(i+1)+'</td>'
+ +'<td class="b">'+b.title+'</td>'
+ +'<td>'+(b.author?b.author.name:'—')+'</td>'
+ +'<td><span class="tag tc">'+b.genre+'</span></td>'
+ +'<td style="font-family:\'DM Mono\',monospace;font-size:0.75rem">'+b.totalPages+'</td>'
+ +'<td>'+tags+'</td>'
+ +'<td><span class="tag '+statusCls+'">'+b.status+'</span></td>'
+ +'<td><div style="display:flex;gap:0.3rem">'
+ +'<button class="btn btn-o" onclick="showToast(\'Vue détaillée à venir\',\'\')">Voir</button>'
+ +'<button class="btn btn-r" onclick="confirmDeleteBook(\''+b.id+'\')">Suppr.</button>'
+ +'</div></td>'
+ +'</tr>';
+ }).join('');
 }
 
 // RENDER VALIDATION
 function renderValidation(){
-  const vc=document.getElementById('validationContent');
-  if(!vc) return;
-  const pending=allBooks.filter(function(b){return b.status==='DRAFT';});
-  if(pending.length===0){
-    vc.innerHTML='<div class="empty"><span class="empty-ico">✅</span>Aucun livre en attente de validation</div>';
-    return;
-  }
-  const gradients=['linear-gradient(160deg,#2d1b0e,#8B4513)','linear-gradient(160deg,#0a1628,#2e5f8f)','linear-gradient(160deg,#1a2a0a,#5f8f2e)','linear-gradient(160deg,#280a0a,#8f2e2e)'];
-  vc.innerHTML=pending.map(function(b,i){
-    const tags=(b.tags||[]).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
-    return '<div class="val-card">'
-      +'<div class="val-top">'
-      +'<div class="val-cover" style="background:'+gradients[i%4]+'"></div>'
-      +'<div class="val-info">'
-      +'<div class="val-title">'+b.title+'</div>'
-      +'<div class="val-author">'+(b.author?b.author.name:'—')+' · '+b.genre+' · '+b.totalPages+' pages</div>'
-      +'<div class="val-synopsis">'+(b.synopsis||'Aucun synopsis fourni.')+'</div>'
-      +'<div class="val-tags">'+tags+'</div>'
-      +'</div></div>'
-      +'<div class="val-actions">'
-      +'<button class="btn btn-g" onclick="approveBook(\''+b.id+'\')">✅ Approuver</button>'
-      +'<button class="btn btn-r" onclick="rejectBook(\''+b.id+'\')">❌ Refuser</button>'
-      +'<button class="btn btn-y" onclick="showToast(\'Demande de modification envoyée\',\'📝\')">📝 Modifier</button>'
-      +'</div>'
-      +'</div>';
-  }).join('');
+ const vc=document.getElementById('validationContent');
+ if(!vc) return;
+ const pending=allBooks.filter(function(b){return b.status==='DRAFT';});
+ if(pending.length===0){
+ vc.innerHTML='<div class="empty"><span class="empty-ico">✓</span>Aucun livre en attente de validation</div>';
+ return;
+ }
+ const gradients=['linear-gradient(160deg,#2d1b0e,#8B4513)','linear-gradient(160deg,#0a1628,#2e5f8f)','linear-gradient(160deg,#1a2a0a,#5f8f2e)','linear-gradient(160deg,#280a0a,#8f2e2e)'];
+ vc.innerHTML=pending.map(function(b,i){
+ const tags=(b.tags||[]).map(function(t){return '<span class="tag to">'+t+'</span>';}).join(' ');
+ return '<div class="val-card">'
+ +'<div class="val-top">'
+ +'<div class="val-cover" style="background:'+gradients[i%4]+'"></div>'
+ +'<div class="val-info">'
+ +'<div class="val-title">'+b.title+'</div>'
+ +'<div class="val-author">'+(b.author?b.author.name:'—')+' · '+b.genre+' · '+b.totalPages+' pages</div>'
+ +'<div class="val-synopsis">'+(b.synopsis||'Aucun synopsis fourni.')+'</div>'
+ +'<div class="val-tags">'+tags+'</div>'
+ +'</div></div>'
+ +'<div class="val-actions">'
+ +'<button class="btn btn-g" onclick="approveBook(\''+b.id+'\')">✓ Approuver</button>'
+ +'<button class="btn btn-r" onclick="rejectBook(\''+b.id+'\')">✗ Refuser</button>'
+ +'<button class="btn btn-y" onclick="showToast(\'Demande de modification envoyée\',\'\')">Modifier</button>'
+ +'</div>'
+ +'</div>';
+ }).join('');
 }
 
 // RENDER TAGS
 function renderTags(){
-  const tl=document.getElementById('tagsList');
-  const tc=document.getElementById('tagsCount');
-  // Collect tags from books
-  const tagMap={};
-  allBooks.forEach(function(b){if(b.tags&&b.tags.length) b.tags.forEach(function(t){tagMap[t]=(tagMap[t]||0)+1;});});
-  const sorted=Object.entries(tagMap).sort(function(a,b){return b[1]-a[1];});
-  if(tc) tc.textContent=sorted.length+' tag'+(sorted.length>1?'s':'');
-  if(!tl) return;
-  if(sorted.length===0){
-    tl.innerHTML='<div class="empty"><span class="empty-ico">🏷️</span>Aucun tag utilisé pour le moment.</div>';
-    return;
-  }
-  const max=sorted[0]?sorted[0][1]:1;
-  tl.innerHTML=sorted.map(function(t){
-    const pct=Math.round((t[1]/max)*100);
-    return '<div class="tag-mgr-row">'
-      +'<div class="tag-mgr-name">'+t[0]+'</div>'
-      +'<div class="tag-mgr-count">'+t[1]+' livre'+(t[1]>1?'s':'')+'</div>'
-      +'<div class="tag-mgr-bar"><div class="prog-track"><div class="prog-fill" style="width:'+pct+'%"></div></div></div>'
-      +'<div style="display:flex;gap:0.3rem"><button class="btn btn-o" onclick="showToast(\'Modification à venir\',\'✏️\')">Édit.</button><button class="btn btn-r" onclick="showToast(\'Suppression à venir\',\'🗑\')">Suppr.</button></div>'
-      +'</div>';
-  }).join('');
+ const tl=document.getElementById('tagsList');
+ const tc=document.getElementById('tagsCount');
+ // Collect tags from books
+ const tagMap={};
+ allBooks.forEach(function(b){if(b.tags&&b.tags.length) b.tags.forEach(function(t){tagMap[t]=(tagMap[t]||0)+1;});});
+ const sorted=Object.entries(tagMap).sort(function(a,b){return b[1]-a[1];});
+ if(tc) tc.textContent=sorted.length+' tag'+(sorted.length>1?'s':'');
+ if(!tl) return;
+ if(sorted.length===0){
+ tl.innerHTML='<div class="empty"><span class="empty-ico"></span>Aucun tag utilisé pour le moment.</div>';
+ return;
+ }
+ const max=sorted[0]?sorted[0][1]:1;
+ tl.innerHTML=sorted.map(function(t){
+ const pct=Math.round((t[1]/max)*100);
+ return '<div class="tag-mgr-row">'
+ +'<div class="tag-mgr-name">'+t[0]+'</div>'
+ +'<div class="tag-mgr-count">'+t[1]+' livre'+(t[1]>1?'s':'')+'</div>'
+ +'<div class="tag-mgr-bar"><div class="prog-track"><div class="prog-fill" style="width:'+pct+'%"></div></div></div>'
+ +'<div style="display:flex;gap:0.3rem"><button class="btn btn-o" onclick="showToast(\'Modification à venir\',\'\')">Édit.</button><button class="btn btn-r" onclick="showToast(\'Suppression à venir\',\'\')">Suppr.</button></div>'
+ +'</div>';
+ }).join('');
 }
 
 window.openCreateTag=function(){
-  document.getElementById('newTagName').focus();
-  showToast('Utilisez le formulaire ci-dessous','💡');
+ document.getElementById('newTagName').focus();
+ showToast('Utilisez le formulaire ci-dessous','');
 };
 window.createTag=function(){
-  const name=document.getElementById('newTagName').value.trim();
-  if(!name){showToast('Entrez un nom de tag','⚠️');return;}
-  showToast('Tag "'+name+'" créé !','✅');
-  document.getElementById('newTagName').value='';
+ const name=document.getElementById('newTagName').value.trim();
+ if(!name){showToast('Entrez un nom de tag','');return;}
+ showToast('Tag "'+name+'" créé !','✓');
+ document.getElementById('newTagName').value='';
 };
 
 // ACTIONS
 window.toggleSuspend=async function(userId,suspend){
-  const token=localStorage.getItem('accessToken');
-  const action=suspend?'Suspendre':'Réactiver';
-  openModal(action+' cet utilisateur ?',suspend?'L\'utilisateur ne pourra plus se connecter.':'L\'utilisateur pourra se reconnecter.',null,action,suspend?'danger':null,async function(){
-    try{
-      await fetch(API+'/admin/suspend-user',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-        body:JSON.stringify({userId,suspend})
-      });
-      const u=allUsers.find(function(u){return u.id===userId;});
-      if(u) u.isSuspended=suspend;
-      renderUsers(allUsers);
-      showToast('Utilisateur '+(suspend?'suspendu':'réactivé')+' !',suspend?'⛔':'✅');
-    }catch(e){showToast('Erreur','❌');}
-  });
+ const token=localStorage.getItem('accessToken');
+ const action=suspend?'Suspendre':'Réactiver';
+ openModal(action+' cet utilisateur ?',suspend?'L\'utilisateur ne pourra plus se connecter.':'L\'utilisateur pourra se reconnecter.',null,action,suspend?'danger':null,async function(){
+ try{
+ await fetch(API+'/admin/suspend-user',{
+ method:'POST',
+ headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+ body:JSON.stringify({userId,suspend})
+ });
+ const u=allUsers.find(function(u){return u.id===userId;});
+ if(u) u.isSuspended=suspend;
+ renderUsers(allUsers);
+ showToast('Utilisateur '+(suspend?'suspendu':'réactivé')+' !',suspend?'':'✓');
+ }catch(e){showToast('Erreur','✗');}
+ });
 };
 
 window.verifyAuthor=async function(userId){
-  const token=localStorage.getItem('accessToken');
-  openModal('Promouvoir en auteur ?','Le compte passera de Lecteur à Auteur vérifié.',null,'Promouvoir',null,async function(){
-    try{
-      await fetch(API+'/admin/verify-author',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-        body:JSON.stringify({userId})
-      });
-      const u=allUsers.find(function(u){return u.id===userId;});
-      if(u) u.role='AUTHOR';
-      renderUsers(allUsers);
-      showToast('Auteur vérifié !','✍️');
-    }catch(e){showToast('Erreur','❌');}
-  });
+ const token=localStorage.getItem('accessToken');
+ openModal('Promouvoir en auteur ?','Le compte passera de Lecteur à Auteur vérifié.',null,'Promouvoir',null,async function(){
+ try{
+ await fetch(API+'/admin/verify-author',{
+ method:'POST',
+ headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+ body:JSON.stringify({userId})
+ });
+ const u=allUsers.find(function(u){return u.id===userId;});
+ if(u) u.role='AUTHOR';
+ renderUsers(allUsers);
+ showToast('Auteur vérifié !','');
+ }catch(e){showToast('Erreur','✗');}
+ });
 };
 
 window.approveBook=function(id){
-  openModal('Approuver ce livre ?','Il sera visible dans le catalogue public.',null,'Approuver',null,function(){
-    allBooks=allBooks.map(function(b){return b.id===id?Object.assign({},b,{status:'PUBLISHED'}):b;});
-    renderValidation();
-    updateBooksUI();
-    showToast('Livre approuvé et publié !','✅');
-  });
+ openModal('Approuver ce livre ?','Il sera visible dans le catalogue public.',null,'Approuver',null,function(){
+ allBooks=allBooks.map(function(b){return b.id===id?Object.assign({},b,{status:'PUBLISHED'}):b;});
+ renderValidation();
+ updateBooksUI();
+ showToast('Livre approuvé et publié !','✓');
+ });
 };
 window.rejectBook=function(id){
-  openModal('Refuser ce livre ?','L\'auteur sera notifié du refus.',null,'Refuser','danger',function(){
-    allBooks=allBooks.filter(function(b){return b.id!==id;});
-    renderValidation();
-    updateBooksUI();
-    showToast('Livre refusé','❌');
-  });
+ openModal('Refuser ce livre ?','L\'auteur sera notifié du refus.',null,'Refuser','danger',function(){
+ allBooks=allBooks.filter(function(b){return b.id!==id;});
+ renderValidation();
+ updateBooksUI();
+ showToast('Livre refusé','✗');
+ });
 };
 window.confirmDeleteBook=function(id){
-  openModal('Supprimer ce livre ?','Cette action est irréversible.',null,'Supprimer','danger',function(){
-    allBooks=allBooks.filter(function(b){return b.id!==id;});
-    renderBooks(allBooks);
-    showToast('Livre supprimé','🗑');
-  });
+ openModal('Supprimer ce livre ?','Cette action est irréversible.',null,'Supprimer','danger',function(){
+ allBooks=allBooks.filter(function(b){return b.id!==id;});
+ renderBooks(allBooks);
+ showToast('Livre supprimé','');
+ });
 };
 
 // Filters
 window.filterBooks=function(status,btn){
-  document.querySelectorAll('.fbar .fc').forEach(function(c){c.classList.remove('active');});
-  btn.classList.add('active');
-  renderBooks(status==='all'?allBooks:allBooks.filter(function(b){return b.status===status;}));
+ document.querySelectorAll('.fbar .fc').forEach(function(c){c.classList.remove('active');});
+ btn.classList.add('active');
+ renderBooks(status==='all'?allBooks:allBooks.filter(function(b){return b.status===status;}));
 };
 window.filterUsers=function(role,btn){
-  document.querySelectorAll('.fbar .fc').forEach(function(c){c.classList.remove('active');});
-  btn.classList.add('active');
-  const filtered=role==='all'?allUsers:role==='suspended'?allUsers.filter(function(u){return u.isSuspended;}):allUsers.filter(function(u){return u.role===role;});
-  renderUsers(filtered);
+ document.querySelectorAll('.fbar .fc').forEach(function(c){c.classList.remove('active');});
+ btn.classList.add('active');
+ const filtered=role==='all'?allUsers:role==='suspended'?allUsers.filter(function(u){return u.isSuspended;}):allUsers.filter(function(u){return u.role===role;});
+ renderUsers(filtered);
 };
 
 // Search
 window.searchBooks=function(val){renderBooks(val?allBooks.filter(function(b){return b.title.toLowerCase().includes(val.toLowerCase())||(b.author&&b.author.name.toLowerCase().includes(val.toLowerCase()));}):allBooks);};
 window.searchUsers=function(val){renderUsers(val?allUsers.filter(function(u){return u.name.toLowerCase().includes(val.toLowerCase())||u.email.toLowerCase().includes(val.toLowerCase());}):allUsers);};
 window.globalSearch=function(val){
-  if(!val||val.length<2) return;
-  showPage('livres',null);
-  renderBooks(allBooks.filter(function(b){return b.title.toLowerCase().includes(val.toLowerCase())||(b.author&&b.author.name.toLowerCase().includes(val.toLowerCase()));}));
+ if(!val||val.length<2) return;
+ showPage('livres',null);
+ renderBooks(allBooks.filter(function(b){return b.title.toLowerCase().includes(val.toLowerCase())||(b.author&&b.author.name.toLowerCase().includes(val.toLowerCase()));}));
 };
 
 // Déconnexion
 window.deconnecter=function(){
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('refreshToken');
-  window.location.href='/griotte-landing.html';
+ localStorage.removeItem('accessToken');
+ localStorage.removeItem('refreshToken');
+ window.location.href='/griotte-landing.html';
 };
 
 // Init

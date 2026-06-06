@@ -7,24 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
-   Une seule taille, une seule source, partout identique
-   ════════════════════════════════════════════════════ */
+ Une seule taille, une seule source, partout identique
+ ════════════════════════════════════════════════════ */
 .g-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: visible !important;
-  line-height: 0;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0;
+ overflow: visible !important;
+ line-height: 0;
 }
 .g-icon img {
-  display: block;
-  height: 38px;
-  width: 38px;
-  object-fit: contain;
-  border-radius: 11px;
-  overflow: visible !important;
-  /* No filter, no opacity, no shadow — logo brut */
+ display: block;
+ height: 38px;
+ width: 38px;
+ object-fit: contain;
+ border-radius: 11px;
+ overflow: visible !important;
+ /* No filter, no opacity, no shadow — logo brut */
 }
 /* Override ALL size variants → same 38px */
 .g-icon--48 img,
@@ -32,24 +32,24 @@
 .g-icon--36 img,
 .g-icon--32 img,
 .g-icon--28 img {
-  height: 38px !important;
-  width: 38px !important;
-  border-radius: 11px !important;
+ height: 38px !important;
+ width: 38px !important;
+ border-radius: 11px !important;
 }
 /* Footer: slightly smaller on dark bg */
 footer .g-icon img,
 footer .g-icon--48 img,
 footer .g-icon--40 img,
 footer .g-icon--36 img {
-  height: 34px !important;
-  width: 34px !important;
-  border-radius: 10px !important;
+ height: 34px !important;
+ width: 34px !important;
+ border-radius: 10px !important;
 }
 /* Auth modal: centered */
 .auth-logo-wrap .g-icon img {
-  height: 42px !important;
-  width: 42px !important;
-  border-radius: 13px !important;
+ height: 42px !important;
+ width: 42px !important;
+ border-radius: 13px !important;
 }
 /* Force no extra styles */
 [class*="logo"] { overflow: visible !important; }
@@ -80,37 +80,37 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
 .g-icon--32 img{height:32px;width:32px}
 [class*="logo"],[class*="sidebar-logo"],[class*="cat-logo"],[class*="s-logo"],[class*="footer-logo"]{overflow:visible!important}
 @media(max-width:768px){
-  .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
-  .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
+ .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
+ .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
 }
 /* ──────────────────────────────────────────────────────── */
 
 :root{
-  /* Couleurs logo */
-  --or:#FF6B00;
-  --or-dark:#CC5200;
-  --or-light:#FF8C33;
-  --or-glow:rgba(255,107,0,0.12);
-  --or-border:rgba(255,107,0,0.25);
-  /* Fond & surfaces */
-  --bg:#F8F5F1;
-  --bg-card:#FFFFFF;
-  --bg-card2:#FFF8F4;
-  --bg-sidebar:#FFFFFF;
-  /* Texte */
-  --text-main:#1A1410;
-  --text-soft:#4A3F35;
-  --text-muted:#6B5A4E;
-  /* Bordures */
-  --border:rgba(26,20,16,0.09);
-  --border-strong:rgba(26,20,16,0.16);
-  /* Compatibilité ancien code */
-  --noir:#1A1410;
-  --noir-soft:#F8F5F1;
-  --noir-card:#FFFFFF;
-  --blanc:#F8F5F1;
-  --blanc-dim:#6B5A4E;
-  --cendre:#6B5F52;
+ /* Couleurs logo */
+ --or:#FF6B00;
+ --or-dark:#CC5200;
+ --or-light:#FF8C33;
+ --or-glow:rgba(255,107,0,0.12);
+ --or-border:rgba(255,107,0,0.25);
+ /* Fond & surfaces */
+ --bg:#F8F5F1;
+ --bg-card:#FFFFFF;
+ --bg-card2:#FFF8F4;
+ --bg-sidebar:#FFFFFF;
+ /* Texte */
+ --text-main:#1A1410;
+ --text-soft:#4A3F35;
+ --text-muted:#6B5A4E;
+ /* Bordures */
+ --border:rgba(26,20,16,0.09);
+ --border-strong:rgba(26,20,16,0.16);
+ /* Compatibilité ancien code */
+ --noir:#1A1410;
+ --noir-soft:#F8F5F1;
+ --noir-card:#FFFFFF;
+ --blanc:#F8F5F1;
+ --blanc-dim:#6B5A4E;
+ --cendre:#6B5F52;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
@@ -412,17 +412,17 @@ body{background:var(--noir);color:var(--blanc);font-family:'Syne',sans-serif;min
 .toast.show{opacity:1;transform:translateY(0)}
 
 /* ════════════════════════════════════════════════
-   GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
-   Applied across all pages for WCAG AA compliance
-   ════════════════════════════════════════════════ */
+ GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
+ Applied across all pages for WCAG AA compliance
+ ════════════════════════════════════════════════ */
 
 /* 1. Strengthen base variables */
 :root {
-  --text-main:   #1A1410 !important;   /* near-black, high contrast */
-  --text-soft:   #4A3F35 !important;   /* dark brown-grey, readable */
-  --text-muted:  #6B5A4E !important;   /* medium brown, still readable */
-  --blanc-dim:   #6B5A4E !important;
-  --cendre:      #4A3F35 !important;
+ --text-main: #1A1410 !important; /* near-black, high contrast */
+ --text-soft: #4A3F35 !important; /* dark brown-grey, readable */
+ --text-muted: #6B5A4E !important; /* medium brown, still readable */
+ --blanc-dim: #6B5A4E !important;
+ --cendre: #4A3F35 !important;
 }
 
 /* 2. Body & base text */
@@ -445,8 +445,8 @@ h1, h2, h3, h4, h5, h6,
 
 /* 6. Sidebar — enforce dark text on white bg */
 .sidebar, .aside, [class*="sidebar"] {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
 }
 .sidebar *, .aside * { color: #1A1410; }
 .nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
@@ -454,16 +454,16 @@ h1, h2, h3, h4, h5, h6,
 /* 7. Cards — always readable */
 .card, [class*="-card"], .book-card, .testi-card,
 .stat-card, .dash-stat, .concept-visual, .author-dashboard {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.1) !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.1) !important;
 }
 .card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
 
 /* 8. Topbar */
 .topbar, [class*="topbar"], #navbar {
-  background: rgba(248,245,241,0.95) !important;
-  color: #1A1410 !important;
+ background: rgba(248,245,241,0.95) !important;
+ color: #1A1410 !important;
 }
 .topbar *, #navbar * { color: #1A1410; }
 
@@ -472,22 +472,22 @@ h1, h2, h3, h4, h5, h6,
 [class*="btn"][class*="hero"],
 [class*="btn-nav-cta"], .btn-hero-primary,
 .btn-cta-primary, .auth-btn {
-  background: #FF6B00 !important;
-  color: #FFFFFF !important;
-  opacity: 1 !important;
+ background: #FF6B00 !important;
+ color: #FFFFFF !important;
+ opacity: 1 !important;
 }
 [class*="btn"][class*="ghost"],
 [class*="btn"][class*="secondary"],
 .btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.25) !important;
-  opacity: 1 !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.25) !important;
+ opacity: 1 !important;
 }
 
 /* 10. Footer — dark bg with proper white text */
 footer {
-  background: #1A1410 !important;
-  color: rgba(255,255,255,0.75) !important;
+ background: #1A1410 !important;
+ color: rgba(255,255,255,0.75) !important;
 }
 footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
 footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
@@ -504,7 +504,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .hero-stat-value, .stat-value, .dash-stat-val,
 .pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
 .hero-stat-label, .stat-label, .dash-stat-lbl {
-  color: #6B5A4E !important; opacity: 1 !important;
+ color: #6B5A4E !important; opacity: 1 !important;
 }
 
 /* 13. Auth modal */
@@ -515,7 +515,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 /* 14. Section badges & DM Mono labels */
 .section-badge, .hero-badge, .dash-badge,
 [class*="badge"], [class*="-label"], .nav-section {
-  opacity: 1 !important;
+ opacity: 1 !important;
 }
 
 /* 15. Minimum font sizes */
@@ -523,13 +523,13 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .section-badge, .ticker-item, .book-price,
 .testi-role, .auth-sub, [class*="-label"],
 [class*="-lbl"], [class*="badge"] {
-  font-size: max(0.72rem, 11px) !important;
+ font-size: max(0.72rem, 11px) !important;
 }
 
 /* 16. Reader — dark text on white */
 .reader-content, .reader-text, [class*="reader-body"] {
-  color: #1A1410 !important;
-  background: #FFFFFF !important;
+ color: #1A1410 !important;
+ background: #FFFFFF !important;
 }
 
 /* ═══════════════════════════════════════════════ */
@@ -545,413 +545,413 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <!-- MODAL CHAPITRE -->
 <div class="modal-overlay" id="chapterModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeChapterModal()">✕</button>
-    <div class="modal-title">Nouveau chapitre</div>
-    <div class="modal-sub">Ajoutez un chapitre à votre œuvre</div>
-    <div class="form-group"><label class="form-label">Titre du chapitre</label><input id="chTitle" type="text" class="form-input" placeholder="Ex: Chapitre I — Les Racines du Sahel"/></div>
-    <div class="form-group"><label class="form-label">Type d'accès</label>
-      <div class="chapter-type-select">
-        <button class="ctype-btn active" onclick="selectChType('free',this)"><span class="ctype-ico">🆓</span><span class="ctype-btn-label">Gratuit</span></button>
-        <button class="ctype-btn" onclick="selectChType('premium',this)"><span class="ctype-ico">💎</span><span class="ctype-btn-label">Premium</span></button>
-        <button class="ctype-btn" onclick="selectChType('scheduled',this)"><span class="ctype-ico">📅</span><span class="ctype-btn-label">Programmé</span></button>
-      </div>
-    </div>
-    <div class="form-group" id="scheduleGroup" style="display:none"><label class="form-label">Date de publication</label><input id="chSchedule" type="datetime-local" class="form-input"/></div>
-    <div class="form-group"><label class="form-label">Contenu (optionnel)</label><textarea id="chContent" class="form-textarea" rows="6" placeholder="Commencez à écrire ou laissez vide pour rédiger plus tard..."></textarea></div>
-    <div class="modal-actions">
-      <button class="btn-modal-cancel" onclick="closeChapterModal()">Annuler</button>
-      <button class="btn-modal-ok" onclick="saveChapter()">Créer le chapitre →</button>
-    </div>
-  </div>
+ <div class="modal-box">
+ <button class="modal-close" onclick="closeChapterModal()"></button>
+ <div class="modal-title">Nouveau chapitre</div>
+ <div class="modal-sub">Ajoutez un chapitre à votre œuvre</div>
+ <div class="form-group"><label class="form-label">Titre du chapitre</label><input id="chTitle" type="text" class="form-input" placeholder="Ex: Chapitre I — Les Racines du Sahel"/></div>
+ <div class="form-group"><label class="form-label">Type d'accès</label>
+ <div class="chapter-type-select">
+ <button class="ctype-btn active" onclick="selectChType('free',this)"><span class="ctype-ico">🆓</span><span class="ctype-btn-label">Gratuit</span></button>
+ <button class="ctype-btn" onclick="selectChType('premium',this)"><span class="ctype-ico"></span><span class="ctype-btn-label">Premium</span></button>
+ <button class="ctype-btn" onclick="selectChType('scheduled',this)"><span class="ctype-ico"></span><span class="ctype-btn-label">Programmé</span></button>
+ </div>
+ </div>
+ <div class="form-group" id="scheduleGroup" style="display:none"><label class="form-label">Date de publication</label><input id="chSchedule" type="datetime-local" class="form-input"/></div>
+ <div class="form-group"><label class="form-label">Contenu (optionnel)</label><textarea id="chContent" class="form-textarea" rows="6" placeholder="Commencez à écrire ou laissez vide pour rédiger plus tard..."></textarea></div>
+ <div class="modal-actions">
+ <button class="btn-modal-cancel" onclick="closeChapterModal()">Annuler</button>
+ <button class="btn-modal-ok" onclick="saveChapter()">Créer le chapitre →</button>
+ </div>
+ </div>
 </div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo"><brand-logo></brand-logo></div></div>
-    </span>
-    <span class="studio-badge">Studio</span>
-  </div>
-  <div class="sidebar-author">
-    <div class="author-ava" id="authorAva">A</div>
-    <div>
-      <div class="author-name" id="authorName">Chargement...</div>
-      <div class="author-status">● Auteur vérifié</div>
-    </div>
-  </div>
-  <nav class="nav">
-    <div class="nav-section">Mes œuvres</div>
-    <a class="nav-item active" onclick="showPage('oeuvres',this)"><span class="nav-ico">📚</span> Bibliothèque <span class="nav-count" id="navBookCount">0</span></a>
-    <a class="nav-item create" onclick="showPage('create',this)"><span class="nav-ico">✍️</span> Nouvelle œuvre</a>
-    <div class="nav-section">Analyse</div>
-    <a class="nav-item" onclick="showPage('stats',this)"><span class="nav-ico">📊</span> Statistiques</a>
-    <a class="nav-item" onclick="showPage('revenus',this)"><span class="nav-ico">💸</span> Revenus & Retraits</a>
-    <div class="nav-section">Compte</div>
-    <a class="nav-item" onclick="window.location.href='griotte-dashboard.html'"><span class="nav-ico">🏠</span> Dashboard principal</a>
-    <a class="nav-item danger" onclick="deconnecter()"><span class="nav-ico">🚪</span> Déconnexion</a>
-  </nav>
-  <div class="sidebar-stats">
-    <div class="mini-stats">
-      <div class="mini-stat"><div class="mini-stat-val" id="miniBooks">0</div><div class="mini-stat-label">Livres</div></div>
-      <div class="mini-stat"><div class="mini-stat-val" id="miniRevenu">0</div><div class="mini-stat-label">FCFA</div></div>
-    </div>
-  </div>
+ <div class="sidebar-logo"><brand-logo></brand-logo></div></div>
+ </span>
+ <span class="studio-badge">Studio</span>
+ </div>
+ <div class="sidebar-author">
+ <div class="author-ava" id="authorAva">A</div>
+ <div>
+ <div class="author-name" id="authorName">Chargement...</div>
+ <div class="author-status">Auteur vérifié</div>
+ </div>
+ </div>
+ <nav class="nav">
+ <div class="nav-section">Mes œuvres</div>
+ <a class="nav-item active" onclick="showPage('oeuvres',this)"><span class="nav-ico"></span> Bibliothèque <span class="nav-count" id="navBookCount">0</span></a>
+ <a class="nav-item create" onclick="showPage('create',this)"><span class="nav-ico"></span> Nouvelle œuvre</a>
+ <div class="nav-section">Analyse</div>
+ <a class="nav-item" onclick="showPage('stats',this)"><span class="nav-ico"></span> Statistiques</a>
+ <a class="nav-item" onclick="showPage('revenus',this)"><span class="nav-ico"></span> Revenus & Retraits</a>
+ <div class="nav-section">Compte</div>
+ <a class="nav-item" onclick="window.location.href='griotte-dashboard.html'"><span class="nav-ico"></span> Dashboard principal</a>
+ <a class="nav-item danger" onclick="deconnecter()"><span class="nav-ico"></span> Déconnexion</a>
+ </nav>
+ <div class="sidebar-stats">
+ <div class="mini-stats">
+ <div class="mini-stat"><div class="mini-stat-val" id="miniBooks">0</div><div class="mini-stat-label">Livres</div></div>
+ <div class="mini-stat"><div class="mini-stat-val" id="miniRevenu">0</div><div class="mini-stat-label">FCFA</div></div>
+ </div>
+ </div>
 </aside>
 
 <!-- MAIN -->
 <div class="main">
-  <div class="topbar">
-    <div class="topbar-title" id="pageTitle">Mes œuvres</div>
-    <div class="topbar-right">
-      <div class="topbar-date" id="currentDate"></div>
-      <button class="btn-new-book" onclick="showPage('create',null)">+ Nouvelle œuvre</button>
-    </div>
-  </div>
+ <div class="topbar">
+ <div class="topbar-title" id="pageTitle">Mes œuvres</div>
+ <div class="topbar-right">
+ <div class="topbar-date" id="currentDate"></div>
+ <button class="btn-new-book" onclick="showPage('create',null)">+ Nouvelle œuvre</button>
+ </div>
+ </div>
 
-  <!-- PAGE: MES OEUVRES -->
-  <div class="page active" id="page-oeuvres">
-    <div class="oeuvres-header">
-      <div>
-        <div class="page-title">Mes œuvres</div>
-        <div class="page-sub" id="oeuvresSubtitle">Chargement...</div>
-      </div>
-    </div>
-    <div class="oeuvres-grid" id="oeuvresGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.72rem">Chargement...</div>
-    </div>
-  </div>
+ <!-- PAGE: MES OEUVRES -->
+ <div class="page active" id="page-oeuvres">
+ <div class="oeuvres-header">
+ <div>
+ <div class="page-title">Mes œuvres</div>
+ <div class="page-sub" id="oeuvresSubtitle">Chargement...</div>
+ </div>
+ </div>
+ <div class="oeuvres-grid" id="oeuvresGrid">
+ <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.72rem">Chargement...</div>
+ </div>
+ </div>
 
-  <!-- PAGE: CRÉER UNE OEUVRE -->
-  <div class="page" id="page-create">
-    <!-- Steps bar -->
-    <div class="steps-bar" id="stepsBar">
-      <div class="step-item">
-        <div class="step-num active" id="snum1">1</div>
-        <span class="step-label active" id="slabel1">Informations</span>
-      </div>
-      <div class="step-line" id="sline1"></div>
-      <div class="step-item">
-        <div class="step-num pending" id="snum2">2</div>
-        <span class="step-label pending" id="slabel2">Couverture & Tags</span>
-      </div>
-      <div class="step-line" id="sline2"></div>
-      <div class="step-item">
-        <div class="step-num pending" id="snum3">3</div>
-        <span class="step-label pending" id="slabel3">Chapitres</span>
-      </div>
-    </div>
+ <!-- PAGE: CRÉER UNE OEUVRE -->
+ <div class="page" id="page-create">
+ <!-- Steps bar -->
+ <div class="steps-bar" id="stepsBar">
+ <div class="step-item">
+ <div class="step-num active" id="snum1">1</div>
+ <span class="step-label active" id="slabel1">Informations</span>
+ </div>
+ <div class="step-line" id="sline1"></div>
+ <div class="step-item">
+ <div class="step-num pending" id="snum2">2</div>
+ <span class="step-label pending" id="slabel2">Couverture & Tags</span>
+ </div>
+ <div class="step-line" id="sline2"></div>
+ <div class="step-item">
+ <div class="step-num pending" id="snum3">3</div>
+ <span class="step-label pending" id="slabel3">Chapitres</span>
+ </div>
+ </div>
 
-    <!-- STEP 1 -->
-    <div id="step1">
-      <div class="creation-layout">
-        <div>
-          <div class="form-card">
-            <div class="form-card-title">📖 Informations de base</div>
-            <div class="form-group">
-              <label class="form-label">Titre de l'œuvre *</label>
-              <div class="input-wrap">
-                <input id="newTitle" type="text" class="form-input" placeholder="Le titre captivant de votre œuvre" maxlength="100" oninput="updatePreview()"/>
-                <span class="char-count" id="titleCount">0/100</span>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Synopsis *</label>
-              <div class="input-wrap">
-                <textarea id="newSynopsis" class="form-textarea" placeholder="Décrivez votre œuvre en quelques phrases percutantes. C'est votre première impression sur les lecteurs..." maxlength="500" oninput="updatePreview()"></textarea>
-                <span class="char-count" id="synopsisCount">0/500</span>
-              </div>
-            </div>
-            <div class="form-2col">
-              <div class="form-group">
-                <label class="form-label">Genre principal *</label>
-                <select id="newGenre" class="form-select" onchange="updatePreview();updatePotential()">
-                  <option value="">Sélectionner...</option>
-                  <option value="Roman">Roman</option>
-                  <option value="Romance">Romance</option>
-                  <option value="Fantastique">Fantastique</option>
-                  <option value="Thriller">Thriller</option>
-                  <option value="Policier">Policier</option>
-                  <option value="Histoire">Histoire</option>
-                  <option value="Littérature">Littérature africaine</option>
-                  <option value="Jeunesse">Jeunesse</option>
-                  <option value="Poésie">Poésie</option>
-                  <option value="Développement">Développement personnel</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Genre secondaire</label>
-                <select id="newGenre2" class="form-select">
-                  <option value="">Optionnel...</option>
-                  <option value="Drame">Drame</option>
-                  <option value="Aventure">Aventure</option>
-                  <option value="Mystère">Mystère</option>
-                  <option value="Spirituel">Spirituel</option>
-                  <option value="Politique">Politique</option>
-                  <option value="Diaspora">Diaspora</option>
-                  <option value="Campus">Campus</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-2col">
-              <div class="form-group">
-                <label class="form-label">Langue</label>
-                <select id="newLang" class="form-select">
-                  <option value="fr">🇫🇷 Français</option>
-                  <option value="en">🇬🇧 Anglais</option>
-                  <option value="pt">🇵🇹 Portugais</option>
-                  <option value="ar">🇸🇦 Arabe</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Tranche d'âge</label>
-                <select id="newAge" class="form-select">
-                  <option value="all">Tous publics</option>
-                  <option value="teen">Adolescents (13+)</option>
-                  <option value="adult">Adultes (18+)</option>
-                  <option value="child">Enfants (- 12 ans)</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="preview-card">
-          <div class="preview-title">Aperçu · Fiche livre</div>
-          <div class="preview-book">
-            <div class="preview-cover" id="previewCoverStep1">
-              <div class="preview-cover-ph cv-1" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)"></div>
-            </div>
-            <div class="preview-info">
-              <div class="preview-book-title" id="previewTitle">Titre de votre œuvre</div>
-              <div class="preview-book-author" id="previewAuthor">Votre nom</div>
-              <div class="preview-book-genre" id="previewGenre">Genre</div>
-            </div>
-          </div>
-          <div class="preview-synopsis" id="previewSynopsis" style="font-family:'Cormorant Garamond',serif;font-size:0.82rem;color:var(--blanc-dim);line-height:1.5;font-style:italic">Votre synopsis apparaîtra ici...</div>
-          <div class="potential-box">
-            <div class="potential-label">📈 Potentiel estimé</div>
-            <div class="potential-score" id="potScore">—</div>
-            <div class="potential-bar-track"><div class="potential-bar-fill" id="potBar" style="width:0%"></div></div>
-            <div class="potential-items">
-              <div class="pot-item"><span class="pot-key">Popularité du genre</span><span class="pot-val" id="potGenre">—</span></div>
-              <div class="pot-item"><span class="pot-key">Audience potentielle</span><span class="pot-val" id="potAudience">—</span></div>
-              <div class="pot-item"><span class="pot-key">Concurrence</span><span class="pot-val" id="potConcurrence">—</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="step-actions">
-        <button class="btn-prev" onclick="window.location.href='griotte-dashboard.html'">← Retour au dashboard</button>
-        <button class="btn-next" onclick="goToStep2()">Suivant → Couverture & Tags</button>
-      </div>
-    </div>
+ <!-- STEP 1 -->
+ <div id="step1">
+ <div class="creation-layout">
+ <div>
+ <div class="form-card">
+ <div class="form-card-title">Informations de base</div>
+ <div class="form-group">
+ <label class="form-label">Titre de l'œuvre *</label>
+ <div class="input-wrap">
+ <input id="newTitle" type="text" class="form-input" placeholder="Le titre captivant de votre œuvre" maxlength="100" oninput="updatePreview()"/>
+ <span class="char-count" id="titleCount">0/100</span>
+ </div>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Synopsis *</label>
+ <div class="input-wrap">
+ <textarea id="newSynopsis" class="form-textarea" placeholder="Décrivez votre œuvre en quelques phrases percutantes. C'est votre première impression sur les lecteurs..." maxlength="500" oninput="updatePreview()"></textarea>
+ <span class="char-count" id="synopsisCount">0/500</span>
+ </div>
+ </div>
+ <div class="form-2col">
+ <div class="form-group">
+ <label class="form-label">Genre principal *</label>
+ <select id="newGenre" class="form-select" onchange="updatePreview();updatePotential()">
+ <option value="">Sélectionner...</option>
+ <option value="Roman">Roman</option>
+ <option value="Romance">Romance</option>
+ <option value="Fantastique">Fantastique</option>
+ <option value="Thriller">Thriller</option>
+ <option value="Policier">Policier</option>
+ <option value="Histoire">Histoire</option>
+ <option value="Littérature">Littérature africaine</option>
+ <option value="Jeunesse">Jeunesse</option>
+ <option value="Poésie">Poésie</option>
+ <option value="Développement">Développement personnel</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Genre secondaire</label>
+ <select id="newGenre2" class="form-select">
+ <option value="">Optionnel...</option>
+ <option value="Drame">Drame</option>
+ <option value="Aventure">Aventure</option>
+ <option value="Mystère">Mystère</option>
+ <option value="Spirituel">Spirituel</option>
+ <option value="Politique">Politique</option>
+ <option value="Diaspora">Diaspora</option>
+ <option value="Campus">Campus</option>
+ </select>
+ </div>
+ </div>
+ <div class="form-2col">
+ <div class="form-group">
+ <label class="form-label">Langue</label>
+ <select id="newLang" class="form-select">
+ <option value="fr">🇫🇷 Français</option>
+ <option value="en">🇬🇧 Anglais</option>
+ <option value="pt">🇵🇹 Portugais</option>
+ <option value="ar">🇸🇦 Arabe</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Tranche d'âge</label>
+ <select id="newAge" class="form-select">
+ <option value="all">Tous publics</option>
+ <option value="teen">Adolescents (13+)</option>
+ <option value="adult">Adultes (18+)</option>
+ <option value="child">Enfants (- 12 ans)</option>
+ </select>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="preview-card">
+ <div class="preview-title">Aperçu · Fiche livre</div>
+ <div class="preview-book">
+ <div class="preview-cover" id="previewCoverStep1">
+ <div class="preview-cover-ph cv-1" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)"></div>
+ </div>
+ <div class="preview-info">
+ <div class="preview-book-title" id="previewTitle">Titre de votre œuvre</div>
+ <div class="preview-book-author" id="previewAuthor">Votre nom</div>
+ <div class="preview-book-genre" id="previewGenre">Genre</div>
+ </div>
+ </div>
+ <div class="preview-synopsis" id="previewSynopsis" style="font-family:'Cormorant Garamond',serif;font-size:0.82rem;color:var(--blanc-dim);line-height:1.5;font-style:italic">Votre synopsis apparaîtra ici...</div>
+ <div class="potential-box">
+ <div class="potential-label"> Potentiel estimé</div>
+ <div class="potential-score" id="potScore">—</div>
+ <div class="potential-bar-track"><div class="potential-bar-fill" id="potBar" style="width:0%"></div></div>
+ <div class="potential-items">
+ <div class="pot-item"><span class="pot-key">Popularité du genre</span><span class="pot-val" id="potGenre">—</span></div>
+ <div class="pot-item"><span class="pot-key">Audience potentielle</span><span class="pot-val" id="potAudience">—</span></div>
+ <div class="pot-item"><span class="pot-key">Concurrence</span><span class="pot-val" id="potConcurrence">—</span></div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="step-actions">
+ <button class="btn-prev" onclick="window.location.href='griotte-dashboard.html'">← Retour au dashboard</button>
+ <button class="btn-next" onclick="goToStep2()">Suivant → Couverture & Tags</button>
+ </div>
+ </div>
 
-    <!-- STEP 2 -->
-    <div id="step2" style="display:none">
-      <div class="creation-layout">
-        <div>
-          <div class="form-card">
-            <div class="form-card-title">🎨 Couverture du livre</div>
-            <div class="cover-upload-zone" id="coverZone" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
-              <input type="file" id="coverInput" accept="image/jpg,image/jpeg,image/png,image/webp" onchange="onCoverChange(event)"/>
-              <div class="cover-preview" id="coverPreview">
-                <div class="cover-preview-placeholder" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)">
-                  <div class="cover-ico">📖</div>
-                  <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(255,255,255,0.8)">Votre couverture</div>
-                </div>
-              </div>
-              <div class="cover-upload-label">Glissez votre image ici<br/>ou <span>parcourez vos fichiers</span></div>
-              <div class="cover-specs">JPG · PNG · WEBP · Max 5 Mo · Recommandé : 1600×2400px</div>
-            </div>
-            <div style="display:flex;gap:0.5rem;margin-top:0.75rem">
-              <button onclick="document.getElementById('coverInput').click()" style="flex:1;padding:0.6rem;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.2);border-radius:8px;color:var(--or);font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer">📁 Parcourir</button>
-              <button onclick="removeCover()" style="flex:1;padding:0.6rem;background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer">🗑 Supprimer</button>
-            </div>
-          </div>
+ <!-- STEP 2 -->
+ <div id="step2" style="display:none">
+ <div class="creation-layout">
+ <div>
+ <div class="form-card">
+ <div class="form-card-title"> Couverture du livre</div>
+ <div class="cover-upload-zone" id="coverZone" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+ <input type="file" id="coverInput" accept="image/jpg,image/jpeg,image/png,image/webp" onchange="onCoverChange(event)"/>
+ <div class="cover-preview" id="coverPreview">
+ <div class="cover-preview-placeholder" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)">
+ <div class="cover-ico"></div>
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(255,255,255,0.8)">Votre couverture</div>
+ </div>
+ </div>
+ <div class="cover-upload-label">Glissez votre image ici<br/>ou <span>parcourez vos fichiers</span></div>
+ <div class="cover-specs">JPG · PNG · WEBP · Max 5 Mo · Recommandé : 1600×2400px</div>
+ </div>
+ <div style="display:flex;gap:0.5rem;margin-top:0.75rem">
+ <button onclick="document.getElementById('coverInput').click()" style="flex:1;padding:0.6rem;background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.2);border-radius:8px;color:var(--or);font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer"> Parcourir</button>
+ <button onclick="removeCover()" style="flex:1;padding:0.6rem;background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem;cursor:pointer">Supprimer</button>
+ </div>
+ </div>
 
-          <div class="form-card">
-            <div class="form-card-title">🏷️ Tags <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);font-weight:400;margin-left:0.5rem">Max 15 tags</span></div>
-            <div class="tags-area">
-              <div class="tags-chips" id="tagsChips"></div>
-              <div class="tags-input-row">
-                <input type="text" class="tags-input" id="tagInput" placeholder="Ajouter un tag..." onkeydown="onTagKey(event)" oninput="renderTagSuggestions()"/>
-                <button class="tag-add-btn" onclick="addTag()">+ Ajouter</button>
-              </div>
-            </div>
-            <div class="tag-suggestions" id="tagSuggestions"></div>
-            <div class="tag-count" id="tagCount">0 / 15 tags</div>
-          </div>
+ <div class="form-card">
+ <div class="form-card-title"> Tags <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);font-weight:400;margin-left:0.5rem">Max 15 tags</span></div>
+ <div class="tags-area">
+ <div class="tags-chips" id="tagsChips"></div>
+ <div class="tags-input-row">
+ <input type="text" class="tags-input" id="tagInput" placeholder="Ajouter un tag..." onkeydown="onTagKey(event)" oninput="renderTagSuggestions()"/>
+ <button class="tag-add-btn" onclick="addTag()">+ Ajouter</button>
+ </div>
+ </div>
+ <div class="tag-suggestions" id="tagSuggestions"></div>
+ <div class="tag-count" id="tagCount">0 / 15 tags</div>
+ </div>
 
-          <div class="form-card">
-            <div class="form-card-title">🌍 Informations éditoriales</div>
-            <div class="form-2col">
-              <div class="form-group">
-                <label class="form-label">Pays ciblé</label>
-                <select id="newCountry" class="form-select">
-                  <option value="all">Toute l'Afrique</option>
-                  <option value="ml">🇲🇱 Mali</option>
-                  <option value="sn">🇸🇳 Sénégal</option>
-                  <option value="ng">🇳🇬 Nigeria</option>
-                  <option value="ci">🇨🇮 Côte d'Ivoire</option>
-                  <option value="cm">🇨🇲 Cameroun</option>
-                  <option value="gh">🇬🇭 Ghana</option>
-                  <option value="ke">🇰🇪 Kenya</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Nombre de pages estimé</label>
-                <input id="newPages" type="number" class="form-input" placeholder="Ex: 250"/>
-              </div>
-            </div>
-          </div>
-        </div>
+ <div class="form-card">
+ <div class="form-card-title">Informations éditoriales</div>
+ <div class="form-2col">
+ <div class="form-group">
+ <label class="form-label">Pays ciblé</label>
+ <select id="newCountry" class="form-select">
+ <option value="all">Toute l'Afrique</option>
+ <option value="ml">🇲🇱 Mali</option>
+ <option value="sn">🇸🇳 Sénégal</option>
+ <option value="ng">🇳🇬 Nigeria</option>
+ <option value="ci">🇨🇮 Côte d'Ivoire</option>
+ <option value="cm">🇨🇲 Cameroun</option>
+ <option value="gh">🇬🇭 Ghana</option>
+ <option value="ke">🇰🇪 Kenya</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label class="form-label">Nombre de pages estimé</label>
+ <input id="newPages" type="number" class="form-input" placeholder="Ex: 250"/>
+ </div>
+ </div>
+ </div>
+ </div>
 
-        <div class="preview-card">
-          <div class="preview-title">Aperçu · Couverture</div>
-          <div style="width:100%;max-width:180px;margin:0 auto 1rem;aspect-ratio:2/3;border-radius:4px 12px 12px 4px;overflow:hidden;box-shadow:-5px 0 0 rgba(0,0,0,0.3),0 14px 40px rgba(0,0,0,0.4)" id="previewCoverBig">
-            <div style="width:100%;height:100%;background:linear-gradient(160deg,#2d1b0e,#8B4513);display:flex;align-items:center;justify-content:center;font-size:3rem">📖</div>
-          </div>
-          <div style="text-align:center;margin-bottom:1.2rem">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--blanc)" id="previewTitle2">Titre</div>
-            <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)" id="previewAuthor2">Auteur</div>
-          </div>
-          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.6rem">Tags sélectionnés</div>
-          <div class="preview-tags" id="previewTagsList"></div>
-        </div>
-      </div>
-      <div class="step-actions">
-        <button class="btn-prev" onclick="goToStep1()">← Retour</button>
-        <button class="btn-next" onclick="goToStep3()">Suivant → Chapitres</button>
-      </div>
-    </div>
+ <div class="preview-card">
+ <div class="preview-title">Aperçu · Couverture</div>
+ <div style="width:100%;max-width:180px;margin:0 auto 1rem;aspect-ratio:2/3;border-radius:4px 12px 12px 4px;overflow:hidden;box-shadow:-5px 0 0 rgba(0,0,0,0.3),0 14px 40px rgba(0,0,0,0.4)" id="previewCoverBig">
+ <div style="width:100%;height:100%;background:linear-gradient(160deg,#2d1b0e,#8B4513);display:flex;align-items:center;justify-content:center;font-size:3rem"></div>
+ </div>
+ <div style="text-align:center;margin-bottom:1.2rem">
+ <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--blanc)" id="previewTitle2">Titre</div>
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)" id="previewAuthor2">Auteur</div>
+ </div>
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.6rem">Tags sélectionnés</div>
+ <div class="preview-tags" id="previewTagsList"></div>
+ </div>
+ </div>
+ <div class="step-actions">
+ <button class="btn-prev" onclick="goToStep1()">← Retour</button>
+ <button class="btn-next" onclick="goToStep3()">Suivant → Chapitres</button>
+ </div>
+ </div>
 
-    <!-- STEP 3 -->
-    <div id="step3" style="display:none">
-      <div style="max-width:800px">
-        <div class="form-card" style="margin-bottom:1.5rem">
-          <div class="form-card-title">📋 Récapitulatif</div>
-          <div style="display:flex;gap:1.2rem;align-items:center">
-            <div style="width:60px;height:85px;border-radius:3px 8px 8px 3px;flex-shrink:0;overflow:hidden;background:linear-gradient(160deg,#2d1b0e,#8B4513)" id="recap-cover-preview"></div>
-            <div>
-              <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--blanc);margin-bottom:0.2rem" id="recapTitle">—</div>
-              <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.4rem" id="recapGenre">—</div>
-              <div class="preview-tags" id="recapTags"></div>
-            </div>
-          </div>
-        </div>
+ <!-- STEP 3 -->
+ <div id="step3" style="display:none">
+ <div style="max-width:800px">
+ <div class="form-card" style="margin-bottom:1.5rem">
+ <div class="form-card-title">Récapitulatif</div>
+ <div style="display:flex;gap:1.2rem;align-items:center">
+ <div style="width:60px;height:85px;border-radius:3px 8px 8px 3px;flex-shrink:0;overflow:hidden;background:linear-gradient(160deg,#2d1b0e,#8B4513)" id="recap-cover-preview"></div>
+ <div>
+ <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--blanc);margin-bottom:0.2rem" id="recapTitle">—</div>
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.4rem" id="recapGenre">—</div>
+ <div class="preview-tags" id="recapTags"></div>
+ </div>
+ </div>
+ </div>
 
-        <div class="chapitres-toolbar">
-          <div>
-            <div style="font-size:0.88rem;font-weight:700;color:var(--blanc);margin-bottom:0.2rem">Chapitres <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)" id="chapCount">(0)</span></div>
-            <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Ajoutez autant de chapitres que vous souhaitez</div>
-          </div>
-          <button class="btn-add-chapter" onclick="openChapterModal()">+ Nouveau chapitre</button>
-        </div>
+ <div class="chapitres-toolbar">
+ <div>
+ <div style="font-size:0.88rem;font-weight:700;color:var(--blanc);margin-bottom:0.2rem">Chapitres <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)" id="chapCount">(0)</span></div>
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Ajoutez autant de chapitres que vous souhaitez</div>
+ </div>
+ <button class="btn-add-chapter" onclick="openChapterModal()">+ Nouveau chapitre</button>
+ </div>
 
-        <div class="chapters-list" id="chaptersList">
-          <div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">
-            Aucun chapitre · Ajoutez votre premier chapitre ci-dessus
-          </div>
-        </div>
+ <div class="chapters-list" id="chaptersList">
+ <div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:'DM Mono',monospace;font-size:0.75rem">
+ Aucun chapitre · Ajoutez votre premier chapitre ci-dessus
+ </div>
+ </div>
 
-        <div class="step-actions">
-          <button class="btn-prev" onclick="goToStep2()">← Retour</button>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
-            <button class="btn-next" onclick="publierOeuvre()">🚀 Publier l'œuvre</button>
-            <div class="pub-msg" id="pubMsg"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="step-actions">
+ <button class="btn-prev" onclick="goToStep2()">← Retour</button>
+ <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem">
+ <button class="btn-next" onclick="publierOeuvre()"> Publier l'œuvre</button>
+ <div class="pub-msg" id="pubMsg"></div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
 
-  <!-- PAGE: STATS -->
-  <div class="page" id="page-stats">
-    <div class="stats-kpis" id="statsKpis">
-      <div class="skpi"><span class="skpi-icon">📚</span><div class="skpi-label">Livres publiés</div><div class="skpi-value" id="skpi1">0</div><span class="skpi-trend trend-neutral">total</span></div>
-      <div class="skpi"><span class="skpi-icon">👥</span><div class="skpi-label">Lecteurs actifs</div><div class="skpi-value">0</div><span class="skpi-trend trend-up">↑ ce mois</span></div>
-      <div class="skpi"><span class="skpi-icon">📖</span><div class="skpi-label">Pages lues</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">total</span></div>
-      <div class="skpi"><span class="skpi-icon">💰</span><div class="skpi-label">Revenus totaux</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-card-title">Évolution des revenus</div>
-        <div class="stat-card-sub">6 derniers mois · FCFA</div>
-        <div class="chart-wrap">
-          <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:35%" data-val="8 200 FCFA"></div><span class="chart-lbl">Déc</span></div>
-          <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:48%" data-val="11 400 FCFA"></div><span class="chart-lbl">Jan</span></div>
-          <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:42%" data-val="9 900 FCFA"></div><span class="chart-lbl">Fév</span></div>
-          <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:60%" data-val="14 200 FCFA"></div><span class="chart-lbl">Mar</span></div>
-          <div class="chart-bar-col"><div class="chart-bar-fill bar-gold" style="height:78%" data-val="18 340 FCFA"></div><span class="chart-lbl">Avr</span></div>
-          <div class="chart-bar-col"><div class="chart-bar-fill bar-gold" style="height:98%" data-val="23 100 FCFA"></div><span class="chart-lbl">Mai</span></div>
-        </div>
-        <div class="perf-list" id="perfList">
-          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Chargement des performances...</div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:1.5rem">
-        <div class="stat-card">
-          <div class="stat-card-title">Lecteurs par pays</div>
-          <div class="stat-card-sub">Répartition géographique</div>
-          <div class="geo-list">
-            <div class="geo-row"><span class="geo-flag">🇲🇱</span><div class="geo-info"><div class="geo-name">Mali <span class="geo-pct">42%</span></div><div class="geo-track"><div class="geo-fill" style="width:82%"></div></div></div></div>
-            <div class="geo-row"><span class="geo-flag">🇸🇳</span><div class="geo-info"><div class="geo-name">Sénégal <span class="geo-pct">24%</span></div><div class="geo-track"><div class="geo-fill" style="width:47%"></div></div></div></div>
-            <div class="geo-row"><span class="geo-flag">🇨🇮</span><div class="geo-info"><div class="geo-name">Côte d'Ivoire <span class="geo-pct">16%</span></div><div class="geo-track"><div class="geo-fill" style="width:31%"></div></div></div></div>
-            <div class="geo-row"><span class="geo-flag">🇫🇷</span><div class="geo-info"><div class="geo-name">Diaspora France <span class="geo-pct">10%</span></div><div class="geo-track"><div class="geo-fill" style="width:20%"></div></div></div></div>
-            <div class="geo-row"><span class="geo-flag">🌍</span><div class="geo-info"><div class="geo-name">Autres <span class="geo-pct">8%</span></div><div class="geo-track"><div class="geo-fill" style="width:16%"></div></div></div></div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-title">Tags performants</div>
-          <div class="stat-card-sub">Lecteurs par tag</div>
-          <div id="tagStats" style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Publiez un livre avec des tags pour voir les stats.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <!-- PAGE: STATS -->
+ <div class="page" id="page-stats">
+ <div class="stats-kpis" id="statsKpis">
+ <div class="skpi"><span class="skpi-icon"></span><div class="skpi-label">Livres publiés</div><div class="skpi-value" id="skpi1">0</div><span class="skpi-trend trend-neutral">total</span></div>
+ <div class="skpi"><span class="skpi-icon"></span><div class="skpi-label">Lecteurs actifs</div><div class="skpi-value">0</div><span class="skpi-trend trend-up">↑ ce mois</span></div>
+ <div class="skpi"><span class="skpi-icon"></span><div class="skpi-label">Pages lues</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">total</span></div>
+ <div class="skpi"><span class="skpi-icon"></span><div class="skpi-label">Revenus totaux</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
+ </div>
+ <div class="stats-grid">
+ <div class="stat-card">
+ <div class="stat-card-title">Évolution des revenus</div>
+ <div class="stat-card-sub">6 derniers mois · FCFA</div>
+ <div class="chart-wrap">
+ <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:35%" data-val="8 200 FCFA"></div><span class="chart-lbl">Déc</span></div>
+ <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:48%" data-val="11 400 FCFA"></div><span class="chart-lbl">Jan</span></div>
+ <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:42%" data-val="9 900 FCFA"></div><span class="chart-lbl">Fév</span></div>
+ <div class="chart-bar-col"><div class="chart-bar-fill bar-dim" style="height:60%" data-val="14 200 FCFA"></div><span class="chart-lbl">Mar</span></div>
+ <div class="chart-bar-col"><div class="chart-bar-fill bar-gold" style="height:78%" data-val="18 340 FCFA"></div><span class="chart-lbl">Avr</span></div>
+ <div class="chart-bar-col"><div class="chart-bar-fill bar-gold" style="height:98%" data-val="23 100 FCFA"></div><span class="chart-lbl">Mai</span></div>
+ </div>
+ <div class="perf-list" id="perfList">
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Chargement des performances...</div>
+ </div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:1.5rem">
+ <div class="stat-card">
+ <div class="stat-card-title">Lecteurs par pays</div>
+ <div class="stat-card-sub">Répartition géographique</div>
+ <div class="geo-list">
+ <div class="geo-row"><span class="geo-flag">🇲🇱</span><div class="geo-info"><div class="geo-name">Mali <span class="geo-pct">42%</span></div><div class="geo-track"><div class="geo-fill" style="width:82%"></div></div></div></div>
+ <div class="geo-row"><span class="geo-flag">🇸🇳</span><div class="geo-info"><div class="geo-name">Sénégal <span class="geo-pct">24%</span></div><div class="geo-track"><div class="geo-fill" style="width:47%"></div></div></div></div>
+ <div class="geo-row"><span class="geo-flag">🇨🇮</span><div class="geo-info"><div class="geo-name">Côte d'Ivoire <span class="geo-pct">16%</span></div><div class="geo-track"><div class="geo-fill" style="width:31%"></div></div></div></div>
+ <div class="geo-row"><span class="geo-flag">🇫🇷</span><div class="geo-info"><div class="geo-name">Diaspora France <span class="geo-pct">10%</span></div><div class="geo-track"><div class="geo-fill" style="width:20%"></div></div></div></div>
+ <div class="geo-row"><span class="geo-flag"></span><div class="geo-info"><div class="geo-name">Autres <span class="geo-pct">8%</span></div><div class="geo-track"><div class="geo-fill" style="width:16%"></div></div></div></div>
+ </div>
+ </div>
+ <div class="stat-card">
+ <div class="stat-card-title">Tags performants</div>
+ <div class="stat-card-sub">Lecteurs par tag</div>
+ <div id="tagStats" style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)">Publiez un livre avec des tags pour voir les stats.</div>
+ </div>
+ </div>
+ </div>
+ </div>
 
-  <!-- PAGE: REVENUS -->
-  <div class="page" id="page-revenus">
-    <div class="stats-kpis">
-      <div class="skpi"><span class="skpi-icon">💰</span><div class="skpi-label">Revenus du mois</div><div class="skpi-value">0</div><span class="skpi-trend trend-up">FCFA</span></div>
-      <div class="skpi"><span class="skpi-icon">💳</span><div class="skpi-label">Solde disponible</div><div class="skpi-value" id="revSolde">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
-      <div class="skpi"><span class="skpi-icon">⏳</span><div class="skpi-label">En attente</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
-      <div class="skpi"><span class="skpi-icon">✅</span><div class="skpi-label">Total retiré</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
-    </div>
-    <div class="revenus-layout">
-      <div>
-        <div class="stat-card" style="margin-bottom:1.5rem">
-          <div class="stat-card-title">Historique des paiements</div>
-          <div class="stat-card-sub">Revenus générés par page lue</div>
-          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);padding:2rem;text-align:center">Aucun paiement enregistré pour le moment.</div>
-        </div>
-      </div>
-      <div class="retrait-card">
-        <div class="retrait-solde-label">Solde disponible</div>
-        <div class="retrait-solde-amount" id="retraitSolde">0 FCFA</div>
-        <div class="retrait-solde-sub">
-          <span>En attente : <span class="retrait-pending">0 FCFA</span></span>
-          <span>Dernier retrait : —</span>
-        </div>
-        <div class="retrait-form">
-          <div class="form-group" style="margin:0"><label class="form-label">Montant (FCFA)</label><input type="number" id="retraitAmount" class="form-input" placeholder="Ex: 5 000" min="500"/></div>
-          <div class="form-group" style="margin:0"><label class="form-label">Méthode</label>
-            <select id="retraitMethod" class="form-select">
-              <option>📱 Mobile Money — Flooz</option>
-              <option>📱 MTN MoMo</option>
-              <option>🟠 Orange Money</option>
-              <option>🏦 Virement bancaire</option>
-            </select>
-          </div>
-          <div class="form-group" style="margin:0"><label class="form-label">Numéro / IBAN</label><input type="text" id="retraitNum" class="form-input" placeholder="Votre numéro Mobile Money"/></div>
-        </div>
-        <button class="retrait-btn" onclick="demandeRetrait()">Demander un retrait →</button>
-        <div class="retrait-history">
-          <div class="rh-title">Historique des retraits</div>
-          <div class="rh-empty">Aucun retrait effectué.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <!-- PAGE: REVENUS -->
+ <div class="page" id="page-revenus">
+ <div class="stats-kpis">
+ <div class="skpi"><span class="skpi-icon"></span><div class="skpi-label">Revenus du mois</div><div class="skpi-value">0</div><span class="skpi-trend trend-up">FCFA</span></div>
+ <div class="skpi"><span class="skpi-icon"></span><div class="skpi-label">Solde disponible</div><div class="skpi-value" id="revSolde">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
+ <div class="skpi"><span class="skpi-icon">⏳</span><div class="skpi-label">En attente</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
+ <div class="skpi"><span class="skpi-icon">✓</span><div class="skpi-label">Total retiré</div><div class="skpi-value">0</div><span class="skpi-trend trend-neutral">FCFA</span></div>
+ </div>
+ <div class="revenus-layout">
+ <div>
+ <div class="stat-card" style="margin-bottom:1.5rem">
+ <div class="stat-card-title">Historique des paiements</div>
+ <div class="stat-card-sub">Revenus générés par page lue</div>
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);padding:2rem;text-align:center">Aucun paiement enregistré pour le moment.</div>
+ </div>
+ </div>
+ <div class="retrait-card">
+ <div class="retrait-solde-label">Solde disponible</div>
+ <div class="retrait-solde-amount" id="retraitSolde">0 FCFA</div>
+ <div class="retrait-solde-sub">
+ <span>En attente : <span class="retrait-pending">0 FCFA</span></span>
+ <span>Dernier retrait : —</span>
+ </div>
+ <div class="retrait-form">
+ <div class="form-group" style="margin:0"><label class="form-label">Montant (FCFA)</label><input type="number" id="retraitAmount" class="form-input" placeholder="Ex: 5 000" min="500"/></div>
+ <div class="form-group" style="margin:0"><label class="form-label">Méthode</label>
+ <select id="retraitMethod" class="form-select">
+ <option> Mobile Money — Flooz</option>
+ <option> MTN MoMo</option>
+ <option> Orange Money</option>
+ <option> Virement bancaire</option>
+ </select>
+ </div>
+ <div class="form-group" style="margin:0"><label class="form-label">Numéro / IBAN</label><input type="text" id="retraitNum" class="form-input" placeholder="Votre numéro Mobile Money"/></div>
+ </div>
+ <button class="retrait-btn" onclick="demandeRetrait()">Demander un retrait →</button>
+ <div class="retrait-history">
+ <div class="rh-title">Historique des retraits</div>
+ <div class="rh-empty">Aucun retrait effectué.</div>
+ </div>
+ </div>
+ </div>
+ </div>
 
 </div>
 
@@ -976,350 +976,350 @@ if(de) de.textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:
 
 // Toast
 window.showToast=function(msg,ico){
-  const t=document.getElementById('toast');
-  document.getElementById('toastIco').textContent=ico||'✅';
-  document.getElementById('toastMsg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},2800);
+ const t=document.getElementById('toast');
+ document.getElementById('toastIco').textContent=ico||'✓';
+ document.getElementById('toastMsg').textContent=msg;
+ t.classList.add('show');
+ setTimeout(function(){t.classList.remove('show');},2800);
 };
 
 // Nav
 window.showPage=function(page,el){
-  document.querySelectorAll('.page').forEach(function(p){p.style.display='none';p.classList.remove('active');});
-  const t=document.getElementById('page-'+page);
-  if(t){t.style.display='block';t.classList.add('active');}
-  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
-  if(el) el.classList.add('active');
-  const titles={oeuvres:'Mes œuvres',create:'Nouvelle œuvre',stats:'Statistiques',revenus:'Revenus & Retraits'};
-  const te=document.getElementById('pageTitle');
-  if(te) te.textContent=titles[page]||page;
-  if(page==='oeuvres') loadOeuvres();
-  if(page==='stats') loadStats();
-  if(page==='revenus') loadSolde();
+ document.querySelectorAll('.page').forEach(function(p){p.style.display='none';p.classList.remove('active');});
+ const t=document.getElementById('page-'+page);
+ if(t){t.style.display='block';t.classList.add('active');}
+ document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+ if(el) el.classList.add('active');
+ const titles={oeuvres:'Mes œuvres',create:'Nouvelle œuvre',stats:'Statistiques',revenus:'Revenus & Retraits'};
+ const te=document.getElementById('pageTitle');
+ if(te) te.textContent=titles[page]||page;
+ if(page==='oeuvres') loadOeuvres();
+ if(page==='stats') loadStats();
+ if(page==='revenus') loadSolde();
 };
 
 // Load user
 async function loadUser(){
-  const token=localStorage.getItem('accessToken');
-  if(!token){window.location.href='/griotte-landing.html';return;}
-  try{
-    const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
-    const d=await res.json();
-    if(!d.name){window.location.href='/griotte-landing.html';return;}
-    userName=d.name;
-    userBalance=d.balance||0;
-    const aa=document.getElementById('authorAva');
-    if(aa) aa.textContent=userName.charAt(0).toUpperCase();
-    const an=document.getElementById('authorName');
-    if(an) an.textContent=userName;
-    const pa=document.getElementById('previewAuthor');
-    if(pa) pa.textContent=userName;
-    const pa2=document.getElementById('previewAuthor2');
-    if(pa2) pa2.textContent=userName;
-    loadOeuvres();
-  }catch(e){window.location.href='/griotte-landing.html';}
+ const token=localStorage.getItem('accessToken');
+ if(!token){window.location.href='/griotte-landing.html';return;}
+ try{
+ const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
+ const d=await res.json();
+ if(!d.name){window.location.href='/griotte-landing.html';return;}
+ userName=d.name;
+ userBalance=d.balance||0;
+ const aa=document.getElementById('authorAva');
+ if(aa) aa.textContent=userName.charAt(0).toUpperCase();
+ const an=document.getElementById('authorName');
+ if(an) an.textContent=userName;
+ const pa=document.getElementById('previewAuthor');
+ if(pa) pa.textContent=userName;
+ const pa2=document.getElementById('previewAuthor2');
+ if(pa2) pa2.textContent=userName;
+ loadOeuvres();
+ }catch(e){window.location.href='/griotte-landing.html';}
 }
 
 // Load oeuvres
 async function loadOeuvres(){
-  const token=localStorage.getItem('accessToken');
-  if(!token) return;
-  const grid=document.getElementById('oeuvresGrid');
-  try{
-    const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
-    const books=await res.json();
-    const nb=document.getElementById('navBookCount');
-    const mb=document.getElementById('miniBooks');
-    if(nb) nb.textContent=books?books.length:0;
-    if(mb) mb.textContent=books?books.length:0;
-    const sub=document.getElementById('oeuvresSubtitle');
-    if(sub) sub.textContent=(books&&books.length>0)?books.length+' œuvre'+(books.length>1?'s publiées':' publiée'):'Aucune œuvre publiée';
-    if(!books||books.length===0){
-      grid.innerHTML='<div style="grid-column:1/-1"><div class="empty-studio"><div class="empty-ico">✍️</div><div class="empty-title">Votre bibliothèque est vide</div><div class="empty-sub">Vous n\'avez pas encore publié d\'œuvre sur GRIOTTE.<br/>Commencez dès maintenant et atteignez 48 000+ lecteurs africains.</div><button onclick="showPage(\'create\',null)" class="btn-next">✍️ Créer ma première œuvre</button></div></div>';
-      return;
-    }
-    const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
-    const gradients=['linear-gradient(160deg,#2d1b0e,#8B4513)','linear-gradient(160deg,#0a1628,#2e5f8f)','linear-gradient(160deg,#1a2a0a,#5f8f2e)','linear-gradient(160deg,#280a0a,#8f2e2e)','linear-gradient(160deg,#0a1a28,#0e5a8f)','linear-gradient(160deg,#1a0a28,#5a1e8f)'];
-    grid.innerHTML=books.map(function(b,i){
-      const tags=b.tags||[];
-      const tagsHtml=tags.slice(0,3).map(function(t){return '<span class="oeuvre-tag">'+t+'</span>';}).join('');
-      return '<div class="oeuvre-card">'
-        +'<div class="oeuvre-card-top">'
-        +'<div class="oeuvre-cover" style="background:'+gradients[i%6]+'">'
-        +(b.coverImage?'<img src="'+b.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>':'<div class="oeuvre-cover-placeholder">📖</div>')
-        +'</div>'
-        +'<div class="oeuvre-meta">'
-        +'<div class="oeuvre-title">'+b.title+'</div>'
-        +'<div class="oeuvre-genre">'+b.genre+' · '+b.totalPages+' pages</div>'
-        +'<div class="oeuvre-tags">'+tagsHtml+'</div>'
-        +'<span class="oeuvre-status status-published">● Publié</span>'
-        +'</div></div>'
-        +'<div class="oeuvre-card-stats">'
-        +'<div class="oc-stat"><div class="oc-val">0</div><div class="oc-label">Lecteurs</div></div>'
-        +'<div class="oc-stat"><div class="oc-val">0</div><div class="oc-label">Pages lues</div></div>'
-        +'<div class="oc-stat"><div class="oc-val">0 FCFA</div><div class="oc-label">Revenus</div></div>'
-        +'</div>'
-        +'<div class="oeuvre-card-actions">'
-        +'<button class="btn-action" onclick="loadBookForEdit(\''+b.id+'\')">✏️ Modifier</button>'
-        +'<button class="btn-action primary" onclick="window.location.href=\'griotte-reader.html\'">▶ Voir</button>'
-        +'</div>'
-        +'</div>';
-    }).join('');
-  }catch(e){
-    if(grid) grid.innerHTML='<div style="grid-column:1/-1"><div class="empty-studio"><div class="empty-ico">⚠️</div><div class="empty-title">Erreur de chargement</div><div class="empty-sub">Impossible de charger vos œuvres. Vérifiez votre connexion.</div></div></div>';
-  }
+ const token=localStorage.getItem('accessToken');
+ if(!token) return;
+ const grid=document.getElementById('oeuvresGrid');
+ try{
+ const res=await fetch(API+'/my-books',{headers:{'Authorization':'Bearer '+token}});
+ const books=await res.json();
+ const nb=document.getElementById('navBookCount');
+ const mb=document.getElementById('miniBooks');
+ if(nb) nb.textContent=books?books.length:0;
+ if(mb) mb.textContent=books?books.length:0;
+ const sub=document.getElementById('oeuvresSubtitle');
+ if(sub) sub.textContent=(books&&books.length>0)?books.length+' œuvre'+(books.length>1?'s publiées':' publiée'):'Aucune œuvre publiée';
+ if(!books||books.length===0){
+ grid.innerHTML='<div style="grid-column:1/-1"><div class="empty-studio"><div class="empty-ico"></div><div class="empty-title">Votre bibliothèque est vide</div><div class="empty-sub">Vous n\'avez pas encore publié d\'œuvre sur GRIOTTE.<br/>Commencez dès maintenant et atteignez 48 000+ lecteurs africains.</div><button onclick="showPage(\'create\',null)" class="btn-next">Créer ma première œuvre</button></div></div>';
+ return;
+ }
+ const covers=['cv-1','cv-2','cv-3','cv-4','cv-5','cv-6'];
+ const gradients=['linear-gradient(160deg,#2d1b0e,#8B4513)','linear-gradient(160deg,#0a1628,#2e5f8f)','linear-gradient(160deg,#1a2a0a,#5f8f2e)','linear-gradient(160deg,#280a0a,#8f2e2e)','linear-gradient(160deg,#0a1a28,#0e5a8f)','linear-gradient(160deg,#1a0a28,#5a1e8f)'];
+ grid.innerHTML=books.map(function(b,i){
+ const tags=b.tags||[];
+ const tagsHtml=tags.slice(0,3).map(function(t){return '<span class="oeuvre-tag">'+t+'</span>';}).join('');
+ return '<div class="oeuvre-card">'
+ +'<div class="oeuvre-card-top">'
+ +'<div class="oeuvre-cover" style="background:'+gradients[i%6]+'">'
+ +(b.coverImage?'<img src="'+b.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>':'<div class="oeuvre-cover-placeholder"></div>')
+ +'</div>'
+ +'<div class="oeuvre-meta">'
+ +'<div class="oeuvre-title">'+b.title+'</div>'
+ +'<div class="oeuvre-genre">'+b.genre+' · '+b.totalPages+' pages</div>'
+ +'<div class="oeuvre-tags">'+tagsHtml+'</div>'
+ +'<span class="oeuvre-status status-published">Publié</span>'
+ +'</div></div>'
+ +'<div class="oeuvre-card-stats">'
+ +'<div class="oc-stat"><div class="oc-val">0</div><div class="oc-label">Lecteurs</div></div>'
+ +'<div class="oc-stat"><div class="oc-val">0</div><div class="oc-label">Pages lues</div></div>'
+ +'<div class="oc-stat"><div class="oc-val">0 FCFA</div><div class="oc-label">Revenus</div></div>'
+ +'</div>'
+ +'<div class="oeuvre-card-actions">'
+ +'<button class="btn-action" onclick="loadBookForEdit(\''+b.id+'\')"> Modifier</button>'
+ +'<button class="btn-action primary" onclick="window.location.href=\'griotte-reader.html\'">Voir</button>'
+ +'</div>'
+ +'</div>';
+ }).join('');
+ }catch(e){
+ if(grid) grid.innerHTML='<div style="grid-column:1/-1"><div class="empty-studio"><div class="empty-ico"></div><div class="empty-title">Erreur de chargement</div><div class="empty-sub">Impossible de charger vos œuvres. Vérifiez votre connexion.</div></div></div>';
+ }
 }
 
 // Stats
 function loadStats(){
-  const token=localStorage.getItem('accessToken');
-  if(!token) return;
-  fetch(API+'/my-stats',{headers:{'Authorization':'Bearer '+token}})
-    .then(function(r){return r.json();})
-    .then(function(d){
-      const s1=document.getElementById('skpi1');
-      if(s1) s1.textContent=d.totalBooks||0;
-      if(d.books&&d.books.length>0){
-        const pl=document.getElementById('perfList');
-        if(pl){
-          pl.innerHTML=d.books.map(function(b,i){
-            return '<div class="perf-row">'
-              +'<div class="perf-rank">'+(i+1)+'</div>'
-              +'<div class="perf-info"><div class="perf-name">'+b.title+'</div>'
-              +'<div class="perf-bar-track"><div class="perf-fill" style="width:'+(60-i*15)+'%"></div></div></div>'
-              +'<div class="perf-val">'+b.totalPages+' p.</div>'
-              +'</div>';
-          }).join('');
-        }
-        const ts=document.getElementById('tagStats');
-        if(ts){
-          const allTags=[];
-          d.books.forEach(function(b){if(b.tags&&b.tags.length) b.tags.forEach(function(t){allTags.push(t);});});
-          if(allTags.length>0){
-            const tagCounts={};
-            allTags.forEach(function(t){tagCounts[t]=(tagCounts[t]||0)+1;});
-            const sorted=Object.keys(tagCounts).sort(function(a,b){return tagCounts[b]-tagCounts[a];});
-            ts.innerHTML=sorted.slice(0,5).map(function(t,i){
-              return '<div class="perf-row" style="margin-bottom:0.6rem">'
-                +'<div class="oeuvre-tag" style="margin-right:0.5rem">'+t+'</div>'
-                +'<div class="perf-info"><div class="perf-bar-track"><div class="perf-fill" style="width:'+(80-i*12)+'%"></div></div></div>'
-                +'<div class="perf-val">'+(1200-i*150)+' lecteurs</div>'
-                +'</div>';
-            }).join('');
-          }
-        }
-      }
-    }).catch(function(){});
+ const token=localStorage.getItem('accessToken');
+ if(!token) return;
+ fetch(API+'/my-stats',{headers:{'Authorization':'Bearer '+token}})
+ .then(function(r){return r.json();})
+ .then(function(d){
+ const s1=document.getElementById('skpi1');
+ if(s1) s1.textContent=d.totalBooks||0;
+ if(d.books&&d.books.length>0){
+ const pl=document.getElementById('perfList');
+ if(pl){
+ pl.innerHTML=d.books.map(function(b,i){
+ return '<div class="perf-row">'
+ +'<div class="perf-rank">'+(i+1)+'</div>'
+ +'<div class="perf-info"><div class="perf-name">'+b.title+'</div>'
+ +'<div class="perf-bar-track"><div class="perf-fill" style="width:'+(60-i*15)+'%"></div></div></div>'
+ +'<div class="perf-val">'+b.totalPages+' p.</div>'
+ +'</div>';
+ }).join('');
+ }
+ const ts=document.getElementById('tagStats');
+ if(ts){
+ const allTags=[];
+ d.books.forEach(function(b){if(b.tags&&b.tags.length) b.tags.forEach(function(t){allTags.push(t);});});
+ if(allTags.length>0){
+ const tagCounts={};
+ allTags.forEach(function(t){tagCounts[t]=(tagCounts[t]||0)+1;});
+ const sorted=Object.keys(tagCounts).sort(function(a,b){return tagCounts[b]-tagCounts[a];});
+ ts.innerHTML=sorted.slice(0,5).map(function(t,i){
+ return '<div class="perf-row" style="margin-bottom:0.6rem">'
+ +'<div class="oeuvre-tag" style="margin-right:0.5rem">'+t+'</div>'
+ +'<div class="perf-info"><div class="perf-bar-track"><div class="perf-fill" style="width:'+(80-i*12)+'%"></div></div></div>'
+ +'<div class="perf-val">'+(1200-i*150)+' lecteurs</div>'
+ +'</div>';
+ }).join('');
+ }
+ }
+ }
+ }).catch(function(){});
 }
 
 // Solde
 function loadSolde(){
-  const token=localStorage.getItem('accessToken');
-  if(!token) return;
-  fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}})
-    .then(function(r){return r.json();})
-    .then(function(d){
-      userBalance=d.balance||0;
-      const rs=document.getElementById('revSolde');
-      if(rs) rs.textContent=userBalance.toLocaleString();
-      const ret=document.getElementById('retraitSolde');
-      if(ret) ret.textContent=userBalance.toLocaleString()+' FCFA';
-      const ms=document.getElementById('miniRevenu');
-      if(ms) ms.textContent=userBalance.toLocaleString();
-    }).catch(function(){});
+ const token=localStorage.getItem('accessToken');
+ if(!token) return;
+ fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}})
+ .then(function(r){return r.json();})
+ .then(function(d){
+ userBalance=d.balance||0;
+ const rs=document.getElementById('revSolde');
+ if(rs) rs.textContent=userBalance.toLocaleString();
+ const ret=document.getElementById('retraitSolde');
+ if(ret) ret.textContent=userBalance.toLocaleString()+' FCFA';
+ const ms=document.getElementById('miniRevenu');
+ if(ms) ms.textContent=userBalance.toLocaleString();
+ }).catch(function(){});
 }
 
 // Preview
 window.updatePreview=function(){
-  const t=document.getElementById('newTitle');
-  const s=document.getElementById('newSynopsis');
-  const g=document.getElementById('newGenre');
-  if(t){
-    const v=t.value||'Titre de votre œuvre';
-    const pt=document.getElementById('previewTitle');
-    if(pt) pt.textContent=v;
-    const pt2=document.getElementById('previewTitle2');
-    if(pt2) pt2.textContent=v;
-    const tc=document.getElementById('titleCount');
-    if(tc) tc.textContent=(t.value.length)+'/100';
-  }
-  if(s){
-    const ps=document.getElementById('previewSynopsis');
-    if(ps) ps.textContent=s.value||'Votre synopsis apparaîtra ici...';
-    const sc=document.getElementById('synopsisCount');
-    if(sc) sc.textContent=(s.value.length)+'/500';
-  }
-  if(g){
-    const pg=document.getElementById('previewGenre');
-    if(pg) pg.textContent=g.value||'Genre';
-  }
+ const t=document.getElementById('newTitle');
+ const s=document.getElementById('newSynopsis');
+ const g=document.getElementById('newGenre');
+ if(t){
+ const v=t.value||'Titre de votre œuvre';
+ const pt=document.getElementById('previewTitle');
+ if(pt) pt.textContent=v;
+ const pt2=document.getElementById('previewTitle2');
+ if(pt2) pt2.textContent=v;
+ const tc=document.getElementById('titleCount');
+ if(tc) tc.textContent=(t.value.length)+'/100';
+ }
+ if(s){
+ const ps=document.getElementById('previewSynopsis');
+ if(ps) ps.textContent=s.value||'Votre synopsis apparaîtra ici...';
+ const sc=document.getElementById('synopsisCount');
+ if(sc) sc.textContent=(s.value.length)+'/500';
+ }
+ if(g){
+ const pg=document.getElementById('previewGenre');
+ if(pg) pg.textContent=g.value||'Genre';
+ }
 };
 
 // Potential estimator
 const genrePotential={'Romance':{score:92,pop:'Très élevée',aud:'380k lecteurs',conc:'Forte'},'Fantastique':{score:85,pop:'Élevée',aud:'210k lecteurs',conc:'Modérée'},'Thriller':{score:78,pop:'Élevée',aud:'190k lecteurs',conc:'Modérée'},'Roman':{score:72,pop:'Élevée',aud:'520k lecteurs',conc:'Forte'},'Policier':{score:75,pop:'Modérée',aud:'160k lecteurs',conc:'Faible'},'Histoire':{score:68,pop:'Modérée',aud:'140k lecteurs',conc:'Faible'},'Littérature':{score:65,pop:'Modérée',aud:'120k lecteurs',conc:'Faible'},'Jeunesse':{score:70,pop:'Modérée',aud:'180k lecteurs',conc:'Modérée'}};
 window.updatePotential=function(){
-  const genre=document.getElementById('newGenre');
-  if(!genre||!genre.value) return;
-  const data=genrePotential[genre.value];
-  if(!data) return;
-  const ps=document.getElementById('potScore');
-  if(ps) ps.textContent=data.score+'%';
-  const pb=document.getElementById('potBar');
-  if(pb) pb.style.width=data.score+'%';
-  const pg=document.getElementById('potGenre');
-  if(pg) pg.textContent=data.pop;
-  const pa=document.getElementById('potAudience');
-  if(pa) pa.textContent=data.aud;
-  const pc=document.getElementById('potConcurrence');
-  if(pc) pc.textContent=data.conc;
+ const genre=document.getElementById('newGenre');
+ if(!genre||!genre.value) return;
+ const data=genrePotential[genre.value];
+ if(!data) return;
+ const ps=document.getElementById('potScore');
+ if(ps) ps.textContent=data.score+'%';
+ const pb=document.getElementById('potBar');
+ if(pb) pb.style.width=data.score+'%';
+ const pg=document.getElementById('potGenre');
+ if(pg) pg.textContent=data.pop;
+ const pa=document.getElementById('potAudience');
+ if(pa) pa.textContent=data.aud;
+ const pc=document.getElementById('potConcurrence');
+ if(pc) pc.textContent=data.conc;
 };
 
 // Steps
 window.goToStep1=function(){
-  document.getElementById('step1').style.display='block';
-  document.getElementById('step2').style.display='none';
-  document.getElementById('step3').style.display='none';
-  setStep(1);
+ document.getElementById('step1').style.display='block';
+ document.getElementById('step2').style.display='none';
+ document.getElementById('step3').style.display='none';
+ setStep(1);
 };
 window.goToStep2=function(){
-  const title=document.getElementById('newTitle').value.trim();
-  const synopsis=document.getElementById('newSynopsis').value.trim();
-  const genre=document.getElementById('newGenre').value;
-  if(!title||!synopsis||!genre){showToast('Remplissez tous les champs obligatoires *','⚠️');return;}
-  document.getElementById('step1').style.display='none';
-  document.getElementById('step2').style.display='block';
-  document.getElementById('step3').style.display='none';
-  const pa2=document.getElementById('previewAuthor2');
-  if(pa2) pa2.textContent=userName;
-  const pt2=document.getElementById('previewTitle2');
-  if(pt2) pt2.textContent=title;
-  setStep(2);
+ const title=document.getElementById('newTitle').value.trim();
+ const synopsis=document.getElementById('newSynopsis').value.trim();
+ const genre=document.getElementById('newGenre').value;
+ if(!title||!synopsis||!genre){showToast('Remplissez tous les champs obligatoires *','');return;}
+ document.getElementById('step1').style.display='none';
+ document.getElementById('step2').style.display='block';
+ document.getElementById('step3').style.display='none';
+ const pa2=document.getElementById('previewAuthor2');
+ if(pa2) pa2.textContent=userName;
+ const pt2=document.getElementById('previewTitle2');
+ if(pt2) pt2.textContent=title;
+ setStep(2);
 };
 window.goToStep3=function(){
-  document.getElementById('step1').style.display='none';
-  document.getElementById('step2').style.display='none';
-  document.getElementById('step3').style.display='block';
-  const rt=document.getElementById('recapTitle');
-  if(rt) rt.textContent=document.getElementById('newTitle').value;
-  const rg=document.getElementById('recapGenre');
-  if(rg) rg.textContent=document.getElementById('newGenre').value;
-  const rtags=document.getElementById('recapTags');
-  if(rtags) rtags.innerHTML=selectedTags.map(function(t){return '<span class="preview-tag">'+t+'</span>';}).join('');
-  renderChapters();
-  setStep(3);
+ document.getElementById('step1').style.display='none';
+ document.getElementById('step2').style.display='none';
+ document.getElementById('step3').style.display='block';
+ const rt=document.getElementById('recapTitle');
+ if(rt) rt.textContent=document.getElementById('newTitle').value;
+ const rg=document.getElementById('recapGenre');
+ if(rg) rg.textContent=document.getElementById('newGenre').value;
+ const rtags=document.getElementById('recapTags');
+ if(rtags) rtags.innerHTML=selectedTags.map(function(t){return '<span class="preview-tag">'+t+'</span>';}).join('');
+ renderChapters();
+ setStep(3);
 };
 
 function setStep(n){
-  for(let i=1;i<=3;i++){
-    const snum=document.getElementById('snum'+i);
-    const slabel=document.getElementById('slabel'+i);
-    if(i<n){snum.className='step-num done';snum.textContent='✓';slabel.className='step-label done';}
-    else if(i===n){snum.className='step-num active';snum.textContent=i;slabel.className='step-label active';}
-    else{snum.className='step-num pending';snum.textContent=i;slabel.className='step-label pending';}
-    if(i<3){const sl=document.getElementById('sline'+i);if(sl) sl.className=i<n?'step-line done':'step-line';}
-  }
+ for(let i=1;i<=3;i++){
+ const snum=document.getElementById('snum'+i);
+ const slabel=document.getElementById('slabel'+i);
+ if(i<n){snum.className='step-num done';snum.textContent='✓';slabel.className='step-label done';}
+ else if(i===n){snum.className='step-num active';snum.textContent=i;slabel.className='step-label active';}
+ else{snum.className='step-num pending';snum.textContent=i;slabel.className='step-label pending';}
+ if(i<3){const sl=document.getElementById('sline'+i);if(sl) sl.className=i<n?'step-line done':'step-line';}
+ }
 }
 
 // Cover
 window.onCoverChange=function(e){
-  const file=e.target.files[0];
-  if(file) processCoverFile(file);
+ const file=e.target.files[0];
+ if(file) processCoverFile(file);
 };
 window.onDragOver=function(e){e.preventDefault();document.getElementById('coverZone').classList.add('drag-over');};
 window.onDragLeave=function(){document.getElementById('coverZone').classList.remove('drag-over');};
 window.onDrop=function(e){
-  e.preventDefault();
-  document.getElementById('coverZone').classList.remove('drag-over');
-  const file=e.dataTransfer.files[0];
-  if(file) processCoverFile(file);
+ e.preventDefault();
+ document.getElementById('coverZone').classList.remove('drag-over');
+ const file=e.dataTransfer.files[0];
+ if(file) processCoverFile(file);
 };
 function processCoverFile(file){
-  if(file.size>5*1024*1024){showToast('Image trop lourde (max 5 Mo)','⚠️');return;}
-  // Compression automatique
-  const img=new Image();
-  const objectUrl=URL.createObjectURL(file);
-  img.onload=function(){
-    URL.revokeObjectURL(objectUrl);
-    const canvas=document.createElement('canvas');
-    const MAX=800;
-    let w=img.width,h=img.height;
-    if(w>MAX||h>MAX){const ratio=Math.min(MAX/w,MAX*1.5/h);w=Math.round(w*ratio);h=Math.round(h*ratio);}
-    canvas.width=w;canvas.height=h;
-    const ctx=canvas.getContext('2d');
-    ctx.drawImage(img,0,0,w,h);
-    coverDataUrl=canvas.toDataURL('image/jpeg',0.75);
-    const cp=document.getElementById('coverPreview');
-    if(cp) cp.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
-    const cpb=document.getElementById('previewCoverBig');
-    if(cpb) cpb.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover"/>';
-    const sizekb=Math.round(coverDataUrl.length*0.75/1024);
-    showToast('Couverture ajoutée · '+sizekb+' Ko','🎨');
-  };
-  img.src=objectUrl;
-  return;
-  const reader=new FileReader();
-  reader.onload=function(e){
-    coverDataUrl=e.target.result;
-    const cp=document.getElementById('coverPreview');
-    if(cp) cp.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
-    const cpb=document.getElementById('previewCoverBig');
-    if(cpb) cpb.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover"/>';
-    showToast('Couverture ajoutée !','🎨');
-  };
-  reader.readAsDataURL(file);
+ if(file.size>5*1024*1024){showToast('Image trop lourde (max 5 Mo)','');return;}
+ // Compression automatique
+ const img=new Image();
+ const objectUrl=URL.createObjectURL(file);
+ img.onload=function(){
+ URL.revokeObjectURL(objectUrl);
+ const canvas=document.createElement('canvas');
+ const MAX=800;
+ let w=img.width,h=img.height;
+ if(w>MAX||h>MAX){const ratio=Math.min(MAX/w,MAX*1.5/h);w=Math.round(w*ratio);h=Math.round(h*ratio);}
+ canvas.width=w;canvas.height=h;
+ const ctx=canvas.getContext('2d');
+ ctx.drawImage(img,0,0,w,h);
+ coverDataUrl=canvas.toDataURL('image/jpeg',0.75);
+ const cp=document.getElementById('coverPreview');
+ if(cp) cp.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
+ const cpb=document.getElementById('previewCoverBig');
+ if(cpb) cpb.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover"/>';
+ const sizekb=Math.round(coverDataUrl.length*0.75/1024);
+ showToast('Couverture ajoutée · '+sizekb+' Ko','');
+ };
+ img.src=objectUrl;
+ return;
+ const reader=new FileReader();
+ reader.onload=function(e){
+ coverDataUrl=e.target.result;
+ const cp=document.getElementById('coverPreview');
+ if(cp) cp.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
+ const cpb=document.getElementById('previewCoverBig');
+ if(cpb) cpb.innerHTML='<img src="'+coverDataUrl+'" alt="Couverture" style="width:100%;height:100%;object-fit:cover"/>';
+ showToast('Couverture ajoutée !','');
+ };
+ reader.readAsDataURL(file);
 }
 window.removeCover=function(){
-  coverDataUrl=null;
-  const cp=document.getElementById('coverPreview');
-  if(cp) cp.innerHTML='<div class="cover-preview-placeholder" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)"><div class="cover-ico">📖</div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:rgba(255,255,255,0.8)">Votre couverture</div></div>';
-  const cpb=document.getElementById('previewCoverBig');
-  if(cpb) cpb.innerHTML='<div style="width:100%;height:100%;background:linear-gradient(160deg,#2d1b0e,#8B4513);display:flex;align-items:center;justify-content:center;font-size:3rem">📖</div>';
-  showToast('Couverture supprimée','🗑');
+ coverDataUrl=null;
+ const cp=document.getElementById('coverPreview');
+ if(cp) cp.innerHTML='<div class="cover-preview-placeholder" style="background:linear-gradient(160deg,#2d1b0e,#8B4513)"><div class="cover-ico"></div><div style="font-family:\'DM Mono\',monospace;font-size:0.75rem;color:rgba(255,255,255,0.8)">Votre couverture</div></div>';
+ const cpb=document.getElementById('previewCoverBig');
+ if(cpb) cpb.innerHTML='<div style="width:100%;height:100%;background:linear-gradient(160deg,#2d1b0e,#8B4513);display:flex;align-items:center;justify-content:center;font-size:3rem"></div>';
+ showToast('Couverture supprimée','');
 };
 
 // Tags
 const suggestedTags=['Romance','Amour','Famille','Immigration','Diaspora','Sorcellerie','Mythologie africaine','Politique','Tradition','Mali','Sénégal','Nigeria','Ghana','Côte d\'Ivoire','Cameroun','Kenya','Fantastique','Thriller','Policier','Jeunesse','Poésie','Histoire','Développement personnel','Religion','Héritage','Mariage','Triangle amoureux','Campus','Étudiant','Aventure','Mystère','Spirituel','Exil'];
 
 function renderTags(){
-  const tc=document.getElementById('tagsChips');
-  if(tc) tc.innerHTML=selectedTags.map(function(t){
-    return '<span class="tag-chip">'+t+'<span class="tag-chip-remove" onclick="removeTag(\''+t+'\')">✕</span></span>';
-  }).join('');
-  const ptl=document.getElementById('previewTagsList');
-  if(ptl) ptl.innerHTML=selectedTags.map(function(t){return '<span class="preview-tag">'+t+'</span>';}).join('');
-  const tcount=document.getElementById('tagCount');
-  if(tcount) tcount.textContent=selectedTags.length+' / 15 tags';
+ const tc=document.getElementById('tagsChips');
+ if(tc) tc.innerHTML=selectedTags.map(function(t){
+ return '<span class="tag-chip">'+t+'<span class="tag-chip-remove" onclick="removeTag(\''+t+'\')"></span></span>';
+ }).join('');
+ const ptl=document.getElementById('previewTagsList');
+ if(ptl) ptl.innerHTML=selectedTags.map(function(t){return '<span class="preview-tag">'+t+'</span>';}).join('');
+ const tcount=document.getElementById('tagCount');
+ if(tcount) tcount.textContent=selectedTags.length+' / 15 tags';
 }
 
 window.renderTagSuggestions=function(){
-  const input=document.getElementById('tagInput');
-  const val=input?input.value.toLowerCase():'';
-  const filtered=suggestedTags.filter(function(t){return !selectedTags.includes(t)&&(val===''||t.toLowerCase().includes(val));}).slice(0,10);
-  const ts=document.getElementById('tagSuggestions');
-  if(ts) ts.innerHTML=filtered.map(function(t){
-    return '<span class="tag-sug" onclick="addTagDirect(\''+t+'\')">+ '+t+'</span>';
-  }).join('');
+ const input=document.getElementById('tagInput');
+ const val=input?input.value.toLowerCase():'';
+ const filtered=suggestedTags.filter(function(t){return !selectedTags.includes(t)&&(val===''||t.toLowerCase().includes(val));}).slice(0,10);
+ const ts=document.getElementById('tagSuggestions');
+ if(ts) ts.innerHTML=filtered.map(function(t){
+ return '<span class="tag-sug" onclick="addTagDirect(\''+t+'\')">+ '+t+'</span>';
+ }).join('');
 };
 
 window.onTagKey=function(e){
-  if(e.key==='Enter'){e.preventDefault();addTag();}
-  else renderTagSuggestions();
+ if(e.key==='Enter'){e.preventDefault();addTag();}
+ else renderTagSuggestions();
 };
 window.addTag=function(){
-  const input=document.getElementById('tagInput');
-  if(!input) return;
-  const val=input.value.trim();
-  if(val&&!selectedTags.includes(val)&&selectedTags.length<15){
-    selectedTags.push(val);input.value='';renderTags();renderTagSuggestions();
-  } else if(selectedTags.length>=15){showToast('Maximum 15 tags atteint','⚠️');}
+ const input=document.getElementById('tagInput');
+ if(!input) return;
+ const val=input.value.trim();
+ if(val&&!selectedTags.includes(val)&&selectedTags.length<15){
+ selectedTags.push(val);input.value='';renderTags();renderTagSuggestions();
+ } else if(selectedTags.length>=15){showToast('Maximum 15 tags atteint','');}
 };
 window.addTagDirect=function(tag){
-  if(!selectedTags.includes(tag)&&selectedTags.length<15){selectedTags.push(tag);renderTags();renderTagSuggestions();}
-  else if(selectedTags.length>=15){showToast('Maximum 15 tags atteint','⚠️');}
+ if(!selectedTags.includes(tag)&&selectedTags.length<15){selectedTags.push(tag);renderTags();renderTagSuggestions();}
+ else if(selectedTags.length>=15){showToast('Maximum 15 tags atteint','');}
 };
 window.removeTag=function(tag){
-  const idx=selectedTags.indexOf(tag);
-  if(idx>-1){selectedTags.splice(idx,1);renderTags();renderTagSuggestions();}
+ const idx=selectedTags.indexOf(tag);
+ if(idx>-1){selectedTags.splice(idx,1);renderTags();renderTagSuggestions();}
 };
 
 // Chapters
@@ -1328,227 +1328,227 @@ window.closeChapterModal=function(){document.getElementById('chapterModal').clas
 document.getElementById('chapterModal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
 
 window.selectChType=function(type,btn){
-  chapterType=type;
-  document.querySelectorAll('.ctype-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  const sg=document.getElementById('scheduleGroup');
-  if(sg) sg.style.display=type==='scheduled'?'block':'none';
+ chapterType=type;
+ document.querySelectorAll('.ctype-btn').forEach(function(b){b.classList.remove('active');});
+ btn.classList.add('active');
+ const sg=document.getElementById('scheduleGroup');
+ if(sg) sg.style.display=type==='scheduled'?'block':'none';
 };
 
 window.saveChapter=async function(){
-  const title=document.getElementById('chTitle').value.trim();
-  if(!title){showToast('Ajoutez un titre au chapitre','⚠️');return;}
-  const content=document.getElementById('chContent').value;
-  const ch={
-    num:chapters.length+1,
-    title:title,
-    type:chapterType,
-    content:content,
-    words:content.split(/\s+/).filter(Boolean).length,
-    status:chapterType==='scheduled'?'scheduled':'draft'
-  };
-  chapters.push(ch);
-  document.getElementById('chTitle').value='';
-  document.getElementById('chContent').value='';
-  closeChapterModal();
-  renderChapters();
-  showToast('Chapitre ajouté !','📝');
-  // Si livre déjà publié, sauvegarder le chapitre en base
-  if(window.currentBookId){
-    const token=localStorage.getItem('accessToken');
-    try{
-      await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+window.currentBookId+'/chapters',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-        body:JSON.stringify({title:ch.title,content:ch.content,number:ch.num,isFree:ch.type==='free'})
-      });
-      showToast('Chapitre sauvegardé en base !','💾');
-    }catch(e){}
-  }
+ const title=document.getElementById('chTitle').value.trim();
+ if(!title){showToast('Ajoutez un titre au chapitre','');return;}
+ const content=document.getElementById('chContent').value;
+ const ch={
+ num:chapters.length+1,
+ title:title,
+ type:chapterType,
+ content:content,
+ words:content.split(/\s+/).filter(Boolean).length,
+ status:chapterType==='scheduled'?'scheduled':'draft'
+ };
+ chapters.push(ch);
+ document.getElementById('chTitle').value='';
+ document.getElementById('chContent').value='';
+ closeChapterModal();
+ renderChapters();
+ showToast('Chapitre ajouté !','');
+ // Si livre déjà publié, sauvegarder le chapitre en base
+ if(window.currentBookId){
+ const token=localStorage.getItem('accessToken');
+ try{
+ await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+window.currentBookId+'/chapters',{
+ method:'POST',
+ headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+ body:JSON.stringify({title:ch.title,content:ch.content,number:ch.num,isFree:ch.type==='free'})
+ });
+ showToast('Chapitre sauvegardé en base !','');
+ }catch(e){}
+ }
 };
 
 function renderChapters(){
-  const cl=document.getElementById('chaptersList');
-  const cc=document.getElementById('chapCount');
-  if(cc) cc.textContent='('+chapters.length+')';
-  if(!cl) return;
-  if(chapters.length===0){
-    cl.innerHTML='<div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun chapitre · Ajoutez votre premier chapitre ci-dessus</div>';
-    return;
-  }
-  const typeLabel={'free':'Gratuit','premium':'Premium','scheduled':'Programmé'};
-  const statusClass={'draft':'cstatus-draft','scheduled':'cstatus-scheduled','published':'cstatus-published'};
-  const typeClass={'free':'ctype-free','premium':'ctype-premium','scheduled':'ctype-premium'};
-  cl.innerHTML=chapters.map(function(ch,i){
-    return '<div class="chapter-row">'
-      +'<div class="chapter-num">'+String(ch.num).padStart(2,'0')+'</div>'
-      +'<div class="chapter-meta">'
-      +'<div class="chapter-title-text">'+ch.title+'</div>'
-      +'<div class="chapter-info"><span>'+ch.words+' mots</span><span>Brouillon</span></div>'
-      +'</div>'
-      +'<span class="chapter-status-badge '+statusClass[ch.status]+'">'+ch.status+'</span>'
-      +'<span class="chapter-type '+typeClass[ch.type]+'">'+typeLabel[ch.type]+'</span>'
-      +'<div class="chapter-actions">'
-      +'<button class="ch-btn" title="Modifier" onclick="editChapter('+i+')">✏️</button>'
-      +'<button class="ch-btn delete" title="Supprimer" onclick="deleteChapter('+i+')">🗑</button>'
-      +'</div>'
-      +'</div>';
-  }).join('');
+ const cl=document.getElementById('chaptersList');
+ const cc=document.getElementById('chapCount');
+ if(cc) cc.textContent='('+chapters.length+')';
+ if(!cl) return;
+ if(chapters.length===0){
+ cl.innerHTML='<div style="text-align:center;padding:2rem;border:1px dashed rgba(217,144,45,0.15);border-radius:10px;color:var(--cendre);font-family:\'DM Mono\',monospace;font-size:0.75rem">Aucun chapitre · Ajoutez votre premier chapitre ci-dessus</div>';
+ return;
+ }
+ const typeLabel={'free':'Gratuit','premium':'Premium','scheduled':'Programmé'};
+ const statusClass={'draft':'cstatus-draft','scheduled':'cstatus-scheduled','published':'cstatus-published'};
+ const typeClass={'free':'ctype-free','premium':'ctype-premium','scheduled':'ctype-premium'};
+ cl.innerHTML=chapters.map(function(ch,i){
+ return '<div class="chapter-row">'
+ +'<div class="chapter-num">'+String(ch.num).padStart(2,'0')+'</div>'
+ +'<div class="chapter-meta">'
+ +'<div class="chapter-title-text">'+ch.title+'</div>'
+ +'<div class="chapter-info"><span>'+ch.words+' mots</span><span>Brouillon</span></div>'
+ +'</div>'
+ +'<span class="chapter-status-badge '+statusClass[ch.status]+'">'+ch.status+'</span>'
+ +'<span class="chapter-type '+typeClass[ch.type]+'">'+typeLabel[ch.type]+'</span>'
+ +'<div class="chapter-actions">'
+ +'<button class="ch-btn" title="Modifier" onclick="editChapter('+i+')"></button>'
+ +'<button class="ch-btn delete" title="Supprimer" onclick="deleteChapter('+i+')"></button>'
+ +'</div>'
+ +'</div>';
+ }).join('');
 }
 
 window.deleteChapter=function(i){
-  const ch=chapters[i];
-  if(!ch) return;
-  if(!confirm('Supprimer le chapitre "'+ch.title+'" ? Cette action est irréversible.')) return;
-  chapters.splice(i,1);
-  chapters.forEach(function(c,j){c.num=j+1;});
-  renderChapters();
-  showToast('Chapitre supprimé','🗑');
+ const ch=chapters[i];
+ if(!ch) return;
+ if(!confirm('Supprimer le chapitre "'+ch.title+'" ? Cette action est irréversible.')) return;
+ chapters.splice(i,1);
+ chapters.forEach(function(c,j){c.num=j+1;});
+ renderChapters();
+ showToast('Chapitre supprimé','');
 };
 window.editChapter=function(i){
-  const ch=chapters[i];
-  if(!ch) return;
-  // Ouvrir modal avec contenu existant
-  document.getElementById('chTitle').value=ch.title||'';
-  document.getElementById('chContent').value=ch.content||'';
-  chapterType=ch.type||'free';
-  // Mettre à jour les boutons de type
-  document.querySelectorAll('.ctype-btn').forEach(function(b){b.classList.remove('active');});
-  const typeMap={'free':0,'premium':1,'scheduled':2};
-  const btns=document.querySelectorAll('.ctype-btn');
-  if(btns[typeMap[chapterType]]) btns[typeMap[chapterType]].classList.add('active');
-  // Changer le bouton save pour modifier au lieu de créer
-  const saveBtn=document.querySelector('[onclick="saveChapter()"]');
-  if(saveBtn){
-    saveBtn.textContent='Enregistrer les modifications →';
-    saveBtn.onclick=function(){updateChapter(i);};
-  }
-  openChapterModal();
+ const ch=chapters[i];
+ if(!ch) return;
+ // Ouvrir modal avec contenu existant
+ document.getElementById('chTitle').value=ch.title||'';
+ document.getElementById('chContent').value=ch.content||'';
+ chapterType=ch.type||'free';
+ // Mettre à jour les boutons de type
+ document.querySelectorAll('.ctype-btn').forEach(function(b){b.classList.remove('active');});
+ const typeMap={'free':0,'premium':1,'scheduled':2};
+ const btns=document.querySelectorAll('.ctype-btn');
+ if(btns[typeMap[chapterType]]) btns[typeMap[chapterType]].classList.add('active');
+ // Changer le bouton save pour modifier au lieu de créer
+ const saveBtn=document.querySelector('[onclick="saveChapter()"]');
+ if(saveBtn){
+ saveBtn.textContent='Enregistrer les modifications →';
+ saveBtn.onclick=function(){updateChapter(i);};
+ }
+ openChapterModal();
 };
 
 window.updateChapter=async function(i){
-  const title=document.getElementById('chTitle').value.trim();
-  if(!title){showToast('Ajoutez un titre','⚠️');return;}
-  const content=document.getElementById('chContent').value;
-  chapters[i].title=title;
-  chapters[i].content=content;
-  chapters[i].type=chapterType;
-  chapters[i].words=content.split(/\s+/).filter(Boolean).length;
-  closeChapterModal();
-  renderChapters();
-  showToast('Chapitre modifié !','✅');
-  // Sauvegarder en base si chapitre existant
-  if(chapters[i].id&&window.currentBookId){
-    const token=localStorage.getItem('accessToken');
-    try{
-      await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+window.currentBookId+'/chapters/'+chapters[i].id+'/update',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-        body:JSON.stringify({title:title,content:content,isFree:chapterType==='free'})
-      });
-      showToast('Chapitre sauvegardé en base !','💾');
-    }catch(e){}
-  }
-  // Réinitialiser le bouton save
-  const saveBtn=document.querySelector('[onclick*="updateChapter"]');
-  if(saveBtn){saveBtn.textContent='Créer le chapitre →';saveBtn.onclick=function(){saveChapter();};}
+ const title=document.getElementById('chTitle').value.trim();
+ if(!title){showToast('Ajoutez un titre','');return;}
+ const content=document.getElementById('chContent').value;
+ chapters[i].title=title;
+ chapters[i].content=content;
+ chapters[i].type=chapterType;
+ chapters[i].words=content.split(/\s+/).filter(Boolean).length;
+ closeChapterModal();
+ renderChapters();
+ showToast('Chapitre modifié !','✓');
+ // Sauvegarder en base si chapitre existant
+ if(chapters[i].id&&window.currentBookId){
+ const token=localStorage.getItem('accessToken');
+ try{
+ await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+window.currentBookId+'/chapters/'+chapters[i].id+'/update',{
+ method:'POST',
+ headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+ body:JSON.stringify({title:title,content:content,isFree:chapterType==='free'})
+ });
+ showToast('Chapitre sauvegardé en base !','');
+ }catch(e){}
+ }
+ // Réinitialiser le bouton save
+ const saveBtn=document.querySelector('[onclick*="updateChapter"]');
+ if(saveBtn){saveBtn.textContent='Créer le chapitre →';saveBtn.onclick=function(){saveChapter();};}
 };
 
 // Publish
 window.publierOeuvre=async function(){
-  const token=localStorage.getItem('accessToken');
-  const title=document.getElementById('newTitle').value.trim();
-  const synopsis=document.getElementById('newSynopsis').value.trim();
-  const genre=document.getElementById('newGenre').value;
-  const pages=parseInt(document.getElementById('newPages').value)||100;
-  const msg=document.getElementById('pubMsg');
-  if(!title||!synopsis||!genre){msg.style.color='#f87171';msg.textContent='Remplissez les informations obligatoires';return;}
-  msg.style.color='#FF6B00';msg.textContent='Publication en cours...';
-  try{
-    const res=await fetch(API+'/publish-book',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-      body:JSON.stringify({title,synopsis,genre,totalPages:pages,tags:selectedTags,coverImage:coverDataUrl})
-    });
-    const d=await res.json();
-    if(d.id){
-      window.currentBookId=d.id;
-      msg.style.color='#4ade80';msg.textContent='✅ Œuvre publiée ! Ajoutez vos chapitres ci-dessous.';
-      showToast('Œuvre publiée !','🚀');
-      const token2=localStorage.getItem('accessToken');
-      for(let i=0;i<chapters.length;i++){
-        try{await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+d.id+'/chapters',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token2},body:JSON.stringify({title:chapters[i].title,content:chapters[i].content,number:chapters[i].num,isFree:chapters[i].type==='free'})});}catch(e2){}
-      }
-      setTimeout(function(){showPage('oeuvres',null);},3000);
-    } else {
-      msg.style.color='#f87171';msg.textContent=d.message||'Erreur lors de la publication';
-    }
-  }catch(e){msg.style.color='#f87171';msg.textContent='Erreur de connexion';}
+ const token=localStorage.getItem('accessToken');
+ const title=document.getElementById('newTitle').value.trim();
+ const synopsis=document.getElementById('newSynopsis').value.trim();
+ const genre=document.getElementById('newGenre').value;
+ const pages=parseInt(document.getElementById('newPages').value)||100;
+ const msg=document.getElementById('pubMsg');
+ if(!title||!synopsis||!genre){msg.style.color='#f87171';msg.textContent='Remplissez les informations obligatoires';return;}
+ msg.style.color='#FF6B00';msg.textContent='Publication en cours...';
+ try{
+ const res=await fetch(API+'/publish-book',{
+ method:'POST',
+ headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+ body:JSON.stringify({title,synopsis,genre,totalPages:pages,tags:selectedTags,coverImage:coverDataUrl})
+ });
+ const d=await res.json();
+ if(d.id){
+ window.currentBookId=d.id;
+ msg.style.color='#4ade80';msg.textContent='✓ Œuvre publiée ! Ajoutez vos chapitres ci-dessous.';
+ showToast('Œuvre publiée !','');
+ const token2=localStorage.getItem('accessToken');
+ for(let i=0;i<chapters.length;i++){
+ try{await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+d.id+'/chapters',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token2},body:JSON.stringify({title:chapters[i].title,content:chapters[i].content,number:chapters[i].num,isFree:chapters[i].type==='free'})});}catch(e2){}
+ }
+ setTimeout(function(){showPage('oeuvres',null);},3000);
+ } else {
+ msg.style.color='#f87171';msg.textContent=d.message||'Erreur lors de la publication';
+ }
+ }catch(e){msg.style.color='#f87171';msg.textContent='Erreur de connexion';}
 };
 
 // Retrait
 window.demandeRetrait=function(){
-  const amount=document.getElementById('retraitAmount').value;
-  if(!amount||parseInt(amount)<500){showToast('Montant minimum : 500 FCFA','⚠️');return;}
-  showToast('Demande de retrait envoyée !','💸');
-  document.getElementById('retraitAmount').value='';
+ const amount=document.getElementById('retraitAmount').value;
+ if(!amount||parseInt(amount)<500){showToast('Montant minimum : 500 FCFA','');return;}
+ showToast('Demande de retrait envoyée !','');
+ document.getElementById('retraitAmount').value='';
 };
 
 // Déconnexion
 window.loadBookForEdit=async function(bookId){
-  const token=localStorage.getItem('accessToken');
-  try{
-    showPage('create',null);
-    goToStep1();
-    showToast('Chargement de l\'œuvre...','⏳');
-    // Charger le livre
-    const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId);
-    const book=await res.json();
-    if(!book||book.error){showToast('Erreur de chargement','❌');return;}
-    // Remplir step 1
-    const t=document.getElementById('newTitle');if(t) t.value=book.title||'';
-    const s=document.getElementById('newSynopsis');if(s) s.value=book.synopsis||'';
-    const g=document.getElementById('newGenre');if(g) g.value=book.genre||'';
-    const p=document.getElementById('newPages');if(p) p.value=book.totalPages||'';
-    updatePreview();
-    // Remplir tags
-    selectedTags.length=0;
-    if(book.tags&&book.tags.length){
-      book.tags.forEach(function(t){selectedTags.push(t);});
-      renderTags();
-    }
-    // Remplir couverture
-    if(book.coverImage){
-      coverDataUrl=book.coverImage;
-      const cp=document.getElementById('coverPreview');
-      if(cp) cp.innerHTML='<img src="'+book.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
-    }
-    // Charger chapitres existants
-    const cRes=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId+'/chapters');
-    const existingChapters=await cRes.json();
-    if(existingChapters&&existingChapters.length>0){
-      chapters.length=0;
-      existingChapters.forEach(function(ch){
-        chapters.push({
-          id:ch.id,
-          num:ch.number,
-          title:ch.title,
-          type:ch.isFree?'free':'premium',
-          content:ch.content||'',
-          words:ch.wordCount||0,
-          status:'published'
-        });
-      });
-    }
-    window.currentBookId=bookId;
-    showToast('Œuvre chargée — '+chapters.length+' chapitre(s)','✅');
-  }catch(e){showToast('Erreur de connexion','❌');}
+ const token=localStorage.getItem('accessToken');
+ try{
+ showPage('create',null);
+ goToStep1();
+ showToast('Chargement de l\'œuvre...','⏳');
+ // Charger le livre
+ const res=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId);
+ const book=await res.json();
+ if(!book||book.error){showToast('Erreur de chargement','✗');return;}
+ // Remplir step 1
+ const t=document.getElementById('newTitle');if(t) t.value=book.title||'';
+ const s=document.getElementById('newSynopsis');if(s) s.value=book.synopsis||'';
+ const g=document.getElementById('newGenre');if(g) g.value=book.genre||'';
+ const p=document.getElementById('newPages');if(p) p.value=book.totalPages||'';
+ updatePreview();
+ // Remplir tags
+ selectedTags.length=0;
+ if(book.tags&&book.tags.length){
+ book.tags.forEach(function(t){selectedTags.push(t);});
+ renderTags();
+ }
+ // Remplir couverture
+ if(book.coverImage){
+ coverDataUrl=book.coverImage;
+ const cp=document.getElementById('coverPreview');
+ if(cp) cp.innerHTML='<img src="'+book.coverImage+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"/>';
+ }
+ // Charger chapitres existants
+ const cRes=await fetch('https://griotte-backend-2-production.up.railway.app/api/v1/auth/books/'+bookId+'/chapters');
+ const existingChapters=await cRes.json();
+ if(existingChapters&&existingChapters.length>0){
+ chapters.length=0;
+ existingChapters.forEach(function(ch){
+ chapters.push({
+ id:ch.id,
+ num:ch.number,
+ title:ch.title,
+ type:ch.isFree?'free':'premium',
+ content:ch.content||'',
+ words:ch.wordCount||0,
+ status:'published'
+ });
+ });
+ }
+ window.currentBookId=bookId;
+ showToast('Œuvre chargée — '+chapters.length+' chapitre(s)','✓');
+ }catch(e){showToast('Erreur de connexion','✗');}
 };
 
 window.deconnecter=function(){
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('refreshToken');
-  window.location.href='/griotte-landing.html';
+ localStorage.removeItem('accessToken');
+ localStorage.removeItem('refreshToken');
+ window.location.href='/griotte-landing.html';
 };
 
 // Init

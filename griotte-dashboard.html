@@ -15,99 +15,99 @@ html{font-size:15px}
 body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:flex;min-height:100vh;overflow-x:hidden}
 
 :root{
-  --or:#FF6B00;--or-dark:#CC5200;--or-light:#FF8C33;
-  --or-glow:rgba(255,107,0,0.10);--or-border:rgba(255,107,0,0.2);
-  --bg:#F8F5F1;--bg-card:#FFFFFF;--bg-card2:#FFF8F4;
-  --text:#1A1410;--text-soft:#4A3F35;--text-muted:#6B5A4E;
-  --border:rgba(26,20,16,0.09);--border-strong:rgba(26,20,16,0.16);
-  --radius:12px;--shadow:0 2px 12px rgba(26,20,16,0.07);
-  --shadow-lg:0 6px 32px rgba(26,20,16,0.11);
-  --sidebar-w:240px
+ --or:#FF6B00;--or-dark:#CC5200;--or-light:#FF8C33;
+ --or-glow:rgba(255,107,0,0.10);--or-border:rgba(255,107,0,0.2);
+ --bg:#F8F5F1;--bg-card:#FFFFFF;--bg-card2:#FFF8F4;
+ --text:#1A1410;--text-soft:#4A3F35;--text-muted:#6B5A4E;
+ --border:rgba(26,20,16,0.09);--border-strong:rgba(26,20,16,0.16);
+ --radius:12px;--shadow:0 2px 12px rgba(26,20,16,0.07);
+ --shadow-lg:0 6px 32px rgba(26,20,16,0.11);
+ --sidebar-w:240px
 }
 
 /* ── SIDEBAR ── */
 .sidebar{
-  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
-  background:#fff;border-right:1px solid var(--border);
-  display:flex;flex-direction:column;z-index:200;overflow-y:auto
+ position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
+ background:#fff;border-right:1px solid var(--border);
+ display:flex;flex-direction:column;z-index:200;overflow-y:auto
 }
 .sidebar-head{
-  padding:1.25rem 1.25rem 1rem;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between
+ padding:1.25rem 1.25rem 1rem;
+ border-bottom:1px solid var(--border);
+ display:flex;align-items:center;justify-content:space-between
 }
 .sidebar-user{padding:1rem 1.25rem;border-bottom:1px solid var(--border)}
 .user-row{display:flex;align-items:center;gap:0.75rem}
 .user-ava{
-  width:38px;height:38px;border-radius:50%;
-  background:linear-gradient(135deg,var(--or),var(--or-dark));
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-family:"Playfair Display",serif;font-size:1rem;font-weight:700;flex-shrink:0
+ width:38px;height:38px;border-radius:50%;
+ background:linear-gradient(135deg,var(--or),var(--or-dark));
+ color:#fff;display:flex;align-items:center;justify-content:center;
+ font-family:"Playfair Display",serif;font-size:1rem;font-weight:700;flex-shrink:0
 }
 .user-name{font-size:0.88rem;font-weight:600;color:var(--text)}
 .user-role{font-size:0.7rem;color:var(--or);font-family:"DM Mono",monospace;margin-top:0.1rem}
 .sidebar-balance{
-  margin:0.75rem 1.25rem;background:var(--bg);border-radius:10px;
-  padding:0.75rem 1rem;border:1px solid var(--border)
+ margin:0.75rem 1.25rem;background:var(--bg);border-radius:10px;
+ padding:0.75rem 1rem;border:1px solid var(--border)
 }
 .balance-label{font-size:0.65rem;font-family:"DM Mono",monospace;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em}
 .balance-val{font-family:"Playfair Display",serif;font-size:1.4rem;font-weight:700;color:var(--text);margin-top:0.1rem}
 .balance-sub{font-size:0.65rem;color:var(--text-muted);margin-top:0.1rem}
 .balance-btn{
-  display:block;width:100%;margin-top:0.6rem;
-  background:var(--or);color:#fff;border:none;border-radius:8px;
-  padding:0.5rem;font-size:0.8rem;font-weight:600;cursor:pointer;
-  font-family:"Inter",sans-serif;transition:background 0.2s
+ display:block;width:100%;margin-top:0.6rem;
+ background:var(--or);color:#fff;border:none;border-radius:8px;
+ padding:0.5rem;font-size:0.8rem;font-weight:600;cursor:pointer;
+ font-family:"Inter",sans-serif;transition:background 0.2s
 }
 .balance-btn:hover{background:var(--or-dark)}
 
 .sidebar-nav{padding:0.75rem 0}
 .nav-section{
-  font-family:"DM Mono",monospace;font-size:0.62rem;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--text-muted);padding:0.5rem 1.25rem 0.3rem
+ font-family:"DM Mono",monospace;font-size:0.62rem;
+ letter-spacing:0.16em;text-transform:uppercase;
+ color:var(--text-muted);padding:0.5rem 1.25rem 0.3rem
 }
 .nav-item{
-  display:flex;align-items:center;gap:0.7rem;
-  padding:0.6rem 1.25rem;cursor:pointer;
-  font-size:0.88rem;color:var(--text-soft);
-  transition:all 0.15s;border-radius:0;
-  text-decoration:none;border:none;background:none;width:100%;text-align:left
+ display:flex;align-items:center;gap:0.7rem;
+ padding:0.6rem 1.25rem;cursor:pointer;
+ font-size:0.88rem;color:var(--text-soft);
+ transition:all 0.15s;border-radius:0;
+ text-decoration:none;border:none;background:none;width:100%;text-align:left
 }
 .nav-item:hover{background:var(--bg);color:var(--text)}
 .nav-item.active{
-  background:rgba(255,107,0,0.08);color:var(--or);
-  font-weight:600;border-right:2px solid var(--or)
+ background:rgba(255,107,0,0.08);color:var(--or);
+ font-weight:600;border-right:2px solid var(--or)
 }
 .nav-ico{font-size:1rem;width:1.2rem;text-align:center;flex-shrink:0}
 .nav-badge{
-  margin-left:auto;font-size:0.6rem;font-family:"DM Mono",monospace;
-  background:var(--or);color:#fff;border-radius:50px;
-  padding:0.1rem 0.45rem
+ margin-left:auto;font-size:0.6rem;font-family:"DM Mono",monospace;
+ background:var(--or);color:#fff;border-radius:50px;
+ padding:0.1rem 0.45rem
 }
 
 .sidebar-footer{margin-top:auto;padding:1rem 1.25rem;border-top:1px solid var(--border)}
 .sidebar-footer a{
-  display:flex;align-items:center;gap:0.6rem;
-  font-size:0.82rem;color:var(--text-muted);text-decoration:none;
-  padding:0.4rem 0;transition:color 0.2s
+ display:flex;align-items:center;gap:0.6rem;
+ font-size:0.82rem;color:var(--text-muted);text-decoration:none;
+ padding:0.4rem 0;transition:color 0.2s
 }
 .sidebar-footer a:hover{color:var(--or)}
 
 /* ── MAIN ── */
 .main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
 .topbar{
-  position:sticky;top:0;z-index:100;
-  background:rgba(248,245,241,0.95);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  padding:0 2rem;height:56px;
-  display:flex;align-items:center;justify-content:space-between
+ position:sticky;top:0;z-index:100;
+ background:rgba(248,245,241,0.95);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--border);
+ padding:0 2rem;height:56px;
+ display:flex;align-items:center;justify-content:space-between
 }
 .topbar-title{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:700;color:var(--text)}
 .topbar-actions{display:flex;align-items:center;gap:0.75rem}
 .btn-sm{
-  font-family:"Inter",sans-serif;font-size:0.8rem;font-weight:600;
-  padding:0.45rem 1rem;border-radius:8px;cursor:pointer;border:none;transition:all 0.2s
+ font-family:"Inter",sans-serif;font-size:0.8rem;font-weight:600;
+ padding:0.45rem 1rem;border-radius:8px;cursor:pointer;border:none;transition:all 0.2s
 }
 .btn-sm-primary{background:var(--or);color:#fff}
 .btn-sm-primary:hover{background:var(--or-dark)}
@@ -123,8 +123,8 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
 /* ── STATS GRID ── */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
 .stat-card{
-  background:var(--bg-card);border:1px solid var(--border);
-  border-radius:var(--radius);padding:1.25rem
+ background:var(--bg-card);border:1px solid var(--border);
+ border-radius:var(--radius);padding:1.25rem
 }
 .stat-label{font-size:0.7rem;font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted)}
 .stat-val{font-family:"Playfair Display",serif;font-size:1.9rem;font-weight:700;color:var(--text);margin:0.3rem 0;line-height:1}
@@ -138,9 +138,9 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
 /* ── BOOK CARDS ── */
 .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}
 .book-card{
-  background:var(--bg-card);border:1px solid var(--border);
-  border-radius:var(--radius);overflow:hidden;cursor:pointer;
-  transition:transform 0.2s,box-shadow 0.2s
+ background:var(--bg-card);border:1px solid var(--border);
+ border-radius:var(--radius);overflow:hidden;cursor:pointer;
+ transition:transform 0.2s,box-shadow 0.2s
 }
 .book-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .book-cover{aspect-ratio:2/3;position:relative;display:flex;align-items:flex-end;padding:0.75rem}
@@ -154,9 +154,9 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
 
 /* ── PUBLISH CARD ── */
 .publish-card{
-  background:linear-gradient(135deg,var(--or-glow),rgba(255,140,51,0.06));
-  border:1.5px dashed var(--or-border);border-radius:var(--radius);
-  padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s
+ background:linear-gradient(135deg,var(--or-glow),rgba(255,140,51,0.06));
+ border:1.5px dashed var(--or-border);border-radius:var(--radius);
+ padding:2rem;text-align:center;cursor:pointer;transition:all 0.2s
 }
 .publish-card:hover{background:rgba(255,107,0,0.1);border-color:var(--or)}
 .publish-ico{font-size:2rem;margin-bottom:0.75rem}
@@ -173,9 +173,9 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
 
 /* ── MY BOOKS (author view) ── */
 .my-book-row{
-  display:flex;align-items:center;gap:1rem;
-  padding:1rem;background:var(--bg-card);border:1px solid var(--border);
-  border-radius:var(--radius);margin-bottom:0.75rem
+ display:flex;align-items:center;gap:1rem;
+ padding:1rem;background:var(--bg-card);border:1px solid var(--border);
+ border-radius:var(--radius);margin-bottom:0.75rem
 }
 .my-book-cover{width:44px;height:60px;border-radius:4px;flex-shrink:0}
 .my-book-title{font-size:0.9rem;font-weight:600;color:var(--text)}
@@ -187,180 +187,180 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
 /* ── PROFIL ── */
 .profil-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;max-width:560px}
 .profil-ava-big{
-  width:72px;height:72px;border-radius:50%;
-  background:linear-gradient(135deg,var(--or),var(--or-dark));
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-family:"Playfair Display",serif;font-size:1.8rem;font-weight:700;
-  margin-bottom:1.25rem
+ width:72px;height:72px;border-radius:50%;
+ background:linear-gradient(135deg,var(--or),var(--or-dark));
+ color:#fff;display:flex;align-items:center;justify-content:center;
+ font-family:"Playfair Display",serif;font-size:1.8rem;font-weight:700;
+ margin-bottom:1.25rem
 }
 .profil-label{font-size:0.78rem;font-weight:600;color:var(--text-soft);margin-bottom:0.4rem;margin-top:1rem}
 .profil-input{
-  width:100%;background:var(--bg);border:1.5px solid var(--border);
-  border-radius:10px;padding:0.7rem 1rem;font-family:"Inter",sans-serif;
-  font-size:0.9rem;color:var(--text);outline:none;transition:border-color 0.2s
+ width:100%;background:var(--bg);border:1.5px solid var(--border);
+ border-radius:10px;padding:0.7rem 1rem;font-family:"Inter",sans-serif;
+ font-size:0.9rem;color:var(--text);outline:none;transition:border-color 0.2s
 }
 .profil-input:focus{border-color:var(--or)}
 
 /* ── TOAST ── */
 .toast{
-  position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
-  background:var(--text);color:#fff;border-radius:10px;
-  padding:0.75rem 1.25rem;font-size:0.85rem;
-  display:flex;align-items:center;gap:0.5rem;
-  transform:translateY(80px);opacity:0;transition:all 0.3s;pointer-events:none
+ position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+ background:var(--text);color:#fff;border-radius:10px;
+ padding:0.75rem 1.25rem;font-size:0.85rem;
+ display:flex;align-items:center;gap:0.5rem;
+ transform:translateY(80px);opacity:0;transition:all 0.3s;pointer-events:none
 }
 .toast.show{transform:translateY(0);opacity:1}
 
 /* ── MODAL ── */
 .modal-overlay{
-  position:fixed;inset:0;background:rgba(26,20,16,0.6);
-  backdrop-filter:blur(6px);z-index:8000;
-  display:none;align-items:center;justify-content:center
+ position:fixed;inset:0;background:rgba(26,20,16,0.6);
+ backdrop-filter:blur(6px);z-index:8000;
+ display:none;align-items:center;justify-content:center
 }
 .modal-overlay.active{display:flex}
 .modal-box{
-  background:#fff;border-radius:18px;padding:2rem;
-  width:100%;max-width:380px;position:relative
+ background:#fff;border-radius:18px;padding:2rem;
+ width:100%;max-width:380px;position:relative
 }
 .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--text-muted)}
 .modal-title{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:0.3rem}
 .modal-sub{font-size:0.82rem;color:var(--text-muted);margin-bottom:1.25rem}
 .modal-label{font-size:0.78rem;font-weight:600;color:var(--text-soft);display:block;margin-bottom:0.35rem}
 .modal-input,.modal-select{
-  width:100%;background:var(--bg);border:1.5px solid var(--border);
-  border-radius:10px;padding:0.65rem 0.9rem;
-  font-family:"Inter",sans-serif;font-size:0.88rem;color:var(--text);
-  outline:none;margin-bottom:1rem;transition:border-color 0.2s
+ width:100%;background:var(--bg);border:1.5px solid var(--border);
+ border-radius:10px;padding:0.65rem 0.9rem;
+ font-family:"Inter",sans-serif;font-size:0.88rem;color:var(--text);
+ outline:none;margin-bottom:1rem;transition:border-color 0.2s
 }
 .modal-input:focus,.modal-select:focus{border-color:var(--or)}
 .modal-field{margin-bottom:0.75rem}
 .pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin-bottom:1.25rem}
 .pack-btn{
-  background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
-  padding:0.75rem 0.5rem;text-align:center;cursor:pointer;transition:all 0.2s
+ background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
+ padding:0.75rem 0.5rem;text-align:center;cursor:pointer;transition:all 0.2s
 }
 .pack-btn.sel,.pack-btn:hover{border-color:var(--or);background:rgba(255,107,0,0.06)}
 .pack-amount{font-family:"Playfair Display",serif;font-size:0.95rem;font-weight:700;color:var(--text)}
 .pack-pages{font-size:0.62rem;color:var(--text-muted);font-family:"DM Mono",monospace;margin-top:0.15rem}
 .modal-btn{
-  width:100%;padding:0.8rem;background:var(--or);border:none;border-radius:10px;
-  color:#fff;font-family:"Inter",sans-serif;font-weight:600;font-size:0.9rem;cursor:pointer
+ width:100%;padding:0.8rem;background:var(--or);border:none;border-radius:10px;
+ color:#fff;font-family:"Inter",sans-serif;font-weight:600;font-size:0.9rem;cursor:pointer
 }
 .modal-btn-cancel{
-  padding:0.8rem 1.25rem;background:none;border:1.5px solid var(--border);
-  border-radius:10px;font-family:"Inter",sans-serif;font-size:0.88rem;cursor:pointer;color:var(--text-soft)
+ padding:0.8rem 1.25rem;background:none;border:1.5px solid var(--border);
+ border-radius:10px;font-family:"Inter",sans-serif;font-size:0.88rem;cursor:pointer;color:var(--text-soft)
 }
 .modal-2btn{display:flex;gap:0.75rem}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .sidebar{transform:translateX(-100%);transition:transform 0.3s}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .topbar{padding:0 1rem}
+ .sidebar{transform:translateX(-100%);transition:transform 0.3s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0}
+ .stats-grid{grid-template-columns:repeat(2,1fr)}
+ .topbar{padding:0 1rem}
 }
 @media(max-width:560px){
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .content{padding:1rem}
+ .stats-grid{grid-template-columns:1fr 1fr}
+ .content{padding:1rem}
 }
 
 /* ══ RESPONSIVE PATCH ══════════════════════════════════ */
 @media(max-width:768px){
-  /* Nav */
-  #navbar,.nav{padding:0 1rem!important;height:56px!important}
-  .nav-links{display:none!important}
-  .nav-actions .btn-nav-ghost,.nav-right .nbtn-ghost{display:none!important}
-  
-  /* Hero */
-  .hero{padding:56px 1.25rem 0!important}
-  .hero-content{padding:2rem 0 3rem!important}
-  .hero-title{font-size:2.4rem!important;line-height:1.1!important}
-  .hero-sub{font-size:0.95rem!important}
-  .hero-stats{gap:1.25rem!important}
-  .hero-stat-value{font-size:1.8rem!important}
-  .hero-books{display:none!important}
-  
-  /* Sections */
-  section{padding-left:1.25rem!important;padding-right:1.25rem!important}
-  .section-inner,[style*="max-width:1100px"],[style*="max-width:1000px"],[style*="max-width:1200px"]{padding-left:1.25rem!important;padding-right:1.25rem!important}
-  .section-title{font-size:1.8rem!important}
-  
-  /* Grilles 2 colonnes → 1 colonne */
-  .concept-grid,.authors-split{grid-template-columns:1fr!important;gap:1.5rem!important}
-  
-  /* Catalogue landing */
-  #lc-track{gap:0.85rem!important}
-  .lc-card{width:130px!important}
-  
-  /* Grille témoignages */
-  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
-  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr 1fr!important}
-  
-  /* Tarifs */
-  [style*="grid-template-columns:1fr 1fr"][style*="gap:1.5rem"]{grid-template-columns:1fr!important}
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important}
-  
-  /* Authors section */
-  [style*="grid-template-columns:1fr 1fr;gap:4rem"]{grid-template-columns:1fr!important;gap:2rem!important}
-  
-  /* Footer */
-  footer{padding:2.5rem 1.25rem!important}
-  [style*="grid-template-columns:1.8fr 1fr 1fr 1fr"]{grid-template-columns:1fr 1fr!important;gap:2rem!important}
-  
-  /* Boutons hero */
-  .hero-actions{flex-direction:column!important;gap:0.75rem!important}
-  .btn-hero-primary,.btn-hero-secondary{width:100%!important;justify-content:center!important}
-  
-  /* Catalogue page */
-  .page-header-inner{flex-direction:column!important;align-items:flex-start!important}
-  .search-box{width:100%!important;max-width:none!important}
-  .book-grid{grid-template-columns:repeat(3,1fr)!important}
-  .carousel-track{gap:0.85rem!important}
-  .bc{width:130px!important}
-  .body{padding:1.25rem!important}
-  
-  /* Dashboard */
-  .sidebar{transform:translateX(-100%);transition:transform 0.3s}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0!important}
-  .stats-grid{grid-template-columns:repeat(2,1fr)!important}
-  .content{padding:1rem!important}
-  .topbar{padding:0 1rem!important}
+ /* Nav */
+ #navbar,.nav{padding:0 1rem!important;height:56px!important}
+ .nav-links{display:none!important}
+ .nav-actions .btn-nav-ghost,.nav-right .nbtn-ghost{display:none!important}
+ 
+ /* Hero */
+ .hero{padding:56px 1.25rem 0!important}
+ .hero-content{padding:2rem 0 3rem!important}
+ .hero-title{font-size:2.4rem!important;line-height:1.1!important}
+ .hero-sub{font-size:0.95rem!important}
+ .hero-stats{gap:1.25rem!important}
+ .hero-stat-value{font-size:1.8rem!important}
+ .hero-books{display:none!important}
+ 
+ /* Sections */
+ section{padding-left:1.25rem!important;padding-right:1.25rem!important}
+ .section-inner,[style*="max-width:1100px"],[style*="max-width:1000px"],[style*="max-width:1200px"]{padding-left:1.25rem!important;padding-right:1.25rem!important}
+ .section-title{font-size:1.8rem!important}
+ 
+ /* Grilles 2 colonnes → 1 colonne */
+ .concept-grid,.authors-split{grid-template-columns:1fr!important;gap:1.5rem!important}
+ 
+ /* Catalogue landing */
+ #lc-track{gap:0.85rem!important}
+ .lc-card{width:130px!important}
+ 
+ /* Grille témoignages */
+ [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+ [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr 1fr!important}
+ 
+ /* Tarifs */
+ [style*="grid-template-columns:1fr 1fr"][style*="gap:1.5rem"]{grid-template-columns:1fr!important}
+ [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important}
+ 
+ /* Authors section */
+ [style*="grid-template-columns:1fr 1fr;gap:4rem"]{grid-template-columns:1fr!important;gap:2rem!important}
+ 
+ /* Footer */
+ footer{padding:2.5rem 1.25rem!important}
+ [style*="grid-template-columns:1.8fr 1fr 1fr 1fr"]{grid-template-columns:1fr 1fr!important;gap:2rem!important}
+ 
+ /* Boutons hero */
+ .hero-actions{flex-direction:column!important;gap:0.75rem!important}
+ .btn-hero-primary,.btn-hero-secondary{width:100%!important;justify-content:center!important}
+ 
+ /* Catalogue page */
+ .page-header-inner{flex-direction:column!important;align-items:flex-start!important}
+ .search-box{width:100%!important;max-width:none!important}
+ .book-grid{grid-template-columns:repeat(3,1fr)!important}
+ .carousel-track{gap:0.85rem!important}
+ .bc{width:130px!important}
+ .body{padding:1.25rem!important}
+ 
+ /* Dashboard */
+ .sidebar{transform:translateX(-100%);transition:transform 0.3s}
+ .sidebar.open{transform:translateX(0)}
+ .main{margin-left:0!important}
+ .stats-grid{grid-template-columns:repeat(2,1fr)!important}
+ .content{padding:1rem!important}
+ .topbar{padding:0 1rem!important}
 }
 
 @media(max-width:480px){
-  /* Hero */
-  .hero-title{font-size:2rem!important}
-  .hero-stats{flex-direction:column!important;gap:0.75rem!important}
-  .hero-stat-divider{display:none!important}
-  
-  /* Sections */
-  .section-title{font-size:1.6rem!important}
-  
-  /* Tarifs — 4 étapes → 2 col */
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important;gap:0.75rem!important}
-  
-  /* Témoignages → 1 col */
-  [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
-  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
-  
-  /* Footer → 1 col */
-  [style*="grid-template-columns:1.8fr 1fr 1fr 1fr"]{grid-template-columns:1fr!important}
-  [style*="grid-template-columns:1fr 1fr;gap:2rem"]{grid-template-columns:1fr!important}
-  
-  /* Catalogue */
-  .book-grid{grid-template-columns:repeat(2,1fr)!important}
-  .bc{width:120px!important}
-  
-  /* Stats dashboard */
-  .stats-grid{grid-template-columns:1fr 1fr!important}
-  
-  /* CTA welcome */
-  .welcome-btns .btn{width:100%!important}
-  
-  /* Footer bottom */
-  [style*="justify-content:space-between"][style*="padding-top:1.75rem"]{flex-direction:column!important;align-items:center!important;text-align:center!important}
+ /* Hero */
+ .hero-title{font-size:2rem!important}
+ .hero-stats{flex-direction:column!important;gap:0.75rem!important}
+ .hero-stat-divider{display:none!important}
+ 
+ /* Sections */
+ .section-title{font-size:1.6rem!important}
+ 
+ /* Tarifs — 4 étapes → 2 col */
+ [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important;gap:0.75rem!important}
+ 
+ /* Témoignages → 1 col */
+ [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+ [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
+ 
+ /* Footer → 1 col */
+ [style*="grid-template-columns:1.8fr 1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+ [style*="grid-template-columns:1fr 1fr;gap:2rem"]{grid-template-columns:1fr!important}
+ 
+ /* Catalogue */
+ .book-grid{grid-template-columns:repeat(2,1fr)!important}
+ .bc{width:120px!important}
+ 
+ /* Stats dashboard */
+ .stats-grid{grid-template-columns:1fr 1fr!important}
+ 
+ /* CTA welcome */
+ .welcome-btns .btn{width:100%!important}
+ 
+ /* Footer bottom */
+ [style*="justify-content:space-between"][style*="padding-top:1.75rem"]{flex-direction:column!important;align-items:center!important;text-align:center!important}
 }
 
 /* ══ FIN RESPONSIVE ════════════════════════════════════ */
@@ -374,301 +374,301 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
 
 <!-- MODAL RECHARGE -->
 <div class="modal-overlay" id="rechargeModal">
-  <div class="modal-box">
-    <button class="modal-close" type="button" onclick="closeModal('rechargeModal')">✕</button>
-    <div class="modal-title">Recharger mon solde</div>
-    <p class="modal-sub">10 FCFA = 1 page · Payez uniquement ce que vous lisez</p>
-    <div class="pack-grid">
-      <div class="pack-btn sel" onclick="selectPack(this,500)"><div class="pack-amount">500</div><div class="pack-pages">FCFA · 50p</div></div>
-      <div class="pack-btn" onclick="selectPack(this,1000)"><div class="pack-amount">1 000</div><div class="pack-pages">FCFA · 100p</div></div>
-      <div class="pack-btn" onclick="selectPack(this,2000)"><div class="pack-amount">2 000</div><div class="pack-pages">FCFA · 200p</div></div>
-      <div class="pack-btn" onclick="selectPack(this,5000)"><div class="pack-amount">5 000</div><div class="pack-pages">FCFA · 500p</div></div>
-      <div class="pack-btn" onclick="selectPack(this,10000)"><div class="pack-amount">10 000</div><div class="pack-pages">FCFA · 1000p</div></div>
-      <div class="pack-btn" onclick="selectPack(this,20000)"><div class="pack-amount">20 000</div><div class="pack-pages">FCFA · 2000p</div></div>
-    </div>
-    <button class="modal-btn" onclick="lancerPaiement()">Confirmer le paiement →</button>
-  </div>
+ <div class="modal-box">
+ <button class="modal-close" type="button" onclick="closeModal('rechargeModal')"></button>
+ <div class="modal-title">Recharger mon solde</div>
+ <p class="modal-sub">10 FCFA = 1 page · Payez uniquement ce que vous lisez</p>
+ <div class="pack-grid">
+ <div class="pack-btn sel" onclick="selectPack(this,500)"><div class="pack-amount">500</div><div class="pack-pages">FCFA · 50p</div></div>
+ <div class="pack-btn" onclick="selectPack(this,1000)"><div class="pack-amount">1 000</div><div class="pack-pages">FCFA · 100p</div></div>
+ <div class="pack-btn" onclick="selectPack(this,2000)"><div class="pack-amount">2 000</div><div class="pack-pages">FCFA · 200p</div></div>
+ <div class="pack-btn" onclick="selectPack(this,5000)"><div class="pack-amount">5 000</div><div class="pack-pages">FCFA · 500p</div></div>
+ <div class="pack-btn" onclick="selectPack(this,10000)"><div class="pack-amount">10 000</div><div class="pack-pages">FCFA · 1000p</div></div>
+ <div class="pack-btn" onclick="selectPack(this,20000)"><div class="pack-amount">20 000</div><div class="pack-pages">FCFA · 2000p</div></div>
+ </div>
+ <button class="modal-btn" onclick="lancerPaiement()">Confirmer le paiement →</button>
+ </div>
 </div>
 
 <!-- MODAL RETRAIT -->
 <div class="modal-overlay" id="withdrawModal">
-  <div class="modal-box">
-    <button class="modal-close" type="button" onclick="closeModal('withdrawModal')">✕</button>
-    <div class="modal-title">Retirer mes gains</div>
-    <p class="modal-sub">Transfert sous 24–48h · Mobile Money ou virement</p>
-    <div class="modal-field">
-      <label class="modal-label">Montant (FCFA)</label>
-      <input type="number" class="modal-input" id="wAmount" placeholder="Ex: 20 000" min="500"/>
-    </div>
-    <div class="modal-field">
-      <label class="modal-label">Méthode</label>
-      <select class="modal-select"><option>📱 Flooz (Togocel)</option><option>📱 MTN MoMo</option><option>🟠 Orange Money</option><option>🏦 Virement bancaire</option></select>
-    </div>
-    <div class="modal-field">
-      <label class="modal-label">Numéro</label>
-      <input type="text" class="modal-input" placeholder="Votre numéro Mobile Money"/>
-    </div>
-    <div class="modal-2btn">
-      <button class="modal-btn-cancel" onclick="closeModal('withdrawModal')">Annuler</button>
-      <button class="modal-btn" style="flex:2" onclick="confirmWithdraw()">Confirmer →</button>
-    </div>
-  </div>
+ <div class="modal-box">
+ <button class="modal-close" type="button" onclick="closeModal('withdrawModal')"></button>
+ <div class="modal-title">Retirer mes gains</div>
+ <p class="modal-sub">Transfert sous 24–48h · Mobile Money ou virement</p>
+ <div class="modal-field">
+ <label class="modal-label">Montant (FCFA)</label>
+ <input type="number" class="modal-input" id="wAmount" placeholder="Ex: 20 000" min="500"/>
+ </div>
+ <div class="modal-field">
+ <label class="modal-label">Méthode</label>
+ <select class="modal-select"><option> Flooz (Togocel)</option><option> MTN MoMo</option><option> Orange Money</option><option> Virement bancaire</option></select>
+ </div>
+ <div class="modal-field">
+ <label class="modal-label">Numéro</label>
+ <input type="text" class="modal-input" placeholder="Votre numéro Mobile Money"/>
+ </div>
+ <div class="modal-2btn">
+ <button class="modal-btn-cancel" onclick="closeModal('withdrawModal')">Annuler</button>
+ <button class="modal-btn" style="flex:2" onclick="confirmWithdraw()">Confirmer →</button>
+ </div>
+ </div>
 </div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-head">
-    <brand-logo></brand-logo>
-    <button type="button" onclick="closeSidebar()" style="display:none;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted)" id="sidebarClose">✕</button>
-  </div>
+ <div class="sidebar-head">
+ <brand-logo></brand-logo>
+ <button type="button" onclick="closeSidebar()" style="display:none;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted)" id="sidebarClose"></button>
+ </div>
 
-  <div class="sidebar-user">
-    <div class="user-row">
-      <div class="user-ava" id="userAva">A</div>
-      <div>
-        <div class="user-name" id="userName">Ama Kouyaté</div>
-        <div class="user-role">Mon espace GRIOTTE</div>
-      </div>
-    </div>
-  </div>
+ <div class="sidebar-user">
+ <div class="user-row">
+ <div class="user-ava" id="userAva">A</div>
+ <div>
+ <div class="user-name" id="userName">Ama Kouyaté</div>
+ <div class="user-role">Mon espace GRIOTTE</div>
+ </div>
+ </div>
+ </div>
 
-  <div class="sidebar-balance">
-    <div class="balance-label">Solde disponible</div>
-    <div class="balance-val" id="sidebarBalance">4 200 <span style="font-size:0.7rem;font-family:DM Mono,monospace;color:var(--text-muted)">FCFA</span></div>
-    <div class="balance-sub" id="sidebarPages">420 pages disponibles</div>
-    <button class="balance-btn" onclick="openModal('rechargeModal')">+ Recharger</button>
-  </div>
+ <div class="sidebar-balance">
+ <div class="balance-label">Solde disponible</div>
+ <div class="balance-val" id="sidebarBalance">4 200 <span style="font-size:0.7rem;font-family:DM Mono,monospace;color:var(--text-muted)">FCFA</span></div>
+ <div class="balance-sub" id="sidebarPages">420 pages disponibles</div>
+ <button class="balance-btn" onclick="openModal('rechargeModal')">+ Recharger</button>
+ </div>
 
-  <nav class="sidebar-nav">
-    <div class="nav-section">Navigation</div>
-    <button class="nav-item active" onclick="showPanel('accueil',this)"><span class="nav-ico">🏠</span> Mon accueil</button>
-    <button class="nav-item" onclick="showPanel('catalogue',this)"><span class="nav-ico">📚</span> Catalogue</button>
-    <button class="nav-item" onclick="showPanel('bibliotheque',this)"><span class="nav-ico">🔖</span> Ma bibliothèque</button>
-    <button class="nav-item" onclick="showPanel('lecture',this)"><span class="nav-ico">📖</span> Continuer à lire</button>
+ <nav class="sidebar-nav">
+ <div class="nav-section">Navigation</div>
+ <button class="nav-item active" onclick="showPanel('accueil',this)"><span class="nav-ico"></span> Mon accueil</button>
+ <button class="nav-item" onclick="showPanel('catalogue',this)"><span class="nav-ico"></span> Catalogue</button>
+ <button class="nav-item" onclick="showPanel('bibliotheque',this)"><span class="nav-ico"></span> Ma bibliothèque</button>
+ <button class="nav-item" onclick="showPanel('lecture',this)"><span class="nav-ico"></span> Continuer à lire</button>
 
-    <div class="nav-section">Publication</div>
-    <button class="nav-item" onclick="showPanel('publier',this)"><span class="nav-ico">✍️</span> Publier une œuvre</button>
-    <button class="nav-item" onclick="showPanel('meslivres',this)"><span class="nav-ico">📝</span> Mes publications</button>
-    <button class="nav-item" onclick="showPanel('revenus',this)"><span class="nav-ico">💰</span> Mes revenus <span class="nav-badge" id="revBadge">28 200 F</span></button>
+ <div class="nav-section">Publication</div>
+ <button class="nav-item" onclick="showPanel('publier',this)"><span class="nav-ico"></span> Publier une œuvre</button>
+ <button class="nav-item" onclick="showPanel('meslivres',this)"><span class="nav-ico"></span> Mes publications</button>
+ <button class="nav-item" onclick="showPanel('revenus',this)"><span class="nav-ico"></span> Mes revenus <span class="nav-badge" id="revBadge">28 200 F</span></button>
 
-    <div class="nav-section">Compte</div>
-    <button class="nav-item" onclick="showPanel('profil',this)"><span class="nav-ico">👤</span> Mon profil</button>
-    <button class="nav-item" onclick="showPanel('parametres',this)"><span class="nav-ico">⚙️</span> Paramètres</button>
-  </nav>
+ <div class="nav-section">Compte</div>
+ <button class="nav-item" onclick="showPanel('profil',this)"><span class="nav-ico"></span> Mon profil</button>
+ <button class="nav-item" onclick="showPanel('parametres',this)"><span class="nav-ico"></span> Paramètres</button>
+ </nav>
 
-  <div class="sidebar-footer">
-    <a href="./griotte-admin.html">🔒 Espace administrateur</a>
-    <a href="./griotte-landing.html" onclick="return confirm('Se déconnecter ?')">🚪 Déconnexion</a>
-  </div>
+ <div class="sidebar-footer">
+ <a href="./griotte-admin.html">Espace administrateur</a>
+ <a href="./griotte-landing.html" onclick="return confirm('Se déconnecter ?')">Déconnexion</a>
+ </div>
 </aside>
 
 <!-- MAIN -->
 <div class="main">
-  <header class="topbar">
-    <div style="display:flex;align-items:center;gap:1rem">
-      <button type="button" id="menuBtn" onclick="openSidebar()" style="display:none;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text)">☰</button>
-      <span class="topbar-title" id="topbarTitle">Mon accueil</span>
-    </div>
-    <div class="topbar-actions">
-      <button class="btn-sm btn-sm-ghost" onclick="openModal('rechargeModal')">💳 Recharger</button>
-      <button class="btn-sm btn-sm-primary" onclick="showPanel('publier',null)">+ Publier</button>
-    </div>
-  </header>
+ <header class="topbar">
+ <div style="display:flex;align-items:center;gap:1rem">
+ <button type="button" id="menuBtn" onclick="openSidebar()" style="display:none;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text)">☰</button>
+ <span class="topbar-title" id="topbarTitle">Mon accueil</span>
+ </div>
+ <div class="topbar-actions">
+ <button class="btn-sm btn-sm-ghost" onclick="openModal('rechargeModal')">Recharger</button>
+ <button class="btn-sm btn-sm-primary" onclick="showPanel('publier',null)">+ Publier</button>
+ </div>
+ </header>
 
-  <div class="content">
+ <div class="content">
 
-    <!-- PANEL: ACCUEIL -->
-    <div class="panel active" id="panel-accueil">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Solde lecteur</div>
-          <div class="stat-val" id="statSolde">4 200</div>
-          <div class="stat-change">FCFA · 420 pages</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Pages lues</div>
-          <div class="stat-val">847</div>
-          <div class="stat-change">↑ +124 ce mois</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Revenus auteur</div>
-          <div class="stat-val" style="color:var(--or)">28 200</div>
-          <div class="stat-change">FCFA ce mois</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Mes lecteurs</div>
-          <div class="stat-val">1 240</div>
-          <div class="stat-change">↑ +89 ce mois</div>
-        </div>
-      </div>
+ <!-- PANEL: ACCUEIL -->
+ <div class="panel active" id="panel-accueil">
+ <div class="stats-grid">
+ <div class="stat-card">
+ <div class="stat-label">Solde lecteur</div>
+ <div class="stat-val" id="statSolde">4 200</div>
+ <div class="stat-change">FCFA · 420 pages</div>
+ </div>
+ <div class="stat-card">
+ <div class="stat-label">Pages lues</div>
+ <div class="stat-val">847</div>
+ <div class="stat-change">↑ +124 ce mois</div>
+ </div>
+ <div class="stat-card">
+ <div class="stat-label">Revenus auteur</div>
+ <div class="stat-val" style="color:var(--or)">28 200</div>
+ <div class="stat-change">FCFA ce mois</div>
+ </div>
+ <div class="stat-card">
+ <div class="stat-label">Mes lecteurs</div>
+ <div class="stat-val">1 240</div>
+ <div class="stat-change">↑ +89 ce mois</div>
+ </div>
+ </div>
 
-      <div class="section-hd">
-        <h3>Continuer à lire</h3>
-        <button class="btn-sm btn-sm-ghost" onclick="showPanel('bibliotheque',null)">Voir tout →</button>
-      </div>
-      <div class="books-grid" style="margin-bottom:2rem">
-        <div class="book-card" onclick="window.location='griotte-reader.html'">
-          <div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div>
-          <div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67% · p.214/320</div></div>
-        </div>
-        <div class="book-card">
-          <div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div>
-          <div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-progress"><div class="book-progress-bar" style="width:23%"></div></div><div class="book-pct">23% · p.94/410</div></div>
-        </div>
-        <div class="book-card">
-          <div class="book-cover" style="background:linear-gradient(145deg,#0a1828,#183860)"><div class="book-cover-overlay"></div><div class="book-cover-title">L'Enfant du Fleuve</div></div>
-          <div class="book-meta"><div class="book-author">Mamadou Traoré</div><div class="book-progress"><div class="book-progress-bar" style="width:8%"></div></div><div class="book-pct">8% · p.15/190</div></div>
-        </div>
-      </div>
+ <div class="section-hd">
+ <h3>Continuer à lire</h3>
+ <button class="btn-sm btn-sm-ghost" onclick="showPanel('bibliotheque',null)">Voir tout →</button>
+ </div>
+ <div class="books-grid" style="margin-bottom:2rem">
+ <div class="book-card" onclick="window.location='griotte-reader.html'">
+ <div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div>
+ <div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67% · p.214/320</div></div>
+ </div>
+ <div class="book-card">
+ <div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div>
+ <div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-progress"><div class="book-progress-bar" style="width:23%"></div></div><div class="book-pct">23% · p.94/410</div></div>
+ </div>
+ <div class="book-card">
+ <div class="book-cover" style="background:linear-gradient(145deg,#0a1828,#183860)"><div class="book-cover-overlay"></div><div class="book-cover-title">L'Enfant du Fleuve</div></div>
+ <div class="book-meta"><div class="book-author">Mamadou Traoré</div><div class="book-progress"><div class="book-progress-bar" style="width:8%"></div></div><div class="book-pct">8% · p.15/190</div></div>
+ </div>
+ </div>
 
-      <div class="section-hd">
-        <h3>Mes publications récentes</h3>
-        <button class="btn-sm btn-sm-ghost" onclick="showPanel('meslivres',null)">Gérer →</button>
-      </div>
-      <div class="my-book-row">
-        <div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>
-        <div>
-          <div class="my-book-title">Les Fils du Sahel</div>
-          <div class="my-book-stats">
-            <div class="my-book-stat">Pages lues <span>32 400</span></div>
-            <div class="my-book-stat">Revenus <span style="color:var(--or)">19 440 F</span></div>
-            <div class="my-book-stat">Lecteurs <span>847</span></div>
-          </div>
-        </div>
-        <div class="my-book-actions">
-          <button class="btn-sm btn-sm-ghost">Modifier</button>
-        </div>
-      </div>
-      <div class="my-book-row">
-        <div class="my-book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"></div>
-        <div>
-          <div class="my-book-title">Terres Rouges</div>
-          <div class="my-book-stats">
-            <div class="my-book-stat">Pages lues <span>14 600</span></div>
-            <div class="my-book-stat">Revenus <span style="color:var(--or)">8 760 F</span></div>
-            <div class="my-book-stat">Lecteurs <span>393</span></div>
-          </div>
-        </div>
-        <div class="my-book-actions">
-          <button class="btn-sm btn-sm-ghost">Modifier</button>
-        </div>
-      </div>
-    </div>
+ <div class="section-hd">
+ <h3>Mes publications récentes</h3>
+ <button class="btn-sm btn-sm-ghost" onclick="showPanel('meslivres',null)">Gérer →</button>
+ </div>
+ <div class="my-book-row">
+ <div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>
+ <div>
+ <div class="my-book-title">Les Fils du Sahel</div>
+ <div class="my-book-stats">
+ <div class="my-book-stat">Pages lues <span>32 400</span></div>
+ <div class="my-book-stat">Revenus <span style="color:var(--or)">19 440 F</span></div>
+ <div class="my-book-stat">Lecteurs <span>847</span></div>
+ </div>
+ </div>
+ <div class="my-book-actions">
+ <button class="btn-sm btn-sm-ghost">Modifier</button>
+ </div>
+ </div>
+ <div class="my-book-row">
+ <div class="my-book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"></div>
+ <div>
+ <div class="my-book-title">Terres Rouges</div>
+ <div class="my-book-stats">
+ <div class="my-book-stat">Pages lues <span>14 600</span></div>
+ <div class="my-book-stat">Revenus <span style="color:var(--or)">8 760 F</span></div>
+ <div class="my-book-stat">Lecteurs <span>393</span></div>
+ </div>
+ </div>
+ <div class="my-book-actions">
+ <button class="btn-sm btn-sm-ghost">Modifier</button>
+ </div>
+ </div>
+ </div>
 
-    <!-- PANEL: CATALOGUE -->
-    <div class="panel" id="panel-catalogue">
-      <p style="color:var(--text-soft);margin-bottom:1.5rem">Découvrez les œuvres de la communauté GRIOTTE.</p>
-      <div class="books-grid">
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">La Griotte de Bamako</div></div><div class="book-meta"><div class="book-author">Seydou Diallo</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div><div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a1828,#183860)"><div class="book-cover-overlay"></div><div class="book-cover-title">L'Enfant du Fleuve</div></div><div class="book-meta"><div class="book-author">Mamadou Traoré</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a1000,#4a3000)"><div class="book-cover-overlay"></div><div class="book-cover-title">Terres Rouges</div></div><div class="book-meta"><div class="book-author">Khadija Bah</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a1a1a,#105050)"><div class="book-cover-overlay"></div><div class="book-cover-title">Le Masque et le Miroir</div></div><div class="book-meta"><div class="book-author">Idrissa Konaté</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
-      </div>
-    </div>
+ <!-- PANEL: CATALOGUE -->
+ <div class="panel" id="panel-catalogue">
+ <p style="color:var(--text-soft);margin-bottom:1.5rem">Découvrez les œuvres de la communauté GRIOTTE.</p>
+ <div class="books-grid">
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">La Griotte de Bamako</div></div><div class="book-meta"><div class="book-author">Seydou Diallo</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div><div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a1828,#183860)"><div class="book-cover-overlay"></div><div class="book-cover-title">L'Enfant du Fleuve</div></div><div class="book-meta"><div class="book-author">Mamadou Traoré</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a1000,#4a3000)"><div class="book-cover-overlay"></div><div class="book-cover-title">Terres Rouges</div></div><div class="book-meta"><div class="book-author">Khadija Bah</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a1a1a,#105050)"><div class="book-cover-overlay"></div><div class="book-cover-title">Le Masque et le Miroir</div></div><div class="book-meta"><div class="book-author">Idrissa Konaté</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
+ </div>
+ </div>
 
-    <!-- PANEL: BIBLIOTHÈQUE -->
-    <div class="panel" id="panel-bibliotheque">
-      <p style="color:var(--text-soft);margin-bottom:1.5rem">Vos livres en cours et terminés.</p>
-      <div class="books-grid">
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67%</div></div></div>
-        <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div><div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-progress"><div class="book-progress-bar" style="width:23%"></div></div><div class="book-pct">23%</div></div></div>
-      </div>
-    </div>
+ <!-- PANEL: BIBLIOTHÈQUE -->
+ <div class="panel" id="panel-bibliotheque">
+ <p style="color:var(--text-soft);margin-bottom:1.5rem">Vos livres en cours et terminés.</p>
+ <div class="books-grid">
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67%</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div><div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-progress"><div class="book-progress-bar" style="width:23%"></div></div><div class="book-pct">23%</div></div></div>
+ </div>
+ </div>
 
-    <!-- PANEL: LECTURE -->
-    <div class="panel" id="panel-lecture">
-      <p style="color:var(--text-soft);margin-bottom:1.5rem">Reprendre là où vous en étiez.</p>
-      <div class="my-book-row" style="cursor:pointer" onclick="window.location='griotte-reader.html'">
-        <div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>
-        <div>
-          <div class="my-book-title">Les Fils du Sahel</div>
-          <div class="my-book-stats"><div class="my-book-stat">Page <span>214 / 320</span></div><div class="my-book-stat">Progression <span>67%</span></div></div>
-        </div>
-        <button class="btn-sm btn-sm-primary" style="margin-left:auto">Reprendre →</button>
-      </div>
-    </div>
+ <!-- PANEL: LECTURE -->
+ <div class="panel" id="panel-lecture">
+ <p style="color:var(--text-soft);margin-bottom:1.5rem">Reprendre là où vous en étiez.</p>
+ <div class="my-book-row" style="cursor:pointer" onclick="window.location='griotte-reader.html'">
+ <div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>
+ <div>
+ <div class="my-book-title">Les Fils du Sahel</div>
+ <div class="my-book-stats"><div class="my-book-stat">Page <span>214 / 320</span></div><div class="my-book-stat">Progression <span>67%</span></div></div>
+ </div>
+ <button class="btn-sm btn-sm-primary" style="margin-left:auto">Reprendre →</button>
+ </div>
+ </div>
 
-    <!-- PANEL: PUBLIER -->
-    <div class="panel" id="panel-publier">
-      <div class="publish-card" style="max-width:480px;margin-bottom:2rem">
-        <div class="publish-ico">✍️</div>
-        <div class="publish-title">Publier une nouvelle œuvre</div>
-        <p class="publish-sub">Uploadez votre manuscrit et rejoignez 340 auteurs sur GRIOTTE.</p>
-        <button class="btn-sm btn-sm-primary" style="margin-top:1.25rem;padding:0.65rem 1.75rem" onclick="showToast('✅ Bientôt disponible — backend en connexion')">Commencer la publication →</button>
-      </div>
-      <a href="griotte-publier.html" style="font-size:0.88rem;color:var(--or);text-decoration:underline">Ouvrir le studio complet →</a>
-    </div>
+ <!-- PANEL: PUBLIER -->
+ <div class="panel" id="panel-publier">
+ <div class="publish-card" style="max-width:480px;margin-bottom:2rem">
+ <div class="publish-ico"></div>
+ <div class="publish-title">Publier une nouvelle œuvre</div>
+ <p class="publish-sub">Uploadez votre manuscrit et rejoignez 340 auteurs sur GRIOTTE.</p>
+ <button class="btn-sm btn-sm-primary" style="margin-top:1.25rem;padding:0.65rem 1.75rem" onclick="showToast('✓ Bientôt disponible — backend en connexion')">Commencer la publication →</button>
+ </div>
+ <a href="griotte-publier.html" style="font-size:0.88rem;color:var(--or);text-decoration:underline">Ouvrir le studio complet →</a>
+ </div>
 
-    <!-- PANEL: MES LIVRES -->
-    <div class="panel" id="panel-meslivres">
-      <div class="section-hd"><h3>Mes publications</h3><button class="btn-sm btn-sm-primary" onclick="showPanel('publier',null)">+ Nouvelle œuvre</button></div>
-      <div class="my-book-row">
-        <div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>
-        <div><div class="my-book-title">Les Fils du Sahel</div><div class="my-book-stats"><div class="my-book-stat">Pages lues <span>32 400</span></div><div class="my-book-stat">Revenus <span style="color:var(--or)">19 440 F</span></div></div></div>
-        <div class="my-book-actions"><button class="btn-sm btn-sm-ghost">Modifier</button><button class="btn-sm btn-sm-ghost">Stats</button></div>
-      </div>
-      <div class="my-book-row">
-        <div class="my-book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"></div>
-        <div><div class="my-book-title">Terres Rouges</div><div class="my-book-stats"><div class="my-book-stat">Pages lues <span>14 600</span></div><div class="my-book-stat">Revenus <span style="color:var(--or)">8 760 F</span></div></div></div>
-        <div class="my-book-actions"><button class="btn-sm btn-sm-ghost">Modifier</button><button class="btn-sm btn-sm-ghost">Stats</button></div>
-      </div>
-    </div>
+ <!-- PANEL: MES LIVRES -->
+ <div class="panel" id="panel-meslivres">
+ <div class="section-hd"><h3>Mes publications</h3><button class="btn-sm btn-sm-primary" onclick="showPanel('publier',null)">+ Nouvelle œuvre</button></div>
+ <div class="my-book-row">
+ <div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>
+ <div><div class="my-book-title">Les Fils du Sahel</div><div class="my-book-stats"><div class="my-book-stat">Pages lues <span>32 400</span></div><div class="my-book-stat">Revenus <span style="color:var(--or)">19 440 F</span></div></div></div>
+ <div class="my-book-actions"><button class="btn-sm btn-sm-ghost">Modifier</button><button class="btn-sm btn-sm-ghost">Stats</button></div>
+ </div>
+ <div class="my-book-row">
+ <div class="my-book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"></div>
+ <div><div class="my-book-title">Terres Rouges</div><div class="my-book-stats"><div class="my-book-stat">Pages lues <span>14 600</span></div><div class="my-book-stat">Revenus <span style="color:var(--or)">8 760 F</span></div></div></div>
+ <div class="my-book-actions"><button class="btn-sm btn-sm-ghost">Modifier</button><button class="btn-sm btn-sm-ghost">Stats</button></div>
+ </div>
+ </div>
 
-    <!-- PANEL: REVENUS -->
-    <div class="panel" id="panel-revenus">
-      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
-        <div class="stat-card"><div class="stat-label">Ce mois</div><div class="stat-val" style="color:var(--or)">28 200</div><div class="stat-change">FCFA</div></div>
-        <div class="stat-card"><div class="stat-label">Total cumulé</div><div class="stat-val">184 500</div><div class="stat-change">FCFA</div></div>
-        <div class="stat-card"><div class="stat-label">Disponible</div><div class="stat-val">28 200</div><div class="stat-change"><button class="btn-sm btn-sm-primary" style="margin-top:0.4rem;font-size:0.72rem;padding:0.3rem 0.8rem" onclick="openModal('withdrawModal')">Retirer →</button></div></div>
-      </div>
-      <div class="section-hd"><h3>Détail par œuvre</h3></div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
-        <table class="rev-table" style="width:100%">
-          <thead><tr><th>Œuvre</th><th>Pages lues</th><th>Revenus (60%)</th></tr></thead>
-          <tbody>
-            <tr><td>Les Fils du Sahel</td><td>32 400</td><td class="rev-amount">19 440 FCFA</td></tr>
-            <tr><td>Terres Rouges</td><td>14 600</td><td class="rev-amount">8 760 FCFA</td></tr>
-            <tr><td>Le Masque et le Miroir</td><td>4 200</td><td class="rev-amount">2 520 FCFA</td></tr>
-            <tr><td style="font-weight:700">Total</td><td>51 200</td><td class="rev-amount" style="font-size:1rem">30 720 FCFA</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+ <!-- PANEL: REVENUS -->
+ <div class="panel" id="panel-revenus">
+ <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+ <div class="stat-card"><div class="stat-label">Ce mois</div><div class="stat-val" style="color:var(--or)">28 200</div><div class="stat-change">FCFA</div></div>
+ <div class="stat-card"><div class="stat-label">Total cumulé</div><div class="stat-val">184 500</div><div class="stat-change">FCFA</div></div>
+ <div class="stat-card"><div class="stat-label">Disponible</div><div class="stat-val">28 200</div><div class="stat-change"><button class="btn-sm btn-sm-primary" style="margin-top:0.4rem;font-size:0.72rem;padding:0.3rem 0.8rem" onclick="openModal('withdrawModal')">Retirer →</button></div></div>
+ </div>
+ <div class="section-hd"><h3>Détail par œuvre</h3></div>
+ <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+ <table class="rev-table" style="width:100%">
+ <thead><tr><th>Œuvre</th><th>Pages lues</th><th>Revenus (60%)</th></tr></thead>
+ <tbody>
+ <tr><td>Les Fils du Sahel</td><td>32 400</td><td class="rev-amount">19 440 FCFA</td></tr>
+ <tr><td>Terres Rouges</td><td>14 600</td><td class="rev-amount">8 760 FCFA</td></tr>
+ <tr><td>Le Masque et le Miroir</td><td>4 200</td><td class="rev-amount">2 520 FCFA</td></tr>
+ <tr><td style="font-weight:700">Total</td><td>51 200</td><td class="rev-amount" style="font-size:1rem">30 720 FCFA</td></tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
 
-    <!-- PANEL: PROFIL -->
-    <div class="panel" id="panel-profil">
-      <div class="profil-card">
-        <div class="profil-ava-big" id="profilAva">A</div>
-        <p class="profil-label">Nom complet</p>
-        <input class="profil-input" type="text" value="Ama Kouyaté" id="profilName"/>
-        <p class="profil-label">Email</p>
-        <input class="profil-input" type="email" value="ama@griotte.com"/>
-        <p class="profil-label">Bio (affichée sur vos livres)</p>
-        <textarea class="profil-input" rows="3" style="resize:vertical">Auteure malienne, passionnée de littérature africaine contemporaine.</textarea>
-        <button class="btn-sm btn-sm-primary" style="margin-top:1.25rem;padding:0.65rem 1.75rem" onclick="showToast('✅ Profil mis à jour')">Enregistrer les modifications</button>
-      </div>
-    </div>
+ <!-- PANEL: PROFIL -->
+ <div class="panel" id="panel-profil">
+ <div class="profil-card">
+ <div class="profil-ava-big" id="profilAva">A</div>
+ <p class="profil-label">Nom complet</p>
+ <input class="profil-input" type="text" value="Ama Kouyaté" id="profilName"/>
+ <p class="profil-label">Email</p>
+ <input class="profil-input" type="email" value="ama@griotte.com"/>
+ <p class="profil-label">Bio (affichée sur vos livres)</p>
+ <textarea class="profil-input" rows="3" style="resize:vertical">Auteure malienne, passionnée de littérature africaine contemporaine.</textarea>
+ <button class="btn-sm btn-sm-primary" style="margin-top:1.25rem;padding:0.65rem 1.75rem" onclick="showToast('✓ Profil mis à jour')">Enregistrer les modifications</button>
+ </div>
+ </div>
 
-    <!-- PANEL: PARAMÈTRES -->
-    <div class="panel" id="panel-parametres">
-      <div class="profil-card">
-        <h3 style="font-family:'Playfair Display',serif;margin-bottom:1.25rem">Paramètres du compte</h3>
-        <p class="profil-label">Langue de l'interface</p>
-        <select class="profil-input"><option>Français</option><option>English</option></select>
-        <p class="profil-label">Notifications email</p>
-        <select class="profil-input"><option>Activées</option><option>Désactivées</option></select>
-        <p class="profil-label">Changer le mot de passe</p>
-        <input class="profil-input" type="password" placeholder="Nouveau mot de passe"/>
-        <button class="btn-sm btn-sm-primary" style="margin-top:1.25rem;padding:0.65rem 1.75rem" onclick="showToast('✅ Paramètres enregistrés')">Enregistrer</button>
-        <div style="margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--border)">
-          <button class="btn-sm" style="background:rgba(220,38,38,0.07);color:#dc2626;border:1px solid rgba(220,38,38,0.2);padding:0.5rem 1rem">🗑 Supprimer mon compte</button>
-        </div>
-      </div>
-    </div>
+ <!-- PANEL: PARAMÈTRES -->
+ <div class="panel" id="panel-parametres">
+ <div class="profil-card">
+ <h3 style="font-family:'Playfair Display',serif;margin-bottom:1.25rem">Paramètres du compte</h3>
+ <p class="profil-label">Langue de l'interface</p>
+ <select class="profil-input"><option>Français</option><option>English</option></select>
+ <p class="profil-label">Notifications email</p>
+ <select class="profil-input"><option>Activées</option><option>Désactivées</option></select>
+ <p class="profil-label">Changer le mot de passe</p>
+ <input class="profil-input" type="password" placeholder="Nouveau mot de passe"/>
+ <button class="btn-sm btn-sm-primary" style="margin-top:1.25rem;padding:0.65rem 1.75rem" onclick="showToast('✓ Paramètres enregistrés')">Enregistrer</button>
+ <div style="margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--border)">
+ <button class="btn-sm" style="background:rgba(220,38,38,0.07);color:#dc2626;border:1px solid rgba(220,38,38,0.2);padding:0.5rem 1rem">Supprimer mon compte</button>
+ </div>
+ </div>
+ </div>
 
-  </div><!-- /content -->
+ </div><!-- /content -->
 </div><!-- /main -->
 
 <script>
@@ -676,237 +676,237 @@ const API = 'https://griotte-backend-2-production.up.railway.app/api/v1';
 
 // ── AUTH CHECK ──
 var token = localStorage.getItem('griotte_token');
-var user  = JSON.parse(localStorage.getItem('griotte_user') || 'null');
+var user = JSON.parse(localStorage.getItem('griotte_user') || 'null');
 
 if (!token) {
-  window.location.href = './griotte-login.html';
+ window.location.href = './griotte-login.html';
 }
 
 // Récupérer token depuis URL (Google OAuth)
 var urlParams = new URLSearchParams(window.location.search);
-var urlToken  = urlParams.get('token');
+var urlToken = urlParams.get('token');
 if (urlToken) {
-  localStorage.setItem('griotte_token', urlToken);
-  token = urlToken;
-  window.history.replaceState({}, '', window.location.pathname);
+ localStorage.setItem('griotte_token', urlToken);
+ token = urlToken;
+ window.history.replaceState({}, '', window.location.pathname);
 }
 
 // ── INIT USER ──
 async function initUser() {
-  try {
-    var res = await fetch(API + '/auth/me', {
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    if (!res.ok) { logout(); return; }
-    user = await res.json();
-    localStorage.setItem('griotte_user', JSON.stringify(user));
+ try {
+ var res = await fetch(API + '/auth/me', {
+ headers: { 'Authorization': 'Bearer ' + token }
+ });
+ if (!res.ok) { logout(); return; }
+ user = await res.json();
+ localStorage.setItem('griotte_user', JSON.stringify(user));
 
-    // Mettre à jour l'interface
-    var initials = (user.name || 'U').charAt(0).toUpperCase();
-    document.getElementById('userAva').textContent   = initials;
-    document.getElementById('userName').textContent  = user.name || 'Utilisateur';
-    document.getElementById('profilAva').textContent = initials;
-    document.getElementById('profilName').value      = user.name || '';
+ // Mettre à jour l'interface
+ var initials = (user.name || 'U').charAt(0).toUpperCase();
+ document.getElementById('userAva').textContent = initials;
+ document.getElementById('userName').textContent = user.name || 'Utilisateur';
+ document.getElementById('profilAva').textContent = initials;
+ document.getElementById('profilName').value = user.name || '';
 
-    var balance = user.balance || 0;
-    document.getElementById('sidebarBalance').innerHTML =
-      balance.toLocaleString('fr-FR') + ' <span style="font-size:0.7rem;font-family:DM Mono,monospace;color:var(--text-muted)">FCFA</span>';
-    document.getElementById('sidebarPages').textContent =
-      Math.floor(balance / 10).toLocaleString('fr-FR') + ' pages disponibles';
-    document.getElementById('statSolde').textContent = balance.toLocaleString('fr-FR');
+ var balance = user.balance || 0;
+ document.getElementById('sidebarBalance').innerHTML =
+ balance.toLocaleString('fr-FR') + ' <span style="font-size:0.7rem;font-family:DM Mono,monospace;color:var(--text-muted)">FCFA</span>';
+ document.getElementById('sidebarPages').textContent =
+ Math.floor(balance / 10).toLocaleString('fr-FR') + ' pages disponibles';
+ document.getElementById('statSolde').textContent = balance.toLocaleString('fr-FR');
 
-    // Admin → lien visible
-    if (user.role === 'ADMIN') {
-      var adminLink = document.querySelector('.sidebar-footer a[href="./griotte-admin.html"]');
-      if (adminLink) adminLink.style.fontWeight = '700';
-    }
+ // Admin → lien visible
+ if (user.role === 'ADMIN') {
+ var adminLink = document.querySelector('.sidebar-footer a[href="./griotte-admin.html"]');
+ if (adminLink) adminLink.style.fontWeight = '700';
+ }
 
-  } catch(e) {
-    console.error('initUser error:', e);
-  }
+ } catch(e) {
+ console.error('initUser error:', e);
+ }
 }
 
 // ── CHARGER CATALOGUE RÉEL ──
 async function loadCatalogue() {
-  try {
-    var res = await fetch(API + '/auth/books-public');
-    var books = await res.json();
-    var grid = document.querySelector('#panel-catalogue .books-grid');
-    if (!grid || !Array.isArray(books) || books.length === 0) return;
+ try {
+ var res = await fetch(API + '/auth/books-public');
+ var books = await res.json();
+ var grid = document.querySelector('#panel-catalogue .books-grid');
+ if (!grid || !Array.isArray(books) || books.length === 0) return;
 
-    var colors = [
-      'linear-gradient(145deg,#1a0a30,#4a1080)',
-      'linear-gradient(145deg,#0a2010,#204a18)',
-      'linear-gradient(145deg,#200a0a,#601010)',
-      'linear-gradient(145deg,#0a1828,#183860)',
-      'linear-gradient(145deg,#1a1000,#4a3000)',
-      'linear-gradient(145deg,#0a1a1a,#105050)',
-    ];
-    grid.innerHTML = books.map(function(b, i) {
-      return '<div class="book-card"><div class="book-cover" style="background:' + colors[i % colors.length] + '">' +
-        '<div class="book-cover-overlay"></div>' +
-        '<div class="book-cover-title">' + (b.title || '') + '</div></div>' +
-        '<div class="book-meta"><div class="book-author">' + (b.author?.name || '') + '</div>' +
-        '<div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>';
-    }).join('');
+ var colors = [
+ 'linear-gradient(145deg,#1a0a30,#4a1080)',
+ 'linear-gradient(145deg,#0a2010,#204a18)',
+ 'linear-gradient(145deg,#200a0a,#601010)',
+ 'linear-gradient(145deg,#0a1828,#183860)',
+ 'linear-gradient(145deg,#1a1000,#4a3000)',
+ 'linear-gradient(145deg,#0a1a1a,#105050)',
+ ];
+ grid.innerHTML = books.map(function(b, i) {
+ return '<div class="book-card"><div class="book-cover" style="background:' + colors[i % colors.length] + '">' +
+ '<div class="book-cover-overlay"></div>' +
+ '<div class="book-cover-title">' + (b.title || '') + '</div></div>' +
+ '<div class="book-meta"><div class="book-author">' + (b.author?.name || '') + '</div>' +
+ '<div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>';
+ }).join('');
 
-    // Aussi mettre à jour accueil catalogue
-    var accueilGrid = document.querySelector('#panel-accueil .books-grid');
-    if (accueilGrid) {
-      accueilGrid.innerHTML = books.slice(0,3).map(function(b, i) {
-        return '<div class="book-card" onclick="window.location='griotte-reader.html'">' +
-          '<div class="book-cover" style="background:' + colors[i % colors.length] + '">' +
-          '<div class="book-cover-overlay"></div>' +
-          '<div class="book-cover-title">' + (b.title || '') + '</div></div>' +
-          '<div class="book-meta"><div class="book-author">' + (b.author?.name || '') + '</div>' +
-          '<div class="book-progress"><div class="book-progress-bar" style="width:0%"></div></div>' +
-          '<div class="book-pct">0%</div></div></div>';
-      }).join('');
-    }
-  } catch(e) { console.error('loadCatalogue:', e); }
+ // Aussi mettre à jour accueil catalogue
+ var accueilGrid = document.querySelector('#panel-accueil .books-grid');
+ if (accueilGrid) {
+ accueilGrid.innerHTML = books.slice(0,3).map(function(b, i) {
+ return '<div class="book-card" onclick="window.location='griotte-reader.html'">' +
+ '<div class="book-cover" style="background:' + colors[i % colors.length] + '">' +
+ '<div class="book-cover-overlay"></div>' +
+ '<div class="book-cover-title">' + (b.title || '') + '</div></div>' +
+ '<div class="book-meta"><div class="book-author">' + (b.author?.name || '') + '</div>' +
+ '<div class="book-progress"><div class="book-progress-bar" style="width:0%"></div></div>' +
+ '<div class="book-pct">0%</div></div></div>';
+ }).join('');
+ }
+ } catch(e) { console.error('loadCatalogue:', e); }
 }
 
 // ── CHARGER MES LIVRES ──
 async function loadMyBooks() {
-  try {
-    var res = await fetch(API + '/auth/my-books', {
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    var books = await res.json();
-    if (!Array.isArray(books) || books.length === 0) return;
+ try {
+ var res = await fetch(API + '/auth/my-books', {
+ headers: { 'Authorization': 'Bearer ' + token }
+ });
+ var books = await res.json();
+ if (!Array.isArray(books) || books.length === 0) return;
 
-    var html = books.map(function(b) {
-      return '<div class="my-book-row">' +
-        '<div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>' +
-        '<div><div class="my-book-title">' + b.title + '</div>' +
-        '<div class="my-book-stats">' +
-        '<div class="my-book-stat">Pages <span>' + (b.totalPages || 0) + '</span></div>' +
-        '<div class="my-book-stat">Statut <span>' + (b.status || 'DRAFT') + '</span></div>' +
-        '</div></div>' +
-        '<div class="my-book-actions"><button class="btn-sm btn-sm-ghost">Modifier</button></div>' +
-        '</div>';
-    }).join('');
+ var html = books.map(function(b) {
+ return '<div class="my-book-row">' +
+ '<div class="my-book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"></div>' +
+ '<div><div class="my-book-title">' + b.title + '</div>' +
+ '<div class="my-book-stats">' +
+ '<div class="my-book-stat">Pages <span>' + (b.totalPages || 0) + '</span></div>' +
+ '<div class="my-book-stat">Statut <span>' + (b.status || 'DRAFT') + '</span></div>' +
+ '</div></div>' +
+ '<div class="my-book-actions"><button class="btn-sm btn-sm-ghost">Modifier</button></div>' +
+ '</div>';
+ }).join('');
 
-    var mesLivres = document.querySelector('#panel-meslivres');
-    if (mesLivres) {
-      var existing = mesLivres.querySelectorAll('.my-book-row');
-      existing.forEach(function(el) { el.remove(); });
-      mesLivres.insertAdjacentHTML('beforeend', html);
-    }
-  } catch(e) { console.error('loadMyBooks:', e); }
+ var mesLivres = document.querySelector('#panel-meslivres');
+ if (mesLivres) {
+ var existing = mesLivres.querySelectorAll('.my-book-row');
+ existing.forEach(function(el) { el.remove(); });
+ mesLivres.insertAdjacentHTML('beforeend', html);
+ }
+ } catch(e) { console.error('loadMyBooks:', e); }
 }
 
 // ── CHARGER STATS ──
 async function loadStats() {
-  try {
-    var res = await fetch(API + '/auth/my-stats', {
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    var stats = await res.json();
-    // Update revenue badge
-    var badge = document.getElementById('revBadge');
-    if (badge && stats.totalRevenue) {
-      badge.textContent = stats.totalRevenue.toLocaleString('fr-FR') + ' F';
-    }
-  } catch(e) { console.error('loadStats:', e); }
+ try {
+ var res = await fetch(API + '/auth/my-stats', {
+ headers: { 'Authorization': 'Bearer ' + token }
+ });
+ var stats = await res.json();
+ // Update revenue badge
+ var badge = document.getElementById('revBadge');
+ if (badge && stats.totalRevenue) {
+ badge.textContent = stats.totalRevenue.toLocaleString('fr-FR') + ' F';
+ }
+ } catch(e) { console.error('loadStats:', e); }
 }
 
 // ── RECHARGE SOLDE ──
 async function lancerPaiement() {
-  closeModal('rechargeModal');
-  try {
-    var res = await fetch(API + '/auth/recharge', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: selectedPack })
-    });
-    var data = await res.json();
-    if (data.balance !== undefined) {
-      var b = data.balance;
-      document.getElementById('sidebarBalance').innerHTML =
-        b.toLocaleString('fr-FR') + ' <span style="font-size:0.7rem;font-family:DM Mono,monospace;color:var(--text-muted)">FCFA</span>';
-      document.getElementById('sidebarPages').textContent = Math.floor(b/10).toLocaleString('fr-FR') + ' pages disponibles';
-      document.getElementById('statSolde').textContent = b.toLocaleString('fr-FR');
-      showToast('✅ Solde rechargé : +' + selectedPack + ' FCFA');
-    }
-  } catch(e) {
-    showToast('❌ Erreur lors du rechargement');
-  }
+ closeModal('rechargeModal');
+ try {
+ var res = await fetch(API + '/auth/recharge', {
+ method: 'POST',
+ headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+ body: JSON.stringify({ amount: selectedPack })
+ });
+ var data = await res.json();
+ if (data.balance !== undefined) {
+ var b = data.balance;
+ document.getElementById('sidebarBalance').innerHTML =
+ b.toLocaleString('fr-FR') + ' <span style="font-size:0.7rem;font-family:DM Mono,monospace;color:var(--text-muted)">FCFA</span>';
+ document.getElementById('sidebarPages').textContent = Math.floor(b/10).toLocaleString('fr-FR') + ' pages disponibles';
+ document.getElementById('statSolde').textContent = b.toLocaleString('fr-FR');
+ showToast('✓ Solde rechargé : +' + selectedPack + ' FCFA');
+ }
+ } catch(e) {
+ showToast('✗ Erreur lors du rechargement');
+ }
 }
 
 // ── RETRAIT ──
 function confirmWithdraw() {
-  var amt = document.getElementById('wAmount').value;
-  closeModal('withdrawModal');
-  showToast('✅ Retrait de ' + (amt||'0') + ' FCFA demandé — traitement sous 24h');
+ var amt = document.getElementById('wAmount').value;
+ closeModal('withdrawModal');
+ showToast('✓ Retrait de ' + (amt||'0') + ' FCFA demandé — traitement sous 24h');
 }
 
 // ── DÉCONNEXION ──
 function logout() {
-  localStorage.removeItem('griotte_token');
-  localStorage.removeItem('griotte_user');
-  localStorage.removeItem('griotte_role');
-  window.location.href = './griotte-login.html';
+ localStorage.removeItem('griotte_token');
+ localStorage.removeItem('griotte_user');
+ localStorage.removeItem('griotte_role');
+ window.location.href = './griotte-login.html';
 }
 
 // ── PANEL NAVIGATION ──
 var titles = {
-  accueil:'Mon accueil', catalogue:'Catalogue', bibliotheque:'Ma bibliothèque',
-  lecture:'Continuer à lire', publier:'Publier une œuvre', meslivres:'Mes publications',
-  revenus:'Mes revenus', profil:'Mon profil', parametres:'Paramètres'
+ accueil:'Mon accueil', catalogue:'Catalogue', bibliotheque:'Ma bibliothèque',
+ lecture:'Continuer à lire', publier:'Publier une œuvre', meslivres:'Mes publications',
+ revenus:'Mes revenus', profil:'Mon profil', parametres:'Paramètres'
 };
 function showPanel(id, btn) {
-  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
-  var panel = document.getElementById('panel-' + id);
-  if (panel) panel.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
-  if (btn) btn.classList.add('active');
-  document.getElementById('topbarTitle').textContent = titles[id] || id;
-  if (window.innerWidth <= 900) closeSidebar();
+ document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+ var panel = document.getElementById('panel-' + id);
+ if (panel) panel.classList.add('active');
+ document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
+ if (btn) btn.classList.add('active');
+ document.getElementById('topbarTitle').textContent = titles[id] || id;
+ if (window.innerWidth <= 900) closeSidebar();
 }
 
 // ── SIDEBAR MOBILE ──
-function openSidebar()  { document.getElementById('sidebar').classList.add('open'); }
+function openSidebar() { document.getElementById('sidebar').classList.add('open'); }
 function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); }
 function checkWidth() {
-  var btn = document.getElementById('menuBtn');
-  if (window.innerWidth <= 900) btn.style.display = 'block';
-  else { btn.style.display = 'none'; closeSidebar(); }
+ var btn = document.getElementById('menuBtn');
+ if (window.innerWidth <= 900) btn.style.display = 'block';
+ else { btn.style.display = 'none'; closeSidebar(); }
 }
 window.addEventListener('resize', checkWidth);
 checkWidth();
 
 // ── MODAL ──
-function openModal(id)  { document.getElementById(id).classList.add('active'); }
+function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 document.querySelectorAll('.modal-overlay').forEach(function(o) {
-  o.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
+ o.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
 });
 
 // ── PACK SELECTION ──
 var selectedPack = 500;
 function selectPack(el, amount) {
-  document.querySelectorAll('.pack-btn').forEach(function(b) { b.classList.remove('sel'); });
-  el.classList.add('sel');
-  selectedPack = amount;
+ document.querySelectorAll('.pack-btn').forEach(function(b) { b.classList.remove('sel'); });
+ el.classList.add('sel');
+ selectedPack = amount;
 }
 
 // ── TOAST ──
 var toastTimer;
 function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(function() { t.classList.remove('show'); }, 3500);
+ var t = document.getElementById('toast');
+ t.textContent = msg;
+ t.classList.add('show');
+ clearTimeout(toastTimer);
+ toastTimer = setTimeout(function() { t.classList.remove('show'); }, 3500);
 }
 
 // ── DÉCONNEXION sidebar ──
 document.querySelector('.sidebar-footer a[href="./griotte-landing.html"]') &&
-  document.querySelector('.sidebar-footer a[href="./griotte-landing.html"]').addEventListener('click', function(e) {
-    e.preventDefault();
-    if (confirm('Se déconnecter ?')) { localStorage.clear(); window.location.href = './griotte-login.html'; }
-  });
+ document.querySelector('.sidebar-footer a[href="./griotte-landing.html"]').addEventListener('click', function(e) {
+ e.preventDefault();
+ if (confirm('Se déconnecter ?')) { localStorage.clear(); window.location.href = './griotte-login.html'; }
+ });
 
 // ── LANCEMENT ──
 initUser();

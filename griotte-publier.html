@@ -9,24 +9,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
-   Une seule taille, une seule source, partout identique
-   ════════════════════════════════════════════════════ */
+ Une seule taille, une seule source, partout identique
+ ════════════════════════════════════════════════════ */
 .g-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: visible !important;
-  line-height: 0;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0;
+ overflow: visible !important;
+ line-height: 0;
 }
 .g-icon img {
-  display: block;
-  height: 38px;
-  width: 38px;
-  object-fit: contain;
-  border-radius: 11px;
-  overflow: visible !important;
-  /* No filter, no opacity, no shadow — logo brut */
+ display: block;
+ height: 38px;
+ width: 38px;
+ object-fit: contain;
+ border-radius: 11px;
+ overflow: visible !important;
+ /* No filter, no opacity, no shadow — logo brut */
 }
 /* Override ALL size variants → same 38px */
 .g-icon--48 img,
@@ -34,24 +34,24 @@
 .g-icon--36 img,
 .g-icon--32 img,
 .g-icon--28 img {
-  height: 38px !important;
-  width: 38px !important;
-  border-radius: 11px !important;
+ height: 38px !important;
+ width: 38px !important;
+ border-radius: 11px !important;
 }
 /* Footer: slightly smaller on dark bg */
 footer .g-icon img,
 footer .g-icon--48 img,
 footer .g-icon--40 img,
 footer .g-icon--36 img {
-  height: 34px !important;
-  width: 34px !important;
-  border-radius: 10px !important;
+ height: 34px !important;
+ width: 34px !important;
+ border-radius: 10px !important;
 }
 /* Auth modal: centered */
 .auth-logo-wrap .g-icon img {
-  height: 42px !important;
-  width: 42px !important;
-  border-radius: 13px !important;
+ height: 42px !important;
+ width: 42px !important;
+ border-radius: 13px !important;
 }
 /* Force no extra styles */
 [class*="logo"] { overflow: visible !important; }
@@ -82,37 +82,37 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
 .g-icon--32 img{height:32px;width:32px}
 [class*="logo"],[class*="sidebar-logo"],[class*="cat-logo"],[class*="s-logo"],[class*="footer-logo"]{overflow:visible!important}
 @media(max-width:768px){
-  .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
-  .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
+ .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
+ .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
 }
 /* ──────────────────────────────────────────────────────── */
 
 :root{
-  /* Couleurs logo */
-  --or:#FF6B00;
-  --or-dark:#CC5200;
-  --or-light:#FF8C33;
-  --or-glow:rgba(255,107,0,0.12);
-  --or-border:rgba(255,107,0,0.25);
-  /* Fond & surfaces */
-  --bg:#F8F5F1;
-  --bg-card:#FFFFFF;
-  --bg-card2:#FFF8F4;
-  --bg-sidebar:#FFFFFF;
-  /* Texte */
-  --text-main:#1A1410;
-  --text-soft:#4A3F35;
-  --text-muted:#6B5A4E;
-  /* Bordures */
-  --border:rgba(26,20,16,0.09);
-  --border-strong:rgba(26,20,16,0.16);
-  /* Compatibilité ancien code */
-  --noir:#1A1410;
-  --noir-soft:#F8F5F1;
-  --noir-card:#FFFFFF;
-  --blanc:#F8F5F1;
-  --blanc-dim:#6B5A4E;
-  --cendre:#6B5F52;
+ /* Couleurs logo */
+ --or:#FF6B00;
+ --or-dark:#CC5200;
+ --or-light:#FF8C33;
+ --or-glow:rgba(255,107,0,0.12);
+ --or-border:rgba(255,107,0,0.25);
+ /* Fond & surfaces */
+ --bg:#F8F5F1;
+ --bg-card:#FFFFFF;
+ --bg-card2:#FFF8F4;
+ --bg-sidebar:#FFFFFF;
+ /* Texte */
+ --text-main:#1A1410;
+ --text-soft:#4A3F35;
+ --text-muted:#6B5A4E;
+ /* Bordures */
+ --border:rgba(26,20,16,0.09);
+ --border-strong:rgba(26,20,16,0.16);
+ /* Compatibilité ancien code */
+ --noir:#1A1410;
+ --noir-soft:#F8F5F1;
+ --noir-card:#FFFFFF;
+ --blanc:#F8F5F1;
+ --blanc-dim:#6B5A4E;
+ --cendre:#6B5F52;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;scroll-behavior:smooth;}
@@ -321,17 +321,17 @@ label .optional{color:var(--cendre);font-size:0.75rem;margin-left:0.3rem;opacity
 @media(max-width:768px){:root{--sidebar-w:0px;}.sidebar{display:none;}.main{margin-left:0;}}
 
 /* ════════════════════════════════════════════════
-   GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
-   Applied across all pages for WCAG AA compliance
-   ════════════════════════════════════════════════ */
+ GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
+ Applied across all pages for WCAG AA compliance
+ ════════════════════════════════════════════════ */
 
 /* 1. Strengthen base variables */
 :root {
-  --text-main:   #1A1410 !important;   /* near-black, high contrast */
-  --text-soft:   #4A3F35 !important;   /* dark brown-grey, readable */
-  --text-muted:  #6B5A4E !important;   /* medium brown, still readable */
-  --blanc-dim:   #6B5A4E !important;
-  --cendre:      #4A3F35 !important;
+ --text-main: #1A1410 !important; /* near-black, high contrast */
+ --text-soft: #4A3F35 !important; /* dark brown-grey, readable */
+ --text-muted: #6B5A4E !important; /* medium brown, still readable */
+ --blanc-dim: #6B5A4E !important;
+ --cendre: #4A3F35 !important;
 }
 
 /* 2. Body & base text */
@@ -354,8 +354,8 @@ h1, h2, h3, h4, h5, h6,
 
 /* 6. Sidebar — enforce dark text on white bg */
 .sidebar, .aside, [class*="sidebar"] {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
 }
 .sidebar *, .aside * { color: #1A1410; }
 .nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
@@ -363,16 +363,16 @@ h1, h2, h3, h4, h5, h6,
 /* 7. Cards — always readable */
 .card, [class*="-card"], .book-card, .testi-card,
 .stat-card, .dash-stat, .concept-visual, .author-dashboard {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.1) !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.1) !important;
 }
 .card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
 
 /* 8. Topbar */
 .topbar, [class*="topbar"], #navbar {
-  background: rgba(248,245,241,0.95) !important;
-  color: #1A1410 !important;
+ background: rgba(248,245,241,0.95) !important;
+ color: #1A1410 !important;
 }
 .topbar *, #navbar * { color: #1A1410; }
 
@@ -381,22 +381,22 @@ h1, h2, h3, h4, h5, h6,
 [class*="btn"][class*="hero"],
 [class*="btn-nav-cta"], .btn-hero-primary,
 .btn-cta-primary, .auth-btn {
-  background: #FF6B00 !important;
-  color: #FFFFFF !important;
-  opacity: 1 !important;
+ background: #FF6B00 !important;
+ color: #FFFFFF !important;
+ opacity: 1 !important;
 }
 [class*="btn"][class*="ghost"],
 [class*="btn"][class*="secondary"],
 .btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.25) !important;
-  opacity: 1 !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.25) !important;
+ opacity: 1 !important;
 }
 
 /* 10. Footer — dark bg with proper white text */
 footer {
-  background: #1A1410 !important;
-  color: rgba(255,255,255,0.75) !important;
+ background: #1A1410 !important;
+ color: rgba(255,255,255,0.75) !important;
 }
 footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
 footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
@@ -413,7 +413,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .hero-stat-value, .stat-value, .dash-stat-val,
 .pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
 .hero-stat-label, .stat-label, .dash-stat-lbl {
-  color: #6B5A4E !important; opacity: 1 !important;
+ color: #6B5A4E !important; opacity: 1 !important;
 }
 
 /* 13. Auth modal */
@@ -424,7 +424,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 /* 14. Section badges & DM Mono labels */
 .section-badge, .hero-badge, .dash-badge,
 [class*="badge"], [class*="-label"], .nav-section {
-  opacity: 1 !important;
+ opacity: 1 !important;
 }
 
 /* 15. Minimum font sizes */
@@ -432,13 +432,13 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .section-badge, .ticker-item, .book-price,
 .testi-role, .auth-sub, [class*="-label"],
 [class*="-lbl"], [class*="badge"] {
-  font-size: max(0.72rem, 11px) !important;
+ font-size: max(0.72rem, 11px) !important;
 }
 
 /* 16. Reader — dark text on white */
 .reader-content, .reader-text, [class*="reader-body"] {
-  color: #1A1410 !important;
-  background: #FFFFFF !important;
+ color: #1A1410 !important;
+ background: #FFFFFF !important;
 }
 
 /* ═══════════════════════════════════════════════ */
@@ -450,657 +450,657 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 <body>
 
 <!-- TOAST -->
-<div class="toast" id="toast"><span id="ti"></span> <span id="tm"></span></div>
+<div class="toast" id="toast"><span id="ti"></span><span id="tm"></span></div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="s-logo"><brand-logo></brand-logo></div></div>
-    </span>
-  </div>
+ <div class="s-logo"><brand-logo></brand-logo></div></div>
+ </span>
+ </div>
 
-  <div class="s-author">
-    <div class="a-avatar">A</div>
-    <div>
-      <div class="a-name">Ama Kouyaté</div>
-      <div class="a-badge">● Auteure vérifiée</div>
-    </div>
-  </div>
+ <div class="s-author">
+ <div class="a-avatar">A</div>
+ <div>
+ <div class="a-name">Ama Kouyaté</div>
+ <div class="a-badge">Auteure vérifiée</div>
+ </div>
+ </div>
 
-  <nav class="s-nav">
-    <div class="nav-sec">Navigation</div>
-    <a class="nav-item" href="#"><span class="nav-ico">📊</span>Dashboard</a>
-    <a class="nav-item" href="#"><span class="nav-ico">📚</span>Mes œuvres</a>
-    <a class="nav-item active"><span class="nav-ico">✍️</span>Nouveau roman</a>
-    <a class="nav-item" href="#"><span class="nav-ico">💰</span>Revenus</a>
-    <a class="nav-item" href="#"><span class="nav-ico">👤</span>Mon profil</a>
-  </nav>
+ <nav class="s-nav">
+ <div class="nav-sec">Navigation</div>
+ <a class="nav-item" href="#"><span class="nav-ico"></span>Dashboard</a>
+ <a class="nav-item" href="#"><span class="nav-ico"></span>Mes œuvres</a>
+ <a class="nav-item active"><span class="nav-ico"></span>Nouveau roman</a>
+ <a class="nav-item" href="#"><span class="nav-ico"></span>Revenus</a>
+ <a class="nav-item" href="#"><span class="nav-ico"></span>Mon profil</a>
+ </nav>
 
-  <div class="steps-nav">
-    <div class="steps-title">Progression</div>
+ <div class="steps-nav">
+ <div class="steps-title">Progression</div>
 
-    <div class="step-item done" onclick="goToStep(1)">
-      <div class="step-circle">✓</div>
-      <span class="step-label">Informations</span>
-    </div>
-    <div class="step-connector done"></div>
+ <div class="step-item done" onclick="goToStep(1)">
+ <div class="step-circle">✓</div>
+ <span class="step-label">Informations</span>
+ </div>
+ <div class="step-connector done"></div>
 
-    <div class="step-item active" onclick="goToStep(2)">
-      <div class="step-circle">2</div>
-      <span class="step-label">Couverture & genre</span>
-    </div>
-    <div class="step-connector"></div>
+ <div class="step-item active" onclick="goToStep(2)">
+ <div class="step-circle">2</div>
+ <span class="step-label">Couverture & genre</span>
+ </div>
+ <div class="step-connector"></div>
 
-    <div class="step-item" onclick="goToStep(3)">
-      <div class="step-circle">3</div>
-      <span class="step-label">Chapitres</span>
-    </div>
-    <div class="step-connector"></div>
+ <div class="step-item" onclick="goToStep(3)">
+ <div class="step-circle">3</div>
+ <span class="step-label">Chapitres</span>
+ </div>
+ <div class="step-connector"></div>
 
-    <div class="step-item" onclick="goToStep(4)">
-      <div class="step-circle">4</div>
-      <span class="step-label">Paramètres</span>
-    </div>
-    <div class="step-connector"></div>
+ <div class="step-item" onclick="goToStep(4)">
+ <div class="step-circle">4</div>
+ <span class="step-label">Paramètres</span>
+ </div>
+ <div class="step-connector"></div>
 
-    <div class="step-item" onclick="goToStep(5)">
-      <div class="step-circle">5</div>
-      <span class="step-label">Révision & publication</span>
-    </div>
-  </div>
+ <div class="step-item" onclick="goToStep(5)">
+ <div class="step-circle">5</div>
+ <span class="step-label">Révision & publication</span>
+ </div>
+ </div>
 </aside>
 
 <!-- MAIN -->
 <div class="main">
 
-  <div class="topbar">
-    <div class="tb-left">
-      <button class="btn-back" onclick="toast('← Retour au dashboard','🏠')">← Dashboard</button>
-      <span style="color:var(--border-md)">|</span>
-      <span class="tb-title" id="topbarTitle">Couverture & Genre</span>
-    </div>
-    <div class="tb-right">
-      <div class="auto-save"><div class="as-dot"></div>Sauvegarde auto</div>
-      <button class="save-draft" onclick="toast('Brouillon sauvegardé ✓','💾')">💾 Enregistrer brouillon</button>
-    </div>
-  </div>
+ <div class="topbar">
+ <div class="tb-left">
+ <button class="btn-back" onclick="toast('← Retour au dashboard','')">← Dashboard</button>
+ <span style="color:var(--border-md)">|</span>
+ <span class="tb-title" id="topbarTitle">Couverture & Genre</span>
+ </div>
+ <div class="tb-right">
+ <div class="auto-save"><div class="as-dot"></div>Sauvegarde auto</div>
+ <button class="save-draft" onclick="toast('Brouillon sauvegardé ✓','')"> Enregistrer brouillon</button>
+ </div>
+ </div>
 
-  <div class="progress-strip">
-    <div class="progress-fill" id="progressFill" style="width:40%"></div>
-  </div>
+ <div class="progress-strip">
+ <div class="progress-fill" id="progressFill" style="width:40%"></div>
+ </div>
 
-  <!-- ═══ STEPS CONTENT ═══ -->
-  <div class="content" id="stepsContent">
+ <!-- ═══ STEPS CONTENT ═══ -->
+ <div class="content" id="stepsContent">
 
-    <!-- STEP 1: Informations -->
-    <div id="step1" style="display:none;">
-      <div class="step-header">
-        <div class="step-label-top">Étape 1 sur 5</div>
-        <h1 class="step-title">Informations générales</h1>
-        <p class="step-desc">Renseignez les informations essentielles de votre roman. Ces données apparaîtront sur la fiche du roman dans le catalogue.</p>
-      </div>
+ <!-- STEP 1: Informations -->
+ <div id="step1" style="display:none;">
+ <div class="step-header">
+ <div class="step-label-top">Étape 1 sur 5</div>
+ <h1 class="step-title">Informations générales</h1>
+ <p class="step-desc">Renseignez les informations essentielles de votre roman. Ces données apparaîtront sur la fiche du roman dans le catalogue.</p>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title">Titre & Description</div>
-        <div class="field">
-          <label>Titre du roman <span class="required">*</span></label>
-          <input class="input" type="text" placeholder="Ex: Les Fils du Sahel" value="Les Fils du Sahel" oninput="updateTitle(this.value)"/>
-        </div>
-        <div class="field">
-          <label>Sous-titre <span class="optional">(optionnel)</span></label>
-          <input class="input" type="text" placeholder="Ex: Une épopée sahélienne"/>
-        </div>
-        <div class="field">
-          <label>Synopsis <span class="required">*</span></label>
-          <textarea class="textarea" placeholder="Résumé de votre roman (200–500 caractères)…" style="min-height:120px;" oninput="countChars(this,500)" id="synopsisField">Dans les vastes plaines du Sahel malien, Djibi revient au village de son enfance après dix ans passés à Bamako. Il y retrouve Aminata, la griotte centenaire gardienne de la mémoire collective…</textarea>
-          <div class="char-count" id="synopsisCount">188 / 500</div>
-        </div>
-      </div>
+ <div class="form-section">
+ <div class="fs-title">Titre & Description</div>
+ <div class="field">
+ <label>Titre du roman <span class="required">*</span></label>
+ <input class="input" type="text" placeholder="Ex: Les Fils du Sahel" value="Les Fils du Sahel" oninput="updateTitle(this.value)"/>
+ </div>
+ <div class="field">
+ <label>Sous-titre <span class="optional">(optionnel)</span></label>
+ <input class="input" type="text" placeholder="Ex: Une épopée sahélienne"/>
+ </div>
+ <div class="field">
+ <label>Synopsis <span class="required">*</span></label>
+ <textarea class="textarea" placeholder="Résumé de votre roman (200–500 caractères)…" style="min-height:120px;" oninput="countChars(this,500)" id="synopsisField">Dans les vastes plaines du Sahel malien, Djibi revient au village de son enfance après dix ans passés à Bamako. Il y retrouve Aminata, la griotte centenaire gardienne de la mémoire collective…</textarea>
+ <div class="char-count" id="synopsisCount">188 / 500</div>
+ </div>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title">Auteur & Origine</div>
-        <div class="field-row">
-          <div>
-            <label>Nom de plume <span class="required">*</span></label>
-            <input class="input" type="text" value="Ama Kouyaté"/>
-          </div>
-          <div>
-            <label>Pays d'origine <span class="required">*</span></label>
-            <select class="select">
-              <option selected>🇲🇱 Mali</option>
-              <option>🇸🇳 Sénégal</option>
-              <option>🇨🇮 Côte d'Ivoire</option>
-              <option>🇳🇬 Nigeria</option>
-              <option>🇬🇭 Ghana</option>
-              <option>🇧🇫 Burkina Faso</option>
-              <option>🇬🇳 Guinée</option>
-              <option>🇰🇪 Kenya</option>
-              <option>🇹🇳 Tunisie</option>
-              <option>🇪🇬 Égypte</option>
-              <option>Autre</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-row">
-          <div>
-            <label>Langue d'écriture <span class="required">*</span></label>
-            <select class="select">
-              <option selected>Français</option>
-              <option>Anglais</option>
-              <option>Arabe</option>
-              <option>Wolof</option>
-              <option>Bambara</option>
-              <option>Haoussa</option>
-              <option>Swahili</option>
-            </select>
-          </div>
-          <div>
-            <label>Année d'écriture</label>
-            <input class="input" type="number" value="2024" min="1900" max="2030"/>
-          </div>
-        </div>
-      </div>
+ <div class="form-section">
+ <div class="fs-title">Auteur & Origine</div>
+ <div class="field-row">
+ <div>
+ <label>Nom de plume <span class="required">*</span></label>
+ <input class="input" type="text" value="Ama Kouyaté"/>
+ </div>
+ <div>
+ <label>Pays d'origine <span class="required">*</span></label>
+ <select class="select">
+ <option selected>🇲🇱 Mali</option>
+ <option>🇸🇳 Sénégal</option>
+ <option>🇨🇮 Côte d'Ivoire</option>
+ <option>🇳🇬 Nigeria</option>
+ <option>🇬🇭 Ghana</option>
+ <option>🇧🇫 Burkina Faso</option>
+ <option>🇬🇳 Guinée</option>
+ <option>🇰🇪 Kenya</option>
+ <option>🇹🇳 Tunisie</option>
+ <option>🇪🇬 Égypte</option>
+ <option>Autre</option>
+ </select>
+ </div>
+ </div>
+ <div class="field-row">
+ <div>
+ <label>Langue d'écriture <span class="required">*</span></label>
+ <select class="select">
+ <option selected>Français</option>
+ <option>Anglais</option>
+ <option>Arabe</option>
+ <option>Wolof</option>
+ <option>Bambara</option>
+ <option>Haoussa</option>
+ <option>Swahili</option>
+ </select>
+ </div>
+ <div>
+ <label>Année d'écriture</label>
+ <input class="input" type="number" value="2024" min="1900" max="2030"/>
+ </div>
+ </div>
+ </div>
 
-      <div class="step-nav">
-        <div class="step-progress-text">Étape 1 / 5</div>
-        <button class="btn-next" onclick="goToStep(2)">Étape suivante →</button>
-      </div>
-    </div>
+ <div class="step-nav">
+ <div class="step-progress-text">Étape 1 / 5</div>
+ <button class="btn-next" onclick="goToStep(2)">Étape suivante →</button>
+ </div>
+ </div>
 
-    <!-- STEP 2: Couverture & Genre -->
-    <div id="step2">
-      <div class="step-header">
-        <div class="step-label-top">Étape 2 sur 5</div>
-        <h1 class="step-title">Couverture & Genre</h1>
-        <p class="step-desc">Choisissez la couleur de votre couverture et les catégories qui définissent votre roman. Une bonne couverture multiplie les clics par 3.</p>
-      </div>
+ <!-- STEP 2: Couverture & Genre -->
+ <div id="step2">
+ <div class="step-header">
+ <div class="step-label-top">Étape 2 sur 5</div>
+ <h1 class="step-title">Couverture & Genre</h1>
+ <p class="step-desc">Choisissez la couleur de votre couverture et les catégories qui définissent votre roman. Une bonne couverture multiplie les clics par 3.</p>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title">Couverture du roman</div>
-        <div class="cover-upload-area">
-          <div class="cover-preview cs1 has-color" id="coverPreview" onclick="toast('Importez votre image ou choisissez une couleur →','🎨')">
-            <div style="position:absolute;inset:0;padding:1rem;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%);">
-              <div style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-weight:600;color:#fff;line-height:1.2;" id="coverTitle">Les Fils du Sahel</div>
-              <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:0.2rem;">Ama Kouyaté</div>
-            </div>
-          </div>
-          <div class="cover-controls">
-            <div>
-              <label>Couleur de couverture</label>
-              <div class="color-grid">
-                <div class="color-swatch cs1 selected" onclick="setCover(this,'cs1')"></div>
-                <div class="color-swatch cs2" onclick="setCover(this,'cs2')"></div>
-                <div class="color-swatch cs3" onclick="setCover(this,'cs3')"></div>
-                <div class="color-swatch cs4" onclick="setCover(this,'cs4')"></div>
-                <div class="color-swatch cs5" onclick="setCover(this,'cs5')"></div>
-                <div class="color-swatch cs6" onclick="setCover(this,'cs6')"></div>
-                <div class="color-swatch cs7" onclick="setCover(this,'cs7')"></div>
-                <div class="color-swatch cs8" onclick="setCover(this,'cs8')"></div>
-              </div>
-            </div>
-            <button class="upload-btn" onclick="toast('Importation d'image — format JPG/PNG, 1200×1600px recommandé','📸')">📸 Importer une image</button>
-            <div class="field-hint">Format JPG ou PNG · Résolution recommandée 1200×1600px · Max 5MB</div>
-          </div>
-        </div>
-      </div>
+ <div class="form-section">
+ <div class="fs-title">Couverture du roman</div>
+ <div class="cover-upload-area">
+ <div class="cover-preview cs1 has-color" id="coverPreview" onclick="toast('Importez votre image ou choisissez une couleur →','')">
+ <div style="position:absolute;inset:0;padding:1rem;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%);">
+ <div style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-weight:600;color:#fff;line-height:1.2;" id="coverTitle">Les Fils du Sahel</div>
+ <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:0.2rem;">Ama Kouyaté</div>
+ </div>
+ </div>
+ <div class="cover-controls">
+ <div>
+ <label>Couleur de couverture</label>
+ <div class="color-grid">
+ <div class="color-swatch cs1 selected" onclick="setCover(this,'cs1')"></div>
+ <div class="color-swatch cs2" onclick="setCover(this,'cs2')"></div>
+ <div class="color-swatch cs3" onclick="setCover(this,'cs3')"></div>
+ <div class="color-swatch cs4" onclick="setCover(this,'cs4')"></div>
+ <div class="color-swatch cs5" onclick="setCover(this,'cs5')"></div>
+ <div class="color-swatch cs6" onclick="setCover(this,'cs6')"></div>
+ <div class="color-swatch cs7" onclick="setCover(this,'cs7')"></div>
+ <div class="color-swatch cs8" onclick="setCover(this,'cs8')"></div>
+ </div>
+ </div>
+ <button class="upload-btn" onclick="toast('Importation d'image — format JPG/PNG, 1200×1600px recommandé','')"> Importer une image</button>
+ <div class="field-hint">Format JPG ou PNG · Résolution recommandée 1200×1600px · Max 5MB</div>
+ </div>
+ </div>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title">Classification</div>
-        <div class="field-row">
-          <div>
-            <label>Genre principal <span class="required">*</span></label>
-            <select class="select">
-              <option selected>Roman littéraire</option>
-              <option>Romance</option>
-              <option>Thriller / Policier</option>
-              <option>Histoire & Épopée</option>
-              <option>Fantastique africain</option>
-              <option>Science-fiction</option>
-              <option>Jeunesse</option>
-              <option>Nouvelle</option>
-              <option>Autobiographie</option>
-              <option>Essai</option>
-            </select>
-          </div>
-          <div>
-            <label>Sous-genre <span class="optional">(optionnel)</span></label>
-            <select class="select">
-              <option selected>— Sélectionner —</option>
-              <option>Initiatique</option>
-              <option>Politique</option>
-              <option>Diaspora</option>
-              <option>Historique</option>
-              <option>Mystique</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label>Mots-clés & thèmes</label>
-          <div class="tags-wrap" onclick="this.querySelector('.tag-input').focus()">
-            <span class="tag-chip">Sahel <button onclick="this.closest('.tag-chip').remove()">✕</button></span>
-            <span class="tag-chip">Identité <button onclick="this.closest('.tag-chip').remove()">✕</button></span>
-            <span class="tag-chip">Mali <button onclick="this.closest('.tag-chip').remove()">✕</button></span>
-            <span class="tag-chip">Griot <button onclick="this.closest('.tag-chip').remove()">✕</button></span>
-            <input class="tag-input" placeholder="Ajouter un thème…" onkeydown="addTag(event,this)"/>
-          </div>
-          <div class="field-hint">Appuyez sur Entrée pour ajouter · Maximum 10 mots-clés</div>
-        </div>
-        <div class="field-row">
-          <div>
-            <label>Public cible</label>
-            <select class="select">
-              <option>Adultes (18+)</option>
-              <option selected>Tous publics (15+)</option>
-              <option>Jeunesse (10–15)</option>
-              <option>Enfants (−10)</option>
-            </select>
-          </div>
-          <div>
-            <label>Contenu sensible</label>
-            <select class="select">
-              <option selected>Aucun</option>
-              <option>Violence légère</option>
-              <option>Thèmes adultes</option>
-              <option>Violence & thèmes adultes</option>
-            </select>
-          </div>
-        </div>
-      </div>
+ <div class="form-section">
+ <div class="fs-title">Classification</div>
+ <div class="field-row">
+ <div>
+ <label>Genre principal <span class="required">*</span></label>
+ <select class="select">
+ <option selected>Roman littéraire</option>
+ <option>Romance</option>
+ <option>Thriller / Policier</option>
+ <option>Histoire & Épopée</option>
+ <option>Fantastique africain</option>
+ <option>Science-fiction</option>
+ <option>Jeunesse</option>
+ <option>Nouvelle</option>
+ <option>Autobiographie</option>
+ <option>Essai</option>
+ </select>
+ </div>
+ <div>
+ <label>Sous-genre <span class="optional">(optionnel)</span></label>
+ <select class="select">
+ <option selected>— Sélectionner —</option>
+ <option>Initiatique</option>
+ <option>Politique</option>
+ <option>Diaspora</option>
+ <option>Historique</option>
+ <option>Mystique</option>
+ </select>
+ </div>
+ </div>
+ <div class="field">
+ <label>Mots-clés & thèmes</label>
+ <div class="tags-wrap" onclick="this.querySelector('.tag-input').focus()">
+ <span class="tag-chip">Sahel <button onclick="this.closest('.tag-chip').remove()"></button></span>
+ <span class="tag-chip">Identité <button onclick="this.closest('.tag-chip').remove()"></button></span>
+ <span class="tag-chip">Mali <button onclick="this.closest('.tag-chip').remove()"></button></span>
+ <span class="tag-chip">Griot <button onclick="this.closest('.tag-chip').remove()"></button></span>
+ <input class="tag-input" placeholder="Ajouter un thème…" onkeydown="addTag(event,this)"/>
+ </div>
+ <div class="field-hint">Appuyez sur Entrée pour ajouter · Maximum 10 mots-clés</div>
+ </div>
+ <div class="field-row">
+ <div>
+ <label>Public cible</label>
+ <select class="select">
+ <option>Adultes (18+)</option>
+ <option selected>Tous publics (15+)</option>
+ <option>Jeunesse (10–15)</option>
+ <option>Enfants (−10)</option>
+ </select>
+ </div>
+ <div>
+ <label>Contenu sensible</label>
+ <select class="select">
+ <option selected>Aucun</option>
+ <option>Violence légère</option>
+ <option>Thèmes adultes</option>
+ <option>Violence & thèmes adultes</option>
+ </select>
+ </div>
+ </div>
+ </div>
 
-      <div class="step-nav">
-        <button class="btn-prev" onclick="goToStep(1)">← Précédent</button>
-        <div class="step-progress-text">Étape 2 / 5</div>
-        <button class="btn-next" onclick="goToStep(3)">Étape suivante →</button>
-      </div>
-    </div>
+ <div class="step-nav">
+ <button class="btn-prev" onclick="goToStep(1)">← Précédent</button>
+ <div class="step-progress-text">Étape 2 / 5</div>
+ <button class="btn-next" onclick="goToStep(3)">Étape suivante →</button>
+ </div>
+ </div>
 
-    <!-- STEP 3: Chapitres -->
-    <div id="step3" style="display:none;">
-      <div class="step-header">
-        <div class="step-label-top">Étape 3 sur 5</div>
-        <h1 class="step-title">Chapitres & contenu</h1>
-        <p class="step-desc">Ajoutez vos chapitres un par un. Vous pouvez importer un fichier PDF, Word ou texte brut. Le premier chapitre peut être mis en lecture gratuite.</p>
-      </div>
+ <!-- STEP 3: Chapitres -->
+ <div id="step3" style="display:none;">
+ <div class="step-header">
+ <div class="step-label-top">Étape 3 sur 5</div>
+ <h1 class="step-title">Chapitres & contenu</h1>
+ <p class="step-desc">Ajoutez vos chapitres un par un. Vous pouvez importer un fichier PDF, Word ou texte brut. Le premier chapitre peut être mis en lecture gratuite.</p>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title" style="justify-content:space-between;">
-          <span style="display:flex;align-items:center;gap:0.5rem;"><span style="display:block;width:18px;height:1px;background:var(--or);"></span>Chapitres (10 ajoutés)</span>
-          <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);">312 pages au total</span>
-        </div>
-        <div class="chapters-list">
+ <div class="form-section">
+ <div class="fs-title" style="justify-content:space-between;">
+ <span style="display:flex;align-items:center;gap:0.5rem;"><span style="display:block;width:18px;height:1px;background:var(--or);"></span>Chapitres (10 ajoutés)</span>
+ <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);">312 pages au total</span>
+ </div>
+ <div class="chapters-list">
 
-          <div class="chapter-item">
-            <div class="ch-header" onclick="toggleChapter(this)">
-              <span class="ch-drag">⠿</span>
-              <span class="ch-num">Ch. 01</span>
-              <span class="ch-name">L'Aube du Désert</span>
-              <span class="ch-pages">27 p.</span>
-              <span class="ch-status ch-done">✓ Importé</span>
-              <div class="ch-actions">
-                <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitre édité','✏️')">✏️</button>
-                <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','🗑')">🗑</button>
-              </div>
-            </div>
-            <div class="ch-body">
-              <div class="field-row">
-                <div><label>Titre du chapitre</label><input class="input" type="text" value="L'Aube du Désert"/></div>
-                <div><label>Accès</label><select class="select"><option selected>🆓 Gratuit (aperçu)</option><option>🔒 Payant</option></select></div>
-              </div>
-            </div>
-          </div>
+ <div class="chapter-item">
+ <div class="ch-header" onclick="toggleChapter(this)">
+ <span class="ch-drag">⠿</span>
+ <span class="ch-num">Ch. 01</span>
+ <span class="ch-name">L'Aube du Désert</span>
+ <span class="ch-pages">27 p.</span>
+ <span class="ch-status ch-done">✓ Importé</span>
+ <div class="ch-actions">
+ <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitre édité','')"></button>
+ <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','')"></button>
+ </div>
+ </div>
+ <div class="ch-body">
+ <div class="field-row">
+ <div><label>Titre du chapitre</label><input class="input" type="text" value="L'Aube du Désert"/></div>
+ <div><label>Accès</label><select class="select"><option selected>🆓 Gratuit (aperçu)</option><option>Payant</option></select></div>
+ </div>
+ </div>
+ </div>
 
-          <div class="chapter-item">
-            <div class="ch-header" onclick="toggleChapter(this)">
-              <span class="ch-drag">⠿</span>
-              <span class="ch-num">Ch. 02</span>
-              <span class="ch-name">Les Voix du Vent</span>
-              <span class="ch-pages">26 p.</span>
-              <span class="ch-status ch-done">✓ Importé</span>
-              <div class="ch-actions">
-                <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitre édité','✏️')">✏️</button>
-                <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','🗑')">🗑</button>
-              </div>
-            </div>
-            <div class="ch-body"></div>
-          </div>
+ <div class="chapter-item">
+ <div class="ch-header" onclick="toggleChapter(this)">
+ <span class="ch-drag">⠿</span>
+ <span class="ch-num">Ch. 02</span>
+ <span class="ch-name">Les Voix du Vent</span>
+ <span class="ch-pages">26 p.</span>
+ <span class="ch-status ch-done">✓ Importé</span>
+ <div class="ch-actions">
+ <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitre édité','')"></button>
+ <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','')"></button>
+ </div>
+ </div>
+ <div class="ch-body"></div>
+ </div>
 
-          <div class="chapter-item">
-            <div class="ch-header" onclick="toggleChapter(this)">
-              <span class="ch-drag">⠿</span>
-              <span class="ch-num">Ch. 03</span>
-              <span class="ch-name">La Rivière Sacrée</span>
-              <span class="ch-pages">33 p.</span>
-              <span class="ch-status ch-done">✓ Importé</span>
-              <div class="ch-actions">
-                <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitre édité','✏️')">✏️</button>
-                <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','🗑')">🗑</button>
-              </div>
-            </div>
-            <div class="ch-body"></div>
-          </div>
+ <div class="chapter-item">
+ <div class="ch-header" onclick="toggleChapter(this)">
+ <span class="ch-drag">⠿</span>
+ <span class="ch-num">Ch. 03</span>
+ <span class="ch-name">La Rivière Sacrée</span>
+ <span class="ch-pages">33 p.</span>
+ <span class="ch-status ch-done">✓ Importé</span>
+ <div class="ch-actions">
+ <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitre édité','')"></button>
+ <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','')"></button>
+ </div>
+ </div>
+ <div class="ch-body"></div>
+ </div>
 
-          <div class="chapter-item">
-            <div class="ch-header" onclick="toggleChapter(this)">
-              <span class="ch-drag">⠿</span>
-              <span class="ch-num">Ch. 04–10</span>
-              <span class="ch-name">7 chapitres supplémentaires</span>
-              <span class="ch-pages">226 p.</span>
-              <span class="ch-status ch-done">✓ Importés</span>
-              <div class="ch-actions">
-                <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitres visibles','👁')">👁</button>
-              </div>
-            </div>
-            <div class="ch-body"></div>
-          </div>
+ <div class="chapter-item">
+ <div class="ch-header" onclick="toggleChapter(this)">
+ <span class="ch-drag">⠿</span>
+ <span class="ch-num">Ch. 04–10</span>
+ <span class="ch-name">7 chapitres supplémentaires</span>
+ <span class="ch-pages">226 p.</span>
+ <span class="ch-status ch-done">✓ Importés</span>
+ <div class="ch-actions">
+ <button class="ch-btn" onclick="event.stopPropagation();toast('Chapitres visibles','')"></button>
+ </div>
+ </div>
+ <div class="ch-body"></div>
+ </div>
 
-          <div class="chapter-item" style="border-style:dashed;">
-            <div class="ch-header" onclick="toggleChapter(this)">
-              <span class="ch-drag">⠿</span>
-              <span class="ch-num">Ch. 11</span>
-              <span class="ch-name" style="color:var(--cendre)">Nouveau chapitre</span>
-              <span class="ch-pages" style="color:var(--cendre)">—</span>
-              <span class="ch-status ch-empty">Vide</span>
-              <div class="ch-actions">
-                <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','🗑')">🗑</button>
-              </div>
-            </div>
-            <div class="ch-body open">
-              <div class="ch-upload" onclick="toast('Sélectionnez un fichier PDF, DOCX ou TXT','📁')">
-                <div class="ch-upload-icon">📁</div>
-                <div class="ch-upload-text">Importer un fichier</div>
-                <div class="ch-upload-hint">PDF · Word (.docx) · Texte brut (.txt) · Max 20MB</div>
-              </div>
-              <div class="field-row">
-                <div><label>Titre du chapitre</label><input class="input" type="text" placeholder="Ex: L'Épreuve finale"/></div>
-                <div><label>Accès</label><select class="select"><option>🆓 Gratuit</option><option selected>🔒 Payant</option></select></div>
-              </div>
-            </div>
-          </div>
+ <div class="chapter-item" style="border-style:dashed;">
+ <div class="ch-header" onclick="toggleChapter(this)">
+ <span class="ch-drag">⠿</span>
+ <span class="ch-num">Ch. 11</span>
+ <span class="ch-name" style="color:var(--cendre)">Nouveau chapitre</span>
+ <span class="ch-pages" style="color:var(--cendre)">—</span>
+ <span class="ch-status ch-empty">Vide</span>
+ <div class="ch-actions">
+ <button class="ch-btn danger" onclick="event.stopPropagation();toast('Chapitre supprimé','')"></button>
+ </div>
+ </div>
+ <div class="ch-body open">
+ <div class="ch-upload" onclick="toast('Sélectionnez un fichier PDF, DOCX ou TXT','')">
+ <div class="ch-upload-icon"></div>
+ <div class="ch-upload-text">Importer un fichier</div>
+ <div class="ch-upload-hint">PDF · Word (.docx) · Texte brut (.txt) · Max 20MB</div>
+ </div>
+ <div class="field-row">
+ <div><label>Titre du chapitre</label><input class="input" type="text" placeholder="Ex: L'Épreuve finale"/></div>
+ <div><label>Accès</label><select class="select"><option>🆓 Gratuit</option><option selected>Payant</option></select></div>
+ </div>
+ </div>
+ </div>
 
-        </div>
-        <button class="add-chapter-btn" onclick="toast('Nouveau chapitre ajouté','➕')">
-          ➕ Ajouter un chapitre
-        </button>
-      </div>
+ </div>
+ <button class="add-chapter-btn" onclick="toast('Nouveau chapitre ajouté','')">
+ Ajouter un chapitre
+ </button>
+ </div>
 
-      <div class="step-nav">
-        <button class="btn-prev" onclick="goToStep(2)">← Précédent</button>
-        <div class="step-progress-text">Étape 3 / 5</div>
-        <button class="btn-next" onclick="goToStep(4)">Étape suivante →</button>
-      </div>
-    </div>
+ <div class="step-nav">
+ <button class="btn-prev" onclick="goToStep(2)">← Précédent</button>
+ <div class="step-progress-text">Étape 3 / 5</div>
+ <button class="btn-next" onclick="goToStep(4)">Étape suivante →</button>
+ </div>
+ </div>
 
-    <!-- STEP 4: Paramètres -->
-    <div id="step4" style="display:none;">
-      <div class="step-header">
-        <div class="step-label-top">Étape 4 sur 5</div>
-        <h1 class="step-title">Paramètres de publication</h1>
-        <p class="step-desc">Définissez la visibilité, la date de publication et les paramètres de monétisation. Le prix est automatiquement calculé sur la base de 10 FCFA par page.</p>
-      </div>
+ <!-- STEP 4: Paramètres -->
+ <div id="step4" style="display:none;">
+ <div class="step-header">
+ <div class="step-label-top">Étape 4 sur 5</div>
+ <h1 class="step-title">Paramètres de publication</h1>
+ <p class="step-desc">Définissez la visibilité, la date de publication et les paramètres de monétisation. Le prix est automatiquement calculé sur la base de 10 FCFA par page.</p>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title">Visibilité & Publication</div>
-        <div class="field-row">
-          <div>
-            <label>Statut de publication</label>
-            <select class="select">
-              <option selected>🌍 Public — visible dans le catalogue</option>
-              <option>🔒 Privé — lien direct uniquement</option>
-              <option>⏰ Programmé — choisir une date</option>
-            </select>
-          </div>
-          <div>
-            <label>Date de publication</label>
-            <input class="input" type="date" value="2026-06-01"/>
-          </div>
-        </div>
-        <div class="field">
-          <label>Accès au premier chapitre</label>
-          <select class="select">
-            <option selected>🆓 Gratuit — encourager la découverte</option>
-            <option>🔒 Payant dès le début</option>
-          </select>
-          <div class="field-hint">Recommandé : rendre le Chapitre 1 gratuit augmente les conversions de +67%</div>
-        </div>
-      </div>
+ <div class="form-section">
+ <div class="fs-title">Visibilité & Publication</div>
+ <div class="field-row">
+ <div>
+ <label>Statut de publication</label>
+ <select class="select">
+ <option selected>Public — visible dans le catalogue</option>
+ <option>Privé — lien direct uniquement</option>
+ <option>⏰ Programmé — choisir une date</option>
+ </select>
+ </div>
+ <div>
+ <label>Date de publication</label>
+ <input class="input" type="date" value="2026-06-01"/>
+ </div>
+ </div>
+ <div class="field">
+ <label>Accès au premier chapitre</label>
+ <select class="select">
+ <option selected>🆓 Gratuit — encourager la découverte</option>
+ <option>Payant dès le début</option>
+ </select>
+ <div class="field-hint">Recommandé : rendre le Chapitre 1 gratuit augmente les conversions de +67%</div>
+ </div>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title">Tarification automatique</div>
-        <div class="pricing-preview">
-          <div class="pp-title">Calcul de la tarification · 312 pages</div>
-          <div class="pp-row">
-            <span class="pp-label">Prix par page</span>
-            <span class="pp-val pp-or">10 FCFA</span>
-          </div>
-          <div class="pp-row">
-            <span class="pp-label">Prix total du roman (lecture complète)</span>
-            <span class="pp-val pp-or">3 120 FCFA</span>
-          </div>
-          <div class="pp-row">
-            <span class="pp-label">Votre part (60% par page lue)</span>
-            <span class="pp-val pp-green">6 FCFA / page → 1 872 FCFA max</span>
-          </div>
-          <div class="pp-row">
-            <span class="pp-label">Commission GRIOTTE (40%)</span>
-            <span class="pp-val pp-dim">4 FCFA / page → 1 248 FCFA max</span>
-          </div>
-          <div class="pp-row" style="border-top:1px solid var(--or-border);padding-top:0.75rem;margin-top:0.25rem;">
-            <span class="pp-label" style="color:var(--blanc);font-weight:600;">Vous êtes payé selon les pages réellement lues</span>
-            <span class="pp-val pp-green">60% garanti ✓</span>
-          </div>
-        </div>
-      </div>
+ <div class="form-section">
+ <div class="fs-title">Tarification automatique</div>
+ <div class="pricing-preview">
+ <div class="pp-title">Calcul de la tarification · 312 pages</div>
+ <div class="pp-row">
+ <span class="pp-label">Prix par page</span>
+ <span class="pp-val pp-or">10 FCFA</span>
+ </div>
+ <div class="pp-row">
+ <span class="pp-label">Prix total du roman (lecture complète)</span>
+ <span class="pp-val pp-or">3 120 FCFA</span>
+ </div>
+ <div class="pp-row">
+ <span class="pp-label">Votre part (60% par page lue)</span>
+ <span class="pp-val pp-green">6 FCFA / page → 1 872 FCFA max</span>
+ </div>
+ <div class="pp-row">
+ <span class="pp-label">Commission GRIOTTE (40%)</span>
+ <span class="pp-val pp-dim">4 FCFA / page → 1 248 FCFA max</span>
+ </div>
+ <div class="pp-row" style="border-top:1px solid var(--or-border);padding-top:0.75rem;margin-top:0.25rem;">
+ <span class="pp-label" style="color:var(--blanc);font-weight:600;">Vous êtes payé selon les pages réellement lues</span>
+ <span class="pp-val pp-green">60% garanti ✓</span>
+ </div>
+ </div>
+ </div>
 
-      <div class="form-section">
-        <div class="fs-title">Options avancées</div>
-        <div class="field-row">
-          <div>
-            <label>Droits & Licence</label>
-            <select class="select">
-              <option selected>Tous droits réservés</option>
-              <option>Creative Commons BY-NC</option>
-              <option>Domaine public</option>
-            </select>
-          </div>
-          <div>
-            <label>Traduction autorisée</label>
-            <select class="select">
-              <option selected>Non</option>
-              <option>Oui, sous accord</option>
-              <option>Oui, libre</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label>Note de l'auteur <span class="optional">(optionnel)</span></label>
-          <textarea class="textarea" placeholder="Message personnel aux lecteurs, contexte du roman…" style="min-height:80px;"></textarea>
-        </div>
-      </div>
+ <div class="form-section">
+ <div class="fs-title">Options avancées</div>
+ <div class="field-row">
+ <div>
+ <label>Droits & Licence</label>
+ <select class="select">
+ <option selected>Tous droits réservés</option>
+ <option>Creative Commons BY-NC</option>
+ <option>Domaine public</option>
+ </select>
+ </div>
+ <div>
+ <label>Traduction autorisée</label>
+ <select class="select">
+ <option selected>Non</option>
+ <option>Oui, sous accord</option>
+ <option>Oui, libre</option>
+ </select>
+ </div>
+ </div>
+ <div class="field">
+ <label>Note de l'auteur <span class="optional">(optionnel)</span></label>
+ <textarea class="textarea" placeholder="Message personnel aux lecteurs, contexte du roman…" style="min-height:80px;"></textarea>
+ </div>
+ </div>
 
-      <div class="step-nav">
-        <button class="btn-prev" onclick="goToStep(3)">← Précédent</button>
-        <div class="step-progress-text">Étape 4 / 5</div>
-        <button class="btn-next" onclick="goToStep(5)">Réviser & publier →</button>
-      </div>
-    </div>
+ <div class="step-nav">
+ <button class="btn-prev" onclick="goToStep(3)">← Précédent</button>
+ <div class="step-progress-text">Étape 4 / 5</div>
+ <button class="btn-next" onclick="goToStep(5)">Réviser & publier →</button>
+ </div>
+ </div>
 
-    <!-- STEP 5: Révision -->
-    <div id="step5" style="display:none;">
-      <div class="step-header">
-        <div class="step-label-top">Étape 5 sur 5</div>
-        <h1 class="step-title">Révision finale</h1>
-        <p class="step-desc">Vérifiez les informations avant de soumettre votre roman. Il sera examiné par notre équipe éditoriale sous 24–48h.</p>
-      </div>
+ <!-- STEP 5: Révision -->
+ <div id="step5" style="display:none;">
+ <div class="step-header">
+ <div class="step-label-top">Étape 5 sur 5</div>
+ <h1 class="step-title">Révision finale</h1>
+ <p class="step-desc">Vérifiez les informations avant de soumettre votre roman. Il sera examiné par notre équipe éditoriale sous 24–48h.</p>
+ </div>
 
-      <div class="review-panel">
-        <div class="rp-header">
-          <div class="rp-cover cs1" style="display:flex;align-items:flex-end;padding:0.6rem;background:linear-gradient(160deg,#2d1b0e,#c47d2e);">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.9);line-height:1.2;" id="previewTitle2">Les Fils du Sahel</div>
-          </div>
-          <div>
-            <div class="rp-title" id="previewTitle3">Les Fils du Sahel</div>
-            <div class="rp-author">Ama Kouyaté · 🇲🇱 Mali · Roman littéraire</div>
-          </div>
-        </div>
-        <div class="rp-checklist">
-          <div class="check-row"><div class="check-icon ci-ok">✓</div>Titre et synopsis renseignés</div>
-          <div class="check-row"><div class="check-icon ci-ok">✓</div>Couverture sélectionnée</div>
-          <div class="check-row"><div class="check-icon ci-ok">✓</div>10 chapitres importés · 312 pages</div>
-          <div class="check-row"><div class="check-icon ci-ok">✓</div>Genre & mots-clés définis</div>
-          <div class="check-row"><div class="check-icon ci-ok">✓</div>Tarification automatique : 3 120 FCFA</div>
-          <div class="check-row"><div class="check-icon ci-ok">✓</div>Chapitre 1 en lecture gratuite</div>
-          <div class="check-row"><div class="check-icon ci-warn">!</div>Note de l'auteur non renseignée (optionnel)</div>
-        </div>
-      </div>
+ <div class="review-panel">
+ <div class="rp-header">
+ <div class="rp-cover cs1" style="display:flex;align-items:flex-end;padding:0.6rem;background:linear-gradient(160deg,#2d1b0e,#c47d2e);">
+ <div style="font-family:'Cormorant Garamond',serif;font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.9);line-height:1.2;" id="previewTitle2">Les Fils du Sahel</div>
+ </div>
+ <div>
+ <div class="rp-title" id="previewTitle3">Les Fils du Sahel</div>
+ <div class="rp-author">Ama Kouyaté · 🇲🇱 Mali · Roman littéraire</div>
+ </div>
+ </div>
+ <div class="rp-checklist">
+ <div class="check-row"><div class="check-icon ci-ok">✓</div>Titre et synopsis renseignés</div>
+ <div class="check-row"><div class="check-icon ci-ok">✓</div>Couverture sélectionnée</div>
+ <div class="check-row"><div class="check-icon ci-ok">✓</div>10 chapitres importés · 312 pages</div>
+ <div class="check-row"><div class="check-icon ci-ok">✓</div>Genre & mots-clés définis</div>
+ <div class="check-row"><div class="check-icon ci-ok">✓</div>Tarification automatique : 3 120 FCFA</div>
+ <div class="check-row"><div class="check-icon ci-ok">✓</div>Chapitre 1 en lecture gratuite</div>
+ <div class="check-row"><div class="check-icon ci-warn">!</div>Note de l'auteur non renseignée (optionnel)</div>
+ </div>
+ </div>
 
-      <div style="background:var(--or-glow);border:1px solid var(--or-border);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;gap:1rem;align-items:flex-start;">
-        <span style="font-size:1.2rem;">📋</span>
-        <div>
-          <div style="font-size:0.82rem;font-weight:700;color:var(--blanc);margin-bottom:0.3rem;">Processus de validation GRIOTTE</div>
-          <div style="font-size:0.76rem;color:var(--cendre);line-height:1.6;">Notre équipe éditoriale examine chaque roman sous <strong style="color:var(--blanc);">24 à 48h</strong>. Vous recevrez une notification par email. En cas de corrections demandées, vous pourrez modifier votre manuscrit avant publication finale.</div>
-        </div>
-      </div>
+ <div style="background:var(--or-glow);border:1px solid var(--or-border);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;gap:1rem;align-items:flex-start;">
+ <span style="font-size:1.2rem;"></span>
+ <div>
+ <div style="font-size:0.82rem;font-weight:700;color:var(--blanc);margin-bottom:0.3rem;">Processus de validation GRIOTTE</div>
+ <div style="font-size:0.76rem;color:var(--cendre);line-height:1.6;">Notre équipe éditoriale examine chaque roman sous <strong style="color:var(--blanc);">24 à 48h</strong>. Vous recevrez une notification par email. En cas de corrections demandées, vous pourrez modifier votre manuscrit avant publication finale.</div>
+ </div>
+ </div>
 
-      <div class="step-nav">
-        <button class="btn-prev" onclick="goToStep(4)">← Précédent</button>
-        <div class="step-progress-text">Tout est prêt ✓</div>
-        <button class="btn-next btn-publish" onclick="publishRoman()">🚀 Soumettre pour publication</button>
-      </div>
-    </div>
+ <div class="step-nav">
+ <button class="btn-prev" onclick="goToStep(4)">← Précédent</button>
+ <div class="step-progress-text">Tout est prêt ✓</div>
+ <button class="btn-next btn-publish" onclick="publishRoman()"> Soumettre pour publication</button>
+ </div>
+ </div>
 
-    <!-- SUCCESS -->
-    <div class="success-screen" id="successScreen">
-      <div class="success-icon">🎉</div>
-      <h2 class="success-title">Roman soumis avec <em>succès</em> !</h2>
-      <p class="success-sub">
-        <strong style="color:var(--blanc);">«&nbsp;Les Fils du Sahel&nbsp;»</strong> est maintenant en attente de validation par notre équipe éditoriale.<br/><br/>
-        Vous recevrez un email sous <strong style="color:var(--blanc);">24 à 48h</strong>. Dès approbation, votre roman sera visible dans le catalogue GRIOTTE et vous commencerez à recevoir 6 FCFA pour chaque page lue.
-      </p>
-      <div class="success-actions">
-        <button class="sa-btn sa-primary" onclick="toast('Retour au dashboard','🏠')">Voir mon dashboard →</button>
-        <button class="sa-btn sa-secondary" onclick="resetForm()">Publier un autre roman</button>
-      </div>
-    </div>
+ <!-- SUCCESS -->
+ <div class="success-screen" id="successScreen">
+ <div class="success-icon"></div>
+ <h2 class="success-title">Roman soumis avec <em>succès</em> !</h2>
+ <p class="success-sub">
+ <strong style="color:var(--blanc);">«&nbsp;Les Fils du Sahel&nbsp;»</strong> est maintenant en attente de validation par notre équipe éditoriale.<br/><br/>
+ Vous recevrez un email sous <strong style="color:var(--blanc);">24 à 48h</strong>. Dès approbation, votre roman sera visible dans le catalogue GRIOTTE et vous commencerez à recevoir 6 FCFA pour chaque page lue.
+ </p>
+ <div class="success-actions">
+ <button class="sa-btn sa-primary" onclick="toast('Retour au dashboard','')">Voir mon dashboard →</button>
+ <button class="sa-btn sa-secondary" onclick="resetForm()">Publier un autre roman</button>
+ </div>
+ </div>
 
-  </div>
+ </div>
 </div>
 
 <script>
 let currentStep = 2;
 const totalSteps = 5;
 const stepTitles = {
-  1:"Informations générales",
-  2:"Couverture & Genre",
-  3:"Chapitres & contenu",
-  4:"Paramètres de publication",
-  5:"Révision finale"
+ 1:"Informations générales",
+ 2:"Couverture & Genre",
+ 3:"Chapitres & contenu",
+ 4:"Paramètres de publication",
+ 5:"Révision finale"
 };
 const stepProgress = {1:20,2:40,3:60,4:80,5:100};
 
 function goToStep(n) {
-  // Hide all steps
-  for(let i=1;i<=5;i++) {
-    const el = document.getElementById("step"+i);
-    if(el) el.style.display = "none";
-  }
-  document.getElementById("successScreen").classList.remove("show");
+ // Hide all steps
+ for(let i=1;i<=5;i++) {
+ const el = document.getElementById("step"+i);
+ if(el) el.style.display = "none";
+ }
+ document.getElementById("successScreen").classList.remove("show");
 
-  // Show target step
-  const target = document.getElementById("step"+n);
-  if(target) {
-    target.style.display = "block";
-    currentStep = n;
-  }
+ // Show target step
+ const target = document.getElementById("step"+n);
+ if(target) {
+ target.style.display = "block";
+ currentStep = n;
+ }
 
-  // Update topbar title
-  document.getElementById("topbarTitle").textContent = stepTitles[n] || "";
+ // Update topbar title
+ document.getElementById("topbarTitle").textContent = stepTitles[n] || "";
 
-  // Update progress bar
-  document.getElementById("progressFill").style.width = stepProgress[n] + "%";
+ // Update progress bar
+ document.getElementById("progressFill").style.width = stepProgress[n] + "%";
 
-  // Update sidebar steps
-  document.querySelectorAll(".step-item").forEach((item, idx) => {
-    item.classList.remove("active","done");
-    const stepNum = idx + 1;
-    if(stepNum < n) item.classList.add("done");
-    else if(stepNum === n) item.classList.add("active");
-  });
-  document.querySelectorAll(".step-connector").forEach((conn, idx) => {
-    conn.classList.toggle("done", idx + 1 < n);
-  });
+ // Update sidebar steps
+ document.querySelectorAll(".step-item").forEach((item, idx) => {
+ item.classList.remove("active","done");
+ const stepNum = idx + 1;
+ if(stepNum < n) item.classList.add("done");
+ else if(stepNum === n) item.classList.add("active");
+ });
+ document.querySelectorAll(".step-connector").forEach((conn, idx) => {
+ conn.classList.toggle("done", idx + 1 < n);
+ });
 
-  window.scrollTo({top:0,behavior:"smooth"});
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function setCover(el, cls) {
-  document.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("selected"));
-  el.classList.add("selected");
-  const preview = document.getElementById("coverPreview");
-  preview.className = "cover-preview has-color " + cls;
-  preview.style.cssText = "";
-  toast("Couleur de couverture appliquée", "🎨");
+ document.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("selected"));
+ el.classList.add("selected");
+ const preview = document.getElementById("coverPreview");
+ preview.className = "cover-preview has-color " + cls;
+ preview.style.cssText = "";
+ toast("Couleur de couverture appliquée", "");
 }
 
 function updateTitle(val) {
-  const t = val || "Titre du roman";
-  const el = document.getElementById("coverTitle");
-  if(el) el.textContent = t;
-  const el2 = document.getElementById("previewTitle2");
-  if(el2) el2.textContent = t;
-  const el3 = document.getElementById("previewTitle3");
-  if(el3) el3.textContent = t;
+ const t = val || "Titre du roman";
+ const el = document.getElementById("coverTitle");
+ if(el) el.textContent = t;
+ const el2 = document.getElementById("previewTitle2");
+ if(el2) el2.textContent = t;
+ const el3 = document.getElementById("previewTitle3");
+ if(el3) el3.textContent = t;
 }
 
 function countChars(el, max) {
-  const n = el.value.length;
-  const counter = document.getElementById("synopsisCount");
-  if(counter) {
-    counter.textContent = n + " / " + max;
-    counter.className = "char-count" + (n > max*0.9 ? " warn" : "") + (n > max ? " danger" : "");
-  }
+ const n = el.value.length;
+ const counter = document.getElementById("synopsisCount");
+ if(counter) {
+ counter.textContent = n + " / " + max;
+ counter.className = "char-count" + (n > max*0.9 ? " warn" : "") + (n > max ? " danger" : "");
+ }
 }
 
 function addTag(e, input) {
-  if(e.key === "Enter" && input.value.trim()) {
-    e.preventDefault();
-    const tag = input.value.trim();
-    const chip = document.createElement("span");
-    chip.className = "tag-chip";
-    chip.innerHTML = tag + ' <button onclick="this.closest('.tag-chip').remove()">✕</button>';
-    input.parentNode.insertBefore(chip, input);
-    input.value = "";
-    toast("Tag "" + tag + "" ajouté", "🏷");
-  }
+ if(e.key === "Enter" && input.value.trim()) {
+ e.preventDefault();
+ const tag = input.value.trim();
+ const chip = document.createElement("span");
+ chip.className = "tag-chip";
+ chip.innerHTML = tag + ' <button onclick="this.closest('.tag-chip').remove()"></button>';
+ input.parentNode.insertBefore(chip, input);
+ input.value = "";
+ toast("Tag "" + tag + "" ajouté", "");
+ }
 }
 
 function toggleChapter(header) {
-  const body = header.nextElementSibling;
-  if(body) body.classList.toggle("open");
+ const body = header.nextElementSibling;
+ if(body) body.classList.toggle("open");
 }
 
 function publishRoman() {
-  for(let i=1;i<=5;i++) {
-    const el = document.getElementById("step"+i);
-    if(el) el.style.display = "none";
-  }
-  document.getElementById("progressFill").style.width = "100%";
-  document.getElementById("topbarTitle").textContent = "Roman publié !";
-  const ss = document.getElementById("successScreen");
-  ss.classList.add("show");
-  toast("🎉 Roman soumis avec succès !", "✅");
-  window.scrollTo({top:0,behavior:"smooth"});
+ for(let i=1;i<=5;i++) {
+ const el = document.getElementById("step"+i);
+ if(el) el.style.display = "none";
+ }
+ document.getElementById("progressFill").style.width = "100%";
+ document.getElementById("topbarTitle").textContent = "Roman publié !";
+ const ss = document.getElementById("successScreen");
+ ss.classList.add("show");
+ toast(" Roman soumis avec succès !", "✓");
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function resetForm() {
-  goToStep(1);
-  toast("Nouveau roman — prêt à saisir","✍️");
+ goToStep(1);
+ toast("Nouveau roman — prêt à saisir","");
 }
 
-function toast(msg, icon="✅") {
-  document.getElementById("ti").textContent = icon;
-  document.getElementById("tm").textContent = msg;
-  const t = document.getElementById("toast");
-  t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2800);
+function toast(msg, icon="✓") {
+ document.getElementById("ti").textContent = icon;
+ document.getElementById("tm").textContent = msg;
+ const t = document.getElementById("toast");
+ t.classList.add("show");
+ setTimeout(() => t.classList.remove("show"), 2800);
 }
 
 // Init on step 2
@@ -1108,8 +1108,8 @@ goToStep(2);
 
 // Auto-save simulation
 setInterval(() => {
-  const dot = document.querySelector(".as-dot");
-  if(dot) { dot.style.background = "var(--or)"; setTimeout(()=>dot.style.background="var(--green)",500); }
+ const dot = document.querySelector(".as-dot");
+ if(dot) { dot.style.background = "var(--or)"; setTimeout(()=>dot.style.background="var(--green)",500); }
 }, 8000);
 </script>
 </body>

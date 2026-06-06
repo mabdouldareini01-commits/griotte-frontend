@@ -7,24 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
-   Une seule taille, une seule source, partout identique
-   ════════════════════════════════════════════════════ */
+ Une seule taille, une seule source, partout identique
+ ════════════════════════════════════════════════════ */
 .g-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: visible !important;
-  line-height: 0;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0;
+ overflow: visible !important;
+ line-height: 0;
 }
 .g-icon img {
-  display: block;
-  height: 38px;
-  width: 38px;
-  object-fit: contain;
-  border-radius: 11px;
-  overflow: visible !important;
-  /* No filter, no opacity, no shadow — logo brut */
+ display: block;
+ height: 38px;
+ width: 38px;
+ object-fit: contain;
+ border-radius: 11px;
+ overflow: visible !important;
+ /* No filter, no opacity, no shadow — logo brut */
 }
 /* Override ALL size variants → same 38px */
 .g-icon--48 img,
@@ -32,24 +32,24 @@
 .g-icon--36 img,
 .g-icon--32 img,
 .g-icon--28 img {
-  height: 38px !important;
-  width: 38px !important;
-  border-radius: 11px !important;
+ height: 38px !important;
+ width: 38px !important;
+ border-radius: 11px !important;
 }
 /* Footer: slightly smaller on dark bg */
 footer .g-icon img,
 footer .g-icon--48 img,
 footer .g-icon--40 img,
 footer .g-icon--36 img {
-  height: 34px !important;
-  width: 34px !important;
-  border-radius: 10px !important;
+ height: 34px !important;
+ width: 34px !important;
+ border-radius: 10px !important;
 }
 /* Auth modal: centered */
 .auth-logo-wrap .g-icon img {
-  height: 42px !important;
-  width: 42px !important;
-  border-radius: 13px !important;
+ height: 42px !important;
+ width: 42px !important;
+ border-radius: 13px !important;
 }
 /* Force no extra styles */
 [class*="logo"] { overflow: visible !important; }
@@ -80,37 +80,37 @@ html,body{background:var(--bg)!important;color:var(--text-main)!important}
 .g-icon--32 img{height:32px;width:32px}
 [class*="logo"],[class*="sidebar-logo"],[class*="cat-logo"],[class*="s-logo"],[class*="footer-logo"]{overflow:visible!important}
 @media(max-width:768px){
-  .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
-  .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
+ .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
+ .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
 }
 /* ──────────────────────────────────────────────────────── */
 
 :root{
-  /* Couleurs logo */
-  --or:#FF6B00;
-  --or-dark:#CC5200;
-  --or-light:#FF8C33;
-  --or-glow:rgba(255,107,0,0.12);
-  --or-border:rgba(255,107,0,0.25);
-  /* Fond & surfaces */
-  --bg:#F8F5F1;
-  --bg-card:#FFFFFF;
-  --bg-card2:#FFF8F4;
-  --bg-sidebar:#FFFFFF;
-  /* Texte */
-  --text-main:#1A1410;
-  --text-soft:#4A3F35;
-  --text-muted:#6B5A4E;
-  /* Bordures */
-  --border:rgba(26,20,16,0.09);
-  --border-strong:rgba(26,20,16,0.16);
-  /* Compatibilité ancien code */
-  --noir:#1A1410;
-  --noir-soft:#F8F5F1;
-  --noir-card:#FFFFFF;
-  --blanc:#F8F5F1;
-  --blanc-dim:#6B5A4E;
-  --cendre:#6B5F52;
+ /* Couleurs logo */
+ --or:#FF6B00;
+ --or-dark:#CC5200;
+ --or-light:#FF8C33;
+ --or-glow:rgba(255,107,0,0.12);
+ --or-border:rgba(255,107,0,0.25);
+ /* Fond & surfaces */
+ --bg:#F8F5F1;
+ --bg-card:#FFFFFF;
+ --bg-card2:#FFF8F4;
+ --bg-sidebar:#FFFFFF;
+ /* Texte */
+ --text-main:#1A1410;
+ --text-soft:#4A3F35;
+ --text-muted:#6B5A4E;
+ /* Bordures */
+ --border:rgba(26,20,16,0.09);
+ --border-strong:rgba(26,20,16,0.16);
+ /* Compatibilité ancien code */
+ --noir:#1A1410;
+ --noir-soft:#F8F5F1;
+ --noir-card:#FFFFFF;
+ --blanc:#F8F5F1;
+ --blanc-dim:#6B5A4E;
+ --cendre:#6B5F52;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:var(--font-size)}
@@ -253,17 +253,17 @@ body.day{--bg-color:#f5f0e8;--text-color:#1a1510;--tb-bg:rgba(245,240,232,0.92)}
 body.sepia{--bg-color:#f4ead5;--text-color:#3d2e1e;--tb-bg:rgba(244,234,213,0.92)}
 
 /* ════════════════════════════════════════════════
-   GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
-   Applied across all pages for WCAG AA compliance
-   ════════════════════════════════════════════════ */
+ GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
+ Applied across all pages for WCAG AA compliance
+ ════════════════════════════════════════════════ */
 
 /* 1. Strengthen base variables */
 :root {
-  --text-main:   #1A1410 !important;   /* near-black, high contrast */
-  --text-soft:   #4A3F35 !important;   /* dark brown-grey, readable */
-  --text-muted:  #6B5A4E !important;   /* medium brown, still readable */
-  --blanc-dim:   #6B5A4E !important;
-  --cendre:      #4A3F35 !important;
+ --text-main: #1A1410 !important; /* near-black, high contrast */
+ --text-soft: #4A3F35 !important; /* dark brown-grey, readable */
+ --text-muted: #6B5A4E !important; /* medium brown, still readable */
+ --blanc-dim: #6B5A4E !important;
+ --cendre: #4A3F35 !important;
 }
 
 /* 2. Body & base text */
@@ -286,8 +286,8 @@ h1, h2, h3, h4, h5, h6,
 
 /* 6. Sidebar — enforce dark text on white bg */
 .sidebar, .aside, [class*="sidebar"] {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
 }
 .sidebar *, .aside * { color: #1A1410; }
 .nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
@@ -295,16 +295,16 @@ h1, h2, h3, h4, h5, h6,
 /* 7. Cards — always readable */
 .card, [class*="-card"], .book-card, .testi-card,
 .stat-card, .dash-stat, .concept-visual, .author-dashboard {
-  background: #FFFFFF !important;
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.1) !important;
+ background: #FFFFFF !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.1) !important;
 }
 .card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
 
 /* 8. Topbar */
 .topbar, [class*="topbar"], #navbar {
-  background: rgba(248,245,241,0.95) !important;
-  color: #1A1410 !important;
+ background: rgba(248,245,241,0.95) !important;
+ color: #1A1410 !important;
 }
 .topbar *, #navbar * { color: #1A1410; }
 
@@ -313,22 +313,22 @@ h1, h2, h3, h4, h5, h6,
 [class*="btn"][class*="hero"],
 [class*="btn-nav-cta"], .btn-hero-primary,
 .btn-cta-primary, .auth-btn {
-  background: #FF6B00 !important;
-  color: #FFFFFF !important;
-  opacity: 1 !important;
+ background: #FF6B00 !important;
+ color: #FFFFFF !important;
+ opacity: 1 !important;
 }
 [class*="btn"][class*="ghost"],
 [class*="btn"][class*="secondary"],
 .btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
-  color: #1A1410 !important;
-  border-color: rgba(26,20,16,0.25) !important;
-  opacity: 1 !important;
+ color: #1A1410 !important;
+ border-color: rgba(26,20,16,0.25) !important;
+ opacity: 1 !important;
 }
 
 /* 10. Footer — dark bg with proper white text */
 footer {
-  background: #1A1410 !important;
-  color: rgba(255,255,255,0.75) !important;
+ background: #1A1410 !important;
+ color: rgba(255,255,255,0.75) !important;
 }
 footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
 footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
@@ -345,7 +345,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .hero-stat-value, .stat-value, .dash-stat-val,
 .pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
 .hero-stat-label, .stat-label, .dash-stat-lbl {
-  color: #6B5A4E !important; opacity: 1 !important;
+ color: #6B5A4E !important; opacity: 1 !important;
 }
 
 /* 13. Auth modal */
@@ -356,7 +356,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 /* 14. Section badges & DM Mono labels */
 .section-badge, .hero-badge, .dash-badge,
 [class*="badge"], [class*="-label"], .nav-section {
-  opacity: 1 !important;
+ opacity: 1 !important;
 }
 
 /* 15. Minimum font sizes */
@@ -364,13 +364,13 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .section-badge, .ticker-item, .book-price,
 .testi-role, .auth-sub, [class*="-label"],
 [class*="-lbl"], [class*="badge"] {
-  font-size: max(0.72rem, 11px) !important;
+ font-size: max(0.72rem, 11px) !important;
 }
 
 /* 16. Reader — dark text on white */
 .reader-content, .reader-text, [class*="reader-body"] {
-  color: #1A1410 !important;
-  background: #FFFFFF !important;
+ color: #1A1410 !important;
+ background: #FFFFFF !important;
 }
 
 /* ═══════════════════════════════════════════════ */
@@ -385,14 +385,14 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <!-- FONDS INSUFFISANTS -->
 <div class="funds-overlay" id="fundsOverlay">
-  <div class="funds-box">
-    <div class="funds-ico">💳</div>
-    <div class="funds-title">Solde insuffisant</div>
-    <div class="funds-sub" id="fundsMessage">Votre solde est épuisé.<br/>Rechargez pour continuer votre lecture.</div>
-    <button class="funds-btn" onclick="window.location.href='griotte-dashboard.html?page=credits'">+ Recharger mes crédits →</button>
-    <button class="funds-back" onclick="closeFundsOverlay()">← Continuer depuis le début</button>
-    <button class="funds-back" style="margin-top:0.5rem" onclick="window.location.href='griotte-catalogue.html'">📚 Retour au catalogue</button>
-  </div>
+ <div class="funds-box">
+ <div class="funds-ico"></div>
+ <div class="funds-title">Solde insuffisant</div>
+ <div class="funds-sub" id="fundsMessage">Votre solde est épuisé.<br/>Rechargez pour continuer votre lecture.</div>
+ <button class="funds-btn" onclick="window.location.href='griotte-dashboard.html?page=credits'">+ Recharger mes crédits →</button>
+ <button class="funds-back" onclick="closeFundsOverlay()">← Continuer depuis le début</button>
+ <button class="funds-back" style="margin-top:0.5rem" onclick="window.location.href='griotte-catalogue.html'">Retour au catalogue</button>
+ </div>
 </div>
 
 <!-- PANEL OVERLAY -->
@@ -400,65 +400,65 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <!-- CHAPTERS PANEL -->
 <div class="chapters-panel" id="chaptersPanel">
-  <div class="cp-title">Chapitres</div>
-  <div id="cpCover" style="width:80px;height:115px;border-radius:3px 10px 10px 3px;margin:0 1.5rem 1rem;overflow:hidden;box-shadow:-4px 0 0 rgba(0,0,0,0.3)"></div>
-  <div class="cp-book-title" id="cpBookTitle">—</div>
-  <div id="chaptersList"></div>
+ <div class="cp-title">Chapitres</div>
+ <div id="cpCover" style="width:80px;height:115px;border-radius:3px 10px 10px 3px;margin:0 1.5rem 1rem;overflow:hidden;box-shadow:-4px 0 0 rgba(0,0,0,0.3)"></div>
+ <div class="cp-book-title" id="cpBookTitle">—</div>
+ <div id="chaptersList"></div>
 </div>
 
 <!-- SETTINGS PANEL -->
 <div class="settings-panel" id="settingsPanel">
-  <div class="sp-title">Paramètres de lecture</div>
-  <div class="sp-sub">Personnalisez votre expérience</div>
-  <div class="sp-section">
-    <span class="sp-label">Thème</span>
-    <div class="theme-btns">
-      <button class="theme-btn" onclick="setTheme('day',this)"><div class="theme-prev day"></div><div class="theme-name">Jour</div></button>
-      <button class="theme-btn active" onclick="setTheme('night',this)"><div class="theme-prev night"></div><div class="theme-name">Nuit</div></button>
-      <button class="theme-btn" onclick="setTheme('sepia',this)"><div class="theme-prev sepia"></div><div class="theme-name">Sépia</div></button>
-    </div>
-  </div>
-  <div class="sp-section">
-    <span class="sp-label">Taille du texte</span>
-    <div class="font-ctrl">
-      <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
-      <span class="font-disp" id="fontSizeDisp">18px</span>
-      <button class="font-btn" onclick="changeFontSize(1)">A+</button>
-    </div>
-  </div>
-  <div class="sp-section">
-    <span class="sp-label">Largeur de colonne</span>
-    <div class="width-btns">
-      <button class="width-btn" onclick="setWidth(560,this)">Étroit</button>
-      <button class="width-btn active" onclick="setWidth(680,this)">Moyen</button>
-      <button class="width-btn" onclick="setWidth(820,this)">Large</button>
-    </div>
-  </div>
-  <div class="sp-section">
-    <span class="sp-label">Mon solde</span>
-    <div class="solde-sp">
-      <div class="solde-sp-amount" id="soldeSp">0 FCFA</div>
-      <div class="solde-sp-label">= <span id="pagesRestSp">0</span> pages dispo</div>
-      <button class="solde-sp-btn" onclick="window.location.href='griotte-dashboard.html'">+ Recharger</button>
-    </div>
-  </div>
+ <div class="sp-title">Paramètres de lecture</div>
+ <div class="sp-sub">Personnalisez votre expérience</div>
+ <div class="sp-section">
+ <span class="sp-label">Thème</span>
+ <div class="theme-btns">
+ <button class="theme-btn" onclick="setTheme('day',this)"><div class="theme-prev day"></div><div class="theme-name">Jour</div></button>
+ <button class="theme-btn active" onclick="setTheme('night',this)"><div class="theme-prev night"></div><div class="theme-name">Nuit</div></button>
+ <button class="theme-btn" onclick="setTheme('sepia',this)"><div class="theme-prev sepia"></div><div class="theme-name">Sépia</div></button>
+ </div>
+ </div>
+ <div class="sp-section">
+ <span class="sp-label">Taille du texte</span>
+ <div class="font-ctrl">
+ <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
+ <span class="font-disp" id="fontSizeDisp">18px</span>
+ <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+ </div>
+ </div>
+ <div class="sp-section">
+ <span class="sp-label">Largeur de colonne</span>
+ <div class="width-btns">
+ <button class="width-btn" onclick="setWidth(560,this)">Étroit</button>
+ <button class="width-btn active" onclick="setWidth(680,this)">Moyen</button>
+ <button class="width-btn" onclick="setWidth(820,this)">Large</button>
+ </div>
+ </div>
+ <div class="sp-section">
+ <span class="sp-label">Mon solde</span>
+ <div class="solde-sp">
+ <div class="solde-sp-amount" id="soldeSp">0 FCFA</div>
+ <div class="solde-sp-label">= <span id="pagesRestSp">0</span> pages dispo</div>
+ <button class="solde-sp-btn" onclick="window.location.href='griotte-dashboard.html'">+ Recharger</button>
+ </div>
+ </div>
 </div>
 
 <!-- TOOLBAR TOP -->
 <nav class="toolbar-top" id="toolbarTop">
-  <div class="tb-left">
-    <button class="tb-back" onclick="window.location.href='griotte-dashboard.html'">←</button>
-    <div class="tb-book-info">
-      <div class="tb-title" id="bookTitle">Chargement...</div>
-      <div class="tb-chapter" id="chapterLabel">—</div>
-    </div>
-  </div>
-  <div class="tb-solde"><span class="tb-dot"></span><span id="soldeDisplay">0 FCFA</span></div>
-  <div class="tb-right">
-    <button class="tb-btn" onclick="toggleChaptersPanel()" title="Chapitres">☰</button>
-    <button class="tb-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Signet">🔖</button>
-    <button class="tb-btn" onclick="toggleSettingsPanel()" title="Paramètres">⚙</button>
-  </div>
+ <div class="tb-left">
+ <button class="tb-back" onclick="window.location.href='griotte-dashboard.html'">←</button>
+ <div class="tb-book-info">
+ <div class="tb-title" id="bookTitle">Chargement...</div>
+ <div class="tb-chapter" id="chapterLabel">—</div>
+ </div>
+ </div>
+ <div class="tb-solde"><span class="tb-dot"></span><span id="soldeDisplay">0 FCFA</span></div>
+ <div class="tb-right">
+ <button class="tb-btn" onclick="toggleChaptersPanel()" title="Chapitres">☰</button>
+ <button class="tb-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Signet"></button>
+ <button class="tb-btn" onclick="toggleSettingsPanel()" title="Paramètres"></button>
+ </div>
 </nav>
 
 <!-- PROGRESS BAR -->
@@ -466,29 +466,29 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 
 <!-- READING AREA -->
 <main class="reading-area" id="readingArea">
-  <div class="reading-content" id="readingContent">
-    <div class="reader-state">
-      <span class="rs-ico">📖</span>
-      <div class="rs-title">Chargement...</div>
-      <div class="rs-sub">Récupération du contenu en cours.</div>
-    </div>
-  </div>
+ <div class="reading-content" id="readingContent">
+ <div class="reader-state">
+ <span class="rs-ico"></span>
+ <div class="rs-title">Chargement...</div>
+ <div class="rs-sub">Récupération du contenu en cours.</div>
+ </div>
+ </div>
 </main>
 
 <!-- TOOLBAR BOTTOM -->
 <div class="toolbar-bottom" id="toolbarBottom"><brand-logo></brand-logo>
-  <div class="tb-bottom-main">
-    <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹ Précédent</button>
-    <div class="page-counter">
-      <span class="page-indicator" id="pageIndicator">Page 1 / —</span>
-      <span class="progress-pct" id="progressPct">0%</span>
-    </div>
-    <button class="nav-btn nav-btn-next" id="nextBtn" onclick="nextPage()">Suivant ›</button>
-  </div>
-  <div class="tb-bottom-meta">
-    <span class="time-remaining" id="timeRemaining">—</span>
-    <span class="debit-info"><span class="debit-dot"></span>10 FCFA / page</span>
-  </div>
+ <div class="tb-bottom-main">
+ <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹ Précédent</button>
+ <div class="page-counter">
+ <span class="page-indicator" id="pageIndicator">Page 1 / —</span>
+ <span class="progress-pct" id="progressPct">0%</span>
+ </div>
+ <button class="nav-btn nav-btn-next" id="nextBtn" onclick="nextPage()">Suivant ›</button>
+ </div>
+ <div class="tb-bottom-meta">
+ <span class="time-remaining" id="timeRemaining">—</span>
+ <span class="debit-info"><span class="debit-dot"></span>10 FCFA / page</span>
+ </div>
 </div>
 
 <script>
@@ -513,351 +513,351 @@ bookId=up.get('bookId');
 
 // Init
 async function init(){
-  const token=localStorage.getItem('accessToken');
-  if(token) await loadSolde(token);
-  if(!bookId){
-    showState('no-book');
-    return;
-  }
-  await loadBook(bookId);
+ const token=localStorage.getItem('accessToken');
+ if(token) await loadSolde(token);
+ if(!bookId){
+ showState('no-book');
+ return;
+ }
+ await loadBook(bookId);
 }
 
 // Load solde
 async function loadSolde(token){
-  try{
-    const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
-    const d=await res.json();
-    if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
-    if(d.role) userRole=d.role;
-    if(d.id) userId=d.id;
-    else if(d.sub) userId=d.sub;
-    
-  }catch(e){}
+ try{
+ const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
+ const d=await res.json();
+ if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
+ if(d.role) userRole=d.role;
+ if(d.id) userId=d.id;
+ else if(d.sub) userId=d.sub;
+ 
+ }catch(e){}
 }
 
 function updateSoldeDisplay(){
-  const sd=document.getElementById('soldeDisplay');
-  if(sd) sd.textContent=balance.toLocaleString()+' FCFA';
-  const ss=document.getElementById('soldeSp');
-  if(ss) ss.textContent=balance.toLocaleString()+' FCFA';
-  const sp=document.getElementById('pagesRestSp');
-  if(sp) sp.textContent=Math.floor(balance/10);
+ const sd=document.getElementById('soldeDisplay');
+ if(sd) sd.textContent=balance.toLocaleString()+' FCFA';
+ const ss=document.getElementById('soldeSp');
+ if(ss) ss.textContent=balance.toLocaleString()+' FCFA';
+ const sp=document.getElementById('pagesRestSp');
+ if(sp) sp.textContent=Math.floor(balance/10);
 }
 
 // Load book + chapters
 async function loadBook(id){
-  try{
-    // Charger le livre avec authorId
-    const bRes=await fetch(API+'/books/'+id);
-    bookData=await bRes.json();
-    if(bookData.error) bookData=null;
+ try{
+ // Charger le livre avec authorId
+ const bRes=await fetch(API+'/books/'+id);
+ bookData=await bRes.json();
+ if(bookData.error) bookData=null;
 
-    if(!bookData){
-      showState('not-found');
-      return;
-    }
+ if(!bookData){
+ showState('not-found');
+ return;
+ }
 
-    // Titre du livre
-    const bt=document.getElementById('bookTitle');
-    if(bt) bt.textContent=bookData.title;
-    const cbt=document.getElementById('cpBookTitle');
-    if(cbt) cbt.textContent=bookData.title;
-    // Couverture dans panel chapitres
-    const cpCover=document.getElementById('cpCover');
-    if(cpCover){
-      if(bookData.coverImage){
-        cpCover.innerHTML='<img src="'+bookData.coverImage+'" alt="'+bookData.title+'" style="width:100%;height:100%;object-fit:cover"/>';
-      } else {
-        cpCover.style.background='linear-gradient(160deg,#2d1b0e,#8B4513)';
-      }
-    }
+ // Titre du livre
+ const bt=document.getElementById('bookTitle');
+ if(bt) bt.textContent=bookData.title;
+ const cbt=document.getElementById('cpBookTitle');
+ if(cbt) cbt.textContent=bookData.title;
+ // Couverture dans panel chapitres
+ const cpCover=document.getElementById('cpCover');
+ if(cpCover){
+ if(bookData.coverImage){
+ cpCover.innerHTML='<img src="'+bookData.coverImage+'" alt="'+bookData.title+'" style="width:100%;height:100%;object-fit:cover"/>';
+ } else {
+ cpCover.style.background='linear-gradient(160deg,#2d1b0e,#8B4513)';
+ }
+ }
 
-    // Charger les chapitres
-    const cRes=await fetch(API+'/books/'+id+'/chapters');
-    const chapters=await cRes.json();
+ // Charger les chapitres
+ const cRes=await fetch(API+'/books/'+id+'/chapters');
+ const chapters=await cRes.json();
 
-    if(!chapters||chapters.length===0){
-      showState('no-chapters',bookData.title);
-      return;
-    }
+ if(!chapters||chapters.length===0){
+ showState('no-chapters',bookData.title);
+ return;
+ }
 
-    // Construire les pages depuis les chapitres réels
-    pages=[];
-    chapters.forEach(function(ch,ci){
-      const content=ch.content||'';
-      const words=content.split(/\s+/).filter(Boolean);
-      const wordsPerPage=280;
-      const numPages=Math.max(1,Math.ceil(words.length/wordsPerPage));
+ // Construire les pages depuis les chapitres réels
+ pages=[];
+ chapters.forEach(function(ch,ci){
+ const content=ch.content||'';
+ const words=content.split(/\s+/).filter(Boolean);
+ const wordsPerPage=280;
+ const numPages=Math.max(1,Math.ceil(words.length/wordsPerPage));
 
-      for(let p=0;p<numPages;p++){
-        const start=p*wordsPerPage;
-        const chunk=words.slice(start,start+wordsPerPage).join(' ');
-        const isFirst=p===0;
-        pages.push({
-          chapterNum:ch.number,
-          chapterTitle:ch.title,
-          isFirstOfChapter:isFirst,
-          isFree:ch.isFree,
-          content:chunk,
-          chapterIndex:ci,
-          pageInChapter:p+1,
-          totalPagesInChapter:numPages
-        });
-      }
-    });
+ for(let p=0;p<numPages;p++){
+ const start=p*wordsPerPage;
+ const chunk=words.slice(start,start+wordsPerPage).join(' ');
+ const isFirst=p===0;
+ pages.push({
+ chapterNum:ch.number,
+ chapterTitle:ch.title,
+ isFirstOfChapter:isFirst,
+ isFree:ch.isFree,
+ content:chunk,
+ chapterIndex:ci,
+ pageInChapter:p+1,
+ totalPagesInChapter:numPages
+ });
+ }
+ });
 
-    totalPages=pages.length;
+ totalPages=pages.length;
 
-    // Construire la liste des chapitres dans le panel
-    renderChaptersList(chapters);
+ // Construire la liste des chapitres dans le panel
+ renderChaptersList(chapters);
 
-    // Afficher la première page
-    showPage(0);
-    updateProgress();
-    startHideTimer();
-    document.addEventListener('click',handleAreaClick);
-    document.addEventListener('mousemove',onMouseMove);
+ // Afficher la première page
+ showPage(0);
+ updateProgress();
+ startHideTimer();
+ document.addEventListener('click',handleAreaClick);
+ document.addEventListener('mousemove',onMouseMove);
 
-  }catch(e){
-    console.error(e);
-    showState('error');
-  }
+ }catch(e){
+ console.error(e);
+ showState('error');
+ }
 }
 
 // Render chapters list
 function renderChaptersList(chapters){
-  const cl=document.getElementById('chaptersList');
-  if(!cl) return;
-  cl.innerHTML=chapters.map(function(ch,i){
-    return '<div class="chapter-item" id="ci-'+i+'" onclick="jumpToChapter('+i+')">'
-      +'<div class="ci-num">'+ch.number+'</div>'
-      +'<div class="ci-title">'+ch.title+'</div>'
-      +(ch.isFree?'<span class="ci-free">Gratuit</span>':'<span class="ci-premium">Premium</span>')
-      +'</div>';
-  }).join('');
+ const cl=document.getElementById('chaptersList');
+ if(!cl) return;
+ cl.innerHTML=chapters.map(function(ch,i){
+ return '<div class="chapter-item" id="ci-'+i+'" onclick="jumpToChapter('+i+')">'
+ +'<div class="ci-num">'+ch.number+'</div>'
+ +'<div class="ci-title">'+ch.title+'</div>'
+ +(ch.isFree?'<span class="ci-free">Gratuit</span>':'<span class="ci-premium">Premium</span>')
+ +'</div>';
+ }).join('');
 }
 
 // Jump to chapter
 window.jumpToChapter=function(chapterIndex){
-  const firstPage=pages.findIndex(function(p){return p.chapterIndex===chapterIndex;});
-  if(firstPage>=0){
-    currentPage=firstPage;
-    showPage(currentPage);
-    updateProgress();
-    window.scrollTo({top:0,behavior:'smooth'});
-    closePanels();
-  }
+ const firstPage=pages.findIndex(function(p){return p.chapterIndex===chapterIndex;});
+ if(firstPage>=0){
+ currentPage=firstPage;
+ showPage(currentPage);
+ updateProgress();
+ window.scrollTo({top:0,behavior:'smooth'});
+ closePanels();
+ }
 };
 
 // Show page
 function showPage(idx){
-  if(pages.length===0) return;
-  idx=Math.max(0,Math.min(idx,pages.length-1));
-  const p=pages[idx];
-  const content=document.getElementById('readingContent');
-  content.style.opacity='0';
-  setTimeout(function(){
-    let html='';
-    if(p.isFirstOfChapter){
-      html+='<div class="chapter-header">'
-        +'<span class="chapter-number">Chapitre '+p.chapterNum+'</span>'
-        +'<h1 class="chapter-title">'+p.chapterTitle+'</h1>'
-        +'</div>';
-    }
-    // Formater le texte en paragraphes
-    const sentences=p.content.split(/(?<=[.!?»])\s+/);
-    const paragraphs=[];
-    let current=[];
-    sentences.forEach(function(s,i){
-      current.push(s);
-      if(current.length>=3||i===sentences.length-1){
-        paragraphs.push(current.join(' '));
-        current=[];
-      }
-    });
-    html+='<div>'+paragraphs.map(function(par,i){
-      return '<p class="'+(i>0?'indent':'')+'">'+(par.trim()||'...')+'</p>';
-    }).join('')+'</div>';
-    content.innerHTML=html;
-    content.style.opacity='1';
-    content.style.transition='opacity 0.25s ease';
-    // Update chapter label
-    const cl=document.getElementById('chapterLabel');
-    if(cl) cl.textContent='Ch. '+p.chapterNum+' · '+p.chapterTitle;
-    // Update active chapter in panel
-    document.querySelectorAll('.chapter-item').forEach(function(el){el.classList.remove('active');});
-    const activeItem=document.getElementById('ci-'+p.chapterIndex);
-    if(activeItem) activeItem.classList.add('active');
-  },150);
+ if(pages.length===0) return;
+ idx=Math.max(0,Math.min(idx,pages.length-1));
+ const p=pages[idx];
+ const content=document.getElementById('readingContent');
+ content.style.opacity='0';
+ setTimeout(function(){
+ let html='';
+ if(p.isFirstOfChapter){
+ html+='<div class="chapter-header">'
+ +'<span class="chapter-number">Chapitre '+p.chapterNum+'</span>'
+ +'<h1 class="chapter-title">'+p.chapterTitle+'</h1>'
+ +'</div>';
+ }
+ // Formater le texte en paragraphes
+ const sentences=p.content.split(/(?<=[.!?»])\s+/);
+ const paragraphs=[];
+ let current=[];
+ sentences.forEach(function(s,i){
+ current.push(s);
+ if(current.length>=3||i===sentences.length-1){
+ paragraphs.push(current.join(' '));
+ current=[];
+ }
+ });
+ html+='<div>'+paragraphs.map(function(par,i){
+ return '<p class="'+(i>0?'indent':'')+'">'+(par.trim()||'...')+'</p>';
+ }).join('')+'</div>';
+ content.innerHTML=html;
+ content.style.opacity='1';
+ content.style.transition='opacity 0.25s ease';
+ // Update chapter label
+ const cl=document.getElementById('chapterLabel');
+ if(cl) cl.textContent='Ch. '+p.chapterNum+' · '+p.chapterTitle;
+ // Update active chapter in panel
+ document.querySelectorAll('.chapter-item').forEach(function(el){el.classList.remove('active');});
+ const activeItem=document.getElementById('ci-'+p.chapterIndex);
+ if(activeItem) activeItem.classList.add('active');
+ },150);
 }
 
 // Show empty/error states
 function showState(type,title){
-  const content=document.getElementById('readingContent');
-  const bt=document.getElementById('bookTitle');
-  if(bt) bt.textContent=title||'GRIOTTE';
-  const states={
-    'no-book':'<div class="reader-state"><span class="rs-ico">📚</span><div class="rs-title">Aucun livre sélectionné</div><div class="rs-sub">Choisissez une œuvre depuis le catalogue pour commencer à lire.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
-    'not-found':'<div class="reader-state"><span class="rs-ico">🔍</span><div class="rs-title">Livre introuvable</div><div class="rs-sub">Ce livre n\'existe pas ou a été supprimé.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
-    'no-chapters':'<div class="reader-state"><span class="rs-ico">📝</span><div class="rs-title">'+(title||'Œuvre sans chapitre')+'</div><div class="rs-sub">Cette œuvre ne contient pas encore de chapitre.<br/>Revenez bientôt — l\'auteur est en train d\'écrire !</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Retour au catalogue →</button></div>',
-    'error':'<div class="reader-state"><span class="rs-ico">⚠️</span><div class="rs-title">Erreur de chargement</div><div class="rs-sub">Impossible de charger ce livre.<br/>Vérifiez votre connexion et réessayez.</div><button class="rs-btn" onclick="window.location.reload()">Réessayer →</button></div>'
-  };
-  content.innerHTML=states[type]||states['error'];
-  hideToolbars();
+ const content=document.getElementById('readingContent');
+ const bt=document.getElementById('bookTitle');
+ if(bt) bt.textContent=title||'GRIOTTE';
+ const states={
+ 'no-book':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">Aucun livre sélectionné</div><div class="rs-sub">Choisissez une œuvre depuis le catalogue pour commencer à lire.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
+ 'not-found':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">Livre introuvable</div><div class="rs-sub">Ce livre n\'existe pas ou a été supprimé.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
+ 'no-chapters':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">'+(title||'Œuvre sans chapitre')+'</div><div class="rs-sub">Cette œuvre ne contient pas encore de chapitre.<br/>Revenez bientôt — l\'auteur est en train d\'écrire !</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Retour au catalogue →</button></div>',
+ 'error':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">Erreur de chargement</div><div class="rs-sub">Impossible de charger ce livre.<br/>Vérifiez votre connexion et réessayez.</div><button class="rs-btn" onclick="window.location.reload()">Réessayer →</button></div>'
+ };
+ content.innerHTML=states[type]||states['error'];
+ hideToolbars();
 }
 
 // Navigation
 window.nextPage=async function(){
-  if(currentPage>=pages.length-1) return;
-  // Lecture gratuite pour admin et auteur du livre
-  const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||userRole==='AUTHOR'&&bookData&&bookData.authorId===userId;
-  const currentPageData=pages[currentPage];
-  const nextPageData=pages[currentPage+1];
-  // Vérifier si la prochaine page est premium et non accessible
-  if(!isFree&&nextPageData&&!nextPageData.isFree&&balance<=0){
-    document.getElementById('fundsOverlay').classList.add('open');
-    return;
-  }
-  if(!isFree&&balance<=0){
-    document.getElementById('fundsOverlay').classList.add('open');
-    return;
-  }
-  const token=localStorage.getItem('accessToken');
-  if(token&&!isFree){
-    try{
-      const res=await fetch(API+'/recharge',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-        body:JSON.stringify({amount:-10})
-      });
-      const d=await res.json();
-      if(d.error){document.getElementById('fundsOverlay').classList.add('open');return;}
-      if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
-    }catch(e){}
-  }
-  currentPage++;
-  showPage(currentPage);
-  updateProgress();
-  window.scrollTo({top:0,behavior:'smooth'});
-  showToast('p. '+(currentPage+1),'📄');
+ if(currentPage>=pages.length-1) return;
+ // Lecture gratuite pour admin et auteur du livre
+ const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||userRole==='AUTHOR'&&bookData&&bookData.authorId===userId;
+ const currentPageData=pages[currentPage];
+ const nextPageData=pages[currentPage+1];
+ // Vérifier si la prochaine page est premium et non accessible
+ if(!isFree&&nextPageData&&!nextPageData.isFree&&balance<=0){
+ document.getElementById('fundsOverlay').classList.add('open');
+ return;
+ }
+ if(!isFree&&balance<=0){
+ document.getElementById('fundsOverlay').classList.add('open');
+ return;
+ }
+ const token=localStorage.getItem('accessToken');
+ if(token&&!isFree){
+ try{
+ const res=await fetch(API+'/recharge',{
+ method:'POST',
+ headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+ body:JSON.stringify({amount:-10})
+ });
+ const d=await res.json();
+ if(d.error){document.getElementById('fundsOverlay').classList.add('open');return;}
+ if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
+ }catch(e){}
+ }
+ currentPage++;
+ showPage(currentPage);
+ updateProgress();
+ window.scrollTo({top:0,behavior:'smooth'});
+ showToast('p. '+(currentPage+1),'');
 };
 
 window.prevPage=function(){
-  if(currentPage<=0) return;
-  currentPage--;
-  showPage(currentPage);
-  updateProgress();
-  window.scrollTo({top:0,behavior:'smooth'});
+ if(currentPage<=0) return;
+ currentPage--;
+ showPage(currentPage);
+ updateProgress();
+ window.scrollTo({top:0,behavior:'smooth'});
 };
 
 
 
 // Progress
 function updateProgress(){
-  const pct=totalPages>1?Math.round((currentPage/(totalPages-1))*100):0;
-  const pf=document.getElementById('progressFill');if(pf) pf.style.width=pct+'%';
-  const pi=document.getElementById('pageIndicator');if(pi) pi.textContent='Page '+(currentPage+1)+' / '+totalPages;
-  const pp=document.getElementById('progressPct');if(pp) pp.textContent=pct+'% lu';
-  const tr=document.getElementById('timeRemaining');
-  if(tr){
-    const left=totalPages-currentPage-1;
-    const h=Math.floor(left/40);
-    const m=Math.round((left%40)*1.5);
-    tr.textContent=h>0?'≈ '+h+'h '+m+'min restantes':'≈ '+m+' min restantes';
-  }
-  const prevBtn=document.getElementById('prevBtn');if(prevBtn) prevBtn.disabled=currentPage===0;
-  const nextBtn=document.getElementById('nextBtn');if(nextBtn) nextBtn.disabled=currentPage>=pages.length-1;
+ const pct=totalPages>1?Math.round((currentPage/(totalPages-1))*100):0;
+ const pf=document.getElementById('progressFill');if(pf) pf.style.width=pct+'%';
+ const pi=document.getElementById('pageIndicator');if(pi) pi.textContent='Page '+(currentPage+1)+' / '+totalPages;
+ const pp=document.getElementById('progressPct');if(pp) pp.textContent=pct+'% lu';
+ const tr=document.getElementById('timeRemaining');
+ if(tr){
+ const left=totalPages-currentPage-1;
+ const h=Math.floor(left/40);
+ const m=Math.round((left%40)*1.5);
+ tr.textContent=h>0?'≈ '+h+'h '+m+'min restantes':'≈ '+m+' min restantes';
+ }
+ const prevBtn=document.getElementById('prevBtn');if(prevBtn) prevBtn.disabled=currentPage===0;
+ const nextBtn=document.getElementById('nextBtn');if(nextBtn) nextBtn.disabled=currentPage>=pages.length-1;
 }
 
 // Toolbars
 function startHideTimer(){
-  clearTimeout(hideTimeout);
-  hideTimeout=setTimeout(function(){
-    document.getElementById('toolbarTop').classList.add('hidden');
-    document.getElementById('toolbarBottom').classList.add('hidden');
-    toolbarsVisible=false;
-  },4000);
+ clearTimeout(hideTimeout);
+ hideTimeout=setTimeout(function(){
+ document.getElementById('toolbarTop').classList.add('hidden');
+ document.getElementById('toolbarBottom').classList.add('hidden');
+ toolbarsVisible=false;
+ },4000);
 }
 function showToolbars(){
-  document.getElementById('toolbarTop').classList.remove('hidden');
-  document.getElementById('toolbarBottom').classList.remove('hidden');
-  toolbarsVisible=true;
-  startHideTimer();
+ document.getElementById('toolbarTop').classList.remove('hidden');
+ document.getElementById('toolbarBottom').classList.remove('hidden');
+ toolbarsVisible=true;
+ startHideTimer();
 }
 function hideToolbars(){
-  document.getElementById('toolbarTop').classList.add('hidden');
-  document.getElementById('toolbarBottom').classList.add('hidden');
-  toolbarsVisible=false;
+ document.getElementById('toolbarTop').classList.add('hidden');
+ document.getElementById('toolbarBottom').classList.add('hidden');
+ toolbarsVisible=false;
 }
 function handleAreaClick(e){
-  if(e.target.closest('.toolbar-top')||e.target.closest('.toolbar-bottom')||e.target.closest('.settings-panel')||e.target.closest('.chapters-panel')||e.target.closest('.funds-overlay')||e.target.closest('.reader-state')) return;
-  showToolbars();
+ if(e.target.closest('.toolbar-top')||e.target.closest('.toolbar-bottom')||e.target.closest('.settings-panel')||e.target.closest('.chapters-panel')||e.target.closest('.funds-overlay')||e.target.closest('.reader-state')) return;
+ showToolbars();
 }
 function onMouseMove(){if(!toolbarsVisible) showToolbars();else startHideTimer();}
 
 // Panels
 window.toggleSettingsPanel=function(){
-  document.getElementById('settingsPanel').classList.toggle('open');
-  document.getElementById('panelOverlay').classList.toggle('open');
-  document.getElementById('chaptersPanel').classList.remove('open');
+ document.getElementById('settingsPanel').classList.toggle('open');
+ document.getElementById('panelOverlay').classList.toggle('open');
+ document.getElementById('chaptersPanel').classList.remove('open');
 };
 window.toggleChaptersPanel=function(){
-  document.getElementById('chaptersPanel').classList.toggle('open');
-  document.getElementById('panelOverlay').classList.toggle('open');
-  document.getElementById('settingsPanel').classList.remove('open');
+ document.getElementById('chaptersPanel').classList.toggle('open');
+ document.getElementById('panelOverlay').classList.toggle('open');
+ document.getElementById('settingsPanel').classList.remove('open');
 };
 window.closePanels=function(){
-  document.getElementById('settingsPanel').classList.remove('open');
-  document.getElementById('chaptersPanel').classList.remove('open');
-  document.getElementById('panelOverlay').classList.remove('open');
+ document.getElementById('settingsPanel').classList.remove('open');
+ document.getElementById('chaptersPanel').classList.remove('open');
+ document.getElementById('panelOverlay').classList.remove('open');
 };
 
 // Settings
 window.setTheme=function(theme,btn){
-  document.body.className=theme;
-  document.querySelectorAll('.theme-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
+ document.body.className=theme;
+ document.querySelectorAll('.theme-btn').forEach(function(b){b.classList.remove('active');});
+ btn.classList.add('active');
 };
 window.changeFontSize=function(delta){
-  fontSize=Math.max(14,Math.min(24,fontSize+delta));
-  document.documentElement.style.setProperty('--font-size',fontSize+'px');
-  const fd=document.getElementById('fontSizeDisp');if(fd) fd.textContent=fontSize+'px';
+ fontSize=Math.max(14,Math.min(24,fontSize+delta));
+ document.documentElement.style.setProperty('--font-size',fontSize+'px');
+ const fd=document.getElementById('fontSizeDisp');if(fd) fd.textContent=fontSize+'px';
 };
 window.setWidth=function(w,btn){
-  document.documentElement.style.setProperty('--width',w+'px');
-  document.querySelectorAll('.width-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
+ document.documentElement.style.setProperty('--width',w+'px');
+ document.querySelectorAll('.width-btn').forEach(function(b){b.classList.remove('active');});
+ btn.classList.add('active');
 };
 
 // Bookmark
 window.toggleBookmark=function(){
-  bookmarked=!bookmarked;
-  const btn=document.getElementById('bookmarkBtn');
-  if(btn) btn.classList.toggle('active',bookmarked);
-  showToast(bookmarked?'Signet ajouté — p.'+(currentPage+1):'Signet retiré','🔖');
+ bookmarked=!bookmarked;
+ const btn=document.getElementById('bookmarkBtn');
+ if(btn) btn.classList.toggle('active',bookmarked);
+ showToast(bookmarked?'Signet ajouté — p.'+(currentPage+1):'Signet retiré','');
 };
 
 // Toast
 window.closeFundsOverlay=function(){
-  document.getElementById('fundsOverlay').classList.remove('open');
-  // Remettre le slider à la position actuelle
-  const slider=document.getElementById('progressSlider');
-  if(slider&&pages.length>1) slider.value=Math.round((currentPage/(pages.length-1))*100);
+ document.getElementById('fundsOverlay').classList.remove('open');
+ // Remettre le slider à la position actuelle
+ const slider=document.getElementById('progressSlider');
+ if(slider&&pages.length>1) slider.value=Math.round((currentPage/(pages.length-1))*100);
 };
 
 window.showToast=function(msg,ico){
-  const t=document.getElementById('toast');
-  document.getElementById('toastIco').textContent=ico||'✅';
-  document.getElementById('toastMsg').textContent=msg;
-  t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},1800);
+ const t=document.getElementById('toast');
+ document.getElementById('toastIco').textContent=ico||'✓';
+ document.getElementById('toastMsg').textContent=msg;
+ t.classList.add('show');
+ setTimeout(function(){t.classList.remove('show');},1800);
 };
 
 // Keyboard
 document.addEventListener('keydown',function(e){
-  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextPage();}
-  else if(e.key==='ArrowLeft'){e.preventDefault();prevPage();}
-  else if(e.key==='Escape') closePanels();
+ if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextPage();}
+ else if(e.key==='ArrowLeft'){e.preventDefault();prevPage();}
+ else if(e.key==='Escape') closePanels();
 });
 
 init();
