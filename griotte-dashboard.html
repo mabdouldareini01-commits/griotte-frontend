@@ -493,7 +493,7 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
  <div class="user-row">
  <div class="user-ava" id="userAva">A</div>
  <div>
- <div class="user-name" id="userName">Ama Kouyaté</div>
+ <div class="user-name" id="userName">—</div>
  <div class="user-role">Mon espace GRIOTTE</div>
  </div>
  </div>
@@ -516,7 +516,7 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
  <div class="nav-section">Publication</div>
  <button class="nav-item" onclick="showPanel('publier',this)"><span class="nav-ico"></span> Publier une œuvre</button>
  <button class="nav-item" onclick="showPanel('meslivres',this)"><span class="nav-ico"></span> Mes publications</button>
- <button class="nav-item" onclick="showPanel('revenus',this)"><span class="nav-ico"></span> Mes revenus <span class="nav-badge" id="revBadge">28 200 F</span></button>
+ <button class="nav-item" onclick="showPanel('revenus',this)"><span class="nav-ico"></span> Mes revenus <span class="nav-badge" id="revBadge">—</span></button>
 
  <div class="nav-section">Compte</div>
  <button class="nav-item" onclick="showPanel('profil',this)"><span class="nav-ico"></span> Mon profil</button>
@@ -554,6 +554,7 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
  </div>
  <div class="stat-card">
  <div class="stat-label">Pages lues</div>
+<div class="stat-value"><span id="statPages">—</span></div><div class="stat-sub" id="statPagesSub">—</div>
  <div class="stat-val">847</div>
  <div class="stat-change">↑ +124 ce mois</div>
  </div>
@@ -576,7 +577,7 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
  <div class="books-grid" style="margin-bottom:2rem">
  <div class="book-card" onclick="window.location='griotte-reader.html'">
  <div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div>
- <div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67% · p.214/320</div></div>
+ <div class="book-meta"><div class="book-author" data-author="true">Auteur</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67% · p.214/320</div></div>
  </div>
  <div class="book-card">
  <div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div>
@@ -626,7 +627,7 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
  <div class="panel" id="panel-catalogue">
  <p style="color:var(--text-soft);margin-bottom:1.5rem">Découvrez les œuvres de la communauté GRIOTTE.</p>
  <div class="books-grid">
- <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author" data-author="true">Auteur</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
  <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">La Griotte de Bamako</div></div><div class="book-meta"><div class="book-author">Seydou Diallo</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
  <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#200a0a,#601010)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div><div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
  <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a1828,#183860)"><div class="book-cover-overlay"></div><div class="book-cover-title">L'Enfant du Fleuve</div></div><div class="book-meta"><div class="book-author">Mamadou Traoré</div><div class="book-pct" style="color:var(--or)">10 FCFA/page</div></div></div>
@@ -639,7 +640,7 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
  <div class="panel" id="panel-bibliotheque">
  <p style="color:var(--text-soft);margin-bottom:1.5rem">Vos livres en cours et terminés.</p>
  <div class="books-grid">
- <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author">Ama Kouyaté</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67%</div></div></div>
+ <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#1a0a30,#4a1080)"><div class="book-cover-overlay"></div><div class="book-cover-title">Les Fils du Sahel</div></div><div class="book-meta"><div class="book-author" data-author="true">Auteur</div><div class="book-progress"><div class="book-progress-bar" style="width:67%"></div></div><div class="book-pct">67%</div></div></div>
  <div class="book-card"><div class="book-cover" style="background:linear-gradient(145deg,#0a2010,#204a18)"><div class="book-cover-overlay"></div><div class="book-cover-title">Nuit sur le Sahara</div></div><div class="book-meta"><div class="book-author">Fatou Sow</div><div class="book-progress"><div class="book-progress-bar" style="width:23%"></div></div><div class="book-pct">23%</div></div></div>
  </div>
  </div>
@@ -709,7 +710,7 @@ body{font-family:"Inter",sans-serif;background:#F8F5F1;color:#1A1410;display:fle
  <div class="profil-card">
  <div class="profil-ava-big" id="profilAva">A</div>
  <p class="profil-label">Nom complet</p>
- <input class="profil-input" type="text" value="Ama Kouyaté" id="profilName"/>
+ <input class="profil-input" type="text" value="" id="profilName" placeholder="Votre nom"/>
  <p class="profil-label">Email</p>
  <input class="profil-input" type="email" value="ama@griotte.com"/>
  <p class="profil-label">Bio (affichée sur vos livres)</p>
@@ -763,58 +764,53 @@ async function initUser() {
     user = await res.json();
     localStorage.setItem('griotte_user', JSON.stringify(user));
   } catch(e) {
-    // Use cached user if offline
-    console.warn('initUser offline:', e.message);
+    user = JSON.parse(localStorage.getItem('griotte_user') || '{}');
+    if (!user.name) { logout(); return; }
   }
 
-  var name     = user.name     || 'Lecteur';
-  var email    = user.email    || '';
-  var balance  = user.balance  || 0;
-  var role     = user.role     || 'READER';
-  var initials = name.charAt(0).toUpperCase();
+  var name    = user.name    || '';
+  var email   = user.email   || '';
+  var balance = user.balance || 0;
+  var role    = user.role    || 'READER';
+  var initial = name.charAt(0).toUpperCase() || '?';
 
   // Avatar
-  setAll('.user-avatar', initials);
-  setEl('userAva', initials);
+  setAll('.user-avatar', initial);
+  setEl('userAva', initial);
+  setEl('profilAva', initial);
 
-  // Name
+  // Nom
   setAll('.user-name', name);
   setEl('userName', name);
-  setEl('profilName', name);
 
-  // Email
-  setEl('userEmail', email);
-  setEl('profilEmail', email);
+  // Profil inputs
+  var pn = document.getElementById('profilName');
+  if (pn) pn.value = name;
+  var pe = document.getElementById('profilEmail');
+  if (pe) pe.value = email;
 
-  // Balance
+  // Solde
+  var pages  = Math.floor(balance / 10);
   var balFmt = balance.toLocaleString('fr-FR') + ' FCFA';
-  setAll('.user-balance', balFmt);
-  setEl('sidebarBalance', balFmt);
   setEl('statSolde', balFmt);
+  setEl('statSoldeSub', pages.toLocaleString('fr-FR') + ' pages disponibles');
+  setEl('sidebarBalance', balFmt);
   setEl('balanceDisplay', balFmt);
+  setAll('.solde-amount', balFmt);
 
-  // Role badge
-  var roleLbl = role === 'ADMIN' ? 'Administrateur' : role === 'AUTHOR' ? 'Auteur' : 'Lecteur';
-  setEl('userRole', roleLbl);
+  // Role
+  var roleLbl = role === 'ADMIN' ? 'Administrateur' : role === 'AUTHOR' ? 'Auteur vérifié' : 'Lecteur';
+  setAll('.user-role', roleLbl);
 
-  // Admin link visibility
+  // Admin link
   var adminLink = document.getElementById('adminLink');
   if (adminLink) adminLink.style.display = (role === 'ADMIN') ? 'flex' : 'none';
 
-  // Load role-specific data
+  // Load data
   loadStats();
-  if (role === 'AUTHOR' || role === 'ADMIN') {
-    loadMyBooks();
-  }
+  if (role === 'AUTHOR' || role === 'ADMIN') loadMyBooks();
 }
 
-function setEl(id, val) {
-  var el = document.getElementById(id);
-  if (el) el.textContent = val;
-}
-function setAll(selector, val) {
-  document.querySelectorAll(selector).forEach(function(el) { el.textContent = val; });
-}
 
 // ── LOAD CATALOGUE ────────────────────────────────────────────────
 async function loadCatalogue() {
@@ -824,7 +820,7 @@ async function loadCatalogue() {
   grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#8A7A6E;font-family:Inter,sans-serif;font-size:0.85rem">Chargement du catalogue…</div>';
 
   try {
-    var res   = await fetch(API + '/auth/books-public');
+    var res = await fetch(API + '/auth/books-public');
     var books = await res.json();
 
     if (!Array.isArray(books) || books.length === 0) {
@@ -924,23 +920,27 @@ async function loadStats() {
     var res   = await fetch(API + '/auth/my-stats', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
+    if (!res.ok) return;
     var stats = await res.json();
 
-    // Revenue badge in sidebar
-    if (stats.totalRevenue) {
+    if (stats.totalRevenue !== undefined) {
+      setEl('statRevenu', stats.totalRevenue.toLocaleString('fr-FR') + ' FCFA');
       setEl('revBadge', stats.totalRevenue.toLocaleString('fr-FR') + ' F');
     }
-
-    // Stats panel
-    if (stats.totalPages)   setEl('statTotalPages',   stats.totalPages.toLocaleString('fr-FR'));
-    if (stats.totalReads)   setEl('statTotalReads',   stats.totalReads.toLocaleString('fr-FR'));
-    if (stats.totalRevenue) setEl('statTotalRevenue', stats.totalRevenue.toLocaleString('fr-FR') + ' FCFA');
-    if (stats.monthRevenue) setEl('statMonthRevenue', stats.monthRevenue.toLocaleString('fr-FR') + ' FCFA');
-
+    if (stats.totalReads !== undefined) {
+      setEl('statPages', stats.totalReads.toLocaleString('fr-FR'));
+    }
+    if (stats.readers !== undefined) {
+      setEl('statLecteurs', stats.readers.toLocaleString('fr-FR'));
+    }
+    if (stats.monthRevenue !== undefined) {
+      setEl('statMonthRevenue', stats.monthRevenue.toLocaleString('fr-FR') + ' FCFA');
+    }
   } catch(e) {
     console.warn('loadStats:', e.message);
   }
 }
+
 
 // ── RECHARGE ──────────────────────────────────────────────────────
 var selectedPack = 0;
