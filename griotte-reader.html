@@ -2,866 +2,626 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>GRIOTTE — Lecteur</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-/* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
- Une seule taille, une seule source, partout identique
- ════════════════════════════════════════════════════ */
-.g-icon {
- display: inline-flex;
- align-items: center;
- justify-content: center;
- flex-shrink: 0;
- overflow: visible !important;
- line-height: 0;
-}
-.g-icon img {
- display: block;
- height: 38px;
- width: 38px;
- object-fit: contain;
- border-radius: 11px;
- overflow: visible !important;
- /* No filter, no opacity, no shadow — logo brut */
-}
-/* Override ALL size variants → same 38px */
-.g-icon--48 img,
-.g-icon--40 img,
-.g-icon--36 img,
-.g-icon--32 img,
-.g-icon--28 img {
- height: 38px !important;
- width: 38px !important;
- border-radius: 11px !important;
-}
-/* Footer: slightly smaller on dark bg */
-footer .g-icon img,
-footer .g-icon--48 img,
-footer .g-icon--40 img,
-footer .g-icon--36 img {
- height: 34px !important;
- width: 34px !important;
- border-radius: 10px !important;
-}
-/* Auth modal: centered */
-.auth-logo-wrap .g-icon img {
- height: 42px !important;
- width: 42px !important;
- border-radius: 13px !important;
-}
-/* Force no extra styles */
-[class*="logo"] { overflow: visible !important; }
-/* ════════════════════════════════════════════════ */
-
-/* == THEME CLAIR GRIOTTE == */
-html,body{background:var(--bg)!important;color:var(--text-main)!important}
-/* Sidebar light */
-.sidebar,.aside,[class*="sidebar"]{background:var(--bg-sidebar)!important;border-color:var(--border)!important}
-/* Cards */
-.card,[class*="-card"]{background:var(--bg-card)!important;border-color:var(--border)!important}
-/* Topbar */
-.topbar,[class*="topbar"]{background:rgba(248,245,241,0.96)!important;border-color:var(--border)!important;color:var(--text-main)!important}
-/* Orange buttons */
-[class*="btn"][class*="primary"],
-[class*="btn"][class*="hero"],
-[class*="hero-btn"]{background:var(--or)!important;color:#fff!important}
-/* Orange accents */
-[class*="or-"],[style*="#FF6B00"],[style*="#FF6B00"]{color:var(--or)!important}
-/* == FIN THEME == */
-
-/* ── LOGO GRIOTTE UNIQUE ─────────────────────────────────── */
-.g-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0;overflow:visible}
-.g-icon img{display:block;object-fit:contain;border-radius:16px;overflow:visible}
-.g-icon--48 img{height:48px;width:48px}
-.g-icon--40 img{height:40px;width:40px}
-.g-icon--36 img{height:36px;width:36px}
-.g-icon--32 img{height:32px;width:32px}
-[class*="logo"],[class*="sidebar-logo"],[class*="cat-logo"],[class*="s-logo"],[class*="footer-logo"]{overflow:visible!important}
-@media(max-width:768px){
- .g-icon--48 img,.g-icon--40 img{height:36px;width:36px}
- .g-icon--36 img,.g-icon--32 img{height:32px;width:32px}
-}
-/* ──────────────────────────────────────────────────────── */
-
-:root{
- /* Couleurs logo */
- --or:#FF6B00;
- --or-dark:#CC5200;
- --or-light:#FF8C33;
- --or-glow:rgba(255,107,0,0.12);
- --or-border:rgba(255,107,0,0.25);
- /* Fond & surfaces */
- --bg:#F8F5F1;
- --bg-card:#FFFFFF;
- --bg-card2:#FFF8F4;
- --bg-sidebar:#FFFFFF;
- /* Texte */
- --text-main:#1A1410;
- --text-soft:#4A3F35;
- --text-muted:#6B5A4E;
- /* Bordures */
- --border:rgba(26,20,16,0.09);
- --border-strong:rgba(26,20,16,0.16);
- /* Compatibilité ancien code */
- --noir:#1A1410;
- --noir-soft:#F8F5F1;
- --noir-card:#FFFFFF;
- --blanc:#F8F5F1;
- --blanc-dim:#6B5A4E;
- --cendre:#6B5F52;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:var(--font-size)}
-body{background:var(--bg-color,#FFFFFF);color:var(--text-color,#e8e4de);font-family:'Cormorant Garamond',serif;min-height:100vh;transition:background 0.4s,color 0.4s;overflow-x:hidden}
-::selection{background:rgba(217,144,45,0.25)}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:rgba(217,144,45,0.3);border-radius:2px}
-
-/* TOOLBAR TOP */
-.toolbar-top{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:var(--tb-bg,rgba(15,13,10,0.92));backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:transform 0.35s ease,opacity 0.35s ease}
-.toolbar-top.hidden{transform:translateY(-100%);opacity:0}
-.tb-left{display:flex;align-items:center;gap:0.9rem}
-.tb-back{background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.9rem;transition:all 0.2s;flex-shrink:0}
-.tb-back:hover{color:var(--blanc)}
-.tb-book-info{}
-.tb-title{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:var(--text-color,#e8e4de);line-height:1.1}
-.tb-chapter{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.06em}
-.tb-solde{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);background:rgba(217,144,45,0.08);border:1px solid rgba(217,144,45,0.2);padding:0.28rem 0.75rem;border-radius:100px;display:flex;align-items:center;gap:0.35rem}
-.tb-dot{width:5px;height:5px;background:var(--or);border-radius:50%;animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.tb-right{display:flex;align-items:center;gap:0.35rem}
-.tb-btn{background:none;border:1px solid var(--border);border-radius:8px;color:var(--cendre);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.82rem;transition:all 0.2s}
-.tb-btn:hover{color:var(--blanc);border-color:rgba(248,246,242,0.2)}
-.tb-btn.active{color:var(--or);border-color:rgba(217,144,45,0.3);background:rgba(217,144,45,0.08)}
-
-/* PROGRESS */
-.progress-line{position:fixed;top:52px;left:0;right:0;z-index:99;height:2px;background:rgba(248,246,242,0.06)}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--or-dark),var(--or));transition:width 0.4s ease}
-
-/* READING AREA */
-.reading-area{max-width:var(--width);margin:0 auto;padding:90px 2rem 160px}
-
-.chapter-header{text-align:center;padding:3.5rem 0 2.5rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem}
-.chapter-number{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--or);margin-bottom:1rem;display:block}
-.chapter-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:500;line-height:1.1;margin-bottom:0.6rem}
-.chapter-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--cendre);font-weight:300}
-
-.reading-content p{margin-bottom:1.4em;line-height:var(--line-height);font-size:1rem;font-weight:400;letter-spacing:0.01em}
-.reading-content p.indent{text-indent:2em}
-.reading-content .bq{margin:2.5em 0;padding:1.4em 2em;border-left:2px solid var(--or);background:rgba(217,144,45,0.04);border-radius:0 8px 8px 0}
-.reading-content .bq p{margin-bottom:0.4em;font-style:italic;font-size:1.05rem}
-.reading-content .bq cite{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);font-style:normal;letter-spacing:0.06em}
-.reading-content em{font-style:italic}
-.reading-content strong{font-weight:600}
-.page-sep{display:flex;align-items:center;gap:1rem;margin:3rem 0;opacity:0.25}
-.page-sep::before,.page-sep::after{content:'';flex:1;height:1px;background:currentColor}
-.page-sep-ico{font-size:0.75rem}
-
-/* EMPTY / LOADING STATES */
-.reader-state{text-align:center;padding:6rem 2rem;max-width:500px;margin:0 auto}
-.rs-ico{font-size:4rem;margin-bottom:1.5rem;opacity:0.3;display:block}
-.rs-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;margin-bottom:0.75rem;color:var(--text-color,#e8e4de)}
-.rs-sub{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--cendre);line-height:1.8;margin-bottom:2rem;letter-spacing:0.04em}
-.rs-btn{background:linear-gradient(135deg,var(--or),var(--or-dark));color:#FFFFFF;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;padding:0.8rem 1.8rem;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s}
-.rs-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(217,144,45,0.3)}
-
-/* TOOLBAR BOTTOM */
-.toolbar-bottom{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:1rem 2rem 1.4rem;background:var(--tb-bg,rgba(15,13,10,0.95));backdrop-filter:blur(20px);border-top:1px solid var(--border);transition:transform 0.35s ease,opacity 0.35s ease}
-.toolbar-bottom.hidden{transform:translateY(100%);opacity:0}
-.tb-bottom-main{display:flex;align-items:center;gap:1.2rem;margin-bottom:0.7rem}
-.nav-btn{height:44px;padding:0 1.2rem;background:rgba(248,246,242,0.06);border:1px solid var(--border);border-radius:100px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.78rem;font-family:'Syne',sans-serif;font-weight:700;color:var(--text-color,#e8e4de);transition:all 0.2s;flex-shrink:0;letter-spacing:0.04em}
-.nav-btn:hover{background:rgba(248,246,242,0.1);border-color:rgba(248,246,242,0.2)}
-.nav-btn:disabled{opacity:0.25;cursor:not-allowed}
-.nav-btn-next{background:rgba(217,144,45,0.1);border-color:rgba(217,144,45,0.25);color:var(--or)}
-.nav-btn-next:hover{background:rgba(217,144,45,0.18)}
-.progress-section{flex:1}
-.progress-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.45rem}
-.page-indicator{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.04em}
-.progress-pct{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or)}
-.page-counter{display:flex;flex-direction:column;align-items:center;gap:0.2rem;flex:1}
-.tb-bottom-meta{display:flex;justify-content:space-between;align-items:center}
-.time-remaining{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);letter-spacing:0.05em}
-.debit-info{font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(217,144,45,0.55);display:flex;align-items:center;gap:0.3rem}
-.debit-dot{width:3px;height:3px;background:var(--or);border-radius:50%;opacity:0.55}
-
-/* SETTINGS PANEL */
-.settings-panel{position:fixed;top:0;right:0;bottom:0;width:300px;background:var(--tb-bg,#FFFFFF);border-left:1px solid var(--border);z-index:200;padding:5rem 1.8rem 2rem;transform:translateX(100%);transition:transform 0.3s ease;overflow-y:auto}
-.settings-panel.open{transform:translateX(0)}
-.sp-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:var(--text-color,#e8e4de);margin-bottom:0.25rem}
-.sp-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:2rem;letter-spacing:0.05em}
-.sp-section{margin-bottom:1.8rem}
-.sp-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cendre);margin-bottom:0.65rem;display:block}
-.theme-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:0.45rem}
-.theme-btn{border:1px solid var(--border);border-radius:8px;padding:0.6rem;cursor:pointer;text-align:center;transition:all 0.2s;background:none}
-.theme-btn.active{border-color:var(--or);background:rgba(217,144,45,0.08)}
-.theme-prev{width:100%;height:26px;border-radius:4px;margin-bottom:0.35rem}
-.theme-prev.night{background:linear-gradient(135deg,#FFFFFF,#1a1612)}
-.theme-prev.day{background:linear-gradient(135deg,#f5f0e8,#ece4d4)}
-.theme-prev.sepia{background:linear-gradient(135deg,#f4ead5,#e8d9b8)}
-.theme-name{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-.theme-btn.active .theme-name{color:var(--or)}
-.font-ctrl{display:flex;align-items:center;gap:0.65rem}
-.font-btn{width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--cendre);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.88rem;transition:all 0.2s;flex-shrink:0}
-.font-btn:hover{color:var(--blanc)}
-.font-disp{flex:1;text-align:center;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre)}
-.width-btns{display:flex;gap:0.45rem}
-.width-btn{flex:1;border:1px solid var(--border);border-radius:8px;padding:0.55rem;cursor:pointer;background:none;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);transition:all 0.2s;text-align:center}
-.width-btn.active{border-color:var(--or);color:var(--or);background:rgba(217,144,45,0.08)}
-.solde-sp{background:rgba(217,144,45,0.06);border:1px solid rgba(217,144,45,0.15);border-radius:10px;padding:1rem;text-align:center}
-.solde-sp-amount{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--or);line-height:1;margin-bottom:0.2rem}
-.solde-sp-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);margin-bottom:0.65rem}
-.solde-sp-btn{width:100%;padding:0.52rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:8px;color:#FFFFFF;font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;cursor:pointer}
-
-/* CHAPTERS PANEL */
-.chapters-panel{position:fixed;top:0;left:0;bottom:0;width:300px;background:var(--tb-bg,#FFFFFF);border-right:1px solid var(--border);z-index:200;padding:5rem 0 2rem;transform:translateX(-100%);transition:transform 0.3s ease;overflow-y:auto}
-.chapters-panel.open{transform:translateX(0)}
-.cp-title{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;color:var(--text-color,#e8e4de);padding:0 1.5rem;margin-bottom:1rem}
-.cp-book-title{font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:var(--cendre);padding:0 1.5rem;margin-bottom:1.5rem;font-style:italic}
-.chapter-item{display:flex;align-items:center;gap:0.75rem;padding:0.7rem 1.5rem;cursor:pointer;transition:background 0.15s;border-left:2px solid transparent}
-.chapter-item:hover{background:rgba(248,246,242,0.03)}
-.chapter-item.active{border-left-color:var(--or);background:rgba(217,144,45,0.06)}
-.ci-num{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);min-width:24px}
-.ci-title{font-size:0.78rem;color:var(--text-color,#e8e4de);font-weight:600;line-height:1.2;flex:1}
-.ci-free{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--green,#4ade80);background:rgba(74,222,128,0.1);padding:0.08rem 0.35rem;border-radius:100px;flex-shrink:0}
-.ci-premium{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--or);background:rgba(217,144,45,0.1);padding:0.08rem 0.35rem;border-radius:100px;flex-shrink:0}
-
-/* PANEL OVERLAY */
-.panel-overlay{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.45);opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(2px)}
-.panel-overlay.open{opacity:1;pointer-events:all}
-
-/* FUNDS OVERLAY */
-.funds-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center}
-.funds-overlay.open{display:flex}
-.funds-box{background:#FFFFFF;border:1px solid rgba(248,246,242,0.1);border-radius:20px;padding:3rem;text-align:center;max-width:360px;width:100%;margin:1rem;position:relative}
-.funds-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--or),transparent);border-radius:20px 20px 0 0}
-.funds-ico{font-size:3rem;margin-bottom:1rem}
-.funds-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--blanc);margin-bottom:0.5rem}
-.funds-sub{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--cendre);line-height:1.7;margin-bottom:2rem;letter-spacing:0.04em}
-.funds-btn{width:100%;padding:0.9rem;background:linear-gradient(135deg,var(--or),var(--or-dark));border:none;border-radius:12px;color:#FFFFFF;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;margin-bottom:0.7rem;transition:all 0.2s}
-.funds-btn:hover{filter:brightness(1.1)}
-.funds-back{width:100%;padding:0.75rem;background:none;border:1px solid var(--border);border-radius:12px;color:var(--cendre);font-family:'Syne',sans-serif;font-weight:600;font-size:0.8rem;cursor:pointer;transition:all 0.2s}
-.funds-back:hover{border-color:rgba(248,246,242,0.2);color:var(--blanc)}
-
-/* TOAST */
-.toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(15,13,10,0.95);border:1px solid rgba(248,246,242,0.1);border-radius:100px;padding:0.55rem 1.1rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--blanc);white-space:nowrap;opacity:0;pointer-events:none;transition:all 0.28s;z-index:300;display:flex;align-items:center;gap:0.45rem}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* THEMES */
-body.day{--bg-color:#f5f0e8;--text-color:#1a1510;--tb-bg:rgba(245,240,232,0.92)}
-body.sepia{--bg-color:#f4ead5;--text-color:#3d2e1e;--tb-bg:rgba(244,234,213,0.92)}
-
-/* ════════════════════════════════════════════════
- GRIOTTE — GLOBAL CONTRAST & READABILITY PATCH
- Applied across all pages for WCAG AA compliance
- ════════════════════════════════════════════════ */
-
-/* 1. Strengthen base variables */
-:root {
- --text-main: #1A1410 !important; /* near-black, high contrast */
- --text-soft: #4A3F35 !important; /* dark brown-grey, readable */
- --text-muted: #6B5A4E !important; /* medium brown, still readable */
- --blanc-dim: #6B5A4E !important;
- --cendre: #4A3F35 !important;
-}
-
-/* 2. Body & base text */
-body { color: #1A1410 !important; background: #F8F5F1 !important; }
-
-/* 3. All paragraphs, labels, small text */
-p, span, label, li, td, th, caption, figcaption,
-.section-sub, .hero-sub, .step-desc, .feature-desc,
-.footer-tagline, .testi-quote, .book-author, .dash-book-reads,
-.auth-sub { color: #4A3F35; }
-
-/* 4. Headings always dark */
-h1, h2, h3, h4, h5, h6,
-.hero-title, .section-title, .auth-title,
-.dash-title, .feature-title, .step-title { color: #1A1410 !important; }
-
-/* 5. Nav links */
-.nav-links a, .sidebar-link, .sidebar-nav a,
-[class*="nav-link"], [class*="menu-link"] { color: #3A2F25 !important; }
-
-/* 6. Sidebar — enforce dark text on white bg */
-.sidebar, .aside, [class*="sidebar"] {
- background: #FFFFFF !important;
- color: #1A1410 !important;
-}
-.sidebar *, .aside * { color: #1A1410; }
-.nav-section, [class*="nav-section"] { color: #6B5A4E !important; }
-
-/* 7. Cards — always readable */
-.card, [class*="-card"], .book-card, .testi-card,
-.stat-card, .dash-stat, .concept-visual, .author-dashboard {
- background: #FFFFFF !important;
- color: #1A1410 !important;
- border-color: rgba(26,20,16,0.1) !important;
-}
-.card *, [class*="-card"] *, .testi-card *, .dash-stat * { color: #1A1410; }
-
-/* 8. Topbar */
-.topbar, [class*="topbar"], #navbar {
- background: rgba(248,245,241,0.95) !important;
- color: #1A1410 !important;
-}
-.topbar *, #navbar * { color: #1A1410; }
-
-/* 9. Buttons — always visible */
-[class*="btn"][class*="primary"],
-[class*="btn"][class*="hero"],
-[class*="btn-nav-cta"], .btn-hero-primary,
-.btn-cta-primary, .auth-btn {
- background: #FF6B00 !important;
- color: #FFFFFF !important;
- opacity: 1 !important;
-}
-[class*="btn"][class*="ghost"],
-[class*="btn"][class*="secondary"],
-.btn-nav-ghost, .btn-hero-secondary, .btn-cta-secondary {
- color: #1A1410 !important;
- border-color: rgba(26,20,16,0.25) !important;
- opacity: 1 !important;
-}
-
-/* 10. Footer — dark bg with proper white text */
-footer {
- background: #1A1410 !important;
- color: rgba(255,255,255,0.75) !important;
-}
-footer h3, footer h4, .footer-brand-name { color: #FFFFFF !important; }
-footer p, .footer-tagline { color: rgba(255,255,255,0.6) !important; }
-.footer-links a { color: rgba(255,255,255,0.65) !important; }
-.footer-links a:hover { color: #FF6B00 !important; }
-.footer-copy, .footer-legal a { color: rgba(255,255,255,0.35) !important; }
-.footer-col-title { color: rgba(255,255,255,0.4) !important; }
-
-/* 11. Orange accent — always full opacity */
-.or, [style*="color:var(--or)"], [style*="color: var(--or)"] { color: #FF6B00 !important; opacity: 1 !important; }
-em { color: #FF6B00 !important; opacity: 1 !important; }
-
-/* 12. Stat values — bold and dark */
-.hero-stat-value, .stat-value, .dash-stat-val,
-.pricing-big, .pricing-pct { color: #1A1410 !important; opacity: 1 !important; }
-.hero-stat-label, .stat-label, .dash-stat-lbl {
- color: #6B5A4E !important; opacity: 1 !important;
-}
-
-/* 13. Auth modal */
-.auth-box { background: #FFFFFF !important; }
-.auth-input { background: #F8F5F1 !important; color: #1A1410 !important; border-color: rgba(26,20,16,0.15) !important; }
-.auth-label { color: #4A3F35 !important; }
-
-/* 14. Section badges & DM Mono labels */
-.section-badge, .hero-badge, .dash-badge,
-[class*="badge"], [class*="-label"], .nav-section {
- opacity: 1 !important;
-}
-
-/* 15. Minimum font sizes */
-.nav-section, .footer-col-title, .hero-badge,
-.section-badge, .ticker-item, .book-price,
-.testi-role, .auth-sub, [class*="-label"],
-[class*="-lbl"], [class*="badge"] {
- font-size: max(0.72rem, 11px) !important;
-}
-
-/* 16. Reader — dark text on white */
-.reader-content, .reader-text, [class*="reader-body"] {
- color: #1A1410 !important;
- background: #FFFFFF !important;
-}
-
-/* ═══════════════════════════════════════════════ */
-
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Lecture — GRIOTTE</title>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
-<script src="./brand-logo.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;background:#F4F1ED;color:#1A1410;min-height:100vh;display:flex;flex-direction:column}
+:root{
+  --or:#FF6B00;--or-dark:#CC5200;
+  --bg:#F4F1ED;--card:#fff;
+  --text:#1A1410;--soft:#4A3F35;--muted:#8A7A6E;
+  --border:rgba(26,20,16,0.08);
+  --reading-bg:#FDFAF6;
+  --reading-text:#2C1810;
+  --reading-width:680px
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:52px;background:rgba(253,250,246,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 1.5rem;gap:1rem
+}
+.topbar-left{display:flex;align-items:center;gap:0.75rem;flex:1;min-width:0}
+.back-btn{
+  display:flex;align-items:center;gap:0.4rem;
+  font-family:'Inter',sans-serif;font-size:0.8rem;
+  color:var(--muted);text-decoration:none;
+  padding:0.3rem 0.6rem;border-radius:6px;
+  transition:all 0.18s;white-space:nowrap;
+  border:none;background:none;cursor:pointer
+}
+.back-btn:hover{color:var(--text);background:rgba(26,20,16,0.05)}
+.back-btn svg{flex-shrink:0}
+.book-info{min-width:0}
+.book-info-title{
+  font-family:'Inter',sans-serif;font-size:0.82rem;
+  font-weight:600;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.book-info-author{font-size:0.7rem;color:var(--muted)}
+.topbar-center{
+  display:flex;flex-direction:column;align-items:center;gap:0.2rem;
+  flex-shrink:0
+}
+.progress-bar-wrap{
+  width:180px;height:3px;background:rgba(26,20,16,0.1);
+  border-radius:50px;overflow:hidden
+}
+.progress-bar-fill{
+  height:100%;background:var(--or);
+  border-radius:50px;transition:width 0.4s ease
+}
+.progress-label{
+  font-family:'DM Mono',monospace;font-size:0.58rem;
+  color:var(--muted);letter-spacing:0.05em
+}
+.topbar-right{display:flex;align-items:center;gap:0.5rem;flex-shrink:0}
+.solde-badge{
+  font-family:'DM Mono',monospace;font-size:0.72rem;
+  font-weight:500;color:var(--or);
+  background:rgba(255,107,0,0.08);
+  border:1px solid rgba(255,107,0,0.2);
+  border-radius:50px;padding:0.25rem 0.75rem;
+  white-space:nowrap
+}
+.settings-btn{
+  width:32px;height:32px;border-radius:8px;
+  background:none;border:1.5px solid var(--border);
+  color:var(--muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s
+}
+.settings-btn:hover{border-color:var(--or);color:var(--or)}
+
+/* ── READING AREA ── */
+.reader-wrap{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;
+  padding:52px 1.5rem 120px;
+  background:var(--reading-bg)
+}
+.page-content{
+  width:100%;max-width:var(--reading-width);
+  padding:3.5rem 0 2rem;
+}
+.page-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  line-height:1.95;
+  color:var(--reading-text);
+  letter-spacing:0.01em;
+  text-align:justify;
+  text-indent:2em
+}
+.page-number-display{
+  text-align:center;
+  font-family:'DM Mono',monospace;
+  font-size:0.65rem;
+  color:rgba(26,20,16,0.25);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-top:3rem;
+  padding-top:1.5rem;
+  border-top:1px solid rgba(26,20,16,0.06)
+}
+
+/* ── CHAPTER HEADER ── */
+.chapter-header{
+  text-align:center;margin-bottom:3rem;
+  padding-bottom:2rem;
+  border-bottom:1px solid rgba(26,20,16,0.08)
+}
+.chapter-label{
+  font-family:'DM Mono',monospace;font-size:0.62rem;
+  color:var(--muted);letter-spacing:0.18em;
+  text-transform:uppercase;margin-bottom:0.75rem
+}
+.chapter-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:700;
+  color:var(--reading-text);
+  line-height:1.2
+}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(253,250,246,0.98);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:0.85rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem
+}
+.nav-btn{
+  display:flex;align-items:center;gap:0.5rem;
+  font-family:'Inter',sans-serif;font-size:0.82rem;
+  font-weight:500;color:var(--soft);
+  background:none;border:1.5px solid var(--border);
+  border-radius:9px;padding:0.6rem 1.2rem;
+  cursor:pointer;transition:all 0.2s;
+  white-space:nowrap
+}
+.nav-btn:hover{border-color:var(--or);color:var(--or)}
+.nav-btn:disabled{opacity:0.35;cursor:not-allowed}
+.nav-btn-primary{
+  background:var(--or);color:#fff;
+  border-color:var(--or);font-weight:600
+}
+.nav-btn-primary:hover{background:var(--or-dark);border-color:var(--or-dark);color:#fff}
+.page-indicator{
+  font-family:'DM Mono',monospace;
+  font-size:0.78rem;color:var(--muted);
+  text-align:center;flex:1
+}
+.cost-indicator{
+  font-family:'DM Mono',monospace;
+  font-size:0.68rem;color:var(--muted)
+}
+.cost-debit{color:var(--or);font-weight:600}
+
+/* ── SETTINGS PANEL ── */
+.settings-panel{
+  position:fixed;top:52px;right:0;bottom:0;
+  width:280px;background:var(--card);
+  border-left:1px solid var(--border);
+  padding:1.5rem;z-index:99;
+  transform:translateX(100%);
+  transition:transform 0.28s ease;
+  overflow-y:auto
+}
+.settings-panel.open{transform:translateX(0)}
+.settings-title{
+  font-family:'Inter',sans-serif;font-size:0.85rem;
+  font-weight:700;color:var(--text);
+  margin-bottom:1.5rem;
+  padding-bottom:0.75rem;
+  border-bottom:1px solid var(--border)
+}
+.setting-group{margin-bottom:1.5rem}
+.setting-label{
+  font-family:'Inter',sans-serif;font-size:0.72rem;
+  font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:0.08em;
+  margin-bottom:0.75rem
+}
+.font-size-ctrl{display:flex;align-items:center;gap:0.75rem}
+.fs-btn{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--bg);border:1.5px solid var(--border);
+  font-family:'Inter',sans-serif;font-size:1rem;
+  color:var(--soft);cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center
+}
+.fs-btn:hover{border-color:var(--or);color:var(--or)}
+.fs-display{
+  font-family:'DM Mono',monospace;font-size:0.82rem;
+  color:var(--text);flex:1;text-align:center
+}
+.theme-btns{display:flex;gap:0.5rem}
+.theme-btn{
+  flex:1;padding:0.55rem;border-radius:8px;
+  font-family:'Inter',sans-serif;font-size:0.75rem;
+  font-weight:500;cursor:pointer;transition:all 0.2s;
+  border:1.5px solid var(--border);background:var(--bg);
+  color:var(--soft)
+}
+.theme-btn.active{border-color:var(--or);color:var(--or);background:rgba(255,107,0,0.06)}
+
+/* ── MODAL SOLDE ── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(13,11,9,0.7);
+  backdrop-filter:blur(8px);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:1.5rem
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:var(--card);border-radius:18px;
+  width:100%;max-width:380px;padding:2rem;
+  box-shadow:0 24px 60px rgba(0,0,0,0.2)
+}
+.modal-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;font-weight:700;color:var(--text);
+  margin-bottom:0.5rem
+}
+.modal-sub{font-size:0.85rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
+.recharge-amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin-bottom:1.25rem}
+.amount-btn{
+  padding:0.75rem 0.5rem;border-radius:10px;
+  background:var(--bg);border:1.5px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:0.82rem;
+  font-weight:600;color:var(--text);cursor:pointer;
+  transition:all 0.2s;text-align:center
+}
+.amount-btn:hover,.amount-btn.selected{
+  border-color:var(--or);color:var(--or);
+  background:rgba(255,107,0,0.06)
+}
+.modal-btn{
+  width:100%;padding:0.85rem;border-radius:10px;
+  font-family:'Inter',sans-serif;font-weight:600;
+  font-size:0.9rem;cursor:pointer;border:none;
+  transition:all 0.2s;margin-bottom:0.65rem
+}
+.modal-btn-primary{background:var(--or);color:#fff}
+.modal-btn-primary:hover{background:var(--or-dark)}
+.modal-btn-ghost{background:var(--bg);color:var(--soft);border:1.5px solid var(--border)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:90px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:#1A1410;color:#fff;
+  font-family:'Inter',sans-serif;font-size:0.82rem;
+  padding:0.65rem 1.25rem;border-radius:50px;
+  opacity:0;transition:all 0.3s;pointer-events:none;
+  white-space:nowrap;z-index:300
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.orange{background:var(--or)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .topbar-center{display:none}
+  .page-text{font-size:1.05rem;line-height:1.85}
+  .page-content{padding:2rem 0 1.5rem}
+  .settings-panel{width:100%}
+  .nav-btn span{display:none}
+}
+</style>
 </head>
-<body class="night">
+<body>
 
-<div class="toast" id="toast"><span id="toastIco"></span><span id="toastMsg"></span></div>
-
-<!-- FONDS INSUFFISANTS -->
-<div class="funds-overlay" id="fundsOverlay">
- <div class="funds-box">
- <div class="funds-ico"></div>
- <div class="funds-title">Solde insuffisant</div>
- <div class="funds-sub" id="fundsMessage">Votre solde est épuisé.<br/>Rechargez pour continuer votre lecture.</div>
- <button class="funds-btn" onclick="window.location.href='griotte-dashboard.html?page=credits'">+ Recharger mes crédits →</button>
- <button class="funds-back" onclick="closeFundsOverlay()">← Continuer depuis le début</button>
- <button class="funds-back" style="margin-top:0.5rem" onclick="window.location.href='griotte-catalogue.html'">Retour au catalogue</button>
- </div>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <button class="back-btn" onclick="window.location.href='./griotte-dashboard.html'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Bibliothèque
+    </button>
+    <div style="width:1px;height:20px;background:var(--border)"></div>
+    <div class="book-info">
+      <div class="book-info-title" id="bookTitle">Les Fils du Sahel</div>
+      <div class="book-info-author" id="bookAuthor">Ama Kouyaté</div>
+    </div>
+  </div>
+  <div class="topbar-center">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">0 % lu</div>
+  </div>
+  <div class="topbar-right">
+    <div class="solde-badge" id="soldeBadge">— FCFA</div>
+    <button class="settings-btn" onclick="toggleSettings()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
 </div>
 
-<!-- PANEL OVERLAY -->
-<div class="panel-overlay" id="panelOverlay" onclick="closePanels()"></div>
+<!-- READING AREA -->
+<div class="reader-wrap" id="readerWrap">
+  <div class="page-content">
+    <div class="chapter-header">
+      <div class="chapter-label">Chapitre I</div>
+      <div class="chapter-title" id="chapterTitle">L'aube de Bamako</div>
+    </div>
+    <div class="page-text" id="pageText">Chargement...</div>
+    <div class="page-number-display" id="pageNumDisplay">Page 1</div>
+  </div>
+</div>
 
-<!-- CHAPTERS PANEL -->
-<div class="chapters-panel" id="chaptersPanel">
- <div class="cp-title">Chapitres</div>
- <div id="cpCover" style="width:80px;height:115px;border-radius:3px 10px 10px 3px;margin:0 1.5rem 1rem;overflow:hidden;box-shadow:-4px 0 0 rgba(0,0,0,0.3)"></div>
- <div class="cp-book-title" id="cpBookTitle">—</div>
- <div id="chaptersList"></div>
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-btn" id="btnPrev" onclick="prevPage()" disabled>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span>Précédent</span>
+  </button>
+  <div style="text-align:center">
+    <div class="page-indicator" id="pageIndicator">1 / 10</div>
+    <div class="cost-indicator">10 FCFA <span class="cost-debit" id="costDebit">— débité</span></div>
+  </div>
+  <button class="nav-btn nav-btn-primary" id="btnNext" onclick="nextPage()">
+    <span>Suivant</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </button>
 </div>
 
 <!-- SETTINGS PANEL -->
 <div class="settings-panel" id="settingsPanel">
- <div class="sp-title">Paramètres de lecture</div>
- <div class="sp-sub">Personnalisez votre expérience</div>
- <div class="sp-section">
- <span class="sp-label">Thème</span>
- <div class="theme-btns">
- <button class="theme-btn" onclick="setTheme('day',this)"><div class="theme-prev day"></div><div class="theme-name">Jour</div></button>
- <button class="theme-btn active" onclick="setTheme('night',this)"><div class="theme-prev night"></div><div class="theme-name">Nuit</div></button>
- <button class="theme-btn" onclick="setTheme('sepia',this)"><div class="theme-prev sepia"></div><div class="theme-name">Sépia</div></button>
- </div>
- </div>
- <div class="sp-section">
- <span class="sp-label">Taille du texte</span>
- <div class="font-ctrl">
- <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
- <span class="font-disp" id="fontSizeDisp">18px</span>
- <button class="font-btn" onclick="changeFontSize(1)">A+</button>
- </div>
- </div>
- <div class="sp-section">
- <span class="sp-label">Largeur de colonne</span>
- <div class="width-btns">
- <button class="width-btn" onclick="setWidth(560,this)">Étroit</button>
- <button class="width-btn active" onclick="setWidth(680,this)">Moyen</button>
- <button class="width-btn" onclick="setWidth(820,this)">Large</button>
- </div>
- </div>
- <div class="sp-section">
- <span class="sp-label">Mon solde</span>
- <div class="solde-sp">
- <div class="solde-sp-amount" id="soldeSp">0 FCFA</div>
- <div class="solde-sp-label">= <span id="pagesRestSp">0</span> pages dispo</div>
- <button class="solde-sp-btn" onclick="window.location.href='griotte-dashboard.html'">+ Recharger</button>
- </div>
- </div>
+  <div class="settings-title">Préférences de lecture</div>
+  
+  <div class="setting-group">
+    <div class="setting-label">Taille du texte</div>
+    <div class="font-size-ctrl">
+      <button class="fs-btn" onclick="changeFontSize(-1)">A−</button>
+      <div class="fs-display" id="fsDisplay">1.2rem</div>
+      <button class="fs-btn" onclick="changeFontSize(1)">A+</button>
+    </div>
+  </div>
+
+  <div class="setting-group">
+    <div class="setting-label">Thème</div>
+    <div class="theme-btns">
+      <button class="theme-btn active" id="theme-creme" onclick="setTheme('creme')">Crème</button>
+      <button class="theme-btn" id="theme-blanc" onclick="setTheme('blanc')">Blanc</button>
+      <button class="theme-btn" id="theme-nuit" onclick="setTheme('nuit')">Nuit</button>
+    </div>
+  </div>
+
+  <div class="setting-group" style="padding-top:1rem;border-top:1px solid var(--border)">
+    <div class="setting-label">Solde</div>
+    <div style="font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:600;color:var(--or);margin-bottom:0.75rem" id="soldeDisplay">— FCFA</div>
+    <button onclick="openRecharge()" style="width:100%;padding:0.65rem;border-radius:9px;background:rgba(255,107,0,0.08);border:1.5px solid rgba(255,107,0,0.2);color:var(--or);font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer">Recharger mon solde</button>
+  </div>
 </div>
 
-<!-- TOOLBAR TOP -->
-<nav class="toolbar-top" id="toolbarTop">
- <div class="tb-left">
- <button class="tb-back" onclick="window.location.href='griotte-dashboard.html'">←</button>
- <div class="tb-book-info">
- <div class="tb-title" id="bookTitle">Chargement...</div>
- <div class="tb-chapter" id="chapterLabel">—</div>
- </div>
- </div>
- <div class="tb-solde"><span class="tb-dot"></span><span id="soldeDisplay">0 FCFA</span></div>
- <div class="tb-right">
- <button class="tb-btn" onclick="toggleChaptersPanel()" title="Chapitres">☰</button>
- <button class="tb-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Signet"></button>
- <button class="tb-btn" onclick="toggleSettingsPanel()" title="Paramètres"></button>
- </div>
-</nav>
-
-<!-- PROGRESS BAR -->
-<div class="progress-line"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-
-<!-- READING AREA -->
-<main class="reading-area" id="readingArea">
- <div class="reading-content" id="readingContent">
- <div class="reader-state">
- <span class="rs-ico"></span>
- <div class="rs-title">Chargement...</div>
- <div class="rs-sub">Récupération du contenu en cours.</div>
- </div>
- </div>
-</main>
-
-<!-- TOOLBAR BOTTOM -->
-<div class="toolbar-bottom" id="toolbarBottom"><brand-logo></brand-logo>
- <div class="tb-bottom-main">
- <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹ Précédent</button>
- <div class="page-counter">
- <span class="page-indicator" id="pageIndicator">Page 1 / —</span>
- <span class="progress-pct" id="progressPct">0%</span>
- </div>
- <button class="nav-btn nav-btn-next" id="nextBtn" onclick="nextPage()">Suivant ›</button>
- </div>
- <div class="tb-bottom-meta">
- <span class="time-remaining" id="timeRemaining">—</span>
- <span class="debit-info"><span class="debit-dot"></span>10 FCFA / page</span>
- </div>
+<!-- MODAL RECHARGE -->
+<div class="modal-overlay" id="modalRecharge">
+  <div class="modal-box">
+    <div class="modal-title">Recharger le solde</div>
+    <p class="modal-sub">Votre solde est insuffisant pour continuer la lecture. Choisissez un montant à ajouter.</p>
+    <div class="recharge-amounts">
+      <div class="amount-btn" onclick="selectAmount(1000)">1 000</div>
+      <div class="amount-btn" onclick="selectAmount(2000)">2 000</div>
+      <div class="amount-btn" onclick="selectAmount(5000)">5 000</div>
+      <div class="amount-btn" onclick="selectAmount(10000)">10 000</div>
+      <div class="amount-btn" onclick="selectAmount(20000)">20 000</div>
+      <div class="amount-btn" onclick="selectAmount(50000)">50 000</div>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);text-align:center;margin-bottom:1rem">
+      Montant sélectionné : <span id="selectedAmount" style="color:var(--or);font-weight:600">—</span> FCFA
+    </div>
+    <button class="modal-btn modal-btn-primary" onclick="doRecharge()">Recharger maintenant →</button>
+    <button class="modal-btn modal-btn-ghost" onclick="closeRecharge()">Continuer sans recharger</button>
+  </div>
 </div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-(function(){
-const API='https://griotte-backend-2-production.up.railway.app/api/v1/auth';
-let pages=[];
-let currentPage=0;
-let totalPages=0;
-let balance=0;
-let userRole='READER';
-let userId='';
-let bookmarked=false;
-let toolbarsVisible=true;
-let hideTimeout;
-let bookId=null;
-let fontSize=18;
-let bookData=null;
+const API = 'https://griotte-backend-2-production.up.railway.app/api/v1';
+const PRICE_PER_PAGE = 10;
 
-// Token & bookId depuis URL
-const up=new URLSearchParams(window.location.search);
-bookId=up.get('bookId');
+// ── PAGES DEMO ──
+const PAGES = ["Le soleil se levait sur Bamako comme un disque de cuivre incandescent, teintant de rouge et d'or les façades blanches de la médina. Dans les ruelles étroites, les marchands installaient déjà leurs étals, et l'odeur du pain chaud se mêlait au parfum épicé du thé au gingembre.", "Ama avait grandi dans cette ville, mais chaque matin lui semblait une découverte. Elle descendit les trois marches de sa maison, serrant contre elle le manuscrit qu'elle avait écrit pendant la nuit. Trois cents pages. Trois cents pages qui racontaient l'histoire de sa grand-mère.", "La griotte l'attendait sous le grand fromager de la place centrale. Agée de soixante-dix ans au moins, elle portait un boubou brodé d'or que le vent faisait onduler comme une flamme. Ses yeux, profonds comme des puits, s'illuminèrent en voyant Ama approcher.", '"Tu as terminé", dit la vieille femme. Ce n\'était pas une question. Elle tendit la main vers le manuscrit avec une autorité naturelle, le feuilleta lentement, ses lèvres bougeant en silence sur certains passages. Ama attendit, le cœur battant.', '"Les mots sont vivants", déclara finalement la griotte en refermant les pages. "Ils respirent. Ta grand-mère serait fière." Elle rendit le manuscrit à Ama et ajouta, comme si c\'était la chose la plus naturelle du monde : "Maintenant il faut les laisser voyager."', "C'est ainsi que tout commença. Ama ne savait pas encore que ce matin-là changerait sa vie, que ces trois cents pages allaient traverser les frontières, toucher des milliers de cœurs à travers le continent, et que son nom serait un jour prononcé avec respect dans les cercles littéraires de Dakar, d'Abidjan et au-delà.", "La maison d'édition était installée dans un immeuble colonial du centre-ville. Directeur des acquisitions depuis vingt ans, M. Konaté avait vu passer des centaines de manuscrits sur son bureau. Mais celui qu'il tenait entre les mains ce matin avait quelque chose de particulier.", "Il relu le premier chapitre une seconde fois, puis une troisième. La prose était dense, musicale, portée par un rythme qui rappelait les récits oraux de son enfance. L'auteure savait construire une phrase comme on construit une case : avec patience, précision, et une attention aux détails qui faisait toute la différence.", 'Son assistante frappa à la porte. "Monsieur Konaté, votre réunion de dix heures…" Il leva la main sans lever les yeux du manuscrit. "Annulez." Elle hésita un instant, puis referma la porte doucement. Elle avait appris à reconnaître ce signe.', 'Il ne sortit de son bureau qu\'à midi, les yeux rouges mais le visage illuminé d\'une excitation qu\'il n\'avait pas ressentie depuis longtemps. Il appela son assistante. "Retrouvez-moi l\'auteure de ce texte. Aujourd\'hui si possible."'];
+const TOTAL_PAGES = PAGES.length;
 
-// Init
-async function init(){
- const token=localStorage.getItem('accessToken');
- if(token) await loadSolde(token);
- if(!bookId){
- showState('no-book');
- return;
- }
- await loadBook(bookId);
+// ── STATE ──
+let currentPage = 0;
+let solde = 0;
+let token = localStorage.getItem('griotte_token');
+let pagesRead = new Set();
+let fontSize = 1.2;
+let selectedRechargeAmount = 0;
+
+// ── URL PARAMS ──
+const params = new URLSearchParams(window.location.search);
+const bookId    = params.get('book') || '1';
+const bookTitle = params.get('title') || 'Les Fils du Sahel';
+const bookAuthor= params.get('author') || 'Ama Kouyaté';
+
+// ── INIT ──
+document.getElementById('bookTitle').textContent  = decodeURIComponent(bookTitle);
+document.getElementById('bookAuthor').textContent = decodeURIComponent(bookAuthor);
+
+// Restore position
+const savedPage = parseInt(localStorage.getItem('griotte_pos_' + bookId)) || 0;
+currentPage = savedPage;
+
+async function init() {
+  await loadSolde();
+  renderPage(currentPage);
 }
 
-// Load solde
-async function loadSolde(token){
- try{
- const res=await fetch(API+'/me',{headers:{'Authorization':'Bearer '+token}});
- const d=await res.json();
- if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
- if(d.role) userRole=d.role;
- if(d.id) userId=d.id;
- else if(d.sub) userId=d.sub;
- 
- }catch(e){}
+async function loadSolde() {
+  if (!token) { solde = 0; updateSoldeUI(); return; }
+  try {
+    const res  = await fetch(API + '/auth/me', {headers: {'Authorization': 'Bearer ' + token}});
+    const data = await res.json();
+    solde = data.balance || 0;
+    updateSoldeUI();
+  } catch(e) {
+    solde = 500; // demo fallback
+    updateSoldeUI();
+  }
 }
 
-function updateSoldeDisplay(){
- const sd=document.getElementById('soldeDisplay');
- if(sd) sd.textContent=balance.toLocaleString()+' FCFA';
- const ss=document.getElementById('soldeSp');
- if(ss) ss.textContent=balance.toLocaleString()+' FCFA';
- const sp=document.getElementById('pagesRestSp');
- if(sp) sp.textContent=Math.floor(balance/10);
+function updateSoldeUI() {
+  const fmt = solde.toLocaleString('fr-FR') + ' FCFA';
+  document.getElementById('soldeBadge').textContent  = fmt;
+  document.getElementById('soldeDisplay').textContent = fmt;
 }
 
-// Load book + chapters
-async function loadBook(id){
- try{
- // Charger le livre avec authorId
- const bRes=await fetch(API+'/books/'+id);
- bookData=await bRes.json();
- if(bookData.error) bookData=null;
+// ── RENDER PAGE ──
+function renderPage(idx) {
+  const text = PAGES[idx] || 'Page non disponible.';
+  const el   = document.getElementById('pageText');
+  
+  // Fade transition
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(6px)';
+  setTimeout(() => {
+    el.textContent = text;
+    el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, 150);
 
- if(!bookData){
- showState('not-found');
- return;
- }
+  // Update UI
+  document.getElementById('pageNumDisplay').textContent = 'Page ' + (idx + 1);
+  document.getElementById('pageIndicator').textContent  = (idx + 1) + ' / ' + TOTAL_PAGES;
+  document.getElementById('btnPrev').disabled = idx === 0;
+  document.getElementById('btnNext').textContent = idx === TOTAL_PAGES - 1 ? 'Fin' : 'Suivant';
+  
+  // Progress
+  const pct = Math.round(((idx + 1) / TOTAL_PAGES) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '% lu';
 
- // Titre du livre
- const bt=document.getElementById('bookTitle');
- if(bt) bt.textContent=bookData.title;
- const cbt=document.getElementById('cpBookTitle');
- if(cbt) cbt.textContent=bookData.title;
- // Couverture dans panel chapitres
- const cpCover=document.getElementById('cpCover');
- if(cpCover){
- if(bookData.coverImage){
- cpCover.innerHTML='<img src="'+bookData.coverImage+'" alt="'+bookData.title+'" style="width:100%;height:100%;object-fit:cover"/>';
- } else {
- cpCover.style.background='linear-gradient(160deg,#2d1b0e,#8B4513)';
- }
- }
-
- // Charger les chapitres
- const cRes=await fetch(API+'/books/'+id+'/chapters');
- const chapters=await cRes.json();
-
- if(!chapters||chapters.length===0){
- showState('no-chapters',bookData.title);
- return;
- }
-
- // Construire les pages depuis les chapitres réels
- pages=[];
- chapters.forEach(function(ch,ci){
- const content=ch.content||'';
- const words=content.split(/\s+/).filter(Boolean);
- const wordsPerPage=280;
- const numPages=Math.max(1,Math.ceil(words.length/wordsPerPage));
-
- for(let p=0;p<numPages;p++){
- const start=p*wordsPerPage;
- const chunk=words.slice(start,start+wordsPerPage).join(' ');
- const isFirst=p===0;
- pages.push({
- chapterNum:ch.number,
- chapterTitle:ch.title,
- isFirstOfChapter:isFirst,
- isFree:ch.isFree,
- content:chunk,
- chapterIndex:ci,
- pageInChapter:p+1,
- totalPagesInChapter:numPages
- });
- }
- });
-
- totalPages=pages.length;
-
- // Construire la liste des chapitres dans le panel
- renderChaptersList(chapters);
-
- // Afficher la première page
- showPage(0);
- updateProgress();
- startHideTimer();
- document.addEventListener('click',handleAreaClick);
- document.addEventListener('mousemove',onMouseMove);
-
- }catch(e){
- console.error(e);
- showState('error');
- }
+  // Save position
+  localStorage.setItem('griotte_pos_' + bookId, idx);
 }
 
-// Render chapters list
-function renderChaptersList(chapters){
- const cl=document.getElementById('chaptersList');
- if(!cl) return;
- cl.innerHTML=chapters.map(function(ch,i){
- return '<div class="chapter-item" id="ci-'+i+'" onclick="jumpToChapter('+i+')">'
- +'<div class="ci-num">'+ch.number+'</div>'
- +'<div class="ci-title">'+ch.title+'</div>'
- +(ch.isFree?'<span class="ci-free">Gratuit</span>':'<span class="ci-premium">Premium</span>')
- +'</div>';
- }).join('');
+// ── NAVIGATION ──
+async function nextPage() {
+  if (currentPage >= TOTAL_PAGES - 1) return;
+  
+  const nextIdx = currentPage + 1;
+  
+  // Debit if first time reading this page
+  if (!pagesRead.has(nextIdx)) {
+    if (solde < PRICE_PER_PAGE) {
+      openRecharge();
+      return;
+    }
+    await debitPage(nextIdx);
+  }
+  
+  currentPage = nextIdx;
+  renderPage(currentPage);
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// Jump to chapter
-window.jumpToChapter=function(chapterIndex){
- const firstPage=pages.findIndex(function(p){return p.chapterIndex===chapterIndex;});
- if(firstPage>=0){
- currentPage=firstPage;
- showPage(currentPage);
- updateProgress();
- window.scrollTo({top:0,behavior:'smooth'});
- closePanels();
- }
-};
-
-// Show page
-function showPage(idx){
- if(pages.length===0) return;
- idx=Math.max(0,Math.min(idx,pages.length-1));
- const p=pages[idx];
- const content=document.getElementById('readingContent');
- content.style.opacity='0';
- setTimeout(function(){
- let html='';
- if(p.isFirstOfChapter){
- html+='<div class="chapter-header">'
- +'<span class="chapter-number">Chapitre '+p.chapterNum+'</span>'
- +'<h1 class="chapter-title">'+p.chapterTitle+'</h1>'
- +'</div>';
- }
- // Formater le texte en paragraphes
- const sentences=p.content.split(/(?<=[.!?»])\s+/);
- const paragraphs=[];
- let current=[];
- sentences.forEach(function(s,i){
- current.push(s);
- if(current.length>=3||i===sentences.length-1){
- paragraphs.push(current.join(' '));
- current=[];
- }
- });
- html+='<div>'+paragraphs.map(function(par,i){
- return '<p class="'+(i>0?'indent':'')+'">'+(par.trim()||'...')+'</p>';
- }).join('')+'</div>';
- content.innerHTML=html;
- content.style.opacity='1';
- content.style.transition='opacity 0.25s ease';
- // Update chapter label
- const cl=document.getElementById('chapterLabel');
- if(cl) cl.textContent='Ch. '+p.chapterNum+' · '+p.chapterTitle;
- // Update active chapter in panel
- document.querySelectorAll('.chapter-item').forEach(function(el){el.classList.remove('active');});
- const activeItem=document.getElementById('ci-'+p.chapterIndex);
- if(activeItem) activeItem.classList.add('active');
- },150);
+function prevPage() {
+  if (currentPage <= 0) return;
+  currentPage--;
+  renderPage(currentPage);
+  window.scrollTo({top:0, behavior:'smooth'});
+  // No debit going back
+  document.getElementById('costDebit').textContent = 'déjà lu';
 }
 
-// Show empty/error states
-function showState(type,title){
- const content=document.getElementById('readingContent');
- const bt=document.getElementById('bookTitle');
- if(bt) bt.textContent=title||'GRIOTTE';
- const states={
- 'no-book':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">Aucun livre sélectionné</div><div class="rs-sub">Choisissez une œuvre depuis le catalogue pour commencer à lire.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
- 'not-found':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">Livre introuvable</div><div class="rs-sub">Ce livre n\'existe pas ou a été supprimé.</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Aller au catalogue →</button></div>',
- 'no-chapters':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">'+(title||'Œuvre sans chapitre')+'</div><div class="rs-sub">Cette œuvre ne contient pas encore de chapitre.<br/>Revenez bientôt — l\'auteur est en train d\'écrire !</div><button class="rs-btn" onclick="window.location.href=\'griotte-catalogue.html\'">Retour au catalogue →</button></div>',
- 'error':'<div class="reader-state"><span class="rs-ico"></span><div class="rs-title">Erreur de chargement</div><div class="rs-sub">Impossible de charger ce livre.<br/>Vérifiez votre connexion et réessayez.</div><button class="rs-btn" onclick="window.location.reload()">Réessayer →</button></div>'
- };
- content.innerHTML=states[type]||states['error'];
- hideToolbars();
+async function debitPage(pageIdx) {
+  pagesRead.add(pageIdx);
+  solde -= PRICE_PER_PAGE;
+  updateSoldeUI();
+  
+  // Show debit toast
+  document.getElementById('costDebit').textContent = '−10 FCFA';
+  showToast('−10 FCFA débité · Solde : ' + solde.toLocaleString('fr-FR') + ' FCFA');
+  
+  // Sync with backend if logged in
+  if (token) {
+    try {
+      await fetch(API + '/auth/debit-page', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json','Authorization':'Bearer '+token},
+        body: JSON.stringify({bookId, pageNumber: pageIdx, amount: PRICE_PER_PAGE})
+      });
+    } catch(e) {
+      // Route may not exist yet — fail silently
+    }
+  }
 }
 
-// Navigation
-window.nextPage=async function(){
- if(currentPage>=pages.length-1) return;
- // Lecture gratuite pour admin et auteur du livre
- const isFree=userRole==='ADMIN'||userRole==='SUPER_ADMIN'||userRole==='AUTHOR'&&bookData&&bookData.authorId===userId;
- const currentPageData=pages[currentPage];
- const nextPageData=pages[currentPage+1];
- // Vérifier si la prochaine page est premium et non accessible
- if(!isFree&&nextPageData&&!nextPageData.isFree&&balance<=0){
- document.getElementById('fundsOverlay').classList.add('open');
- return;
- }
- if(!isFree&&balance<=0){
- document.getElementById('fundsOverlay').classList.add('open');
- return;
- }
- const token=localStorage.getItem('accessToken');
- if(token&&!isFree){
- try{
- const res=await fetch(API+'/recharge',{
- method:'POST',
- headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
- body:JSON.stringify({amount:-10})
- });
- const d=await res.json();
- if(d.error){document.getElementById('fundsOverlay').classList.add('open');return;}
- if(d.balance!==undefined){balance=d.balance;updateSoldeDisplay();}
- }catch(e){}
- }
- currentPage++;
- showPage(currentPage);
- updateProgress();
- window.scrollTo({top:0,behavior:'smooth'});
- showToast('p. '+(currentPage+1),'');
-};
-
-window.prevPage=function(){
- if(currentPage<=0) return;
- currentPage--;
- showPage(currentPage);
- updateProgress();
- window.scrollTo({top:0,behavior:'smooth'});
-};
-
-
-
-// Progress
-function updateProgress(){
- const pct=totalPages>1?Math.round((currentPage/(totalPages-1))*100):0;
- const pf=document.getElementById('progressFill');if(pf) pf.style.width=pct+'%';
- const pi=document.getElementById('pageIndicator');if(pi) pi.textContent='Page '+(currentPage+1)+' / '+totalPages;
- const pp=document.getElementById('progressPct');if(pp) pp.textContent=pct+'% lu';
- const tr=document.getElementById('timeRemaining');
- if(tr){
- const left=totalPages-currentPage-1;
- const h=Math.floor(left/40);
- const m=Math.round((left%40)*1.5);
- tr.textContent=h>0?'≈ '+h+'h '+m+'min restantes':'≈ '+m+' min restantes';
- }
- const prevBtn=document.getElementById('prevBtn');if(prevBtn) prevBtn.disabled=currentPage===0;
- const nextBtn=document.getElementById('nextBtn');if(nextBtn) nextBtn.disabled=currentPage>=pages.length-1;
+// ── SETTINGS ──
+let settingsOpen = false;
+function toggleSettings() {
+  settingsOpen = !settingsOpen;
+  document.getElementById('settingsPanel').classList.toggle('open', settingsOpen);
 }
 
-// Toolbars
-function startHideTimer(){
- clearTimeout(hideTimeout);
- hideTimeout=setTimeout(function(){
- document.getElementById('toolbarTop').classList.add('hidden');
- document.getElementById('toolbarBottom').classList.add('hidden');
- toolbarsVisible=false;
- },4000);
+function changeFontSize(dir) {
+  fontSize = Math.min(2, Math.max(0.9, fontSize + dir * 0.1));
+  const rem = fontSize.toFixed(1) + 'rem';
+  document.getElementById('pageText').style.fontSize = rem;
+  document.getElementById('fsDisplay').textContent = rem;
 }
-function showToolbars(){
- document.getElementById('toolbarTop').classList.remove('hidden');
- document.getElementById('toolbarBottom').classList.remove('hidden');
- toolbarsVisible=true;
- startHideTimer();
+
+function setTheme(t) {
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('theme-' + t).classList.add('active');
+  const themes = {
+    creme: { '--reading-bg':'#FDFAF6', '--reading-text':'#2C1810' },
+    blanc: { '--reading-bg':'#FFFFFF', '--reading-text':'#1A1410' },
+    nuit:  { '--reading-bg':'#1A1410', '--reading-text':'#E8E0D4' },
+  };
+  const th = themes[t] || themes.creme;
+  Object.entries(th).forEach(([k,v]) => document.documentElement.style.setProperty(k,v));
+  
+  // Adjust topbar/bottom for night mode
+  if (t === 'nuit') {
+    document.querySelector('.topbar').style.background = 'rgba(20,16,12,0.97)';
+    document.querySelector('.bottom-nav').style.background = 'rgba(20,16,12,0.98)';
+  } else {
+    document.querySelector('.topbar').style.background = '';
+    document.querySelector('.bottom-nav').style.background = '';
+  }
 }
-function hideToolbars(){
- document.getElementById('toolbarTop').classList.add('hidden');
- document.getElementById('toolbarBottom').classList.add('hidden');
- toolbarsVisible=false;
+
+// ── RECHARGE ──
+function openRecharge() {
+  document.getElementById('modalRecharge').classList.add('open');
 }
-function handleAreaClick(e){
- if(e.target.closest('.toolbar-top')||e.target.closest('.toolbar-bottom')||e.target.closest('.settings-panel')||e.target.closest('.chapters-panel')||e.target.closest('.funds-overlay')||e.target.closest('.reader-state')) return;
- showToolbars();
+function closeRecharge() {
+  document.getElementById('modalRecharge').classList.remove('open');
 }
-function onMouseMove(){if(!toolbarsVisible) showToolbars();else startHideTimer();}
+function selectAmount(amt) {
+  selectedRechargeAmount = amt;
+  document.getElementById('selectedAmount').textContent = amt.toLocaleString('fr-FR');
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+}
+async function doRecharge() {
+  if (!selectedRechargeAmount) { showToast('Choisissez un montant'); return; }
+  if (!token) { window.location.href = './griotte-login.html'; return; }
+  try {
+    const res  = await fetch(API + '/auth/recharge', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Authorization':'Bearer '+token},
+      body: JSON.stringify({amount: selectedRechargeAmount})
+    });
+    const data = await res.json();
+    solde = data.balance || (solde + selectedRechargeAmount);
+    updateSoldeUI();
+    closeRecharge();
+    showToast('+' + selectedRechargeAmount.toLocaleString('fr-FR') + ' FCFA ajoutés', 'orange');
+  } catch(e) {
+    // Demo mode
+    solde += selectedRechargeAmount;
+    updateSoldeUI();
+    closeRecharge();
+    showToast('+' + selectedRechargeAmount.toLocaleString('fr-FR') + ' FCFA ajoutés', 'orange');
+  }
+}
 
-// Panels
-window.toggleSettingsPanel=function(){
- document.getElementById('settingsPanel').classList.toggle('open');
- document.getElementById('panelOverlay').classList.toggle('open');
- document.getElementById('chaptersPanel').classList.remove('open');
-};
-window.toggleChaptersPanel=function(){
- document.getElementById('chaptersPanel').classList.toggle('open');
- document.getElementById('panelOverlay').classList.toggle('open');
- document.getElementById('settingsPanel').classList.remove('open');
-};
-window.closePanels=function(){
- document.getElementById('settingsPanel').classList.remove('open');
- document.getElementById('chaptersPanel').classList.remove('open');
- document.getElementById('panelOverlay').classList.remove('open');
-};
+// ── TOAST ──
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type === 'orange' ? ' orange' : '');
+  setTimeout(() => t.className = 'toast', 2500);
+}
 
-// Settings
-window.setTheme=function(theme,btn){
- document.body.className=theme;
- document.querySelectorAll('.theme-btn').forEach(function(b){b.classList.remove('active');});
- btn.classList.add('active');
-};
-window.changeFontSize=function(delta){
- fontSize=Math.max(14,Math.min(24,fontSize+delta));
- document.documentElement.style.setProperty('--font-size',fontSize+'px');
- const fd=document.getElementById('fontSizeDisp');if(fd) fd.textContent=fontSize+'px';
-};
-window.setWidth=function(w,btn){
- document.documentElement.style.setProperty('--width',w+'px');
- document.querySelectorAll('.width-btn').forEach(function(b){b.classList.remove('active');});
- btn.classList.add('active');
-};
+// ── KEYBOARD ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextPage(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevPage(); }
+  if (e.key === 'Escape') { settingsOpen = false; document.getElementById('settingsPanel').classList.remove('open'); }
+});
 
-// Bookmark
-window.toggleBookmark=function(){
- bookmarked=!bookmarked;
- const btn=document.getElementById('bookmarkBtn');
- if(btn) btn.classList.toggle('active',bookmarked);
- showToast(bookmarked?'Signet ajouté — p.'+(currentPage+1):'Signet retiré','');
-};
-
-// Toast
-window.closeFundsOverlay=function(){
- document.getElementById('fundsOverlay').classList.remove('open');
- // Remettre le slider à la position actuelle
- const slider=document.getElementById('progressSlider');
- if(slider&&pages.length>1) slider.value=Math.round((currentPage/(pages.length-1))*100);
-};
-
-window.showToast=function(msg,ico){
- const t=document.getElementById('toast');
- document.getElementById('toastIco').textContent=ico||'✓';
- document.getElementById('toastMsg').textContent=msg;
- t.classList.add('show');
- setTimeout(function(){t.classList.remove('show');},1800);
-};
-
-// Keyboard
-document.addEventListener('keydown',function(e){
- if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextPage();}
- else if(e.key==='ArrowLeft'){e.preventDefault();prevPage();}
- else if(e.key==='Escape') closePanels();
+// ── CLICK OUTSIDE SETTINGS ──
+document.addEventListener('click', e => {
+  if (settingsOpen &&
+      !document.getElementById('settingsPanel').contains(e.target) &&
+      !document.querySelector('.settings-btn').contains(e.target)) {
+    settingsOpen = false;
+    document.getElementById('settingsPanel').classList.remove('open');
+  }
 });
 
 init();
-})();
 </script>
 </body>
 </html>
