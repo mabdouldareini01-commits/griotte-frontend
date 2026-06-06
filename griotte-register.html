@@ -7,8 +7,75 @@
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ══ TYPOGRAPHIE GRIOTTE ══════════════════════════════ */
+body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* Titres — Playfair uniquement */
+h1,h2,.hero-title,.section-title,.auth-title,.card-title,.modal-cover-title,.carousel-title{
+  font-family:'Playfair Display',serif;
+  letter-spacing:-0.02em;
+  line-height:1.12
+}
+
+/* Tout le reste — Inter */
+h3,h4,h5,h6,p,span,a,button,input,select,textarea,label,li,td,th{
+  font-family:'Inter',sans-serif
+}
+
+/* Hiérarchie des tailles */
+h1,.hero-title{font-size:clamp(2.6rem,5vw,4.8rem);font-weight:800}
+h2,.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:600}
+p{font-size:1rem;line-height:1.75;color:#4A3F35}
+
+/* Labels, badges, prix — DM Mono */
+.section-badge,.hero-badge,.hero-label,.hero-stat-label,
+.book-genre,.bc-genre,.lc-genre,
+.book-price,.bc-price,.lc-price,
+[class*="-label"],[class*="-badge"],
+[class*="mono"],[class*="price"],[class*="stat-lbl"]{
+  font-family:'DM Mono',monospace
+}
+
+/* Navigation */
+.nav-links a,.nav-wordmark,.nav-logo-name,
+.sidebar .nav-item,.filters .fbtn,.lc-filter{
+  font-family:'Inter',sans-serif;
+  font-size:0.875rem;
+  letter-spacing:0.005em
+}
+
+/* Boutons */
+button,.btn,.auth-btn,.btn-primary,.btn-hero-primary,.nbtn{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  letter-spacing:0.01em
+}
+
+/* Corps texte amélioré */
+.hero-sub,.section-sub,.auth-sub,.perk-desc,.step-desc,.feature-desc{
+  font-family:'Inter',sans-serif;
+  font-size:1.05rem;
+  font-weight:400;
+  line-height:1.75;
+  color:#4A3F35
+}
+
+/* Citations témoignages — Playfair italic */
+.testi-quote,[class*="testi-quote"],
+blockquote{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:1rem;
+  line-height:1.75
+}
+
+/* Remplacer anciennes polices si présentes */
+[style*="Cormorant"],[style*="Syne"]{font-family:'Playfair Display',serif!important}
+/* ══ FIN TYPOGRAPHIE ══════════════════════════════════ */
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-font-smoothing:antialiased}
 body{font-family:'Inter',sans-serif;background:#F4F1ED;color:#1A1410;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem}
@@ -44,70 +111,70 @@ h1{font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:600;color:#1A1410
 @media(max-width:480px){body{padding:1.5rem 1rem;align-items:flex-start;padding-top:2rem}}
 
 @media(max-width:480px){
-  body{padding:1rem!important;align-items:flex-start!important;padding-top:2rem!important}
-  .card{padding:1.75rem 1.25rem!important;border-radius:16px!important}
+ body{padding:1rem!important;align-items:flex-start!important;padding-top:2rem!important}
+ .card{padding:1.75rem 1.25rem!important;border-radius:16px!important}
 }
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="logo">
-    <img src="./logo-icon.png" alt="G" onerror="this.style.display='none'"/>
-    <span class="logo-name">Griotte</span>
-  </div>
-  <h1>Créer mon compte</h1>
-  <p class="sub">Lisez et publiez — un seul espace pour tout faire</p>
-  <div class="msg-error" id="err"></div>
-  <form id="form" onsubmit="doRegister(event)" novalidate autocomplete="off">
-    <div class="field">
-      <label for="name">Nom complet</label>
-      <input id="name" type="text" placeholder="Votre nom complet" autocomplete="off" required/>
-    </div>
-    <div class="field">
-      <label for="username">Nom d'utilisateur</label>
-      <input id="username" type="text" placeholder="ex: ama_kouyate" autocomplete="off" required/>
-    </div>
-    <div class="field">
-      <label for="dob">Date de naissance</label>
-      <input id="dob" type="date" required/>
-    </div>
-    <div class="field">
-      <label for="email">Adresse email</label>
-      <input id="email" type="email" placeholder="votre@email.com" autocomplete="off" required/>
-    </div>
-    <div class="field">
-      <label for="pw">Mot de passe</label>
-      <div class="pw-wrap">
-        <input id="pw2" type="password" placeholder="Répétez votre mot de passe" autocomplete="off" required/>
-        <button
-        type="button"
-        id="eye_pw2"
-        onclick="var i=document.getElementById('pw2');i.type=i.type==='password'?'text':'password'"
-        style="position:absolute;right:0.85rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:0.3rem;line-height:0;z-index:9"
-        aria-label="Afficher"
-      ><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A8878" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-      </div>
-    </div>
-    <div class="field">
-      <label for="pw2">Confirmer le mot de passe</label>
-      <div class="pw-wrap">
-        <input id="pw2" type="password" placeholder="Répétez votre mot de passe" autocomplete="off" required/>
-        <button
-        type="button"
-        id="eye_pw2"
-        onclick="var i=document.getElementById('pw2');i.type=i.type==='password'?'text':'password'"
-        style="position:absolute;right:0.85rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:0.3rem;line-height:0;z-index:9"
-        aria-label="Afficher"
-      ><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A8878" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-      </div>
-    </div>
-    <div class="check">
-      <input type="checkbox" id="cgu" required/>
-      <label for="cgu">J'ai lu et accepté les <a href="#">Conditions d'utilisation</a> ainsi que la <a href="#">Politique de confidentialité</a> de GRIOTTE.</label>
-    </div>
-    <button class="btn btn-primary" type="submit" id="btn">Créer mon compte</button>
-  </form>
-  <p class="back"><a href="./griotte-welcome.html">← Retour</a></p>
+ <div class="logo">
+ <img src="./logo-icon.png" alt="G" onerror="this.style.display='none'"/>
+ <span class="logo-name">Griotte</span>
+ </div>
+ <h1>Créer mon compte</h1>
+ <p class="sub">Lisez et publiez — un seul espace pour tout faire</p>
+ <div class="msg-error" id="err"></div>
+ <form id="form" onsubmit="doRegister(event)" novalidate autocomplete="off">
+ <div class="field">
+ <label for="name">Nom complet</label>
+ <input id="name" type="text" placeholder="Votre nom complet" autocomplete="off" required/>
+ </div>
+ <div class="field">
+ <label for="username">Nom d'utilisateur</label>
+ <input id="username" type="text" placeholder="ex: ama_kouyate" autocomplete="off" required/>
+ </div>
+ <div class="field">
+ <label for="dob">Date de naissance</label>
+ <input id="dob" type="date" required/>
+ </div>
+ <div class="field">
+ <label for="email">Adresse email</label>
+ <input id="email" type="email" placeholder="votre@email.com" autocomplete="off" required/>
+ </div>
+ <div class="field">
+ <label for="pw">Mot de passe</label>
+ <div class="pw-wrap">
+ <input id="pw2" type="password" placeholder="Répétez votre mot de passe" autocomplete="off" required/>
+ <button
+ type="button"
+ id="eye_pw2"
+ onclick="var i=document.getElementById('pw2');i.type=i.type==='password'?'text':'password'"
+ style="position:absolute;right:0.85rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:0.3rem;line-height:0;z-index:9"
+ aria-label="Afficher"
+ ><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A8878" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+ </div>
+ </div>
+ <div class="field">
+ <label for="pw2">Confirmer le mot de passe</label>
+ <div class="pw-wrap">
+ <input id="pw2" type="password" placeholder="Répétez votre mot de passe" autocomplete="off" required/>
+ <button
+ type="button"
+ id="eye_pw2"
+ onclick="var i=document.getElementById('pw2');i.type=i.type==='password'?'text':'password'"
+ style="position:absolute;right:0.85rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:0.3rem;line-height:0;z-index:9"
+ aria-label="Afficher"
+ ><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A8878" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+ </div>
+ </div>
+ <div class="check">
+ <input type="checkbox" id="cgu" required/>
+ <label for="cgu">J'ai lu et accepté les <a href="#">Conditions d'utilisation</a> ainsi que la <a href="#">Politique de confidentialité</a> de GRIOTTE.</label>
+ </div>
+ <button class="btn btn-primary" type="submit" id="btn">Créer mon compte</button>
+ </form>
+ <p class="back"><a href="./griotte-welcome.html">← Retour</a></p>
 </div>
 <script>
 const API='https://griotte-backend-2-production.up.railway.app/api/v1';
@@ -115,38 +182,38 @@ const API='https://griotte-backend-2-production.up.railway.app/api/v1';
 
 
 window.addEventListener('load',function(){
-  setTimeout(function(){
-    ['name','username','email','pw','pw2'].forEach(function(id){
-      var el=document.getElementById(id);if(el)el.value='';
-    });
-  },100);
+ setTimeout(function(){
+ ['name','username','email','pw','pw2'].forEach(function(id){
+ var el=document.getElementById(id);if(el)el.value='';
+ });
+ },100);
 });
 function showErr(m){var e=document.getElementById('err');e.textContent=m;e.classList.add('on');e.scrollIntoView({behavior:'smooth',block:'nearest'});}
 function clearErr(){document.getElementById('err').classList.remove('on');}
 async function doRegister(e){
-  e.preventDefault();clearErr();
-  var name=document.getElementById('name').value.trim();
-  var username=document.getElementById('username').value.trim();
-  var dob=document.getElementById('dob').value;
-  var email=document.getElementById('email').value.trim();
-  var pw=document.getElementById('pw').value;
-  var pw2=document.getElementById('pw2').value;
-  var cgu=document.getElementById('cgu').checked;
-  if(!name||!username||!dob||!email||!pw||!pw2){showErr('Veuillez remplir tous les champs.');return;}
-  if(pw.length<8){showErr('Le mot de passe doit contenir au moins 8 caractères.');return;}
-  if(pw!==pw2){showErr('Les mots de passe ne correspondent pas.');return;}
-  if(!cgu){showErr('Vous devez accepter les conditions d'utilisation.');return;}
-  var btn=document.getElementById('btn');
-  btn.textContent='Création…';btn.disabled=true;
-  try{
-    var res=await fetch(API+'/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pw,name,role:'READER'})});
-    var data=await res.json();
-    if(!res.ok){showErr(data.message||'Erreur lors de la création du compte.');btn.textContent='Créer mon compte';btn.disabled=false;return;}
-    localStorage.setItem('griotte_token',data.accessToken);
-    localStorage.setItem('griotte_role',data.role||'READER');
-    localStorage.setItem('griotte_user',JSON.stringify({name,email,username,role:data.role}));
-    window.location.href='./griotte-dashboard.html';
-  }catch(err){showErr('Erreur réseau. Vérifiez votre connexion.');btn.textContent='Créer mon compte';btn.disabled=false;}
+ e.preventDefault();clearErr();
+ var name=document.getElementById('name').value.trim();
+ var username=document.getElementById('username').value.trim();
+ var dob=document.getElementById('dob').value;
+ var email=document.getElementById('email').value.trim();
+ var pw=document.getElementById('pw').value;
+ var pw2=document.getElementById('pw2').value;
+ var cgu=document.getElementById('cgu').checked;
+ if(!name||!username||!dob||!email||!pw||!pw2){showErr('Veuillez remplir tous les champs.');return;}
+ if(pw.length<8){showErr('Le mot de passe doit contenir au moins 8 caractères.');return;}
+ if(pw!==pw2){showErr('Les mots de passe ne correspondent pas.');return;}
+ if(!cgu){showErr('Vous devez accepter les conditions d'utilisation.');return;}
+ var btn=document.getElementById('btn');
+ btn.textContent='Création…';btn.disabled=true;
+ try{
+ var res=await fetch(API+'/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pw,name,role:'READER'})});
+ var data=await res.json();
+ if(!res.ok){showErr(data.message||'Erreur lors de la création du compte.');btn.textContent='Créer mon compte';btn.disabled=false;return;}
+ localStorage.setItem('griotte_token',data.accessToken);
+ localStorage.setItem('griotte_role',data.role||'READER');
+ localStorage.setItem('griotte_user',JSON.stringify({name,email,username,role:data.role}));
+ window.location.href='./griotte-dashboard.html';
+ }catch(err){showErr('Erreur réseau. Vérifiez votre connexion.');btn.textContent='Créer mon compte';btn.disabled=false;}
 }
 </script>
 </body>

@@ -4,8 +4,75 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>GRIOTTE Admin — Back-office</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ══ TYPOGRAPHIE GRIOTTE ══════════════════════════════ */
+body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* Titres — Playfair uniquement */
+h1,h2,.hero-title,.section-title,.auth-title,.card-title,.modal-cover-title,.carousel-title{
+  font-family:'Playfair Display',serif;
+  letter-spacing:-0.02em;
+  line-height:1.12
+}
+
+/* Tout le reste — Inter */
+h3,h4,h5,h6,p,span,a,button,input,select,textarea,label,li,td,th{
+  font-family:'Inter',sans-serif
+}
+
+/* Hiérarchie des tailles */
+h1,.hero-title{font-size:clamp(2.6rem,5vw,4.8rem);font-weight:800}
+h2,.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700}
+h3{font-size:1.15rem;font-weight:600}
+p{font-size:1rem;line-height:1.75;color:#4A3F35}
+
+/* Labels, badges, prix — DM Mono */
+.section-badge,.hero-badge,.hero-label,.hero-stat-label,
+.book-genre,.bc-genre,.lc-genre,
+.book-price,.bc-price,.lc-price,
+[class*="-label"],[class*="-badge"],
+[class*="mono"],[class*="price"],[class*="stat-lbl"]{
+  font-family:'DM Mono',monospace
+}
+
+/* Navigation */
+.nav-links a,.nav-wordmark,.nav-logo-name,
+.sidebar .nav-item,.filters .fbtn,.lc-filter{
+  font-family:'Inter',sans-serif;
+  font-size:0.875rem;
+  letter-spacing:0.005em
+}
+
+/* Boutons */
+button,.btn,.auth-btn,.btn-primary,.btn-hero-primary,.nbtn{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  letter-spacing:0.01em
+}
+
+/* Corps texte amélioré */
+.hero-sub,.section-sub,.auth-sub,.perk-desc,.step-desc,.feature-desc{
+  font-family:'Inter',sans-serif;
+  font-size:1.05rem;
+  font-weight:400;
+  line-height:1.75;
+  color:#4A3F35
+}
+
+/* Citations témoignages — Playfair italic */
+.testi-quote,[class*="testi-quote"],
+blockquote{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:1rem;
+  line-height:1.75
+}
+
+/* Remplacer anciennes polices si présentes */
+[style*="Cormorant"],[style*="Syne"]{font-family:'Playfair Display',serif!important}
+/* ══ FIN TYPOGRAPHIE ══════════════════════════════════ */
+
 /* ══ LOGO OFFICIEL GRIOTTE — Composant unique ══════════
  Une seule taille, une seule source, partout identique
  ════════════════════════════════════════════════════ */
