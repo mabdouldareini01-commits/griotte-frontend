@@ -574,6 +574,12 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 .snav-badge-warn{background:rgba(255,107,0,0.12);color:#FF6B00}
 /* ── FIN SIDEBAR NAV ── */
 
+
+/* ── ADMIN PAGES ── */
+.page { display: none; }
+.page.active { display: block; }
+/* ── FIN ADMIN PAGES ── */
+
 </style>
 <link rel="icon" type="image/png" href="./logo-icon.png"/>
 <script src="./brand-logo.js" defer></script>
@@ -1386,10 +1392,10 @@ function initGroups() {
 
 // ── SHOW PAGE ─────────────────────────────────────────────────────
 window.showPage = function(page, el) {
-  document.querySelectorAll('.admin-page').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
   document.querySelectorAll('.snav-btn,.nav-item').forEach(n => n.classList.remove('active'));
   const panel = document.getElementById('page-' + page);
-  if (panel) panel.style.display = 'block';
+  if (panel) { panel.style.display = 'block'; panel.classList.add('active'); }
   if (el) el.classList.add('active');
 
   // Load page-specific data
@@ -1416,5 +1422,14 @@ async function loadRetraitsPage() {
 loadAdmin();
 })();
 </script>
+
+
+<!-- FRONTEND -->
+<div class="page" id="page-frontend">
+  <div class="ph"><div><div class="ph-title">Gestion du frontend</div><div class="ph-sub">Modifier les contenus visibles sur le site</div></div></div>
+  <div class="card" style="padding:2rem;text-align:center;color:#8A7A6E;font-size:0.88rem;font-family:'Inter',sans-serif;line-height:1.75">
+    La gestion éditoriale du frontend sera disponible prochainement.<br/>Elle permettra de modifier les textes, titres, témoignages et sections de la landing page.
+  </div>
+</div>
 </body>
 </html>
