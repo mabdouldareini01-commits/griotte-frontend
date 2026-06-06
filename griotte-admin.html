@@ -881,7 +881,7 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
  </div>
 
  <!-- RETRAITS -->
- <div class="page" id="page-retraits">
+ <div class="page" id="page-retraits"><div id="retraitsContent" style="padding:1rem"></div>
  <div class="ph"><div><div class="ph-title">Retraits</div><div class="ph-sub">Demandes de retrait des auteurs</div></div></div>
  <div class="empty"><span class="empty-ico"></span>Aucune demande de retrait en attente.</div>
  </div>
@@ -979,7 +979,23 @@ em { color: #FF6B00 !important; opacity: 1 !important; }
 </div>
 
 <script>
-// ── showPage GLOBAL — doit être défini avant tout clic ────────────
+const API = 'https://griotte-backend-2-production.up.railway.app/api/v1/auth';
+let token = localStorage.getItem('griotte_token') || localStorage.getItem('accessToken');
+
+// Handle URL token
+(function(){
+  var up = new URLSearchParams(window.location.search);
+  var tf = up.get('token');
+  if (tf) {
+    token = tf;
+    localStorage.setItem('griotte_token', tf);
+    localStorage.setItem('accessToken', tf);
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+  if (!token) window.location.href = './griotte-landing.html';
+})();
+
+// ── SHOW PAGE — GLOBAL ────────────────────────────────────────────
 function showPage(page, el) {
   document.querySelectorAll('.page').forEach(function(p) {
     p.classList.remove('active');
@@ -990,399 +1006,222 @@ function showPage(page, el) {
   var panel = document.getElementById('page-' + page);
   if (panel) panel.classList.add('active');
   if (el) el.classList.add('active');
-  // Load data for page
-  if (page === 'retraits')   { if(typeof loadRetraitsPage==='function') loadRetraitsPage(); }
-  if (page === 'users')      { if(typeof renderUsers==='function') renderUsers(); }
-  if (page === 'auteurs')    { if(typeof renderAuteurs==='function') renderAuteurs(); }
-  if (page === 'livres')     { if(typeof renderBooks==='function') renderBooks(); }
-  if (page === 'validation') { if(typeof renderValidation==='function') renderValidation(); }
+  // Update topbar title
+  var titles = {
+    dashboard:'Tableau de bord', users:'Utilisateurs', auteurs:'Auteurs',
+    livres:'Livres', validation:'Validation', tags:'Tags',
+    paiements:'Paiements', retraits:'Retraits', frontend:'Frontend', parametres:'Paramètres',
+    analytics:'Analytics'
+  };
+  var tb = document.getElementById('pageTitle');
+  if (tb && titles[page]) tb.textContent = titles[page];
+  // Load data
+  if (page === 'users')      renderUsers();
+  if (page === 'auteurs')    renderAuteurs();
+  if (page === 'livres')     renderBooks();
+  if (page === 'validation') renderValidation();
+  if (page === 'retraits')   loadRetraitsPage();
 }
 
-// ── Show dashboard on load ────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  showPage('dashboard', document.getElementById('snav-dashboard'));
-});
+// ── HELPERS ───────────────────────────────────────────────────────
+var allBooks = [], allUsers = [], allStats = {};
+var modalOkCb = null;
 
-// ── App ───────────────────────────────────────────────────────────
-(function(){
-const API = 'https://griotte-backend-2-production.up.railway.app/api/v1/auth';
-
-
-// ── TOKEN — support both storage keys ────────────────────────────
-let token = localStorage.getItem('griotte_token') || localStorage.getItem('accessToken');
-const urlParams = new URLSearchParams(window.location.search);
-const urlToken  = urlParams.get('token');
-if (urlToken) {
-  token = urlToken;
-  localStorage.setItem('griotte_token', token);
-  localStorage.setItem('accessToken', token);
-  window.history.replaceState({}, '', window.location.pathname);
-}
-if (!token) { window.location.href = './griotte-landing.html'; }
-
-// ── GLOBAL STATE ──────────────────────────────────────────────────
-let allBooks = [], allUsers = [], allStats = {};
-let modalOkCb = null;
-
-// ── DATE ──────────────────────────────────────────────────────────
-const dateEl = document.getElementById('currentDate');
-if (dateEl) dateEl.textContent = new Date().toLocaleDateString('fr-FR', {
-  day: 'numeric', month: 'long', year: 'numeric'
-});
+function setEl(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
+function fmt(n) { return (n||0).toLocaleString('fr-FR'); }
+function fmtDate(d) { return d ? new Date(d).toLocaleDateString('fr-FR') : '—'; }
 
 // ── TOAST ─────────────────────────────────────────────────────────
-window.showToast = function(msg, type) {
-  const t = document.getElementById('toast');
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
   if (!t) return;
-  const ico = document.getElementById('toastIco');
-  const txt = document.getElementById('toastMsg');
+  var ico = document.getElementById('toastIco');
+  var txt = document.getElementById('toastMsg');
   if (ico) ico.textContent = type === 'error' ? '✗' : '✓';
   if (txt) txt.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
-};
-
-// ── MODAL ─────────────────────────────────────────────────────────
-window.openModal  = function(title, sub, body, okLabel, okClass, cb) {
-  setEl('modalTitle', title || 'Confirmation');
-  setEl('modalSub',   sub   || '');
-  const bodyEl = document.getElementById('modalBody');
-  if (bodyEl) bodyEl.innerHTML = body || '';
-  const btn = document.getElementById('modalOk');
-  if (btn) { btn.textContent = okLabel || 'Confirmer'; btn.className = okClass === 'danger' ? 'bok bok-r' : 'bok'; }
-  modalOkCb = cb;
-  const m = document.getElementById('modal');
-  if (m) m.classList.add('open');
-};
-window.closeModal  = function() { const m = document.getElementById('modal'); if(m) m.classList.remove('open'); modalOkCb = null; };
-window.doModalOk   = function() { if (modalOkCb) modalOkCb(); closeModal(); };
-const modalEl = document.getElementById('modal');
-if (modalEl) modalEl.addEventListener('click', e => { if (e.target === modalEl) closeModal(); });
-
-// ── HELPERS ───────────────────────────────────────────────────────
-function setEl(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
-function fmt(n) { return (n || 0).toLocaleString('fr-FR'); }
-function fmtDate(d) { return d ? new Date(d).toLocaleDateString('fr-FR') : '—'; }
-
-// ── INIT ──────────────────────────────────────────────────────────
-async function loadAdmin() {
-  try {
-    const res  = await fetch(API + '/me', { headers: { 'Authorization': 'Bearer ' + token } });
-    if (!res.ok) { window.location.href = './griotte-landing.html'; return; }
-    const user = await res.json();
-
-    if (user.role !== 'ADMIN') {
-      showToast('Accès refusé — Admins uniquement', 'error');
-      setTimeout(() => window.location.href = './griotte-dashboard.html', 1500);
-      return;
-    }
-
-    setEl('adminAva',  user.name ? user.name.charAt(0).toUpperCase() : 'A');
-    setEl('adminName', user.name || 'Administrateur');
-
-    await loadData();
-    showPage('dashboard', document.getElementById('snav-dashboard'));
-
-  } catch(e) {
-    console.error('loadAdmin:', e);
-    window.location.href = './griotte-landing.html';
-  }
+  setTimeout(function() { t.classList.remove('show'); }, 2800);
 }
 
-// ── LOAD ALL DATA ─────────────────────────────────────────────────
-async function loadData() {
-  await Promise.allSettled([loadBooks(), loadUsers(), loadStats()]);
+// ── MODAL ─────────────────────────────────────────────────────────
+function openModal(title, sub, body, okLabel, okClass, cb) {
+  setEl('modalTitle', title || 'Confirmation');
+  setEl('modalSub', sub || '');
+  var bodyEl = document.getElementById('modalBody');
+  if (bodyEl) bodyEl.innerHTML = body || '';
+  var btn = document.getElementById('modalOk');
+  if (btn) { btn.textContent = okLabel || 'Confirmer'; btn.className = okClass === 'danger' ? 'bok bok-r' : 'bok'; }
+  modalOkCb = cb;
+  var m = document.getElementById('modal');
+  if (m) m.classList.add('open');
+}
+function closeModal() { var m = document.getElementById('modal'); if (m) m.classList.remove('open'); modalOkCb = null; }
+function doModalOk() { if (modalOkCb) modalOkCb(); closeModal(); }
+
+// ── LOAD DATA ─────────────────────────────────────────────────────
+async function loadAdmin() {
+  try {
+    var res = await fetch(API + '/me', { headers: { 'Authorization': 'Bearer ' + token } });
+    if (!res.ok) { window.location.href = './griotte-landing.html'; return; }
+    var user = await res.json();
+    if (user.role !== 'ADMIN') {
+      showToast('Accès refusé', 'error');
+      setTimeout(function() { window.location.href = './griotte-dashboard.html'; }, 1500);
+      return;
+    }
+    setEl('adminAva', user.name ? user.name.charAt(0).toUpperCase() : 'A');
+    setEl('adminName', user.name || 'Administrateur');
+    await Promise.allSettled([loadBooks(), loadUsers(), loadStats()]);
+  } catch(e) {
+    console.error('loadAdmin:', e);
+  }
 }
 
 async function loadBooks() {
   try {
-    const res = await fetch(API + '/books-public');
-    const data = await res.json();
+    var res = await fetch(API + '/books-public');
+    var data = await res.json();
     allBooks = Array.isArray(data) ? data : [];
-    updateBooksUI();
-    updateStatsUI();
+    setEl('navBooks', allBooks.length);
+    setEl('kpiBooks', fmt(allBooks.length));
+    setEl('booksSub', allBooks.length + ' œuvres publiées');
   } catch(e) { console.warn('loadBooks:', e.message); }
 }
 
 async function loadUsers() {
   try {
-    const res  = await fetch(API + '/admin/users', { headers: { 'Authorization': 'Bearer ' + token } });
-    const data = await res.json();
+    var res = await fetch(API + '/admin/users', { headers: { 'Authorization': 'Bearer ' + token } });
+    var data = await res.json();
     allUsers = Array.isArray(data) ? data : [];
-    updateUsersUI();
-    updateStatsUI();
+    var authors = allUsers.filter(function(u) { return u.role === 'AUTHOR'; }).length;
+    setEl('navUsers', allUsers.length);
+    setEl('kpiUsers', fmt(allUsers.length));
+    setEl('kpiAuthors', fmt(authors));
+    setEl('usersSub', allUsers.length + ' utilisateurs inscrits');
   } catch(e) { console.warn('loadUsers:', e.message); }
 }
 
 async function loadStats() {
   try {
-    const res  = await fetch(API + '/admin/stats', { headers: { 'Authorization': 'Bearer ' + token } });
-    allStats   = await res.json();
-    updateStatsUI();
+    var res = await fetch(API + '/admin/stats', { headers: { 'Authorization': 'Bearer ' + token } });
+    allStats = await res.json();
+    if (allStats.totalRevenue) setEl('kpiRevenue', fmt(allStats.totalRevenue) + ' F');
+    if (allStats.pendingBooks) setEl('navPending', allStats.pendingBooks);
+    if (allStats.pendingWithdrawals) setEl('navRetraits', allStats.pendingWithdrawals);
   } catch(e) { console.warn('loadStats:', e.message); }
 }
 
-// ── UPDATE UIs ────────────────────────────────────────────────────
-function updateBooksUI() {
-  const n = allBooks.length;
-  setEl('kpiBooks', fmt(n));
-  setEl('navBooks', n);
-  setEl('booksSub', n + ' œuvres publiées');
-  renderBooks();
-  renderValidation();
-}
-
-function updateUsersUI() {
-  const n = allUsers.length;
-  const authors  = allUsers.filter(u => u.role === 'AUTHOR').length;
-  const readers  = allUsers.filter(u => u.role === 'READER').length;
-  setEl('kpiUsers',   fmt(n));
-  setEl('navUsers',   n);
-  setEl('usersSub',   n + ' utilisateurs inscrits');
-  setEl('kpiAuthors', fmt(authors));
-  if (n > 0) {
-    const rPct = Math.round(readers  / n * 100);
-    const aPct = Math.round(authors  / n * 100);
-    setEl('pctReaders', rPct + '%');
-    setEl('pctAuthors', aPct + '%');
-    const br = document.getElementById('barReaders'); if (br) br.style.width = rPct + '%';
-    const ba = document.getElementById('barAuthors'); if (ba) ba.style.width = aPct + '%';
-  }
-  renderUsers();
-  renderAuteurs();
-}
-
-function updateStatsUI() {
-  const s = allStats;
-
-  // Try stats API fields first, fallback to computed from allUsers/allBooks
-  const totalUsers   = s.totalUsers   || s.users   || allUsers.length;
-  const totalAuthors = s.totalAuthors || s.authors  || allUsers.filter(u => u.role === 'AUTHOR').length;
-  const totalBooks   = s.totalBooks   || s.books    || allBooks.length;
-  const totalRevenue = s.totalRevenue || s.revenue  || 0;
-  const pendingBooks = s.pendingBooks || s.pending  || allBooks.filter(b => b.status === 'PENDING').length;
-
-  setEl('kpiUsers',   fmt(totalUsers));
-  setEl('kpiAuthors', fmt(totalAuthors));
-  setEl('kpiBooks',   fmt(totalBooks));
-  if (totalRevenue) setEl('kpiRevenue', fmt(totalRevenue) + ' F');
-
-  // Nav badges
-  setEl('navUsers',   totalUsers);
-  setEl('navBooks',   totalBooks);
-  setEl('navPending', pendingBooks);
-
-  // Alert pending books
-  setEl('alertPending', pendingBooks + ' livre(s) en attente');
-
-  // Revenue stats
-  if (s.totalRevenue || s.revenue)  setEl('kpiRevStat',  fmt(totalRevenue) + ' FCFA');
-  if (s.monthRevenue)               setEl('kpiMonthRev', fmt(s.monthRevenue) + ' FCFA');
-}
-
-// ── RENDER TABLES ─────────────────────────────────────────────────
+// ── RENDER ────────────────────────────────────────────────────────
 function renderUsers() {
-  const grid = document.getElementById('usersGrid');
+  var grid = document.getElementById('usersGrid') || document.getElementById('usersTable');
   if (!grid) return;
   if (!allUsers.length) {
     grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun utilisateur</div>';
     return;
   }
-  grid.innerHTML = allUsers.map(u => `
-    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
-      <div>
-        <div style="font-weight:600;color:#1A1410">${u.name || '—'}</div>
-        <div style="font-size:0.72rem;color:#8A7A6E">${u.email || ''}</div>
-      </div>
-      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(u.createdAt)}</div>
-      <div><span style="font-family:'DM Mono',monospace;font-size:0.68rem;padding:0.18rem 0.55rem;border-radius:50px;background:${u.role==='ADMIN'?'rgba(255,107,0,0.1)':u.role==='AUTHOR'?'rgba(59,130,246,0.1)':'rgba(26,20,16,0.06)'};color:${u.role==='ADMIN'?'#FF6B00':u.role==='AUTHOR'?'#2563eb':'#6B5A4E'}">${u.role||'READER'}</span></div>
-      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#1A1410">${fmt(u.balance || 0)} F</div>
-      <div style="display:flex;gap:0.4rem">
-        <button onclick="suspendUser('${u.id}', ${!u.suspended})" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid ${u.suspended?'rgba(22,163,74,0.3)':'rgba(220,38,38,0.3)'};background:none;color:${u.suspended?'#16a34a':'#dc2626'};cursor:pointer">${u.suspended?'Réactiver':'Suspendre'}</button>
-      </div>
-    </div>`).join('');
+  grid.innerHTML = allUsers.map(function(u) {
+    return '<div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">' +
+      '<div><div style="font-weight:600;color:#1A1410">' + (u.name||'—') + '</div><div style="font-size:0.72rem;color:#8A7A6E">' + (u.email||'') + '</div></div>' +
+      '<div style="font-size:0.78rem;color:#4A3F35">' + fmtDate(u.createdAt) + '</div>' +
+      '<div><span style="font-family:DM Mono,monospace;font-size:0.68rem;padding:0.18rem 0.55rem;border-radius:50px;background:' + (u.role==='ADMIN'?'rgba(255,107,0,0.1)':u.role==='AUTHOR'?'rgba(59,130,246,0.1)':'rgba(26,20,16,0.06)') + ';color:' + (u.role==='ADMIN'?'#FF6B00':u.role==='AUTHOR'?'#2563eb':'#6B5A4E') + '">' + (u.role||'READER') + '</span></div>' +
+      '<div style="font-family:DM Mono,monospace;font-size:0.75rem">' + fmt(u.balance||0) + ' F</div>' +
+      '<div><button onclick="suspendUser('' + u.id + '',' + !u.suspended + ')" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid ' + (u.suspended?'rgba(22,163,74,0.3)':'rgba(220,38,38,0.3)') + ';background:none;color:' + (u.suspended?'#16a34a':'#dc2626') + ';cursor:pointer">' + (u.suspended?'Réactiver':'Suspendre') + '</button></div>' +
+      '</div>';
+  }).join('');
 }
 
 function renderAuteurs() {
-  const grid = document.getElementById('auteursGrid');
+  var grid = document.getElementById('auteursTable');
   if (!grid) return;
-  const authors = allUsers.filter(u => u.role === 'AUTHOR');
+  var authors = allUsers.filter(function(u) { return u.role === 'AUTHOR'; });
   if (!authors.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun auteur vérifié</div>';
+    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun auteur</div>';
     return;
   }
-  grid.innerHTML = authors.map(a => `
-    <div style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
-      <div>
-        <div style="font-weight:600;color:#1A1410">${a.name || '—'}</div>
-        <div style="font-size:0.72rem;color:#8A7A6E">${a.email || ''}</div>
-      </div>
-      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(a.createdAt)}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#FF6B00">${fmt(a.balance || 0)} F</div>
-      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:#1A1410">${fmt((a.books || []).length)} livre(s)</div>
-    </div>`).join('');
+  grid.innerHTML = authors.map(function(a) {
+    return '<div style="display:grid;grid-template-columns:2fr 2fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">' +
+      '<div><div style="font-weight:600;color:#1A1410">' + (a.name||'—') + '</div><div style="font-size:0.72rem;color:#8A7A6E">' + (a.email||'') + '</div></div>' +
+      '<div style="font-size:0.78rem;color:#4A3F35">' + fmtDate(a.createdAt) + '</div>' +
+      '<div style="font-family:DM Mono,monospace;font-size:0.75rem;color:#FF6B00">' + fmt(a.balance||0) + ' F</div>' +
+      '</div>';
+  }).join('');
 }
 
 function renderBooks() {
-  const grid = document.getElementById('livresGrid');
+  var grid = document.getElementById('livresGrid') || document.getElementById('booksTable');
   if (!grid) return;
   if (!allBooks.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre publié</div>';
+    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre</div>';
     return;
   }
-  grid.innerHTML = allBooks.map(b => `
-    <div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
-      <div>
-        <div style="font-weight:600;color:#1A1410;font-family:'Playfair Display',serif">${b.title || '—'}</div>
-        <div style="font-size:0.72rem;color:#8A7A6E">${(b.author && b.author.name) || 'Auteur inconnu'}</div>
-      </div>
-      <div style="font-size:0.78rem;color:#4A3F35">${b.genre || '—'}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:0.75rem">${b.totalPages || '?'} p.</div>
-      <div><span style="font-family:'DM Mono',monospace;font-size:0.65rem;padding:0.18rem 0.55rem;border-radius:50px;background:rgba(22,163,74,0.1);color:#16a34a">Publié</span></div>
-      <div style="display:flex;gap:0.4rem">
-        <button onclick="deleteBook('${b.id}')" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(220,38,38,0.3);background:none;color:#dc2626;cursor:pointer">Retirer</button>
-      </div>
-    </div>`).join('');
+  grid.innerHTML = allBooks.map(function(b) {
+    return '<div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">' +
+      '<div><div style="font-weight:600;color:#1A1410;font-family:Playfair Display,serif">' + (b.title||'—') + '</div><div style="font-size:0.72rem;color:#8A7A6E">' + ((b.author&&b.author.name)||'') + '</div></div>' +
+      '<div style="font-size:0.78rem;color:#4A3F35">' + (b.genre||'—') + '</div>' +
+      '<div style="font-family:DM Mono,monospace;font-size:0.75rem">' + (b.totalPages||'?') + ' p.</div>' +
+      '<div><span style="font-family:DM Mono,monospace;font-size:0.65rem;padding:0.18rem 0.55rem;border-radius:50px;background:rgba(22,163,74,0.1);color:#16a34a">Publié</span></div>' +
+      '</div>';
+  }).join('');
 }
 
 function renderValidation() {
-  const grid = document.getElementById('validationGrid');
+  var grid = document.getElementById('validationContent');
   if (!grid) return;
-  const pending = allBooks.filter(b => b.status === 'PENDING');
-  if (!pending.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre en attente de validation</div>';
-    return;
-  }
-  grid.innerHTML = pending.map(b => `
-    <div style="display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
-      <div>
-        <div style="font-weight:600;color:#1A1410;font-family:'Playfair Display',serif">${b.title || '—'}</div>
-        <div style="font-size:0.72rem;color:#8A7A6E">${(b.author && b.author.name) || ''}</div>
-      </div>
-      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(b.createdAt)}</div>
-      <div style="font-family:'DM Mono',monospace;font-size:0.75rem">${b.totalPages || '?'} p.</div>
-      <div style="display:flex;gap:0.4rem">
-        <button onclick="validateBook('${b.id}', true)"  style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(22,163,74,0.3);background:none;color:#16a34a;cursor:pointer">Valider</button>
-        <button onclick="validateBook('${b.id}', false)" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(220,38,38,0.3);background:none;color:#dc2626;cursor:pointer">Rejeter</button>
-      </div>
-    </div>`).join('');
+  var pending = allBooks.filter(function(b) { return b.status === 'PENDING'; });
+  grid.innerHTML = pending.length ? pending.map(function(b) {
+    return '<div style="padding:1rem;border-bottom:1px solid rgba(26,20,16,0.06)"><strong>' + b.title + '</strong> — ' + ((b.author&&b.author.name)||'') + '</div>';
+  }).join('') : '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun livre en attente</div>';
 }
 
-function renderRetraits(retraits) {
-  const grid = document.getElementById('retraitsGrid');
+async function loadRetraitsPage() {
+  var grid = document.getElementById('retraitsContent');
   if (!grid) return;
-  if (!retraits || !retraits.length) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun retrait en attente</div>';
-    return;
+  try {
+    var res = await fetch(API + '/admin/withdrawals', { headers: { 'Authorization': 'Bearer ' + token } });
+    var data = await res.json();
+    grid.innerHTML = Array.isArray(data) && data.length ? data.map(function(r) {
+      return '<div style="padding:1rem;border-bottom:1px solid rgba(26,20,16,0.06)">' + (r.author||r.user||'—') + ' — ' + fmt(r.amount) + ' FCFA</div>';
+    }).join('') : '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun retrait en attente</div>';
+  } catch(e) {
+    if (grid) grid.innerHTML = '<div style="text-align:center;padding:2rem;color:#8A7A6E;font-size:0.85rem">Aucun retrait en attente</div>';
   }
-  grid.innerHTML = retraits.map(r => `
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1rem;align-items:center;padding:0.85rem 1rem;border-bottom:1px solid rgba(26,20,16,0.06);font-size:0.85rem">
-      <div>
-        <div style="font-weight:600;color:#1A1410">${r.author || r.user || '—'}</div>
-        <div style="font-size:0.72rem;color:#8A7A6E">${r.method || 'Mobile Money'}</div>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-weight:600;color:#FF6B00">${fmt(r.amount)} FCFA</div>
-      <div style="font-size:0.78rem;color:#4A3F35">${fmtDate(r.createdAt)}</div>
-      <div style="display:flex;gap:0.4rem">
-        <button onclick="processWithdrawal('${r.id}', true)"  style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(22,163,74,0.3);background:none;color:#16a34a;cursor:pointer">Traiter</button>
-        <button onclick="processWithdrawal('${r.id}', false)" style="font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;border:1.5px solid rgba(220,38,38,0.3);background:none;color:#dc2626;cursor:pointer">Rejeter</button>
-      </div>
-    </div>`).join('');
 }
 
 // ── ACTIONS ───────────────────────────────────────────────────────
-window.suspendUser = function(userId, suspend) {
-  const label = suspend ? 'Suspendre' : 'Réactiver';
-  openModal(label + ' cet utilisateur', 'Cette action est immédiatement appliquée.', '', label, suspend ? 'danger' : '', async () => {
+function suspendUser(userId, suspend) {
+  openModal(suspend ? 'Suspendre' : 'Réactiver', '', '', suspend ? 'Suspendre' : 'Réactiver', suspend ? 'danger' : '', async function() {
     try {
       await fetch(API + '/admin/suspend-user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify({ userId, suspend })
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ userId: userId, suspend: suspend })
       });
-      showToast('Utilisateur ' + (suspend ? 'suspendu' : 'réactivé'));
+      showToast(suspend ? 'Utilisateur suspendu' : 'Utilisateur réactivé');
       await loadUsers();
-    } catch(e) { showToast('Erreur lors de l'action', 'error'); }
+      renderUsers();
+    } catch(e) { showToast('Erreur', 'error'); }
   });
-};
+}
 
-window.validateBook = function(bookId, approve) {
-  openModal(approve ? 'Valider ce livre' : 'Rejeter ce livre',
-    approve ? 'Le livre sera visible dans le catalogue.' : 'L'auteur sera notifié du refus.',
-    '', approve ? 'Valider' : 'Rejeter', approve ? '' : 'danger', async () => {
-    try {
-      await fetch(API + '/admin/validate-book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify({ bookId, approve })
-      });
-      showToast(approve ? 'Livre validé et publié' : 'Livre rejeté');
-      await loadBooks();
-    } catch(e) { showToast('Erreur (route peut-être manquante)', 'error'); }
-  });
-};
-
-window.deleteBook = function(bookId) {
-  openModal('Retirer ce livre', 'Le livre sera retiré du catalogue.', '', 'Retirer', 'danger', async () => {
-    try {
-      await fetch(API + '/books/' + bookId, {
-        method: 'DELETE',
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      showToast('Livre retiré du catalogue');
-      await loadBooks();
-    } catch(e) { showToast('Erreur (route peut-être manquante)', 'error'); }
-  });
-};
-
-window.processWithdrawal = function(withdrawalId, approve) {
-  openModal(approve ? 'Traiter ce retrait' : 'Rejeter ce retrait', '', '', approve ? 'Traiter' : 'Rejeter', approve ? '' : 'danger', async () => {
-    try {
-      await fetch(API + '/admin/process-withdrawal', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-        body: JSON.stringify({ withdrawalId, approve })
-      });
-      showToast(approve ? 'Retrait traité' : 'Retrait rejeté');
-    } catch(e) { showToast('Erreur (route peut-être manquante)', 'error'); }
-  });
-};
-
-window.deconnecter = function() {
+function deconnecter() {
   localStorage.removeItem('griotte_token');
   localStorage.removeItem('accessToken');
   localStorage.removeItem('griotte_user');
   window.location.href = './griotte-landing.html';
-};
-
-// ── SHOW PAGE ─────────────────────────────────────────────────────
-
-
-async function loadRetraitsPage() {
-  try {
-    const res  = await fetch(API + '/admin/withdrawals', {
-      headers: { 'Authorization': 'Bearer ' + token }
-    });
-    const data = await res.json();
-    renderRetraits(Array.isArray(data) ? data : []);
-  } catch(e) {
-    renderRetraits([]);
-  }
 }
 
-// ── START ─────────────────────────────────────────────────────────
-loadAdmin();
-})();
-
+// ── INIT ──────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  // Show dashboard immediately
+  showPage('dashboard', document.getElementById('snav-dashboard'));
+  // Setup modal close
+  var modal = document.getElementById('modal');
+  if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+  // Load data
+  loadAdmin();
+  // Date
+  var de = document.getElementById('currentDate');
+  if (de) de.textContent = new Date().toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+});
 </script>
-
-
-<!-- FRONTEND -->
-<div class="page" id="page-frontend">
-  <div class="ph"><div><div class="ph-title">Gestion du frontend</div><div class="ph-sub">Modifier les contenus visibles sur le site</div></div></div>
-  <div class="card" style="padding:2rem;text-align:center;color:#8A7A6E;font-size:0.88rem;font-family:'Inter',sans-serif;line-height:1.75">
-    La gestion éditoriale du frontend sera disponible prochainement.<br/>Elle permettra de modifier les textes, titres, témoignages et sections de la landing page.
-  </div>
-</div>
 </body>
 </html>
